@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -O0 -Wall -fprofile-arcs -ftest-coverage   CMakeFiles/Cjson_withTests.dir/main.cpp.o  -o Cjson_withTests Cjson_lib/libCjson_lib.a 

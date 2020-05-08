@@ -1,0 +1,11 @@
+        -:    0:Source:/mnt/d/CLionProjects/Cjson_withTests/main.cpp
+        -:    0:Graph:main.cpp.gcno
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
+        -:    1:#include <iostream>
+        -:    2:
+    #####:    3:int main() {
+    #####:    4:    std::cout << "Hello, World!" << std::endl;
+    #####:    5:    return 0;
+    #####:    6:}
