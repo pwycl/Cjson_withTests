@@ -1,0 +1,1969 @@
+        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/x86_64-w64-mingw32/include/psdk_inc/intrin-impl.h
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/**
+        -:    2: * This file has no copyright assigned and is placed in the Public Domain.
+        -:    3: * This file is part of the mingw-w64 runtime package.
+        -:    4: * No warranty is given; refer to the file DISCLAIMER.PD within this package.
+        -:    5: */
+        -:    6:
+        -:    7:/* There are 3 separate ways this file is intended to be used:
+        -:    8:
+        -:    9:   1) Included from intrin.h.  In this case, all intrinsics in this file get declarations and
+        -:   10:      implementations.  No special #defines are needed for this case.
+        -:   11:
+        -:   12:   2) Included from the library versions of these functions (ie mingw-w64-crt\intrincs\*.c).  All
+        -:   13:      intrinsics in this file must also be included in the library.  In this case, only the 
+        -:   14:      specific functions requested will get defined, and they will not be defined as inline.  If
+        -:   15:      you have followed the instructions (below) for adding functions to this file, then all you 
+        -:   16:      need to have in the .c file is the following:
+        -:   17:
+        -:   18:      #define __INTRINSIC_ONLYSPECIAL
+        -:   19:      #define __INTRINSIC_SPECIAL___stosb // Causes code generation in intrin-impl.h
+        -:   20:
+        -:   21:      #include <intrin.h>
+        -:   22:
+        -:   23:   3) Included from various platform sdk headers.  Some platform sdk headers (such as winnt.h)
+        -:   24:      define a subset of intrinsics.  To avoid potential conflicts, this file is designed to
+        -:   25:      allow for specific subsets of functions to be defined.  This is done by defining the 
+        -:   26:      appropriate variable before including this file:
+        -:   27:
+        -:   28:      #define __INTRINSIC_GROUP_WINNT
+        -:   29:      #include <psdk_inc/intrin-impl.h>
+        -:   30:
+        -:   31:   In all cases, it is acceptable to include this file multiple times in any order (ie include 
+        -:   32:   winnt.h to get its subset, then include intrin.h to get everything, or vice versa).
+        -:   33:
+        -:   34:   See also the comments at the top of intrin.h.
+        -:   35:*/
+        -:   36:
+        -:   37:/* To add an implementation for a new intrinsic to this file, you should comment out the current prototype in intrin.h.
+        -:   38:   If the function you are adding is not in intrin.h, you should not be adding it to this file.  This file is only
+        -:   39:   for MSVC intrinsics.
+        -:   40:
+        -:   41:   Make sure you put your definition in the right section (x86 vs x64), and use this outline when adding definitions 
+        -:   42:   to this file:
+        -:   43:
+        -:   44:#if __INTRINSIC_PROLOG(__int2c)
+        -:   45:
+        -:   46:<prototype goes here>
+        -:   47:
+        -:   48:__INTRINSICS_USEINLINE 
+        -:   49:<code goes here>
+        -:   50:
+        -:   51:#define __INTRINSIC_DEFINED___int2c
+        -:   52:#endif
+        -:   53:*/
+        -:   54:
+        -:   55:/* Note that there is no file-wide #if to prevent intrin-impl.h from being
+        -:   56:   included multiple times.  This is because this file might be included multiple
+        -:   57:   times to define various subsets of the functions it contains. */
+        -:   58:
+        -:   59:/* However we do check for __MINGW_INTRIN_INLINE.  In theory this means we
+        -:   60:   can work with other compilers.  */
+        -:   61:
+        -:   62:#ifdef __MINGW_INTRIN_INLINE
+        -:   63:
+        -:   64:/* Clang has support for MSVC builtins, GCC doesn't */
+        -:   65:#pragma push_macro("__has_builtin")
+        -:   66:#ifndef __has_builtin
+        -:   67:  #define __has_builtin(x) 0
+        -:   68:#endif
+        -:   69:
+        -:   70:/* These macros are used by the routines below.  While this file may be included 
+        -:   71:   multiple times, these macros only need to be defined once. */
+        -:   72:#ifndef _INTRIN_MAC_
+        -:   73:#define _INTRIN_MAC_
+        -:   74:
+        -:   75:/* GCC v6 added support for outputting flags.  This allows better code to be
+        -:   76:   produced for a number of intrinsics. */
+        -:   77:#ifndef __GCC_ASM_FLAG_OUTPUTS__
+        -:   78:#define __FLAGCONSTRAINT "=qm"
+        -:   79:#define __FLAGSET "\n\tsetc %[old]"
+        -:   80:#define __FLAGCLOBBER1 , "cc"
+        -:   81:#define __FLAGCLOBBER2 "cc"
+        -:   82:#else
+        -:   83:#define __FLAGCONSTRAINT "=@ccc"
+        -:   84:#define __FLAGSET
+        -:   85:#define __FLAGCLOBBER1
+        -:   86:#define __FLAGCLOBBER2
+        -:   87:#endif
+        -:   88:
+        -:   89:/* This macro is used by __stosb, __stosw, __stosd, __stosq */
+        -:   90:
+        -:   91:/* Parameters: (FunctionName, DataType, Operator)
+        -:   92:   FunctionName: Any valid function name
+        -:   93:   DataType: BYTE, WORD, DWORD or DWORD64
+        -:   94:   InstructionSize: b|b, w|w, l|d, q|q */
+        -:   95:
+        -:   96:/* While we don't need the output values for Dest or Count, we
+        -:   97:   must still inform the compiler the asm changes them. */
+        -:   98:#define __buildstos(x, y, z) void x(y *Dest, y Data, size_t Count) \
+        -:   99:{ \
+        -:  100:   __asm__ __volatile__ ("rep stos{" z "}" \
+        -:  101:      : "+D" (Dest), "+c" (Count) \
+        -:  102:      : [Data] "a" (Data) \
+        -:  103:      : "memory"); \
+        -:  104:}
+        -:  105:
+        -:  106:/* This macro is used by InterlockedAnd, InterlockedOr, InterlockedXor, InterlockedAnd64, InterlockedOr64, InterlockedXor64 */
+        -:  107:
+        -:  108:/* Parameters: (FunctionName, DataType, Operator)
+        -:  109:   FunctionName: Any valid function name
+        -:  110:   DataType: __LONG32 or __int64
+        -:  111:   Operator: One of xor, or, and */
+        -:  112:#define __buildlogicali(x, y, o) y x(volatile y *Destination, y Value) \
+        -:  113:{ \
+        -:  114:    return __sync_fetch_and_ ## o(Destination, Value); \
+        -:  115:}
+        -:  116:
+        -:  117:/* This macro is used by InterlockedBitTestAndSet, InterlockedBitTestAndReset, InterlockedBitTestAndComplement,
+        -:  118:   InterlockedBitTestAndSet64, InterlockedBitTestAndReset64, InterlockedBitTestAndComplement64
+        -:  119:   _interlockedbittestandset, _interlockedbittestandreset, _interlockedbittestandcomplement
+        -:  120:   _interlockedbittestandset64, _interlockedbittestandreset64, _interlockedbittestandcomplement64 */
+        -:  121:
+        -:  122:/* Parameters: (FunctionName, DataType, AsmCode, OffsetConstraint)
+        -:  123:   FunctionName: Any valid function name
+        -:  124:   DataType: __LONG32 or __int64
+        -:  125:   OffsetConstraint: either "I" for 32bit data types or "J" for 64. */
+        -:  126:#if defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_)
+        -:  127:#define __buildbittesti(x, y, z, a) unsigned char x(y volatile *Base, y Offset) \
+        -:  128:{ \
+        -:  129:   unsigned char old; \
+        -:  130:   __asm__ __volatile__ (z \
+        -:  131:      : [old] __FLAGCONSTRAINT (old), [Base] "+m" (*Base) \
+        -:  132:      : [Offset] a "r" (Offset) \
+        -:  133:      : "memory" __FLAGCLOBBER1); \
+        -:  134:   return old; \
+        -:  135:}
+        -:  136:#elif defined(__arm__) || defined(_ARM_)
+        -:  137:#define __buildbittesti(x, y, z, a) unsigned char x(y volatile *Base, y Offset) \
+        -:  138:{ \
+        -:  139:   unsigned int old, tmp1, tmp2; \
+        -:  140:   unsigned int bit = 1 << Offset; \
+        -:  141:   __asm__ __volatile__ ("dmb	sy\n\t" \
+        -:  142:        "1: ldrex	%[old], %[Base]\n\t" \
+        -:  143:        "mov	%[tmp1], %[old]\n\t" \
+        -:  144:        z "	%[tmp1], %[tmp1], %[bit]\n\t" \
+        -:  145:        "strex	%[tmp2], %[tmp1], %[Base]\n\t" \
+        -:  146:        "cmp	%[tmp2], #0\n\t" \
+        -:  147:        "bne	1b\n\t" \
+        -:  148:        "dmb	sy" \
+        -:  149:      : [old] "=&r" (old), [tmp1] "=&r" (tmp1), [tmp2] "=&r" (tmp2), [Base] "+m" (*Base) \
+        -:  150:      : [bit] a "r" (bit) \
+        -:  151:      : "memory", "cc"); \
+        -:  152:   return (old >> Offset) & 1; \
+        -:  153:}
+        -:  154:#elif defined(__aarch64__) || defined(_ARM64_)
+        -:  155:#define __buildbittesti(x, y, z, a) unsigned char x(y volatile *Base, y Offset) \
+        -:  156:{ \
+        -:  157:   unsigned int old, tmp1, tmp2; \
+        -:  158:   unsigned int bit = 1 << Offset; \
+        -:  159:   __asm__ __volatile__ ("dmb	sy\n\t" \
+        -:  160:        "1: ldxr	%w[old], %[Base]\n\t" \
+        -:  161:        "mov	%w[tmp1], %w[old]\n\t" \
+        -:  162:        z "	%w[tmp1], %w[tmp1], %w[bit]\n\t" \
+        -:  163:        "stxr	%w[tmp2], %w[tmp1], %[Base]\n\t" \
+        -:  164:        "cmp	%w[tmp2], #0\n\t" \
+        -:  165:        "b.ne	1b\n\t" \
+        -:  166:        "dmb	sy" \
+        -:  167:      : [old] "=&r" (old), [tmp1] "=&r" (tmp1), [tmp2] "=&r" (tmp2), [Base] "+m" (*Base) \
+        -:  168:      : [bit] a "r" (bit) \
+        -:  169:      : "memory", "cc"); \
+        -:  170:   return (old >> Offset) & 1; \
+        -:  171:}
+        -:  172:#endif /* defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_) */
+        -:  173:
+        -:  174:/* This macro is used by YieldProcessor when compiling x86 w/o SSE2.
+        -:  175:It generates the same opcodes as _mm_pause.  */
+        -:  176:#define __buildpause() __asm__ __volatile__("rep nop")
+        -:  177:
+        -:  178:/* This macro is used by DbgRaiseAssertionFailure and __int2c
+        -:  179:
+        -:  180:Parameters: (IntNum)
+        -:  181:IntNum: Interrupt number in hex */
+        -:  182:#define __buildint(a) __asm__ __volatile__("int {$}" #a :)
+        -:  183:
+        -:  184:/* This macro is used by MemoryBarrier when compiling x86 w/o SSE2. 
+        -:  185:Note that on i386, xchg performs an implicit lock. */
+        -:  186:#define __buildmemorybarrier() \
+        -:  187:{ \
+        -:  188:unsigned char Barrier; \
+        -:  189:__asm__ __volatile__("xchg{b %%| }al, %0" :"=m" (Barrier) : /* no inputs */ : "eax", "memory"); \
+        -:  190:}
+        -:  191:
+        -:  192:/* This macro is used by __readfsbyte, __readfsword, __readfsdword
+        -:  193:                         __readgsbyte, __readgsword, __readgsdword, __readgsqword
+        -:  194:
+        -:  195:Parameters: (FunctionName, DataType, Segment)
+        -:  196:   FunctionName: Any valid function name
+        -:  197:   DataType: char, short, __LONG32 or __int64
+        -:  198:   Segment: fs or gs
+        -:  199:   Type: b, w, l, q
+        -:  200:   */
+        -:  201:
+        -:  202:#define __buildreadseg(x, y, z, a) y x(unsigned __LONG32 Offset) { \
+        -:  203:    y ret; \
+        -:  204:    __asm__ ("mov{" a " %%" z ":%[offset], %[ret] | %[ret], %%" z ":%[offset]}" \
+        -:  205:        : [ret] "=r" (ret) \
+        -:  206:        : [offset] "m" ((*(y *) (size_t) Offset))); \
+        -:  207:    return ret; \
+        -:  208:}
+        -:  209:
+        -:  210:/* This macro is used by __writefsbyte, __writefsword, __writefsdword
+        -:  211:                         __writegsbyte, __writegsword, __writegsdword, __writegsqword
+        -:  212:
+        -:  213:Parameters: (FunctionName, DataType, Segment)
+        -:  214:   FunctionName: Any valid function name
+        -:  215:   DataType: char, short, __LONG32 or __int64
+        -:  216:   Segment: fs or gs
+        -:  217:   Type: b, w, l, q
+        -:  218:   */
+        -:  219:
+        -:  220:#define __buildwriteseg(x, y, z, a) void x(unsigned __LONG32 Offset, y Data) { \
+        -:  221:    __asm__ ("mov{" a " %[Data], %%" z ":%[offset] | %%" z ":%[offset], %[Data]}" \
+        -:  222:        : [offset] "=m" ((*(y *) (size_t) Offset)) \
+        -:  223:        : [Data] "ri" (Data)); \
+        -:  224:}
+        -:  225:
+        -:  226:/* This macro is used by _BitScanForward, _BitScanForward64, _BitScanReverse _BitScanReverse64
+        -:  227:
+        -:  228:Parameters: (FunctionName, DataType, Segment)
+        -:  229:   FunctionName: Any valid function name
+        -:  230:   DataType: unsigned __LONG32 or unsigned __int64
+        -:  231:   Statement: BSF or BSR */
+        -:  232:
+        -:  233:/* GCC v6 added support for outputting flags.  This allows better code to be
+        -:  234:   produced for a number of intrinsics. */
+        -:  235:#ifndef __GCC_ASM_FLAG_OUTPUTS__
+        -:  236:#define __buildbitscan(x, y, z) unsigned char x(unsigned __LONG32 *Index, y Mask) \
+        -:  237:{ \
+        -:  238:   y n; \
+        -:  239:   __asm__ (z \
+        -:  240:      : [Index] "=r" (n) \
+        -:  241:      : [Mask] "r" (Mask) \
+        -:  242:      : "cc"); \
+        -:  243:   *Index = n; \
+        -:  244:   return Mask!=0; \
+        -:  245:}
+        -:  246:#else
+        -:  247:#define __buildbitscan(x, y, z) unsigned char x(unsigned __LONG32 *Index, y Mask) \
+        -:  248:{ \
+        -:  249:   y n; \
+        -:  250:   unsigned char old; \
+        -:  251:   __asm__ (z \
+        -:  252:      : "=@ccnz" (old), [Index] "=r" (n) \
+        -:  253:      : [Mask] "r" (Mask)); \
+        -:  254:   *Index = n; \
+        -:  255:   return old; \
+        -:  256:}
+        -:  257:#endif
+        -:  258:
+        -:  259:/* This macro is used by _bittest & _bittest64
+        -:  260:
+        -:  261:Parameters: (FunctionName, DataType, OffsetConstraint)
+        -:  262:   FunctionName: Any valid function name
+        -:  263:   DataType: __LONG32 or __int64
+        -:  264:   Type: l, q
+        -:  265:   OffsetConstraint: either "I" for 32bit data types or "J" for 64.
+        -:  266:
+        -:  267:   */
+        -:  268:#define __buildbittest(x, y, z, a) unsigned char x(const y *Base, y Offset) \
+        -:  269:{ \
+        -:  270:   unsigned char old; \
+        -:  271:   __asm__ ("bt{" z " %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET \
+        -:  272:      : [old] __FLAGCONSTRAINT (old) \
+        -:  273:      : [Offset] a "r" (Offset), [Base] "rm" (*Base) \
+        -:  274:      : __FLAGCLOBBER2); \
+        -:  275:   return old; \
+        -:  276:}
+        -:  277:
+        -:  278:/* This macro is used by _bittestandset, _bittestandreset, _bittestandcomplement,
+        -:  279:   _bittestandset64, _bittestandreset64, _bittestandcomplement64
+        -:  280:
+        -:  281:Parameters: (FunctionName, DataType, Statement, OffsetConstraint)
+        -:  282:   FunctionName: Any valid function name
+        -:  283:   DataType: __LONG32 or __int64
+        -:  284:   Statement: asm statement (bts, btr, btc)
+        -:  285:   OffsetConstraint: either "I" for 32bit data types or "J" for 64.
+        -:  286:   Type: l, q
+        -:  287:   */
+        -:  288:#define __buildbittestand(x, y, z, a, b) unsigned char x(y *Base, y Offset) \
+        -:  289:{ \
+        -:  290:   unsigned char old; \
+        -:  291:   __asm__ (z "{" b " %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET \
+        -:  292:      : [old] __FLAGCONSTRAINT (old), [Base] "+rm" (*Base) \
+        -:  293:      : [Offset] a "r" (Offset) \
+        -:  294:      : __FLAGCLOBBER2); \
+        -:  295:   return old; \
+        -:  296:}
+        -:  297:
+        -:  298:/* This macro is used by __inbyte, __inword, __indword
+        -:  299:
+        -:  300:Parameters: (FunctionName, DataType)
+        -:  301:   FunctionName: Any valid function name
+        -:  302:   DataType: unsigned char, unsigned short, unsigned __LONG32
+        -:  303:   Type: b, w, l
+        -:  304:   */
+        -:  305:#define __build_inport(x, y, z) y x(unsigned short Port) { \
+        -:  306:   y value; \
+        -:  307:      __asm__ __volatile__ ("in{" z " %w[port],%[value]| %[value],%w[port]}" \
+        -:  308:          : [value] "=a" (value) \
+        -:  309:          : [port] "Nd" (Port)); \
+        -:  310:      return value; \
+        -:  311:   }
+        -:  312:
+        -:  313:/* This macro is used by __outbyte, __outword, __outdword
+        -:  314:
+        -:  315:Parameters: (FunctionName, DataType)
+        -:  316:   FunctionName: Any valid function name
+        -:  317:   DataType: unsigned char, unsigned short, unsigned __LONG32
+        -:  318:   Type: b, w, l
+        -:  319:   */
+        -:  320:#define __build_outport(x, y, z) void x(unsigned short Port, y Data) { \
+        -:  321:      __asm__ __volatile__ ("out{" z " %[data],%w[port]| %w[port],%[data]}" \
+        -:  322:          : \
+        -:  323:          : [data] "a" (Data), [port] "Nd" (Port)); \
+        -:  324:   }
+        -:  325:
+        -:  326:/* This macro is used by __inbytestring, __inwordstring, __indwordstring
+        -:  327:
+        -:  328:Parameters: (FunctionName, DataType, InstructionSizeAtt, InstructionSizeIntel)
+        -:  329:   FunctionName: Any valid function name
+        -:  330:   DataType: unsigned char, unsigned short, unsigned __LONG32
+        -:  331:   InstructionSizeAtt: b, w, l
+        -:  332:   InstructionSizeIntel: b, w, d (not b,w,l)
+        -:  333:   */
+        -:  334:#define __build_inportstring(x, y, z, a) void x(unsigned short Port, y *Buffer, unsigned __LONG32 Count) { \
+        -:  335:   __asm__ __volatile__ ("cld ; rep ins{" z "|" a "}" \
+        -:  336:      : "=D" (Buffer), "=c" (Count) \
+        -:  337:      : "d"(Port), "0"(Buffer), "1" (Count) \
+        -:  338:      : "memory"); \
+        -:  339:   }
+        -:  340:
+        -:  341:/* This macro is used by __outbytestring, __outwordstring, __outdwordstring
+        -:  342:
+        -:  343:Parameters: (FunctionName, DataType, InstructionSizeAtt, InstructionSizeIntel)
+        -:  344:   FunctionName: Any valid function name
+        -:  345:   DataType: unsigned char, unsigned short, unsigned __LONG32
+        -:  346:   InstructionSizeAtt: b, w, l
+        -:  347:   InstructionSizeIntel: b, w, d (not b,w,l)
+        -:  348:
+        -:  349:   */
+        -:  350:#define __build_outportstring(x, y, z, a) void x(unsigned short Port, y *Buffer, unsigned __LONG32 Count) { \
+        -:  351:   __asm__ __volatile__ ("cld ; rep outs{" z "|" a "}" \
+        -:  352:      : "=S" (Buffer), "=c" (Count) \
+        -:  353:      : "d"(Port), "0"(Buffer), "1" (Count) \
+        -:  354:      : "memory"); \
+        -:  355:  }
+        -:  356:
+        -:  357:/* This macro is used by __readcr0, __readcr2, __readcr3, __readcr4, __readcr8
+        -:  358:
+        -:  359:Parameters: (FunctionName, DataType, RegisterNumber)
+        -:  360:   FunctionName: Any valid function name
+        -:  361:   DataType: unsigned __LONG32, unsigned __int64
+        -:  362:   RegisterNumber: 0, 2, 3, 4, 8
+        -:  363:
+        -:  364:   */
+        -:  365:#define __build_readcr(x, y, z) y x(void) { \
+        -:  366:      y value; \
+        -:  367:      __asm__ __volatile__ ("mov {%%cr" z ", %[value] | %[value], %%cr" z "}" \
+        -:  368:          : [value] "=q" (value)); \
+        -:  369:      return value; \
+        -:  370:  }
+        -:  371:
+        -:  372:/* This macro is used by __writecr0, __writecr2, __writecr3, __writecr4, __writecr8
+        -:  373:
+        -:  374:Parameters: (FunctionName, DataType, RegisterNumber)
+        -:  375:   FunctionName: Any valid function name
+        -:  376:   DataType: unsigned __LONG32, unsigned __int64
+        -:  377:   RegisterNumber: 0, 2, 3, 4, 8
+        -:  378:
+        -:  379:   */
+        -:  380:#define __build_writecr(x, y, z) void x(y Data) { \
+        -:  381:   __asm__ __volatile__ ("mov {%[Data], %%cr" z "|%%cr" z ", %[Data]}" \
+        -:  382:       : \
+        -:  383:       : [Data] "q" (Data) \
+        -:  384:       : "memory"); \
+        -:  385:   }
+        -:  386:
+        -:  387:/* This macro is used by __movsb, __movsd, __movsq, __movsw
+        -:  388:
+        -:  389:Parameters: (FunctionName, DataType, RegisterNumber)
+        -:  390:   FunctionName: Any valid function name
+        -:  391:   DataType: unsigned char, unsigned short, unsigned __LONG32, unsigned __int64
+        -:  392:   InstructionSize: b, w, d, q
+        -:  393:
+        -:  394:   */
+        -:  395:#define __buildmov(x, y, z) void x(y *Destination, y const *Source, size_t Count) \
+        -:  396:{ \
+        -:  397:  __asm__ __volatile__ ( \
+        -:  398:    "rep movs" z \
+        -:  399:       : "=D" (Destination), "=S" (Source), "=c" (Count) \
+        -:  400:       : "0" (Destination), "1" (Source), "2" (Count) \
+        -:  401:       : "memory"); \
+        -:  402:}
+        -:  403:
+        -:  404:#endif /* _INTRIN_MAC_ */
+        -:  405:
+        -:  406:/* The Barrier functions can never be in the library.  Since gcc only
+        -:  407:supports ReadWriteBarrier, map all 3 to do the same. */
+        -:  408:#ifndef _ReadWriteBarrier
+        -:  409:
+        -:  410:#define _ReadWriteBarrier() __asm__ __volatile__ ("" ::: "memory")
+        -:  411:#define _ReadBarrier _ReadWriteBarrier
+        -:  412:#define _WriteBarrier _ReadWriteBarrier
+        -:  413:
+        -:  414:#endif
+        -:  415:
+        -:  416:/* The logic for this macro is:
+        -:  417:   if the function is not yet defined AND
+        -:  418:   (
+        -:  419:       (if we are not just defining special OR 
+        -:  420:           (we are defining special AND this is one of the ones we are defining)
+        -:  421:       )
+        -:  422:   )
+        -:  423:*/
+        -:  424:#define __INTRINSIC_PROLOG(name) (!defined(__INTRINSIC_DEFINED_ ## name)) && ((!defined (__INTRINSIC_ONLYSPECIAL)) || (defined (__INTRINSIC_ONLYSPECIAL) && defined(__INTRINSIC_SPECIAL_ ## name)))
+        -:  425:
+        -:  426:#ifdef __INTRINSIC_ONLYSPECIAL
+        -:  427:#define __INTRINSICS_USEINLINE
+        -:  428:#else
+        -:  429:#define __INTRINSICS_USEINLINE __MINGW_INTRIN_INLINE
+        -:  430:#endif
+        -:  431:
+        -:  432:/* Normally __INTRINSIC_ONLYSPECIAL is used to indicate that we are
+        -:  433:   being included in the library version of the intrinsic (case 2).  However,
+        -:  434:   that really only affects the definition of __INTRINSICS_USEINLINE.
+        -:  435:   So here we are letting it serve an additional purpose of only defining
+        -:  436:   the intrinsics for a certain file (case 3).  For example, to create the
+        -:  437:   intrinsics for the functions in winnt.h, define __INTRINSIC_GROUP_WINNT.
+        -:  438:
+        -:  439:   Note that this file can be included multiple times, and as a result
+        -:  440:   there can be overlap (definitions that appear in more than one
+        -:  441:   file).  This is handled by __INTRINSIC_DEFINED_*
+        -:  442:
+        -:  443:   If no groups are defined (such as what happens when including intrin.h),
+        -:  444:   all intrinsics are defined.   */
+        -:  445:
+        -:  446:/* If __INTRINSIC_ONLYSPECIAL is defined at this point, we are processing case 2.  In 
+        -:  447:   that case, don't go looking for groups */
+        -:  448:#ifndef __INTRINSIC_ONLYSPECIAL
+        -:  449:
+        -:  450:#ifdef __INTRINSIC_GROUP_WINNT
+        -:  451:#undef __INTRINSIC_GROUP_WINNT /* Remove this for efficiency if intrin-impl.h is included again */
+        -:  452:
+        -:  453:/* Note that this gets undefined at the end of this file */
+        -:  454:#define __INTRINSIC_ONLYSPECIAL
+        -:  455:
+        -:  456:#define __INTRINSIC_SPECIAL___faststorefence
+        -:  457:#define __INTRINSIC_SPECIAL___int2c
+        -:  458:#define __INTRINSIC_SPECIAL___stosb
+        -:  459:#define __INTRINSIC_SPECIAL___stosd
+        -:  460:#define __INTRINSIC_SPECIAL___stosq
+        -:  461:#define __INTRINSIC_SPECIAL___stosw
+        -:  462:#define __INTRINSIC_SPECIAL__InterlockedAnd
+        -:  463:#define __INTRINSIC_SPECIAL__InterlockedAnd64
+        -:  464:#define __INTRINSIC_SPECIAL__interlockedbittestandcomplement
+        -:  465:#define __INTRINSIC_SPECIAL__interlockedbittestandcomplement64
+        -:  466:#define __INTRINSIC_SPECIAL__interlockedbittestandreset
+        -:  467:#define __INTRINSIC_SPECIAL__interlockedbittestandreset64
+        -:  468:#define __INTRINSIC_SPECIAL__interlockedbittestandset
+        -:  469:#define __INTRINSIC_SPECIAL__interlockedbittestandset64
+        -:  470:#define __INTRINSIC_SPECIAL__InterlockedOr
+        -:  471:#define __INTRINSIC_SPECIAL__InterlockedOr64
+        -:  472:#define __INTRINSIC_SPECIAL__InterlockedXor
+        -:  473:#define __INTRINSIC_SPECIAL__InterlockedXor64
+        -:  474:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndComplement
+        -:  475:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndComplement64
+        -:  476:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndReset
+        -:  477:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndReset64
+        -:  478:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndSet
+        -:  479:#define __INTRINSIC_SPECIAL_InterlockedBitTestAndSet64
+        -:  480:#define __INTRINSIC_SPECIAL__InterlockedIncrement16
+        -:  481:#define __INTRINSIC_SPECIAL__InterlockedDecrement16
+        -:  482:#define __INTRINSIC_SPECIAL__InterlockedCompareExchange16
+        -:  483:#define __INTRINSIC_SPECIAL__InterlockedIncrement
+        -:  484:#define __INTRINSIC_SPECIAL__InterlockedDecrement
+        -:  485:#define __INTRINSIC_SPECIAL__InterlockedAdd
+        -:  486:#define __INTRINSIC_SPECIAL__InterlockedExchange
+        -:  487:#define __INTRINSIC_SPECIAL__InterlockedExchangeAdd
+        -:  488:#define __INTRINSIC_SPECIAL__InterlockedCompareExchange
+        -:  489:#define __INTRINSIC_SPECIAL__InterlockedIncrement64
+        -:  490:#define __INTRINSIC_SPECIAL__InterlockedDecrement64
+        -:  491:#define __INTRINSIC_SPECIAL__InterlockedAdd64
+        -:  492:#define __INTRINSIC_SPECIAL__InterlockedExchangeAdd64
+        -:  493:#define __INTRINSIC_SPECIAL__InterlockedExchange64
+        -:  494:#define __INTRINSIC_SPECIAL__InterlockedCompareExchange64
+        -:  495:#define __INTRINSIC_SPECIAL__InterlockedExchangePointer
+        -:  496:#define __INTRINSIC_SPECIAL__InterlockedCompareExchangePointer
+        -:  497:#define __INTRINSIC_SPECIAL___readgsbyte
+        -:  498:#define __INTRINSIC_SPECIAL___readgsword
+        -:  499:#define __INTRINSIC_SPECIAL___readgsdword
+        -:  500:#define __INTRINSIC_SPECIAL___readgsqword
+        -:  501:#define __INTRINSIC_SPECIAL___writegsbyte
+        -:  502:#define __INTRINSIC_SPECIAL___writegsword
+        -:  503:#define __INTRINSIC_SPECIAL___writegsdword
+        -:  504:#define __INTRINSIC_SPECIAL___writegsqword
+        -:  505:#define __INTRINSIC_SPECIAL___readfsbyte
+        -:  506:#define __INTRINSIC_SPECIAL___readfsword
+        -:  507:#define __INTRINSIC_SPECIAL___readfsdword
+        -:  508:#define __INTRINSIC_SPECIAL___writefsbyte
+        -:  509:#define __INTRINSIC_SPECIAL___writefsword
+        -:  510:#define __INTRINSIC_SPECIAL___writefsdword
+        -:  511:#define __INTRINSIC_SPECIAL__BitScanForward
+        -:  512:#define __INTRINSIC_SPECIAL__BitScanForward64
+        -:  513:#define __INTRINSIC_SPECIAL__BitScanReverse
+        -:  514:#define __INTRINSIC_SPECIAL__BitScanReverse64
+        -:  515:#define __INTRINSIC_SPECIAL__bittest
+        -:  516:#define __INTRINSIC_SPECIAL__bittestandset
+        -:  517:#define __INTRINSIC_SPECIAL__bittestandreset
+        -:  518:#define __INTRINSIC_SPECIAL__bittestandcomplement
+        -:  519:#define __INTRINSIC_SPECIAL__bittest64
+        -:  520:#define __INTRINSIC_SPECIAL__bittestandset64
+        -:  521:#define __INTRINSIC_SPECIAL__bittestandreset64
+        -:  522:#define __INTRINSIC_SPECIAL__bittestandcomplement64
+        -:  523:#define __INTRINSIC_SPECIAL___movsb
+        -:  524:#define __INTRINSIC_SPECIAL___movsw
+        -:  525:#define __INTRINSIC_SPECIAL___movsd
+        -:  526:#define __INTRINSIC_SPECIAL___movsq
+        -:  527:
+        -:  528:#endif /* __INTRINSIC_GROUP_WINNT */
+        -:  529:
+        -:  530:#ifdef __INTRINSIC_GROUP_WINBASE
+        -:  531:#undef __INTRINSIC_GROUP_WINBASE /* Remove this for efficiency if intrin-impl.h is included again */
+        -:  532:
+        -:  533:/* Note that this gets undefined at the end of this file */
+        -:  534:#define __INTRINSIC_ONLYSPECIAL
+        -:  535:
+        -:  536:#define __INTRINSIC_SPECIAL__InterlockedIncrement
+        -:  537:#define __INTRINSIC_SPECIAL__InterlockedDecrement
+        -:  538:#define __INTRINSIC_SPECIAL__InterlockedAdd
+        -:  539:#define __INTRINSIC_SPECIAL__InterlockedExchange
+        -:  540:#define __INTRINSIC_SPECIAL__InterlockedExchangeAdd
+        -:  541:#define __INTRINSIC_SPECIAL__InterlockedCompareExchange
+        -:  542:#define __INTRINSIC_SPECIAL__InterlockedCompareExchangePointer
+        -:  543:#define __INTRINSIC_SPECIAL__InterlockedExchangePointer
+        -:  544:#define __INTRINSIC_SPECIAL__InterlockedAnd64
+        -:  545:#define __INTRINSIC_SPECIAL__InterlockedOr64
+        -:  546:#define __INTRINSIC_SPECIAL__InterlockedXor64
+        -:  547:#define __INTRINSIC_SPECIAL__InterlockedIncrement64
+        -:  548:#define __INTRINSIC_SPECIAL__InterlockedDecrement64
+        -:  549:#define __INTRINSIC_SPECIAL__InterlockedAdd64
+        -:  550:#define __INTRINSIC_SPECIAL__InterlockedExchange64
+        -:  551:#define __INTRINSIC_SPECIAL__InterlockedExchangeAdd64
+        -:  552:#define __INTRINSIC_SPECIAL__InterlockedCompareExchange64
+        -:  553:
+        -:  554:#endif /* __INTRINSIC_GROUP_WINBASE */
+        -:  555:
+        -:  556:/* To add an additional group, put the #ifdef and definitions here. */
+        -:  557:
+        -:  558:#endif /* __INTRINSIC_ONLYSPECIAL */
+        -:  559:
+        -:  560:#ifdef __cplusplus
+        -:  561:extern "C" {
+        -:  562:#endif
+        -:  563:
+        -:  564:/* Before 4.9.2, ia32intrin.h had broken versions of these. */
+        -:  565:#undef _lrotl
+        -:  566:#undef _lrotr
+        -:  567:
+        -:  568:#if __INTRINSIC_PROLOG(_lrotl)
+        -:  569:unsigned long _lrotl(unsigned long __X, int __C);
+        -:  570:#if !__has_builtin(_lrotl)
+        -:  571:__INTRINSICS_USEINLINE
+        -:  572:unsigned long _lrotl(unsigned long __X, int __C)
+        -:  573:{
+        -:  574:  return (__X << __C) | (__X >> ((sizeof(long) * 8) - __C));
+        -:  575:}
+        -:  576:#endif
+        -:  577:#define __INTRINSIC_DEFINED__lrotl
+        -:  578:#endif /* __INTRINSIC_PROLOG */
+        -:  579:
+        -:  580:#if __INTRINSIC_PROLOG(_lrotr)
+        -:  581:unsigned long _lrotr(unsigned long __X, int __C);
+        -:  582:#if !__has_builtin(_lrotr)
+        -:  583:__INTRINSICS_USEINLINE
+        -:  584:unsigned long _lrotr(unsigned long __X, int __C)
+        -:  585:{
+        -:  586:  return (__X >> __C) | (__X << ((sizeof(long) * 8) - __C));
+        -:  587:}
+        -:  588:#endif
+        -:  589:#define __INTRINSIC_DEFINED__lrotr
+        -:  590:#endif /* __INTRINSIC_PROLOG */
+        -:  591:
+        -:  592:#if defined(__x86_64__) || defined(_AMD64_)
+        -:  593:
+        -:  594:#if __INTRINSIC_PROLOG(__faststorefence)
+        -:  595:void __faststorefence(void);
+        -:  596:#if !__has_builtin(__faststorefence)
+        -:  597:__INTRINSICS_USEINLINE
+        -:  598:void __faststorefence(void) {
+        -:  599:    /* Turns out this is actually faster than MS's "trick" on newer cpus.  Note
+        -:  600:    that this builtin performs an implicit ReadWriteBarrier. */
+        -:  601:    __builtin_ia32_sfence();
+        -:  602:}
+        -:  603:#endif
+        -:  604:#define __INTRINSIC_DEFINED___faststorefence
+        -:  605:#endif /* __INTRINSIC_PROLOG */
+        -:  606:
+        -:  607:#if __INTRINSIC_PROLOG(__stosq)
+        -:  608:__MINGW_EXTENSION void __stosq(unsigned __int64 *, unsigned __int64, size_t);
+        -:  609:#if !__has_builtin(__stosq)
+        -:  610:__INTRINSICS_USEINLINE 
+        -:  611:__buildstos(__stosq, unsigned __int64, "q|q")
+        -:  612:#endif
+        -:  613:#define __INTRINSIC_DEFINED___stosq
+        -:  614:#endif /* __INTRINSIC_PROLOG */
+        -:  615:
+        -:  616:#if __INTRINSIC_PROLOG(_interlockedbittestandset64)
+        -:  617:__MINGW_EXTENSION unsigned char _interlockedbittestandset64(__int64 volatile *a, __int64 b);
+        -:  618:#if !__has_builtin(_interlockedbittestandset64)
+        -:  619:__INTRINSICS_USEINLINE 
+        -:  620:__buildbittesti(_interlockedbittestandset64, __int64, "lock bts{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  621:#endif
+        -:  622:#define __INTRINSIC_DEFINED__interlockedbittestandset64
+        -:  623:#endif /* __INTRINSIC_PROLOG */
+        -:  624:
+        -:  625:#if __INTRINSIC_PROLOG(_interlockedbittestandreset64)
+        -:  626:__MINGW_EXTENSION unsigned char _interlockedbittestandreset64(__int64 volatile *a, __int64 b);
+        -:  627:#if !__has_builtin(_interlockedbittestandreset64)
+        -:  628:__INTRINSICS_USEINLINE 
+        -:  629:__buildbittesti(_interlockedbittestandreset64, __int64, "lock btr{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  630:#endif
+        -:  631:#define __INTRINSIC_DEFINED__interlockedbittestandreset64
+        -:  632:#endif /* __INTRINSIC_PROLOG */
+        -:  633:
+        -:  634:#if __INTRINSIC_PROLOG(_interlockedbittestandcomplement64)
+        -:  635:__MINGW_EXTENSION unsigned char _interlockedbittestandcomplement64(__int64 volatile *a, __int64 b);
+        -:  636:#if !__has_builtin(_interlockedbittestandcomplement64)
+        -:  637:__INTRINSICS_USEINLINE 
+        -:  638:__buildbittesti(_interlockedbittestandcomplement64, __int64, "lock btc{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  639:#endif
+        -:  640:#define __INTRINSIC_DEFINED__interlockedbittestandcomplement64
+        -:  641:#endif /* __INTRINSIC_PROLOG */
+        -:  642:
+        -:  643:#if __INTRINSIC_PROLOG(InterlockedBitTestAndSet64)
+        -:  644:__MINGW_EXTENSION unsigned char InterlockedBitTestAndSet64(volatile __int64 *a, __int64 b);
+        -:  645:#if !__has_builtin(InterlockedBitTestAndSet64)
+        -:  646:__INTRINSICS_USEINLINE 
+        -:  647:__buildbittesti(InterlockedBitTestAndSet64, __int64, "lock bts{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  648:#endif
+        -:  649:#define __INTRINSIC_DEFINED_InterlockedBitTestAndSet64
+        -:  650:#endif /* __INTRINSIC_PROLOG */
+        -:  651:
+        -:  652:#if __INTRINSIC_PROLOG(InterlockedBitTestAndReset64)
+        -:  653:__MINGW_EXTENSION unsigned char InterlockedBitTestAndReset64(volatile __int64 *a, __int64 b);
+        -:  654:#if !__has_builtin(InterlockedBitTestAndReset64)
+        -:  655:__INTRINSICS_USEINLINE 
+        -:  656:__buildbittesti(InterlockedBitTestAndReset64, __int64, "lock btr{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  657:#endif
+        -:  658:#define __INTRINSIC_DEFINED_InterlockedBitTestAndReset64
+        -:  659:#endif /* __INTRINSIC_PROLOG */
+        -:  660:
+        -:  661:#if __INTRINSIC_PROLOG(InterlockedBitTestAndComplement64)
+        -:  662:__MINGW_EXTENSION unsigned char InterlockedBitTestAndComplement64(volatile __int64 *a, __int64 b);
+        -:  663:#if !__has_builtin(InterlockedBitTestAndComplement64)
+        -:  664:__INTRINSICS_USEINLINE 
+        -:  665:__buildbittesti(InterlockedBitTestAndComplement64, __int64, "lock btc{q %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "J")
+        -:  666:#endif
+        -:  667:#define __INTRINSIC_DEFINED_InterlockedBitTestAndComplement64
+        -:  668:#endif /* __INTRINSIC_PROLOG */
+        -:  669:
+        -:  670:#if __INTRINSIC_PROLOG(_InterlockedAnd64)
+        -:  671:__MINGW_EXTENSION __int64 _InterlockedAnd64(__int64 volatile *, __int64);
+        -:  672:#if !__has_builtin(_InterlockedAnd64)
+        -:  673:__INTRINSICS_USEINLINE 
+        -:  674:__buildlogicali(_InterlockedAnd64, __int64, and)
+        -:  675:#endif
+        -:  676:#define __INTRINSIC_DEFINED__InterlockedAnd64
+        -:  677:#endif /* __INTRINSIC_PROLOG */
+        -:  678:
+        -:  679:#if __INTRINSIC_PROLOG(_InterlockedOr64)
+        -:  680:__MINGW_EXTENSION __int64 _InterlockedOr64(__int64 volatile *, __int64);
+        -:  681:#if !__has_builtin(_InterlockedOr64)
+        -:  682:__INTRINSICS_USEINLINE 
+        -:  683:__buildlogicali(_InterlockedOr64, __int64, or)
+        -:  684:#endif
+        -:  685:#define __INTRINSIC_DEFINED__InterlockedOr64
+        -:  686:#endif /* __INTRINSIC_PROLOG */
+        -:  687:
+        -:  688:#if __INTRINSIC_PROLOG(_InterlockedXor64)
+        -:  689:__MINGW_EXTENSION __int64 _InterlockedXor64(__int64 volatile *, __int64);
+        -:  690:#if !__has_builtin(_InterlockedXor64)
+        -:  691:__INTRINSICS_USEINLINE 
+        -:  692:__buildlogicali(_InterlockedXor64, __int64, xor)
+        -:  693:#endif
+        -:  694:#define __INTRINSIC_DEFINED__InterlockedXor64
+        -:  695:#endif /* __INTRINSIC_PROLOG */
+        -:  696:
+        -:  697:#if __INTRINSIC_PROLOG(_InterlockedIncrement64)
+        -:  698:__MINGW_EXTENSION __int64 _InterlockedIncrement64(__int64 volatile *Addend);
+        -:  699:#if !__has_builtin(_InterlockedIncrement64)
+        -:  700:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -:  701:__int64 _InterlockedIncrement64(__int64 volatile *Addend) {
+        -:  702:    return __sync_add_and_fetch(Addend, 1);
+        -:  703:}
+        -:  704:#endif
+        -:  705:#define __INTRINSIC_DEFINED__InterlockedIncrement64
+        -:  706:#endif /* __INTRINSIC_PROLOG */
+        -:  707:
+        -:  708:#if __INTRINSIC_PROLOG(_InterlockedDecrement64)
+        -:  709:__MINGW_EXTENSION __int64 _InterlockedDecrement64(__int64 volatile *Addend);
+        -:  710:#if !__has_builtin(_InterlockedDecrement64)
+        -:  711:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -:  712:__int64 _InterlockedDecrement64(__int64 volatile *Addend) {
+        -:  713:    return __sync_sub_and_fetch(Addend, 1);
+        -:  714:}
+        -:  715:#endif
+        -:  716:#define __INTRINSIC_DEFINED__InterlockedDecrement64
+        -:  717:#endif /* __INTRINSIC_PROLOG */
+        -:  718:
+        -:  719:#if __INTRINSIC_PROLOG(_InterlockedExchange64)
+        -:  720:__MINGW_EXTENSION __int64 _InterlockedExchange64(__int64 volatile *Target, __int64 Value);
+        -:  721:#if !__has_builtin(_InterlockedExchange64)
+        -:  722:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -:  723:__int64 _InterlockedExchange64(__int64 volatile *Target, __int64 Value) {
+        -:  724:    return __sync_lock_test_and_set(Target, Value);
+        -:  725:}
+        -:  726:#endif
+        -:  727:#define __INTRINSIC_DEFINED__InterlockedExchange64
+        -:  728:#endif /* __INTRINSIC_PROLOG */
+        -:  729:
+        -:  730:#if __INTRINSIC_PROLOG(_InterlockedExchangeAdd64)
+        -:  731:__MINGW_EXTENSION __int64 _InterlockedExchangeAdd64(__int64 volatile *Addend, __int64 Value);
+        -:  732:#if !__has_builtin(_InterlockedExchangeAdd64)
+        -:  733:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -:  734:__int64 _InterlockedExchangeAdd64(__int64 volatile *Addend, __int64 Value) {
+        -:  735:    return __sync_fetch_and_add(Addend, Value);
+        -:  736:}
+        -:  737:#endif
+        -:  738:#define __INTRINSIC_DEFINED__InterlockedExchangeAdd64
+        -:  739:#endif /* __INTRINSIC_PROLOG */
+        -:  740:
+        -:  741:#if __INTRINSIC_PROLOG(__readgsbyte)
+        -:  742:unsigned char __readgsbyte(unsigned __LONG32 Offset);
+        -:  743:#if !__has_builtin(__readgsbyte)
+        -:  744:__INTRINSICS_USEINLINE
+        -:  745:__buildreadseg(__readgsbyte, unsigned char, "gs", "b")
+        -:  746:#endif
+        -:  747:#define __INTRINSIC_DEFINED___readgsbyte
+        -:  748:#endif /* __INTRINSIC_PROLOG */
+        -:  749:
+        -:  750:#if __INTRINSIC_PROLOG(__readgsword)
+        -:  751:unsigned short __readgsword(unsigned __LONG32 Offset);
+        -:  752:#if !__has_builtin(__readgsword)
+        -:  753:__INTRINSICS_USEINLINE
+        -:  754:__buildreadseg(__readgsword, unsigned short, "gs", "w")
+        -:  755:#endif
+        -:  756:#define __INTRINSIC_DEFINED___readgsword
+        -:  757:#endif /* __INTRINSIC_PROLOG */
+        -:  758:
+        -:  759:#if __INTRINSIC_PROLOG(__readgsdword)
+        -:  760:unsigned __LONG32 __readgsdword(unsigned __LONG32 Offset);
+        -:  761:#if !__has_builtin(__readgsdword)
+        -:  762:__INTRINSICS_USEINLINE
+        -:  763:__buildreadseg(__readgsdword, unsigned __LONG32, "gs", "l")
+        -:  764:#endif
+        -:  765:#define __INTRINSIC_DEFINED___readgsdword
+        -:  766:#endif /* __INTRINSIC_PROLOG */
+        -:  767:
+        -:  768:#if __INTRINSIC_PROLOG(__readgsqword)
+        -:  769:__MINGW_EXTENSION unsigned __int64 __readgsqword(unsigned __LONG32 Offset);
+        -:  770:#if !__has_builtin(__readgsqword)
+        -:  771:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  772:__buildreadseg(__readgsqword, unsigned __int64, "gs", "q")
+        -:  773:#endif
+        -:  774:#define __INTRINSIC_DEFINED___readgsqword
+        -:  775:#endif /* __INTRINSIC_PROLOG */
+        -:  776:
+        -:  777:#if __INTRINSIC_PROLOG(__writegsbyte)
+        -:  778:void __writegsbyte(unsigned __LONG32 Offset,unsigned char Data);
+        -:  779:#if !__has_builtin(__writegsbyte)
+        -:  780:__INTRINSICS_USEINLINE
+        -:  781:__buildwriteseg(__writegsbyte, unsigned char, "gs", "b")
+        -:  782:#endif
+        -:  783:#define __INTRINSIC_DEFINED___writegsbyte
+        -:  784:#endif /* __INTRINSIC_PROLOG */
+        -:  785:
+        -:  786:#if __INTRINSIC_PROLOG(__writegsword)
+        -:  787:void __writegsword(unsigned __LONG32 Offset,unsigned short Data);
+        -:  788:#if !__has_builtin(__writegsword)
+        -:  789:__INTRINSICS_USEINLINE
+        -:  790:__buildwriteseg(__writegsword, unsigned short, "gs", "w")
+        -:  791:#endif
+        -:  792:#define __INTRINSIC_DEFINED___writegsword
+        -:  793:#endif /* __INTRINSIC_PROLOG */
+        -:  794:
+        -:  795:#if __INTRINSIC_PROLOG(__writegsdword)
+        -:  796:void __writegsdword(unsigned __LONG32 Offset,unsigned __LONG32 Data);
+        -:  797:#if !__has_builtin(__writegsdword)
+        -:  798:__INTRINSICS_USEINLINE
+        -:  799:__buildwriteseg(__writegsdword, unsigned __LONG32, "gs", "l")
+        -:  800:#endif
+        -:  801:#define __INTRINSIC_DEFINED___writegsdword
+        -:  802:#endif /* __INTRINSIC_PROLOG */
+        -:  803:
+        -:  804:#if __INTRINSIC_PROLOG(__writegsqword)
+        -:  805:__MINGW_EXTENSION void __writegsqword(unsigned __LONG32 Offset,unsigned __int64 Data);
+        -:  806:#if !__has_builtin(__writegsqword)
+        -:  807:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  808:__buildwriteseg(__writegsqword, unsigned __int64, "gs", "q")
+        -:  809:#endif
+        -:  810:#define __INTRINSIC_DEFINED___writegsqword
+        -:  811:#endif /* __INTRINSIC_PROLOG */
+        -:  812:
+        -:  813:#if __INTRINSIC_PROLOG(_BitScanForward64)
+        -:  814:__MINGW_EXTENSION unsigned char _BitScanForward64(unsigned __LONG32 *Index, unsigned __int64 Mask);
+        -:  815:#if !__has_builtin(_BitScanForward64)
+        -:  816:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  817:__buildbitscan(_BitScanForward64, unsigned __int64, "bsf{q %[Mask],%[Index] | %[Index],%[Mask]}")
+        -:  818:#endif
+        -:  819:#define __INTRINSIC_DEFINED__BitScanForward64
+        -:  820:#endif /* __INTRINSIC_PROLOG */
+        -:  821:
+        -:  822:#if __INTRINSIC_PROLOG(_BitScanReverse64)
+        -:  823:__MINGW_EXTENSION unsigned char _BitScanReverse64(unsigned __LONG32 *Index, unsigned __int64 Mask);
+        -:  824:#if !__has_builtin(_BitScanReverse64)
+        -:  825:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  826:__buildbitscan(_BitScanReverse64, unsigned __int64, "bsr{q %[Mask],%[Index] | %[Index],%[Mask]}")
+        -:  827:#endif
+        -:  828:#define __INTRINSIC_DEFINED__BitScanReverse64
+        -:  829:#endif /* __INTRINSIC_PROLOG */
+        -:  830:
+        -:  831:#if __INTRINSIC_PROLOG(_bittest64)
+        -:  832:__MINGW_EXTENSION unsigned char _bittest64(__int64 const *a, __int64 b);
+        -:  833:#if !__has_builtin(_bittest64)
+        -:  834:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  835:__buildbittest(_bittest64, __int64, "q", "J")
+        -:  836:#endif
+        -:  837:#define __INTRINSIC_DEFINED__bittest64
+        -:  838:#endif /* __INTRINSIC_PROLOG */
+        -:  839:
+        -:  840:#if __INTRINSIC_PROLOG(_bittestandset64)
+        -:  841:__MINGW_EXTENSION unsigned char _bittestandset64(__int64 *a, __int64 b);
+        -:  842:#if !__has_builtin(_bittestandset64)
+        -:  843:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  844:__buildbittestand(_bittestandset64, __int64, "bts", "J", "q")
+        -:  845:#endif
+        -:  846:#define __INTRINSIC_DEFINED__bittestandset64
+        -:  847:#endif /* __INTRINSIC_PROLOG */
+        -:  848:
+        -:  849:#if __INTRINSIC_PROLOG(_bittestandreset64)
+        -:  850:__MINGW_EXTENSION unsigned char _bittestandreset64(__int64 *a, __int64 b);
+        -:  851:#if !__has_builtin(_bittestandreset64)
+        -:  852:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  853:__buildbittestand(_bittestandreset64, __int64, "btr", "J", "q")
+        -:  854:#endif
+        -:  855:#define __INTRINSIC_DEFINED__bittestandreset64
+        -:  856:#endif /* __INTRINSIC_PROLOG */
+        -:  857:
+        -:  858:#if __INTRINSIC_PROLOG(_bittestandcomplement64)
+        -:  859:__MINGW_EXTENSION unsigned char _bittestandcomplement64(__int64 *a, __int64 b);
+        -:  860:#if !__has_builtin(_bittestandcomplement64)
+        -:  861:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  862:__buildbittestand(_bittestandcomplement64, __int64, "btc", "J", "q")
+        -:  863:#endif
+        -:  864:#define __INTRINSIC_DEFINED__bittestandcomplement64
+        -:  865:#endif /* __INTRINSIC_PROLOG */
+        -:  866:
+        -:  867:#if __INTRINSIC_PROLOG(__readcr0)
+        -:  868:__MINGW_EXTENSION unsigned __int64 __readcr0(void);
+        -:  869:#if !__has_builtin(__readcr0)
+        -:  870:__INTRINSICS_USEINLINE
+        -:  871:__build_readcr(__readcr0, unsigned __int64, "0")
+        -:  872:#endif
+        -:  873:#define __INTRINSIC_DEFINED___readcr0
+        -:  874:#endif /* __INTRINSIC_PROLOG */
+        -:  875:
+        -:  876:#if __INTRINSIC_PROLOG(__readcr2)
+        -:  877:__MINGW_EXTENSION unsigned __int64 __readcr2(void);
+        -:  878:#if !__has_builtin(__readcr2)
+        -:  879:__INTRINSICS_USEINLINE
+        -:  880:__build_readcr(__readcr2, unsigned __int64, "2")
+        -:  881:#endif
+        -:  882:#define __INTRINSIC_DEFINED___readcr2
+        -:  883:#endif /* __INTRINSIC_PROLOG */
+        -:  884:
+        -:  885:#if __INTRINSIC_PROLOG(__readcr3)
+        -:  886:__MINGW_EXTENSION unsigned __int64 __readcr3(void);
+        -:  887:#if !__has_builtin(__readcr3)
+        -:  888:__INTRINSICS_USEINLINE
+        -:  889:__build_readcr(__readcr3, unsigned __int64, "3")
+        -:  890:#endif
+        -:  891:#define __INTRINSIC_DEFINED___readcr3
+        -:  892:#endif /* __INTRINSIC_PROLOG */
+        -:  893:
+        -:  894:#if __INTRINSIC_PROLOG(__readcr4)
+        -:  895:__MINGW_EXTENSION unsigned __int64 __readcr4(void);
+        -:  896:#if !__has_builtin(__readcr4)
+        -:  897:__INTRINSICS_USEINLINE
+        -:  898:__build_readcr(__readcr4, unsigned __int64, "4")
+        -:  899:#endif
+        -:  900:#define __INTRINSIC_DEFINED___readcr4
+        -:  901:#endif /* __INTRINSIC_PROLOG */
+        -:  902:
+        -:  903:#if __INTRINSIC_PROLOG(__readcr8)
+        -:  904:__MINGW_EXTENSION unsigned __int64 __readcr8(void);
+        -:  905:#if !__has_builtin(__readcr8)
+        -:  906:__INTRINSICS_USEINLINE
+        -:  907:__build_readcr(__readcr8, unsigned __int64, "8")
+        -:  908:#endif
+        -:  909:#define __INTRINSIC_DEFINED___readcr8
+        -:  910:#endif /* __INTRINSIC_PROLOG */
+        -:  911:
+        -:  912:#if __INTRINSIC_PROLOG(__writecr0)
+        -:  913:__MINGW_EXTENSION void __writecr0(unsigned __int64);
+        -:  914:#if !__has_builtin(__writecr0)
+        -:  915:__INTRINSICS_USEINLINE
+        -:  916:__build_writecr(__writecr0, unsigned __int64, "0")
+        -:  917:#endif
+        -:  918:#define __INTRINSIC_DEFINED___writecr0
+        -:  919:#endif /* __INTRINSIC_PROLOG */
+        -:  920:
+        -:  921:#if __INTRINSIC_PROLOG(__writecr3)
+        -:  922:__MINGW_EXTENSION void __writecr3(unsigned __int64);
+        -:  923:#if !__has_builtin(__writecr3)
+        -:  924:__INTRINSICS_USEINLINE
+        -:  925:__build_writecr(__writecr3, unsigned __int64, "3")
+        -:  926:#endif
+        -:  927:#define __INTRINSIC_DEFINED___writecr3
+        -:  928:#endif /* __INTRINSIC_PROLOG */
+        -:  929:
+        -:  930:#if __INTRINSIC_PROLOG(__writecr4)
+        -:  931:__MINGW_EXTENSION void __writecr4(unsigned __int64);
+        -:  932:#if !__has_builtin(__writecr4)
+        -:  933:__INTRINSICS_USEINLINE
+        -:  934:__build_writecr(__writecr4, unsigned __int64, "4")
+        -:  935:#endif
+        -:  936:#define __INTRINSIC_DEFINED___writecr4
+        -:  937:#endif /* __INTRINSIC_PROLOG */
+        -:  938:
+        -:  939:#if __INTRINSIC_PROLOG(__writecr8)
+        -:  940:__MINGW_EXTENSION void __writecr8(unsigned __int64);
+        -:  941:#if !__has_builtin(__writecr8)
+        -:  942:__INTRINSICS_USEINLINE
+        -:  943:__build_writecr(__writecr8, unsigned __int64, "8")
+        -:  944:#endif
+        -:  945:#define __INTRINSIC_DEFINED___writecr8
+        -:  946:#endif /* __INTRINSIC_PROLOG */
+        -:  947:
+        -:  948:#if __INTRINSIC_PROLOG(__movsq)
+        -:  949:__MINGW_EXTENSION void __movsq(unsigned __int64 *Dest, unsigned __int64 const *Source, size_t Count);
+        -:  950:#if !__has_builtin(__movsq)
+        -:  951:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -:  952:__buildmov(__movsq, unsigned __int64, "q")
+        -:  953:#endif
+        -:  954:#define __INTRINSIC_DEFINED___movsq
+        -:  955:#endif /* __INTRINSIC_PROLOG */
+        -:  956:
+        -:  957:#if __INTRINSIC_PROLOG(_umul128)
+        -:  958:unsigned __int64 _umul128(unsigned __int64, unsigned __int64, unsigned __int64 *);
+        -:  959:#if !__has_builtin(_umul128)
+        -:  960:__INTRINSICS_USEINLINE
+        -:  961:unsigned __int64 _umul128(unsigned __int64 a, unsigned __int64 b, unsigned __int64 *hi)
+        -:  962:{
+        -:  963:   __MINGW_EXTENSION union { unsigned __int128 v; unsigned __int64 sv[2]; } var;
+        -:  964:   var.v = a;
+        -:  965:   var.v *= b;
+        -:  966:   if (hi) *hi = var.sv[1];
+        -:  967:   return var.sv[0];
+        -:  968:}
+        -:  969:#endif
+        -:  970:#define __INTRINSIC_DEFINED__umul128
+        -:  971:#endif /* __INTRINSIC_PROLOG */
+        -:  972:
+        -:  973:#if __INTRINSIC_PROLOG(_mul128)
+        -:  974:__int64 _mul128(__int64, __int64, __int64 *);
+        -:  975:#if !__has_builtin(_mul128)
+        -:  976:__INTRINSICS_USEINLINE
+        -:  977:__int64 _mul128(__int64 a, __int64 b, __int64 *hi)
+        -:  978:{
+        -:  979:   __MINGW_EXTENSION union { __int128 v; __int64 sv[2]; } var;
+        -:  980:   var.v = a;
+        -:  981:   var.v *= b;
+        -:  982:   if (hi) *hi = var.sv[1];
+        -:  983:   return var.sv[0];
+        -:  984:}
+        -:  985:#endif
+        -:  986:#define __INTRINSIC_DEFINED__mul128
+        -:  987:#endif /* __INTRINSIC_PROLOG */
+        -:  988:
+        -:  989:#if __INTRINSIC_PROLOG(__shiftleft128)
+        -:  990:unsigned __int64 __shiftleft128(unsigned __int64  LowPart, unsigned __int64 HighPart, unsigned char Shift);
+        -:  991:#if !__has_builtin(__shiftleft128)
+        -:  992:__INTRINSICS_USEINLINE
+        -:  993:unsigned __int64 __shiftleft128 (unsigned __int64  LowPart, unsigned __int64 HighPart, unsigned char Shift)
+        -:  994:{
+        -:  995:   unsigned __int64 ret;
+        -:  996:
+        -:  997:   __asm__ ("shld {%[Shift],%[LowPart],%[HighPart]|%[HighPart], %[LowPart], %[Shift]}" 
+        -:  998:      : [ret] "=r" (ret)
+        -:  999:      : [LowPart] "r" (LowPart), [HighPart] "0" (HighPart), [Shift] "Jc" (Shift)
+        -: 1000:      : "cc");
+        -: 1001:
+        -: 1002:   return ret;
+        -: 1003:}
+        -: 1004:#endif
+        -: 1005:#define __INTRINSIC_DEFINED___shiftleft128
+        -: 1006:#endif /* __INTRINSIC_PROLOG */
+        -: 1007:
+        -: 1008:#if __INTRINSIC_PROLOG(__shiftright128)
+        -: 1009:unsigned __int64 __shiftright128 (unsigned __int64  LowPart, unsigned __int64 HighPart, unsigned char Shift);
+        -: 1010:#if !__has_builtin(__shiftright128)
+        -: 1011:__INTRINSICS_USEINLINE
+        -: 1012:unsigned __int64 __shiftright128 (unsigned __int64  LowPart, unsigned __int64 HighPart, unsigned char Shift)
+        -: 1013:{
+        -: 1014:   unsigned __int64 ret;
+        -: 1015:
+        -: 1016:   __asm__ ("shrd {%[Shift],%[HighPart],%[LowPart]|%[LowPart], %[HighPart], %[Shift]}" 
+        -: 1017:      : [ret] "=r" (ret)
+        -: 1018:      : [LowPart] "0" (LowPart), [HighPart] "r" (HighPart), [Shift] "Jc" (Shift)
+        -: 1019:      : "cc");
+        -: 1020:
+        -: 1021:   return ret;
+        -: 1022:}
+        -: 1023:#endif
+        -: 1024:#define __INTRINSIC_DEFINED___shiftright128
+        -: 1025:#endif /* __INTRINSIC_PROLOG */
+        -: 1026:
+        -: 1027:#endif /* defined(__x86_64__) || defined(_AMD64_) */
+        -: 1028:
+        -: 1029:/* ***************************************************** */
+        -: 1030:
+        -: 1031:#if defined(__arm__) || defined(_ARM_)
+        -: 1032:
+        -: 1033:#if __INTRINSIC_PROLOG(_interlockedbittestandset)
+        -: 1034:unsigned char _interlockedbittestandset(__LONG32 volatile *a, __LONG32 b);
+        -: 1035:#if !__has_builtin(_interlockedbittestandset)
+        -: 1036:__INTRINSICS_USEINLINE 
+        -: 1037:__buildbittesti(_interlockedbittestandset, __LONG32, "orr", /* unused param */)
+        -: 1038:#endif
+        -: 1039:#define __INTRINSIC_DEFINED__interlockedbittestandset
+        -: 1040:#endif /* __INTRINSIC_PROLOG */
+        -: 1041:
+        -: 1042:#if __INTRINSIC_PROLOG(_interlockedbittestandreset)
+        -: 1043:unsigned char _interlockedbittestandreset(__LONG32 volatile *a, __LONG32 b);
+        -: 1044:__INTRINSICS_USEINLINE 
+        -: 1045:#if !__has_builtin(_interlockedbittestandreset)
+        -: 1046:__buildbittesti(_interlockedbittestandreset, __LONG32, "bic", /* unused param */)
+        -: 1047:#endif
+        -: 1048:#define __INTRINSIC_DEFINED__interlockedbittestandreset
+        -: 1049:#endif /* __INTRINSIC_PROLOG */
+        -: 1050:
+        -: 1051:#if __INTRINSIC_PROLOG(_interlockedbittestandcomplement)
+        -: 1052:unsigned char _interlockedbittestandcomplement(__LONG32 volatile *a, __LONG32 b);
+        -: 1053:#if !__has_builtin(_interlockedbittestandcomplement)
+        -: 1054:__INTRINSICS_USEINLINE 
+        -: 1055:__buildbittesti(_interlockedbittestandcomplement, __LONG32, "eor", /* unused param */)
+        -: 1056:#endif
+        -: 1057:#define __INTRINSIC_DEFINED__interlockedbittestandcomplement
+        -: 1058:#endif /* __INTRINSIC_PROLOG */
+        -: 1059:
+        -: 1060:#if __INTRINSIC_PROLOG(InterlockedBitTestAndSet)
+        -: 1061:unsigned char InterlockedBitTestAndSet(volatile __LONG32 *a, __LONG32 b);
+        -: 1062:#if !__has_builtin(InterlockedBitTestAndSet)
+        -: 1063:__INTRINSICS_USEINLINE 
+        -: 1064:__buildbittesti(InterlockedBitTestAndSet, __LONG32, "orr", /* unused param */)
+        -: 1065:#endif
+        -: 1066:#define __INTRINSIC_DEFINED_InterlockedBitTestAndSet
+        -: 1067:#endif /* __INTRINSIC_PROLOG */
+        -: 1068:
+        -: 1069:#if __INTRINSIC_PROLOG(InterlockedBitTestAndReset)
+        -: 1070:unsigned char InterlockedBitTestAndReset(volatile __LONG32 *a, __LONG32 b);
+        -: 1071:#if !__has_builtin(InterlockedBitTestAndReset)
+        -: 1072:__INTRINSICS_USEINLINE 
+        -: 1073:__buildbittesti(InterlockedBitTestAndReset, __LONG32, "bic", /* unused param */)
+        -: 1074:#endif
+        -: 1075:#define __INTRINSIC_DEFINED_InterlockedBitTestAndReset
+        -: 1076:#endif /* __INTRINSIC_PROLOG */
+        -: 1077:
+        -: 1078:#if __INTRINSIC_PROLOG(InterlockedBitTestAndComplement)
+        -: 1079:unsigned char InterlockedBitTestAndComplement(volatile __LONG32 *a, __LONG32 b);
+        -: 1080:#if !__has_builtin(InterlockedBitTestAndComplement)
+        -: 1081:__INTRINSICS_USEINLINE 
+        -: 1082:__buildbittesti(InterlockedBitTestAndComplement, __LONG32, "eor", /* unused param */)
+        -: 1083:#endif
+        -: 1084:#define __INTRINSIC_DEFINED_InterlockedBitTestAndComplement
+        -: 1085:#endif /* __INTRINSIC_PROLOG */
+        -: 1086:
+        -: 1087:#endif /* defined(__arm__) || defined(_ARM_) */
+        -: 1088:
+        -: 1089:#if defined(__aarch64__) || defined(_ARM64_)
+        -: 1090:
+        -: 1091:#if __INTRINSIC_PROLOG(_interlockedbittestandset)
+        -: 1092:unsigned char _interlockedbittestandset(__LONG32 volatile *a, __LONG32 b);
+        -: 1093:#if !__has_builtin(_interlockedbittestandset)
+        -: 1094:__INTRINSICS_USEINLINE 
+        -: 1095:__buildbittesti(_interlockedbittestandset, __LONG32, "orr", /* unused param */)
+        -: 1096:#endif
+        -: 1097:#define __INTRINSIC_DEFINED__interlockedbittestandset
+        -: 1098:#endif /* __INTRINSIC_PROLOG */
+        -: 1099:
+        -: 1100:#if __INTRINSIC_PROLOG(_interlockedbittestandreset)
+        -: 1101:unsigned char _interlockedbittestandreset(__LONG32 volatile *a, __LONG32 b);
+        -: 1102:__INTRINSICS_USEINLINE 
+        -: 1103:#if !__has_builtin(_interlockedbittestandreset)
+        -: 1104:__buildbittesti(_interlockedbittestandreset, __LONG32, "bic", /* unused param */)
+        -: 1105:#endif
+        -: 1106:#define __INTRINSIC_DEFINED__interlockedbittestandreset
+        -: 1107:#endif /* __INTRINSIC_PROLOG */
+        -: 1108:
+        -: 1109:#if __INTRINSIC_PROLOG(_interlockedbittestandcomplement)
+        -: 1110:unsigned char _interlockedbittestandcomplement(__LONG32 volatile *a, __LONG32 b);
+        -: 1111:#if !__has_builtin(_interlockedbittestandcomplement)
+        -: 1112:__INTRINSICS_USEINLINE 
+        -: 1113:__buildbittesti(_interlockedbittestandcomplement, __LONG32, "eor", /* unused param */)
+        -: 1114:#endif
+        -: 1115:#define __INTRINSIC_DEFINED__interlockedbittestandcomplement
+        -: 1116:#endif /* __INTRINSIC_PROLOG */
+        -: 1117:
+        -: 1118:#if __INTRINSIC_PROLOG(InterlockedBitTestAndSet)
+        -: 1119:unsigned char InterlockedBitTestAndSet(volatile __LONG32 *a, __LONG32 b);
+        -: 1120:#if !__has_builtin(InterlockedBitTestAndSet)
+        -: 1121:__INTRINSICS_USEINLINE 
+        -: 1122:__buildbittesti(InterlockedBitTestAndSet, __LONG32, "orr", /* unused param */)
+        -: 1123:#endif
+        -: 1124:#define __INTRINSIC_DEFINED_InterlockedBitTestAndSet
+        -: 1125:#endif /* __INTRINSIC_PROLOG */
+        -: 1126:
+        -: 1127:#if __INTRINSIC_PROLOG(InterlockedBitTestAndReset)
+        -: 1128:unsigned char InterlockedBitTestAndReset(volatile __LONG32 *a, __LONG32 b);
+        -: 1129:#if !__has_builtin(InterlockedBitTestAndReset)
+        -: 1130:__INTRINSICS_USEINLINE 
+        -: 1131:__buildbittesti(InterlockedBitTestAndReset, __LONG32, "bic", /* unused param */)
+        -: 1132:#endif
+        -: 1133:#define __INTRINSIC_DEFINED_InterlockedBitTestAndReset
+        -: 1134:#endif /* __INTRINSIC_PROLOG */
+        -: 1135:
+        -: 1136:#if __INTRINSIC_PROLOG(InterlockedBitTestAndComplement)
+        -: 1137:unsigned char InterlockedBitTestAndComplement(volatile __LONG32 *a, __LONG32 b);
+        -: 1138:#if !__has_builtin(InterlockedBitTestAndComplement)
+        -: 1139:__INTRINSICS_USEINLINE 
+        -: 1140:__buildbittesti(InterlockedBitTestAndComplement, __LONG32, "eor", /* unused param */)
+        -: 1141:#endif
+        -: 1142:#define __INTRINSIC_DEFINED_InterlockedBitTestAndComplement
+        -: 1143:#endif /* __INTRINSIC_PROLOG */
+        -: 1144:
+        -: 1145:#if __INTRINSIC_PROLOG(_InterlockedAnd64)
+        -: 1146:__MINGW_EXTENSION __int64 _InterlockedAnd64(__int64 volatile *, __int64);
+        -: 1147:#if !__has_builtin(_InterlockedAnd64)
+        -: 1148:__INTRINSICS_USEINLINE 
+        -: 1149:__buildlogicali(_InterlockedAnd64, __int64, and)
+        -: 1150:#endif
+        -: 1151:#define __INTRINSIC_DEFINED__InterlockedAnd64
+        -: 1152:#endif /* __INTRINSIC_PROLOG */
+        -: 1153:
+        -: 1154:#if __INTRINSIC_PROLOG(_InterlockedOr64)
+        -: 1155:__MINGW_EXTENSION __int64 _InterlockedOr64(__int64 volatile *, __int64);
+        -: 1156:#if !__has_builtin(_InterlockedOr64)
+        -: 1157:__INTRINSICS_USEINLINE 
+        -: 1158:__buildlogicali(_InterlockedOr64, __int64, or)
+        -: 1159:#endif
+        -: 1160:#define __INTRINSIC_DEFINED__InterlockedOr64
+        -: 1161:#endif /* __INTRINSIC_PROLOG */
+        -: 1162:
+        -: 1163:#if __INTRINSIC_PROLOG(_InterlockedXor64)
+        -: 1164:__MINGW_EXTENSION __int64 _InterlockedXor64(__int64 volatile *, __int64);
+        -: 1165:#if !__has_builtin(_InterlockedXor64)
+        -: 1166:__INTRINSICS_USEINLINE 
+        -: 1167:__buildlogicali(_InterlockedXor64, __int64, xor)
+        -: 1168:#endif
+        -: 1169:#define __INTRINSIC_DEFINED__InterlockedXor64
+        -: 1170:#endif /* __INTRINSIC_PROLOG */
+        -: 1171:
+        -: 1172:#if __INTRINSIC_PROLOG(_InterlockedIncrement64)
+        -: 1173:__MINGW_EXTENSION __int64 _InterlockedIncrement64(__int64 volatile *Addend);
+        -: 1174:#if !__has_builtin(_InterlockedIncrement64)
+        -: 1175:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -: 1176:__int64 _InterlockedIncrement64(__int64 volatile *Addend) {
+        -: 1177:    return __sync_add_and_fetch(Addend, 1);
+        -: 1178:}
+        -: 1179:#endif
+        -: 1180:#define __INTRINSIC_DEFINED__InterlockedIncrement64
+        -: 1181:#endif /* __INTRINSIC_PROLOG */
+        -: 1182:
+        -: 1183:#if __INTRINSIC_PROLOG(_InterlockedDecrement64)
+        -: 1184:__MINGW_EXTENSION __int64 _InterlockedDecrement64(__int64 volatile *Addend);
+        -: 1185:#if !__has_builtin(_InterlockedDecrement64)
+        -: 1186:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -: 1187:__int64 _InterlockedDecrement64(__int64 volatile *Addend) {
+        -: 1188:    return __sync_sub_and_fetch(Addend, 1);
+        -: 1189:}
+        -: 1190:#endif
+        -: 1191:#define __INTRINSIC_DEFINED__InterlockedDecrement64
+        -: 1192:#endif /* __INTRINSIC_PROLOG */
+        -: 1193:
+        -: 1194:#if __INTRINSIC_PROLOG(_InterlockedExchange64)
+        -: 1195:__MINGW_EXTENSION __int64 _InterlockedExchange64(__int64 volatile *Target, __int64 Value);
+        -: 1196:#if !__has_builtin(_InterlockedExchange64)
+        -: 1197:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -: 1198:__int64 _InterlockedExchange64(__int64 volatile *Target, __int64 Value) {
+        -: 1199:    return __sync_lock_test_and_set(Target, Value);
+        -: 1200:}
+        -: 1201:#endif
+        -: 1202:#define __INTRINSIC_DEFINED__InterlockedExchange64
+        -: 1203:#endif /* __INTRINSIC_PROLOG */
+        -: 1204:
+        -: 1205:#if __INTRINSIC_PROLOG(_InterlockedExchangeAdd64)
+        -: 1206:__MINGW_EXTENSION __int64 _InterlockedExchangeAdd64(__int64 volatile *Addend, __int64 Value);
+        -: 1207:#if !__has_builtin(_InterlockedExchangeAdd64)
+        -: 1208:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -: 1209:__int64 _InterlockedExchangeAdd64(__int64 volatile *Addend, __int64 Value) {
+        -: 1210:    return __sync_fetch_and_add(Addend, Value);
+        -: 1211:}
+        -: 1212:#endif
+        -: 1213:#define __INTRINSIC_DEFINED__InterlockedExchangeAdd64
+        -: 1214:#endif /* __INTRINSIC_PROLOG */
+        -: 1215:#endif /* defined(__aarch64__) || define(_ARM64_) */
+        -: 1216:/* ***************************************************** */
+        -: 1217:
+        -: 1218:#if defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_) || defined(__arm__) || defined(_ARM_) || defined(__aarch64__) || defined(_ARM64_)
+        -: 1219:
+        -: 1220:#if __INTRINSIC_PROLOG(__popcnt16)
+        -: 1221:unsigned short __popcnt16(unsigned short);
+        -: 1222:#if !__has_builtin(__popcnt16)
+        -: 1223:__INTRINSICS_USEINLINE
+        -: 1224:unsigned short __popcnt16(unsigned short value)
+        -: 1225:{
+        -: 1226:    return __builtin_popcount(value);
+        -: 1227:}
+        -: 1228:#endif
+        -: 1229:#define __INTRINSIC_DEFINED___popcnt16
+        -: 1230:#endif /* __INTRINSIC_PROLOG */
+        -: 1231:
+        -: 1232:#if __INTRINSIC_PROLOG(__popcnt)
+        -: 1233:unsigned int __popcnt(unsigned int);
+        -: 1234:#if !__has_builtin(__popcnt)
+        -: 1235:__INTRINSICS_USEINLINE
+        -: 1236:unsigned int __popcnt(unsigned int value)
+        -: 1237:{
+        -: 1238:    return __builtin_popcount(value);
+        -: 1239:}
+        -: 1240:#endif
+        -: 1241:#define __INTRINSIC_DEFINED___popcnt
+        -: 1242:#endif /* __INTRINSIC_PROLOG */
+        -: 1243:
+        -: 1244:#if __INTRINSIC_PROLOG(__popcnt64)
+        -: 1245:unsigned __int64 __popcnt64(unsigned __int64);
+        -: 1246:#if !__has_builtin(__popcnt64)
+        -: 1247:__INTRINSICS_USEINLINE
+        -: 1248:unsigned __int64 __popcnt64(unsigned __int64 value)
+        -: 1249:{
+        -: 1250:    return __builtin_popcountll(value);
+        -: 1251:}
+        -: 1252:#endif
+        -: 1253:#define __INTRINSIC_DEFINED___popcnt64
+        -: 1254:#endif /* __INTRINSIC_PROLOG */
+        -: 1255:
+        -: 1256:#if __INTRINSIC_PROLOG(_InterlockedAnd)
+        -: 1257:__LONG32 _InterlockedAnd(__LONG32 volatile *, __LONG32);
+        -: 1258:#if !__has_builtin(_InterlockedAnd)
+        -: 1259:__INTRINSICS_USEINLINE 
+        -: 1260:__buildlogicali(_InterlockedAnd, __LONG32, and)
+        -: 1261:#endif
+        -: 1262:#define __INTRINSIC_DEFINED__InterlockedAnd
+        -: 1263:#endif /* __INTRINSIC_PROLOG */
+        -: 1264:
+        -: 1265:#if __INTRINSIC_PROLOG(_InterlockedOr)
+        -: 1266:__LONG32 _InterlockedOr(__LONG32 volatile *, __LONG32);
+        -: 1267:#if !__has_builtin(_InterlockedOr)
+        -: 1268:__INTRINSICS_USEINLINE 
+        -: 1269:__buildlogicali(_InterlockedOr, __LONG32, or)
+        -: 1270:#endif
+        -: 1271:#define __INTRINSIC_DEFINED__InterlockedOr
+        -: 1272:#endif /* __INTRINSIC_PROLOG */
+        -: 1273:
+        -: 1274:#if __INTRINSIC_PROLOG(_InterlockedXor)
+        -: 1275:__LONG32 _InterlockedXor(__LONG32 volatile *, __LONG32);
+        -: 1276:#if !__has_builtin(_InterlockedXor)
+        -: 1277:__INTRINSICS_USEINLINE 
+        -: 1278:__buildlogicali(_InterlockedXor, __LONG32, xor)
+        -: 1279:#endif
+        -: 1280:#define __INTRINSIC_DEFINED__InterlockedXor
+        -: 1281:#endif /* __INTRINSIC_PROLOG */
+        -: 1282:
+        -: 1283:#if __INTRINSIC_PROLOG(_InterlockedIncrement16)
+        -: 1284:short _InterlockedIncrement16(short volatile *Addend);
+        -: 1285:#if !__has_builtin(_InterlockedIncrement16)
+        -: 1286:__INTRINSICS_USEINLINE 
+        -: 1287:short _InterlockedIncrement16(short volatile *Addend) {
+        -: 1288:    return __sync_add_and_fetch(Addend, 1);
+        -: 1289:}
+        -: 1290:#endif
+        -: 1291:#define __INTRINSIC_DEFINED__InterlockedIncrement16
+        -: 1292:#endif /* __INTRINSIC_PROLOG */
+        -: 1293:
+        -: 1294:#if __INTRINSIC_PROLOG(_InterlockedDecrement16)
+        -: 1295:short _InterlockedDecrement16(short volatile *Addend);
+        -: 1296:#if !__has_builtin(_InterlockedDecrement16)
+        -: 1297:__INTRINSICS_USEINLINE 
+        -: 1298:short _InterlockedDecrement16(short volatile *Addend) {
+        -: 1299:    return __sync_sub_and_fetch(Addend, 1);
+        -: 1300:}
+        -: 1301:#endif
+        -: 1302:#define __INTRINSIC_DEFINED__InterlockedDecrement16
+        -: 1303:#endif /* __INTRINSIC_PROLOG */
+        -: 1304:
+        -: 1305:#if __INTRINSIC_PROLOG(_InterlockedCompareExchange16)
+        -: 1306:short _InterlockedCompareExchange16(short volatile *Destination, short ExChange, short Comperand);
+        -: 1307:#if !__has_builtin(_InterlockedCompareExchange16)
+        -: 1308:__INTRINSICS_USEINLINE 
+        -: 1309:short _InterlockedCompareExchange16(short volatile *Destination, short ExChange, short Comperand) {
+        -: 1310:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
+        -: 1311:}
+        -: 1312:#endif
+        -: 1313:#define __INTRINSIC_DEFINED__InterlockedCompareExchange16
+        -: 1314:#endif /* __INTRINSIC_PROLOG */
+        -: 1315:
+        -: 1316:#if __INTRINSIC_PROLOG(_InterlockedExchangeAdd)
+        -: 1317:__LONG32 _InterlockedExchangeAdd(__LONG32 volatile *Addend, __LONG32 Value);
+        -: 1318:#if !__has_builtin(_InterlockedExchangeAdd)
+        -: 1319:__INTRINSICS_USEINLINE 
+        -: 1320:__LONG32 _InterlockedExchangeAdd(__LONG32 volatile *Addend, __LONG32 Value) {
+        -: 1321:    return __sync_fetch_and_add(Addend, Value);
+        -: 1322:}
+        -: 1323:#endif
+        -: 1324:#define __INTRINSIC_DEFINED__InterlockedExchangeAdd
+        -: 1325:#endif /* __INTRINSIC_PROLOG */
+        -: 1326:
+        -: 1327:#if __INTRINSIC_PROLOG(_InterlockedCompareExchange)
+        -: 1328:__LONG32 _InterlockedCompareExchange(__LONG32 volatile *Destination, __LONG32 ExChange, __LONG32 Comperand);
+        -: 1329:#if !__has_builtin(_InterlockedCompareExchange)
+        -: 1330:__INTRINSICS_USEINLINE 
+        -: 1331:__LONG32 _InterlockedCompareExchange(__LONG32 volatile *Destination, __LONG32 ExChange, __LONG32 Comperand) {
+    #####: 1332:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
+    %%%%%: 1332-block  0
+    %%%%%: 1332-block  1
+        -: 1333:}
+        -: 1334:#endif
+        -: 1335:#define __INTRINSIC_DEFINED__InterlockedCompareExchange
+        -: 1336:#endif /* __INTRINSIC_PROLOG */
+        -: 1337:
+        -: 1338:#if __INTRINSIC_PROLOG(_InterlockedIncrement)
+        -: 1339:__LONG32 _InterlockedIncrement(__LONG32 volatile *Addend);
+        -: 1340:#if !__has_builtin(_InterlockedIncrement)
+        -: 1341:__INTRINSICS_USEINLINE 
+        -: 1342:__LONG32 _InterlockedIncrement(__LONG32 volatile *Addend) {
+        -: 1343:   return __sync_add_and_fetch(Addend, 1);
+        -: 1344:}
+        -: 1345:#endif
+        -: 1346:#define __INTRINSIC_DEFINED__InterlockedIncrement
+        -: 1347:#endif /* __INTRINSIC_PROLOG */
+        -: 1348:
+        -: 1349:#if __INTRINSIC_PROLOG(_InterlockedDecrement)
+        -: 1350:__LONG32 _InterlockedDecrement(__LONG32 volatile *Addend);
+        -: 1351:#if !__has_builtin(_InterlockedDecrement)
+        -: 1352:__INTRINSICS_USEINLINE 
+        -: 1353:__LONG32 _InterlockedDecrement(__LONG32 volatile *Addend) {
+        -: 1354:   return __sync_sub_and_fetch(Addend, 1);
+        -: 1355:}
+        -: 1356:#endif
+        -: 1357:#define __INTRINSIC_DEFINED__InterlockedDecrement
+        -: 1358:#endif /* __INTRINSIC_PROLOG */
+        -: 1359:
+        -: 1360:#if __INTRINSIC_PROLOG(_InterlockedAdd)
+        -: 1361:__LONG32 _InterlockedAdd(__LONG32 volatile *Addend, __LONG32 Value);
+        -: 1362:#if !__has_builtin(_InterlockedAdd)
+        -: 1363:__INTRINSICS_USEINLINE
+        -: 1364:__LONG32 _InterlockedAdd(__LONG32 volatile *Addend, __LONG32 Value) {
+        -: 1365:    return __sync_add_and_fetch(Addend, Value);
+        -: 1366:}
+        -: 1367:#endif
+        -: 1368:#define __INTRINSIC_DEFINED__InterlockedAdd
+        -: 1369:#endif /* __INTRINSIC_PROLOG */
+        -: 1370:
+        -: 1371:#if __INTRINSIC_PROLOG(_InterlockedAdd64)
+        -: 1372:__MINGW_EXTENSION __int64 _InterlockedAdd64(__int64 volatile *Addend, __int64 Value);
+        -: 1373:#if !__has_builtin(_InterlockedAdd64)
+        -: 1374:__MINGW_EXTENSION __INTRINSICS_USEINLINE
+        -: 1375:__int64 _InterlockedAdd64(__int64 volatile *Addend, __int64 Value) {
+        -: 1376:    return __sync_add_and_fetch(Addend, Value);
+        -: 1377:}
+        -: 1378:#endif
+        -: 1379:#define __INTRINSIC_DEFINED__InterlockedAdd64
+        -: 1380:#endif /* __INTRINSIC_PROLOG */
+        -: 1381:
+        -: 1382:#if __INTRINSIC_PROLOG(_InterlockedExchange)
+        -: 1383:__LONG32 _InterlockedExchange(__LONG32 volatile *Target, __LONG32 Value);
+        -: 1384:#if !__has_builtin(_InterlockedExchange)
+        -: 1385:__INTRINSICS_USEINLINE 
+        -: 1386:__LONG32 _InterlockedExchange(__LONG32 volatile *Target, __LONG32 Value) {
+        -: 1387:    return __sync_lock_test_and_set(Target, Value);
+        -: 1388:}
+        -: 1389:#endif
+        -: 1390:#define __INTRINSIC_DEFINED__InterlockedExchange
+        -: 1391:#endif /* __INTRINSIC_PROLOG */
+        -: 1392:
+        -: 1393:#if __INTRINSIC_PROLOG(_InterlockedCompareExchange64)
+        -: 1394:__MINGW_EXTENSION __int64 _InterlockedCompareExchange64(__int64 volatile *Destination, __int64 ExChange, __int64 Comperand);
+        -: 1395:#if !__has_builtin(_InterlockedCompareExchange64)
+        -: 1396:__MINGW_EXTENSION __INTRINSICS_USEINLINE 
+        -: 1397:__int64 _InterlockedCompareExchange64(__int64 volatile *Destination, __int64 ExChange, __int64 Comperand) {
+        -: 1398:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
+        -: 1399:}
+        -: 1400:#endif
+        -: 1401:#define __INTRINSIC_DEFINED__InterlockedCompareExchange64
+        -: 1402:#endif /* __INTRINSIC_PROLOG */
+        -: 1403:
+        -: 1404:#if __INTRINSIC_PROLOG(_InterlockedCompareExchangePointer)
+        -: 1405:void *_InterlockedCompareExchangePointer(void * volatile *Destination, void *ExChange, void *Comperand);
+        -: 1406:#if !__has_builtin(_InterlockedCompareExchangePointer)
+        -: 1407:__INTRINSICS_USEINLINE 
+        -: 1408:void *_InterlockedCompareExchangePointer(void *volatile *Destination, void *ExChange, void *Comperand) {
+        -: 1409:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
+        -: 1410:}
+        -: 1411:#endif
+        -: 1412:#define __INTRINSIC_DEFINED__InterlockedCompareExchangePointer
+        -: 1413:#endif /* __INTRINSIC_PROLOG */
+        -: 1414:
+        -: 1415:#if __INTRINSIC_PROLOG(_InterlockedExchangePointer)
+        -: 1416:void *_InterlockedExchangePointer(void *volatile *Target,void *Value);
+        -: 1417:#if !__has_builtin(_InterlockedExchangePointer)
+        -: 1418:__INTRINSICS_USEINLINE 
+        -: 1419:void *_InterlockedExchangePointer(void *volatile *Target,void *Value) {
+        -: 1420:    return __sync_lock_test_and_set(Target, Value);
+        -: 1421:}
+        -: 1422:#endif
+        -: 1423:#define __INTRINSIC_DEFINED__InterlockedExchangePointer
+        -: 1424:#endif /* __INTRINSIC_PROLOG */
+        -: 1425:
+        -: 1426:#endif /* defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_) || defined(__arm__) || defined(_ARM_) || defined(__aarch64__) || defined(_ARM64_) */
+        -: 1427:
+        -: 1428:#if defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_)
+        -: 1429:
+        -: 1430:#if __INTRINSIC_PROLOG(__int2c)
+        -: 1431:void __int2c(void);
+        -: 1432:#if !__has_builtin(__int2c)
+        -: 1433:__INTRINSICS_USEINLINE
+        -: 1434:void __int2c(void) {
+        -: 1435:    __buildint(0x2c);
+        -: 1436:}
+        -: 1437:#endif
+        -: 1438:#define __INTRINSIC_DEFINED___int2c
+        -: 1439:#endif /* __INTRINSIC_PROLOG */
+        -: 1440:
+        -: 1441:#if __INTRINSIC_PROLOG(__stosb)
+        -: 1442:void __stosb(unsigned char *, unsigned char, size_t);
+        -: 1443:#if !__has_builtin(__stosb)
+        -: 1444:__INTRINSICS_USEINLINE
+        -: 1445:__buildstos(__stosb, unsigned char, "b|b")
+        -: 1446:#endif
+        -: 1447:#define __INTRINSIC_DEFINED___stosb
+        -: 1448:#endif /* __INTRINSIC_PROLOG */
+        -: 1449:
+        -: 1450:#if __INTRINSIC_PROLOG(__stosw)
+        -: 1451:void __stosw(unsigned short *, unsigned short, size_t);
+        -: 1452:#if !__has_builtin(__stosw)
+        -: 1453:__INTRINSICS_USEINLINE
+        -: 1454:__buildstos(__stosw, unsigned short, "w|w")
+        -: 1455:#endif
+        -: 1456:#define __INTRINSIC_DEFINED___stosw
+        -: 1457:#endif /* __INTRINSIC_PROLOG */
+        -: 1458:
+        -: 1459:#if __INTRINSIC_PROLOG(__stosd)
+        -: 1460:void __stosd(unsigned __LONG32 *, unsigned __LONG32, size_t);
+        -: 1461:#if !__has_builtin(__stosd)
+        -: 1462:__INTRINSICS_USEINLINE
+        -: 1463:__buildstos(__stosd, unsigned __LONG32, "l|d")
+        -: 1464:#endif
+        -: 1465:#define __INTRINSIC_DEFINED___stosd
+        -: 1466:#endif /* __INTRINSIC_PROLOG */
+        -: 1467:
+        -: 1468:#if __INTRINSIC_PROLOG(_interlockedbittestandset)
+        -: 1469:unsigned char _interlockedbittestandset(__LONG32 volatile *a, __LONG32 b);
+        -: 1470:#if !__has_builtin(_interlockedbittestandset)
+        -: 1471:__INTRINSICS_USEINLINE
+        -: 1472:__buildbittesti(_interlockedbittestandset, __LONG32, "lock bts{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1473:#endif
+        -: 1474:#define __INTRINSIC_DEFINED__interlockedbittestandset
+        -: 1475:#endif /* __INTRINSIC_PROLOG */
+        -: 1476:
+        -: 1477:#if __INTRINSIC_PROLOG(_interlockedbittestandreset)
+        -: 1478:unsigned char _interlockedbittestandreset(__LONG32 volatile *a, __LONG32 b);
+        -: 1479:#if !__has_builtin(_interlockedbittestandreset)
+        -: 1480:__INTRINSICS_USEINLINE
+        -: 1481:__buildbittesti(_interlockedbittestandreset, __LONG32, "lock btr{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1482:#endif
+        -: 1483:#define __INTRINSIC_DEFINED__interlockedbittestandreset
+        -: 1484:#endif /* __INTRINSIC_PROLOG */
+        -: 1485:
+        -: 1486:#if __INTRINSIC_PROLOG(_interlockedbittestandcomplement)
+        -: 1487:unsigned char _interlockedbittestandcomplement(__LONG32 volatile *a, __LONG32 b);
+        -: 1488:#if !__has_builtin(_interlockedbittestandcomplement)
+        -: 1489:__INTRINSICS_USEINLINE
+        -: 1490:__buildbittesti(_interlockedbittestandcomplement, __LONG32, "lock btc{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1491:#endif
+        -: 1492:#define __INTRINSIC_DEFINED__interlockedbittestandcomplement
+        -: 1493:#endif /* __INTRINSIC_PROLOG */
+        -: 1494:
+        -: 1495:#if __INTRINSIC_PROLOG(InterlockedBitTestAndSet)
+        -: 1496:unsigned char InterlockedBitTestAndSet(volatile __LONG32 *a, __LONG32 b);
+        -: 1497:#if !__has_builtin(InterlockedBitTestAndSet)
+        -: 1498:__INTRINSICS_USEINLINE
+        -: 1499:__buildbittesti(InterlockedBitTestAndSet, __LONG32, "lock bts{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1500:#endif
+        -: 1501:#define __INTRINSIC_DEFINED_InterlockedBitTestAndSet
+        -: 1502:#endif /* __INTRINSIC_PROLOG */
+        -: 1503:
+        -: 1504:#if __INTRINSIC_PROLOG(InterlockedBitTestAndReset)
+        -: 1505:unsigned char InterlockedBitTestAndReset(volatile __LONG32 *a, __LONG32 b);
+        -: 1506:#if !__has_builtin(InterlockedBitTestAndReset)
+        -: 1507:__INTRINSICS_USEINLINE
+        -: 1508:__buildbittesti(InterlockedBitTestAndReset, __LONG32, "lock btr{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1509:#endif
+        -: 1510:#define __INTRINSIC_DEFINED_InterlockedBitTestAndReset
+        -: 1511:#endif /* __INTRINSIC_PROLOG */
+        -: 1512:
+        -: 1513:#if __INTRINSIC_PROLOG(InterlockedBitTestAndComplement)
+        -: 1514:unsigned char InterlockedBitTestAndComplement(volatile __LONG32 *a, __LONG32 b);
+        -: 1515:#if !__has_builtin(InterlockedBitTestAndComplement)
+        -: 1516:__INTRINSICS_USEINLINE
+        -: 1517:__buildbittesti(InterlockedBitTestAndComplement, __LONG32, "lock btc{l %[Offset],%[Base] | %[Base],%[Offset]}" __FLAGSET, "I")
+        -: 1518:#endif
+        -: 1519:#define __INTRINSIC_DEFINED_InterlockedBitTestAndComplement
+        -: 1520:#endif /* __INTRINSIC_PROLOG */
+        -: 1521:
+        -: 1522:#if __INTRINSIC_PROLOG(_BitScanForward)
+        -: 1523:unsigned char _BitScanForward(unsigned __LONG32 *Index, unsigned __LONG32 Mask);
+        -: 1524:#if !__has_builtin(_BitScanForward)
+        -: 1525:__INTRINSICS_USEINLINE 
+        -: 1526:__buildbitscan(_BitScanForward, unsigned __LONG32, "bsf{l %[Mask],%[Index] | %[Index],%[Mask]}")
+        -: 1527:#endif
+        -: 1528:#define __INTRINSIC_DEFINED__BitScanForward
+        -: 1529:#endif /* __INTRINSIC_PROLOG */
+        -: 1530:
+        -: 1531:#if __INTRINSIC_PROLOG(_BitScanReverse)
+        -: 1532:unsigned char _BitScanReverse(unsigned __LONG32 *Index, unsigned __LONG32 Mask);
+        -: 1533:#if !__has_builtin(_BitScanReverse)
+        -: 1534:__INTRINSICS_USEINLINE 
+        -: 1535:__buildbitscan(_BitScanReverse, unsigned __LONG32, "bsr{l %[Mask],%[Index] | %[Index],%[Mask]}")
+        -: 1536:#endif
+        -: 1537:#define __INTRINSIC_DEFINED__BitScanReverse
+        -: 1538:#endif /* __INTRINSIC_PROLOG */
+        -: 1539:
+        -: 1540:#if __INTRINSIC_PROLOG(_bittest)
+        -: 1541:unsigned char _bittest(__LONG32 const *a, __LONG32 b);
+        -: 1542:#if !__has_builtin(_bittest)
+        -: 1543:__INTRINSICS_USEINLINE
+        -: 1544:__buildbittest(_bittest, __LONG32, "l", "I")
+        -: 1545:#endif
+        -: 1546:#define __INTRINSIC_DEFINED__bittest
+        -: 1547:#endif /* __INTRINSIC_PROLOG */
+        -: 1548:
+        -: 1549:#if __INTRINSIC_PROLOG(_bittestandset)
+        -: 1550:unsigned char _bittestandset(__LONG32 *a, __LONG32 b);
+        -: 1551:#if !__has_builtin(_bittestandset)
+        -: 1552:__INTRINSICS_USEINLINE
+        -: 1553:__buildbittestand(_bittestandset, __LONG32, "bts", "I", "l")
+        -: 1554:#endif
+        -: 1555:#define __INTRINSIC_DEFINED__bittestandset
+        -: 1556:#endif /* __INTRINSIC_PROLOG */
+        -: 1557:
+        -: 1558:#if __INTRINSIC_PROLOG(_bittestandreset)
+        -: 1559:unsigned char _bittestandreset(__LONG32 *a, __LONG32 b);
+        -: 1560:#if !__has_builtin(_bittestandreset)
+        -: 1561:__INTRINSICS_USEINLINE
+        -: 1562:__buildbittestand(_bittestandreset, __LONG32, "btr", "I", "l")
+        -: 1563:#endif
+        -: 1564:#define __INTRINSIC_DEFINED__bittestandreset
+        -: 1565:#endif /* __INTRINSIC_PROLOG */
+        -: 1566:
+        -: 1567:#if __INTRINSIC_PROLOG(_bittestandcomplement)
+        -: 1568:unsigned char _bittestandcomplement(__LONG32 *a, __LONG32 b);
+        -: 1569:#if !__has_builtin(_bittestandcomplement)
+        -: 1570:__INTRINSICS_USEINLINE
+        -: 1571:__buildbittestand(_bittestandcomplement, __LONG32, "btc", "I", "l")
+        -: 1572:#endif
+        -: 1573:#define __INTRINSIC_DEFINED__bittestandcomplement
+        -: 1574:#endif /* __INTRINSIC_PROLOG */
+        -: 1575:
+        -: 1576:#if __INTRINSIC_PROLOG(__inbyte)
+        -: 1577:unsigned char __inbyte(unsigned short Port);
+        -: 1578:#if !__has_builtin(__inbyte)
+        -: 1579:__INTRINSICS_USEINLINE
+        -: 1580:__build_inport(__inbyte, unsigned char, "b")
+        -: 1581:#endif
+        -: 1582:#define __INTRINSIC_DEFINED___inbyte
+        -: 1583:#endif /* __INTRINSIC_PROLOG */
+        -: 1584:
+        -: 1585:#if __INTRINSIC_PROLOG(__inword)
+        -: 1586:unsigned short __inword(unsigned short Port);
+        -: 1587:#if !__has_builtin(__inword)
+        -: 1588:__INTRINSICS_USEINLINE
+        -: 1589:__build_inport(__inword, unsigned short, "w")
+        -: 1590:#endif
+        -: 1591:#define __INTRINSIC_DEFINED___inword
+        -: 1592:#endif /* __INTRINSIC_PROLOG */
+        -: 1593:
+        -: 1594:#if __INTRINSIC_PROLOG(__indword)
+        -: 1595:unsigned __LONG32 __indword(unsigned short Port);
+        -: 1596:#if !__has_builtin(__indword)
+        -: 1597:__INTRINSICS_USEINLINE
+        -: 1598:__build_inport(__indword, unsigned __LONG32, "l")
+        -: 1599:#endif
+        -: 1600:#define __INTRINSIC_DEFINED___indword
+        -: 1601:#endif /* __INTRINSIC_PROLOG */
+        -: 1602:
+        -: 1603:#if __INTRINSIC_PROLOG(__outbyte)
+        -: 1604:void __outbyte(unsigned short Port, unsigned char Data);
+        -: 1605:#if !__has_builtin(__outbyte)
+        -: 1606:__INTRINSICS_USEINLINE
+        -: 1607:__build_outport(__outbyte, unsigned char, "b")
+        -: 1608:#endif
+        -: 1609:#define __INTRINSIC_DEFINED___outbyte
+        -: 1610:#endif /* __INTRINSIC_PROLOG */
+        -: 1611:
+        -: 1612:#if __INTRINSIC_PROLOG(__outword)
+        -: 1613:void __outword(unsigned short Port, unsigned short Data);
+        -: 1614:#if !__has_builtin(__outword)
+        -: 1615:__INTRINSICS_USEINLINE
+        -: 1616:__build_outport(__outword, unsigned short, "w")
+        -: 1617:#endif
+        -: 1618:#define __INTRINSIC_DEFINED___outword
+        -: 1619:#endif /* __INTRINSIC_PROLOG */
+        -: 1620:
+        -: 1621:#if __INTRINSIC_PROLOG(__outdword)
+        -: 1622:void __outdword(unsigned short Port, unsigned __LONG32 Data);
+        -: 1623:#if !__has_builtin(__outdword)
+        -: 1624:__INTRINSICS_USEINLINE
+        -: 1625:__build_outport(__outdword, unsigned __LONG32, "l")
+        -: 1626:#endif
+        -: 1627:#define __INTRINSIC_DEFINED___outdword
+        -: 1628:#endif /* __INTRINSIC_PROLOG */
+        -: 1629:
+        -: 1630:#if __INTRINSIC_PROLOG(__inbytestring)
+        -: 1631:void __inbytestring(unsigned short Port, unsigned char *Buffer, unsigned __LONG32 Count);
+        -: 1632:#if !__has_builtin(__inbytestring)
+        -: 1633:__INTRINSICS_USEINLINE
+        -: 1634:__build_inportstring(__inbytestring, unsigned char, "b", "b")
+        -: 1635:#endif
+        -: 1636:#define __INTRINSIC_DEFINED___inbytestring
+        -: 1637:#endif /* __INTRINSIC_PROLOG */
+        -: 1638:
+        -: 1639:#if __INTRINSIC_PROLOG(__inwordstring)
+        -: 1640:void __inwordstring(unsigned short Port, unsigned short *Buffer, unsigned __LONG32 Count);
+        -: 1641:#if !__has_builtin(__inwordstring)
+        -: 1642:__INTRINSICS_USEINLINE
+        -: 1643:__build_inportstring(__inwordstring, unsigned short, "w", "w")
+        -: 1644:#endif
+        -: 1645:#define __INTRINSIC_DEFINED___inwordstring
+        -: 1646:#endif /* __INTRINSIC_PROLOG */
+        -: 1647:
+        -: 1648:#if __INTRINSIC_PROLOG(__indwordstring)
+        -: 1649:void __indwordstring(unsigned short Port, unsigned __LONG32 *Buffer, unsigned __LONG32 Count);
+        -: 1650:#if !__has_builtin(__indwordstring)
+        -: 1651:__INTRINSICS_USEINLINE
+        -: 1652:__build_inportstring(__indwordstring, unsigned __LONG32, "l", "d")
+        -: 1653:#endif
+        -: 1654:#define __INTRINSIC_DEFINED___indwordstring
+        -: 1655:#endif /* __INTRINSIC_PROLOG */
+        -: 1656:
+        -: 1657:#if __INTRINSIC_PROLOG(__outbytestring)
+        -: 1658:void __outbytestring(unsigned short Port, unsigned char *Buffer, unsigned __LONG32 Count);
+        -: 1659:#if !__has_builtin(__outbytestring)
+        -: 1660:__INTRINSICS_USEINLINE
+        -: 1661:__build_outportstring(__outbytestring, unsigned char, "b", "b")
+        -: 1662:#endif
+        -: 1663:#define __INTRINSIC_DEFINED___outbytestring
+        -: 1664:#endif /* __INTRINSIC_PROLOG */
+        -: 1665:
+        -: 1666:#if __INTRINSIC_PROLOG(__outwordstring)
+        -: 1667:void __outwordstring(unsigned short Port, unsigned short *Buffer, unsigned __LONG32 Count);
+        -: 1668:#if !__has_builtin(__outwordstring)
+        -: 1669:__INTRINSICS_USEINLINE
+        -: 1670:__build_outportstring(__outwordstring, unsigned short, "w", "w")
+        -: 1671:#endif
+        -: 1672:#define __INTRINSIC_DEFINED___outwordstring
+        -: 1673:#endif /* __INTRINSIC_PROLOG */
+        -: 1674:
+        -: 1675:#if __INTRINSIC_PROLOG(__outdwordstring)
+        -: 1676:void __outdwordstring(unsigned short Port, unsigned __LONG32 *Buffer, unsigned __LONG32 Count);
+        -: 1677:#if !__has_builtin(__outdwordstring)
+        -: 1678:__INTRINSICS_USEINLINE
+        -: 1679:__build_outportstring(__outdwordstring, unsigned __LONG32, "l", "d")
+        -: 1680:#endif
+        -: 1681:#define __INTRINSIC_DEFINED___outdwordstring
+        -: 1682:#endif /* __INTRINSIC_PROLOG */
+        -: 1683:
+        -: 1684:#if __INTRINSIC_PROLOG(__cpuid)
+        -: 1685:void __cpuid(int CPUInfo[4], int InfoType);
+        -: 1686:#if !__has_builtin(__cpuid)
+        -: 1687:__INTRINSICS_USEINLINE
+        -: 1688:void __cpuid(int CPUInfo[4], int InfoType) {
+        -: 1689:   __asm__ __volatile__ (
+        -: 1690:      "cpuid"
+        -: 1691:      : "=a" (CPUInfo [0]), "=b" (CPUInfo [1]), "=c" (CPUInfo [2]), "=d" (CPUInfo [3])
+        -: 1692:      : "a" (InfoType));
+        -: 1693:}
+        -: 1694:#endif
+        -: 1695:#define __INTRINSIC_DEFINED___cpuid
+        -: 1696:#endif /* __INTRINSIC_PROLOG */
+        -: 1697:
+        -: 1698:#if __INTRINSIC_PROLOG(__cpuidex)
+        -: 1699:void __cpuidex(int CPUInfo[4], int, int);
+        -: 1700:#if !__has_builtin(__cpuidex)
+        -: 1701:__INTRINSICS_USEINLINE
+        -: 1702:void __cpuidex(int CPUInfo[4], int function_id, int subfunction_id) {
+        -: 1703:   __asm__ __volatile__ (
+        -: 1704:      "cpuid"
+        -: 1705:      : "=a" (CPUInfo [0]), "=b" (CPUInfo [1]), "=c" (CPUInfo [2]), "=d" (CPUInfo [3])
+        -: 1706:      : "a" (function_id), "c" (subfunction_id));
+        -: 1707:}
+        -: 1708:#endif
+        -: 1709:#define __INTRINSIC_DEFINED___cpuidex
+        -: 1710:#endif /* __INTRINSIC_PROLOG */
+        -: 1711:
+        -: 1712:#if __INTRINSIC_PROLOG(__readmsr)
+        -: 1713:__MINGW_EXTENSION unsigned __int64 __readmsr(unsigned __LONG32);
+        -: 1714:#if !__has_builtin(__readmsr)
+        -: 1715:__INTRINSICS_USEINLINE
+        -: 1716:unsigned __int64 __readmsr(unsigned __LONG32 msr)
+        -: 1717:{
+        -: 1718:#if defined(__x86_64__) || defined(_AMD64_)
+        -: 1719:   unsigned __int64 val1, val2;
+        -: 1720:#else
+        -: 1721:   unsigned __LONG32 val1, val2;
+        -: 1722:#endif /* defined(__x86_64__) || defined(_AMD64_) */
+        -: 1723:
+        -: 1724:   __asm__ __volatile__(
+        -: 1725:      "rdmsr"
+        -: 1726:      : "=a" (val1), "=d" (val2)
+        -: 1727:      : "c" (msr));
+        -: 1728:
+        -: 1729:   return ((unsigned __int64) val1) | (((unsigned __int64)val2) << 32);
+        -: 1730:}
+        -: 1731:#endif
+        -: 1732:#define __INTRINSIC_DEFINED___readmsr
+        -: 1733:#endif /* __INTRINSIC_PROLOG */
+        -: 1734:
+        -: 1735:#if __INTRINSIC_PROLOG(__writemsr)
+        -: 1736:__MINGW_EXTENSION void __writemsr(unsigned __LONG32, unsigned __int64);
+        -: 1737:#if !__has_builtin(__writemsr)
+        -: 1738:__INTRINSICS_USEINLINE
+        -: 1739:void __writemsr(unsigned __LONG32 msr, unsigned __int64 Value)
+        -: 1740:{
+        -: 1741:   unsigned __LONG32 val1 = Value, val2 = Value >> 32;
+        -: 1742:   __asm__ __volatile__ (
+        -: 1743:      "wrmsr"
+        -: 1744:      :
+        -: 1745:      : "c" (msr), "a" (val1), "d" (val2));
+        -: 1746:}
+        -: 1747:#endif
+        -: 1748:#define __INTRINSIC_DEFINED___writemsr
+        -: 1749:#endif /* __INTRINSIC_PROLOG */
+        -: 1750:
+        -: 1751:#if __INTRINSIC_PROLOG(__movsb)
+        -: 1752:void __movsb(unsigned char *Destination, unsigned char const *Source, size_t Count);
+        -: 1753:#if !__has_builtin(__movsb)
+        -: 1754:__INTRINSICS_USEINLINE
+        -: 1755:__buildmov(__movsb, unsigned char, "b")
+        -: 1756:#endif
+        -: 1757:#define __INTRINSIC_DEFINED___movsb
+        -: 1758:#endif /* __INTRINSIC_PROLOG */
+        -: 1759:
+        -: 1760:#if __INTRINSIC_PROLOG(__movsw)
+        -: 1761:void __movsw(unsigned short *Dest, unsigned short const *Source, size_t Count);
+        -: 1762:#if !__has_builtin(__movsw)
+        -: 1763:__INTRINSICS_USEINLINE
+        -: 1764:__buildmov(__movsw, unsigned short, "w")
+        -: 1765:#endif
+        -: 1766:#define __INTRINSIC_DEFINED___movsw
+        -: 1767:#endif /* __INTRINSIC_PROLOG */
+        -: 1768:
+        -: 1769:#if __INTRINSIC_PROLOG(__movsd)
+        -: 1770:void __movsd(unsigned __LONG32 *Dest, unsigned __LONG32 const *Source, size_t Count);
+        -: 1771:#if !__has_builtin(__movsd)
+        -: 1772:__INTRINSICS_USEINLINE
+        -: 1773:__buildmov(__movsd, unsigned __LONG32, "d")
+        -: 1774:#endif
+        -: 1775:#define __INTRINSIC_DEFINED___movsd
+        -: 1776:#endif /* __INTRINSIC_PROLOG */
+        -: 1777:
+        -: 1778:#if !defined(__GNUC__) || __GNUC__ < 8 /* GCC 8 has already defined _xgetbv */
+        -: 1779:/* NOTE: This should be in immintrin.h */
+        -: 1780:#if __INTRINSIC_PROLOG(_xgetbv)
+        -: 1781:unsigned __int64 _xgetbv(unsigned int);
+        -: 1782:#if !__has_builtin(_xgetbv)
+        -: 1783:__INTRINSICS_USEINLINE
+        -: 1784:unsigned __int64 _xgetbv(unsigned int index)
+        -: 1785:{
+        -: 1786:#if defined(__x86_64__) || defined(_AMD64_)
+        -: 1787:   unsigned __int64 val1, val2;
+        -: 1788:#else
+        -: 1789:   unsigned __LONG32 val1, val2;
+        -: 1790:#endif /* defined(__x86_64__) || defined(_AMD64_) */
+        -: 1791:
+        -: 1792:   __asm__ __volatile__(
+        -: 1793:      "xgetbv"
+        -: 1794:      : "=a" (val1), "=d" (val2)
+        -: 1795:      : "c" (index));
+        -: 1796:
+        -: 1797:   return (((unsigned __int64)val2) << 32) | val1;
+        -: 1798:}
+        -: 1799:#endif
+        -: 1800:#define __INTRINSIC_DEFINED__xgetbv
+        -: 1801:#endif /* __INTRINSIC_PROLOG */
+        -: 1802:#endif /* __GNUC__ < 8 */
+        -: 1803:
+        -: 1804:#endif /* defined(__x86_64__) || defined(_AMD64_) || defined(__i386__) || defined(_X86_) */
+        -: 1805:
+        -: 1806:/* ***************************************************** */
+        -: 1807:
+        -: 1808:#if defined(__i386__) || defined(_X86_)
+        -: 1809:
+        -: 1810:#if __INTRINSIC_PROLOG(__readfsbyte)
+        -: 1811:unsigned char __readfsbyte(unsigned __LONG32 Offset);
+        -: 1812:#if !__has_builtin(__readfsbyte)
+        -: 1813:__INTRINSICS_USEINLINE
+        -: 1814:__buildreadseg(__readfsbyte, unsigned char, "fs", "b")
+        -: 1815:#endif
+        -: 1816:#define __INTRINSIC_DEFINED___readfsbyte
+        -: 1817:#endif /* __INTRINSIC_PROLOG */
+        -: 1818:
+        -: 1819:#if __INTRINSIC_PROLOG(__readfsword)
+        -: 1820:unsigned short __readfsword(unsigned __LONG32 Offset);
+        -: 1821:#if !__has_builtin(__readfsword)
+        -: 1822:__INTRINSICS_USEINLINE
+        -: 1823:__buildreadseg(__readfsword, unsigned short, "fs", "w")
+        -: 1824:#endif
+        -: 1825:#define __INTRINSIC_DEFINED___readfsword
+        -: 1826:#endif /* __INTRINSIC_PROLOG */
+        -: 1827:
+        -: 1828:#if __INTRINSIC_PROLOG(__readfsdword)
+        -: 1829:unsigned __LONG32 __readfsdword(unsigned __LONG32 Offset);
+        -: 1830:#if !__has_builtin(__readfsdword)
+        -: 1831:__INTRINSICS_USEINLINE
+        -: 1832:__buildreadseg(__readfsdword, unsigned __LONG32, "fs", "l")
+        -: 1833:#endif
+        -: 1834:#define __INTRINSIC_DEFINED___readfsdword
+        -: 1835:#endif /* __INTRINSIC_PROLOG */
+        -: 1836:
+        -: 1837:#if __INTRINSIC_PROLOG(__writefsbyte)
+        -: 1838:void __writefsbyte(unsigned __LONG32 Offset,unsigned char Data);
+        -: 1839:#if !__has_builtin(__writefsbyte)
+        -: 1840:__INTRINSICS_USEINLINE
+        -: 1841:__buildwriteseg(__writefsbyte, unsigned char, "fs", "b")
+        -: 1842:#endif
+        -: 1843:#define __INTRINSIC_DEFINED___writefsbyte
+        -: 1844:#endif /* __INTRINSIC_PROLOG */
+        -: 1845:
+        -: 1846:#if __INTRINSIC_PROLOG(__writefsword)
+        -: 1847:void __writefsword(unsigned __LONG32 Offset,unsigned short Data);
+        -: 1848:#if !__has_builtin(__writefsword)
+        -: 1849:__INTRINSICS_USEINLINE
+        -: 1850:__buildwriteseg(__writefsword, unsigned short, "fs", "w")
+        -: 1851:#endif
+        -: 1852:#define __INTRINSIC_DEFINED___writefsword
+        -: 1853:#endif /* __INTRINSIC_PROLOG */
+        -: 1854:
+        -: 1855:#if __INTRINSIC_PROLOG(__writefsdword)
+        -: 1856:void __writefsdword(unsigned __LONG32 Offset,unsigned __LONG32 Data);
+        -: 1857:#if !__has_builtin(__writefsdword)
+        -: 1858:__INTRINSICS_USEINLINE
+        -: 1859:__buildwriteseg(__writefsdword, unsigned __LONG32, "fs", "l")
+        -: 1860:#endif
+        -: 1861:#define __INTRINSIC_DEFINED___writefsdword
+        -: 1862:#endif /* __INTRINSIC_PROLOG */
+        -: 1863:
+        -: 1864:#if __INTRINSIC_PROLOG(__readcr0)
+        -: 1865:unsigned __LONG32 __readcr0(void);
+        -: 1866:#if !__has_builtin(__readcr0)
+        -: 1867:__INTRINSICS_USEINLINE
+        -: 1868:__build_readcr(__readcr0, unsigned __LONG32, "0")
+        -: 1869:#endif
+        -: 1870:#define __INTRINSIC_DEFINED___readcr0
+        -: 1871:#endif /* __INTRINSIC_PROLOG */
+        -: 1872:
+        -: 1873:#if __INTRINSIC_PROLOG(__readcr2)
+        -: 1874:unsigned __LONG32 __readcr2(void);
+        -: 1875:#if !__has_builtin(__readcr2)
+        -: 1876:__INTRINSICS_USEINLINE
+        -: 1877:__build_readcr(__readcr2, unsigned __LONG32, "2")
+        -: 1878:#endif
+        -: 1879:#define __INTRINSIC_DEFINED___readcr2
+        -: 1880:#endif /* __INTRINSIC_PROLOG */
+        -: 1881:
+        -: 1882:#if __INTRINSIC_PROLOG(__readcr3)
+        -: 1883:unsigned __LONG32 __readcr3(void);
+        -: 1884:#if !__has_builtin(__readcr3)
+        -: 1885:__INTRINSICS_USEINLINE
+        -: 1886:__build_readcr(__readcr3, unsigned __LONG32, "3")
+        -: 1887:#endif
+        -: 1888:#define __INTRINSIC_DEFINED___readcr3
+        -: 1889:#endif /* __INTRINSIC_PROLOG */
+        -: 1890:
+        -: 1891:#if __INTRINSIC_PROLOG(__readcr4)
+        -: 1892:unsigned __LONG32 __readcr4(void);
+        -: 1893:#if !__has_builtin(__readcr4)
+        -: 1894:__INTRINSICS_USEINLINE
+        -: 1895:__build_readcr(__readcr4, unsigned __LONG32, "4")
+        -: 1896:#endif
+        -: 1897:#define __INTRINSIC_DEFINED___readcr4
+        -: 1898:#endif /* __INTRINSIC_PROLOG */
+        -: 1899:
+        -: 1900:#if __INTRINSIC_PROLOG(__readcr8)
+        -: 1901:unsigned __LONG32 __readcr8(void);
+        -: 1902:#if !__has_builtin(__readcr8)
+        -: 1903:__INTRINSICS_USEINLINE
+        -: 1904:__build_readcr(__readcr8, unsigned __LONG32, "8")
+        -: 1905:#endif
+        -: 1906:#define __INTRINSIC_DEFINED___readcr8
+        -: 1907:#endif /* __INTRINSIC_PROLOG */
+        -: 1908:
+        -: 1909:#if __INTRINSIC_PROLOG(__writecr0)
+        -: 1910:void __writecr0(unsigned __LONG32);
+        -: 1911:#if !__has_builtin(__writecr0)
+        -: 1912:__INTRINSICS_USEINLINE
+        -: 1913:__build_writecr(__writecr0, unsigned __LONG32, "0")
+        -: 1914:#endif
+        -: 1915:#define __INTRINSIC_DEFINED___writecr0
+        -: 1916:#endif /* __INTRINSIC_PROLOG */
+        -: 1917:
+        -: 1918:#if __INTRINSIC_PROLOG(__writecr3)
+        -: 1919:void __writecr3(unsigned __LONG32);
+        -: 1920:#if !__has_builtin(__writecr3)
+        -: 1921:__INTRINSICS_USEINLINE
+        -: 1922:__build_writecr(__writecr3, unsigned __LONG32, "3")
+        -: 1923:#endif
+        -: 1924:#define __INTRINSIC_DEFINED___writecr3
+        -: 1925:#endif /* __INTRINSIC_PROLOG */
+        -: 1926:
+        -: 1927:#if __INTRINSIC_PROLOG(__writecr4)
+        -: 1928:void __writecr4(unsigned __LONG32);
+        -: 1929:#if !__has_builtin(__writecr4)
+        -: 1930:__INTRINSICS_USEINLINE
+        -: 1931:__build_writecr(__writecr4, unsigned __LONG32, "4")
+        -: 1932:#endif
+        -: 1933:#define __INTRINSIC_DEFINED___writecr4
+        -: 1934:#endif /* __INTRINSIC_PROLOG */
+        -: 1935:
+        -: 1936:#if __INTRINSIC_PROLOG(__writecr8)
+        -: 1937:void __writecr8(unsigned __LONG32);
+        -: 1938:#if !__has_builtin(__writecr8)
+        -: 1939:__INTRINSICS_USEINLINE
+        -: 1940:__build_writecr(__writecr8, unsigned __LONG32, "8")
+        -: 1941:#endif
+        -: 1942:#define __INTRINSIC_DEFINED___writecr8
+        -: 1943:#endif /* __INTRINSIC_PROLOG */
+        -: 1944:
+        -: 1945:#endif /* defined(__i386__) || defined(_X86_) */
+        -: 1946:
+        -: 1947:#ifdef __cplusplus
+        -: 1948:}
+        -: 1949:#endif
+        -: 1950:
+        -: 1951:#undef __INTRINSIC_ONLYSPECIAL
+        -: 1952:#undef __INTRINSIC_PROLOG
+        -: 1953:#undef __INTRINSIC_EPILOG
+        -: 1954:#undef __INTRINSICS_USEINLINE
+        -: 1955:#undef __FLAGCONSTRAINT
+        -: 1956:#undef __FLAGSET
+        -: 1957:#undef __FLAGCLOBBER1
+        -: 1958:#undef __FLAGCLOBBER2
+        -: 1959:
+        -: 1960:#pragma pop_macro("__has_builtin")
+        -: 1961:
+        -: 1962:#endif /* __MINGW_INTRIN_INLINE */

@@ -1,0 +1,166 @@
+        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest-test-part.cc
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// Copyright 2008, Google Inc.
+        -:    2:// All rights reserved.
+        -:    3://
+        -:    4:// Redistribution and use in source and binary forms, with or without
+        -:    5:// modification, are permitted provided that the following conditions are
+        -:    6:// met:
+        -:    7://
+        -:    8://     * Redistributions of source code must retain the above copyright
+        -:    9:// notice, this list of conditions and the following disclaimer.
+        -:   10://     * Redistributions in binary form must reproduce the above
+        -:   11:// copyright notice, this list of conditions and the following disclaimer
+        -:   12:// in the documentation and/or other materials provided with the
+        -:   13:// distribution.
+        -:   14://     * Neither the name of Google Inc. nor the names of its
+        -:   15:// contributors may be used to endorse or promote products derived from
+        -:   16:// this software without specific prior written permission.
+        -:   17://
+        -:   18:// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        -:   19:// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        -:   20:// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+        -:   21:// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        -:   22:// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        -:   23:// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+        -:   24:// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+        -:   25:// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+        -:   26:// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   27:// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        -:   28:// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   29:
+        -:   30://
+        -:   31:// The Google C++ Testing and Mocking Framework (Google Test)
+        -:   32:
+        -:   33:#include "gtest/gtest-test-part.h"
+        -:   34:#include "src/gtest-internal-inl.h"
+        -:   35:
+        -:   36:namespace testing {
+        -:   37:
+        -:   38:using internal::GetUnitTestImpl;
+        -:   39:
+        -:   40:// Gets the summary of the failure message by omitting the stack trace
+        -:   41:// in it.
+    #####:   42:std::string TestPartResult::ExtractSummary(const char* message) {
+    #####:   43:  const char* const stack_trace = strstr(message, internal::kStackTraceMarker);
+    #####:   44:  return stack_trace == nullptr ? message : std::string(message, stack_trace);
+    %%%%%:   44-block  0
+    %%%%%:   44-block  1
+    %%%%%:   44-block  2
+    %%%%%:   44-block  3
+    %%%%%:   44-block  4
+    %%%%%:   44-block  5
+    %%%%%:   44-block  6
+    %%%%%:   44-block  7
+    %%%%%:   44-block  8
+    $$$$$:   44-block  9
+    $$$$$:   44-block 10
+    $$$$$:   44-block 11
+    $$$$$:   44-block 12
+    $$$$$:   44-block 13
+        -:   45:}
+        -:   46:
+        -:   47:// Prints a TestPartResult object.
+    #####:   48:std::ostream& operator<<(std::ostream& os, const TestPartResult& result) {
+    #####:   49:  return os << result.file_name() << ":" << result.line_number() << ": "
+    %%%%%:   49-block  0
+    #####:   50:            << (result.type() == TestPartResult::kSuccess
+        -:   51:                    ? "Success"
+    #####:   52:                    : result.type() == TestPartResult::kSkip
+    %%%%%:   52-block  0
+    #####:   53:                          ? "Skipped"
+    %%%%%:   53-block  0
+    %%%%%:   53-block  1
+    #####:   54:                          : result.type() == TestPartResult::kFatalFailure
+    %%%%%:   54-block  0
+    #####:   55:                                ? "Fatal failure"
+    %%%%%:   55-block  0
+    %%%%%:   55-block  1
+        -:   56:                                : "Non-fatal failure")
+        -:   57:            << ":\n"
+    #####:   58:            << result.message() << std::endl;
+    %%%%%:   58-block  0
+    %%%%%:   58-block  1
+    %%%%%:   58-block  2
+        -:   59:}
+        -:   60:
+        -:   61:// Appends a TestPartResult to the array.
+    #####:   62:void TestPartResultArray::Append(const TestPartResult& result) {
+    #####:   63:  array_.push_back(result);
+    %%%%%:   63-block  0
+    #####:   64:}
+        -:   65:
+        -:   66:// Returns the TestPartResult at the given index (0-based).
+    #####:   67:const TestPartResult& TestPartResultArray::GetTestPartResult(int index) const {
+    #####:   68:  if (index < 0 || index >= size()) {
+    %%%%%:   68-block  0
+    %%%%%:   68-block  1
+    %%%%%:   68-block  2
+    %%%%%:   68-block  3
+    %%%%%:   68-block  4
+    #####:   69:    printf("\nInvalid index (%d) into TestPartResultArray.\n", index);
+    %%%%%:   69-block  0
+    #####:   70:    internal::posix::Abort();
+        -:   71:  }
+        -:   72:
+    #####:   73:  return array_[static_cast<size_t>(index)];
+    %%%%%:   73-block  0
+        -:   74:}
+        -:   75:
+        -:   76:// Returns the number of TestPartResult objects in the array.
+    #####:   77:int TestPartResultArray::size() const {
+    #####:   78:  return static_cast<int>(array_.size());
+    %%%%%:   78-block  0
+        -:   79:}
+        -:   80:
+        -:   81:namespace internal {
+        -:   82:
+    #####:   83:HasNewFatalFailureHelper::HasNewFatalFailureHelper()
+        -:   84:    : has_new_fatal_failure_(false),
+        -:   85:      original_reporter_(GetUnitTestImpl()->
+    #####:   86:                         GetTestPartResultReporterForCurrentThread()) {
+    %%%%%:   86-block  0
+    %%%%%:   86-block  1
+    $$$$$:   86-block  2
+    #####:   87:  GetUnitTestImpl()->SetTestPartResultReporterForCurrentThread(this);
+    %%%%%:   87-block  0
+    %%%%%:   87-block  1
+    #####:   88:}
+    %%%%%:   88-block  0
+        -:   89:
+    #####:   90:HasNewFatalFailureHelper::~HasNewFatalFailureHelper() {
+    #####:   91:  GetUnitTestImpl()->SetTestPartResultReporterForCurrentThread(
+        -:   92:      original_reporter_);
+    #####:   93:}
+------------------
+_ZN7testing8internal24HasNewFatalFailureHelperD0Ev:
+    #####:   90:HasNewFatalFailureHelper::~HasNewFatalFailureHelper() {
+        -:   91:  GetUnitTestImpl()->SetTestPartResultReporterForCurrentThread(
+        -:   92:      original_reporter_);
+    #####:   93:}
+    %%%%%:   93-block  0
+------------------
+_ZN7testing8internal24HasNewFatalFailureHelperD2Ev:
+    #####:   90:HasNewFatalFailureHelper::~HasNewFatalFailureHelper() {
+    #####:   91:  GetUnitTestImpl()->SetTestPartResultReporterForCurrentThread(
+    %%%%%:   91-block  0
+        -:   92:      original_reporter_);
+    #####:   93:}
+------------------
+        -:   94:
+    #####:   95:void HasNewFatalFailureHelper::ReportTestPartResult(
+        -:   96:    const TestPartResult& result) {
+    #####:   97:  if (result.fatally_failed())
+    %%%%%:   97-block  0
+    #####:   98:    has_new_fatal_failure_ = true;
+    %%%%%:   98-block  0
+    #####:   99:  original_reporter_->ReportTestPartResult(result);
+    %%%%%:   99-block  0
+    #####:  100:}
+        -:  101:
+        -:  102:}  // namespace internal
+        -:  103:
+        -:  104:}  // namespace testing
