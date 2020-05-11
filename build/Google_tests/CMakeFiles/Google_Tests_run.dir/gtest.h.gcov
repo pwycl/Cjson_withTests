@@ -277,7 +277,7 @@
         -:  272://   Expected: Foo() is even
         -:  273://     Actual: it's 5
         -:  274://
-      126:  275:class GTEST_API_ AssertionResult {
+      197:  275:class GTEST_API_ AssertionResult {
         -:  276: public:
         -:  277:  // Copy constructor.
         -:  278:  // Used in EXPECT_TRUE/FALSE(assertion_result).
@@ -295,13 +295,13 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-      126:  293:  explicit AssertionResult(
+      197:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-      126:  299:      : success_(success) {}
+      197:  299:      : success_(success) {}
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
         -:  302:  GTEST_DISABLE_MSC_WARNINGS_POP_()
@@ -314,7 +314,7 @@
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-      126:  312:  operator bool() const { return success_; }  // NOLINT
+      197:  312:  operator bool() const { return success_; }  // NOLINT
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;
@@ -323,8 +323,8 @@
         -:  318:  // use it when they fail (i.e., the predicate's outcome doesn't match the
         -:  319:  // assertion's expectation). When nothing has been streamed into the
         -:  320:  // object, returns an empty string.
-    #####:  321:  const char* message() const {
-    #####:  322:    return message_.get() != nullptr ? message_->c_str() : "";
+       67:  321:  const char* message() const {
+       67:  322:    return message_.get() != nullptr ? message_->c_str() : "";
         -:  323:  }
         -:  324:  // Deprecated; please use message() instead.
     #####:  325:  const char* failure_message() const { return message(); }

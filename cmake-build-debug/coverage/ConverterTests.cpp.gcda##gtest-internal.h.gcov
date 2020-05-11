@@ -633,7 +633,7 @@ _ZN7testing8internal15TestFactoryImplI35CjsonFixture_assert_cJSON_free_TestE10Cr
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Compare_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI31CjsonFixture_cJSON_Compare_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1

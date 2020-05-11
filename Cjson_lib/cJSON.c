@@ -1032,7 +1032,7 @@ CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return
     buffer.offset = 0;
     buffer.hooks = global_hooks;
 
-    item = cJSON_New_Item(&global_hooks);
+    item = cJSON_New_Item(&(buffer.hooks));
     if (item == NULL) /* memory fail */
     {
         goto fail;

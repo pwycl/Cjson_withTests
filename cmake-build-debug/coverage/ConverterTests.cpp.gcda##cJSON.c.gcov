@@ -243,27 +243,27 @@
         -:  209:}
         -:  210:
         -:  211:/* Internal constructor. */
-      154:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
+      188:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
         -:  213:{
-      154:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
-      154:  214-block  0
-      154:  215:    if (node)
+      188:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
+      188:  214-block  0
+      188:  215:    if (node)
         -:  216:    {
        28:  217:        memset(node, '\0', sizeof(cJSON));
        28:  217-block  0
         -:  218:    }
         -:  219:
-      154:  220:    return node;
-      154:  220-block  0
+      188:  220:    return node;
+      188:  220-block  0
         -:  221:}
         -:  222:
         -:  223:/* Delete a cJSON structure. */
-       54:  224:CJSON_PUBLIC(void) cJSON_Delete(cJSON *item)
+       90:  224:CJSON_PUBLIC(void) cJSON_Delete(cJSON *item)
         -:  225:{
-       54:  226:    cJSON *next = NULL;
-       54:  226-block  0
-       82:  227:    while (item != NULL)
-       82:  227-block  0
+       90:  226:    cJSON *next = NULL;
+       90:  226-block  0
+      118:  227:    while (item != NULL)
+      118:  227-block  0
         -:  228:    {
        28:  229:        next = item->next;
        28:  230:        if (!(item->type & cJSON_IsReference) && (item->child != NULL))
@@ -291,7 +291,7 @@
        28:  242-block  0
        28:  243:        item = next;
         -:  244:    }
-       54:  245:}
+       90:  245:}
         -:  246:
         -:  247:/* get the decimal point character of the current locale */
        32:  248:static unsigned char get_decimal_point(void)
@@ -1293,34 +1293,34 @@
         -: 1013:}
         -: 1014:
         -: 1015:/* Parse an object - create a new root, and populate. */
-       37: 1016:CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
+       71: 1016:CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
         -: 1017:{
-       37: 1018:    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-       37: 1019:    cJSON *item = NULL;
+       71: 1018:    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+       71: 1019:    cJSON *item = NULL;
         -: 1020:
         -: 1021:    /* reset error position */
-       37: 1022:    global_error.json = NULL;
-       37: 1023:    global_error.position = 0;
+       71: 1022:    global_error.json = NULL;
+       71: 1023:    global_error.position = 0;
         -: 1024:
-       37: 1025:    if (value == NULL)
-       37: 1025-block  0
+       71: 1025:    if (value == NULL)
+       71: 1025-block  0
         -: 1026:    {
         1: 1027:        goto fail;
         1: 1027-block  0
         -: 1028:    }
         -: 1029:
-       36: 1030:    buffer.content = (const unsigned char*)value;
-       36: 1031:    buffer.length = strlen((const char*)value) + sizeof("");
-       36: 1032:    buffer.offset = 0;
-       36: 1033:    buffer.hooks = global_hooks;
+       70: 1030:    buffer.content = (const unsigned char*)value;
+       70: 1031:    buffer.length = strlen((const char*)value) + sizeof("");
+       70: 1032:    buffer.offset = 0;
+       70: 1033:    buffer.hooks = global_hooks;
         -: 1034:
-       36: 1035:    item = cJSON_New_Item(&global_hooks);
-       36: 1035-block  0
-       36: 1036:    if (item == NULL) /* memory fail */
-       36: 1036-block  0
+       70: 1035:    item = cJSON_New_Item(&global_hooks);
+       70: 1035-block  0
+       70: 1036:    if (item == NULL) /* memory fail */
+       70: 1036-block  0
         -: 1037:    {
-       36: 1038:        goto fail;
-       36: 1038-block  0
+       70: 1038:        goto fail;
+       70: 1038-block  0
         -: 1039:    }
         -: 1040:
     #####: 1041:    if (!parse_value(item, buffer_skip_whitespace(skip_utf8_bom(&buffer))))
@@ -1355,26 +1355,26 @@
     #####: 1061:    return item;
     %%%%%: 1061-block  0
         -: 1062:
-       37: 1063:fail:
-       37: 1064:    if (item != NULL)
-       37: 1064-block  0
+       71: 1063:fail:
+       71: 1064:    if (item != NULL)
+       71: 1064-block  0
         -: 1065:    {
     #####: 1066:        cJSON_Delete(item);
     %%%%%: 1066-block  0
         -: 1067:    }
         -: 1068:
-       37: 1069:    if (value != NULL)
-       37: 1069-block  0
+       71: 1069:    if (value != NULL)
+       71: 1069-block  0
         -: 1070:    {
         -: 1071:        error local_error;
-       36: 1072:        local_error.json = (const unsigned char*)value;
-       36: 1073:        local_error.position = 0;
+       70: 1072:        local_error.json = (const unsigned char*)value;
+       70: 1073:        local_error.position = 0;
         -: 1074:
-       36: 1075:        if (buffer.offset < buffer.length)
-       36: 1075-block  0
+       70: 1075:        if (buffer.offset < buffer.length)
+       70: 1075-block  0
         -: 1076:        {
-       36: 1077:            local_error.position = buffer.offset;
-       36: 1077-block  0
+       70: 1077:            local_error.position = buffer.offset;
+       70: 1077-block  0
         -: 1078:        }
     #####: 1079:        else if (buffer.length > 0)
     %%%%%: 1079-block  0
@@ -1383,26 +1383,26 @@
     %%%%%: 1081-block  0
         -: 1082:        }
         -: 1083:
-       36: 1084:        if (return_parse_end != NULL)
-       36: 1084-block  0
+       70: 1084:        if (return_parse_end != NULL)
+       70: 1084-block  0
         -: 1085:        {
     #####: 1086:            *return_parse_end = (const char*)local_error.json + local_error.position;
     %%%%%: 1086-block  0
         -: 1087:        }
         -: 1088:
-       36: 1089:        global_error = local_error;
-       36: 1089-block  0
+       70: 1089:        global_error = local_error;
+       70: 1089-block  0
         -: 1090:    }
         -: 1091:
-       37: 1092:    return NULL;
-       37: 1092-block  0
+       71: 1092:    return NULL;
+       71: 1092-block  0
         -: 1093:}
         -: 1094:
         -: 1095:/* Default options for cJSON_Parse */
-       34: 1096:CJSON_PUBLIC(cJSON *) cJSON_Parse(const char *value)
+       68: 1096:CJSON_PUBLIC(cJSON *) cJSON_Parse(const char *value)
         -: 1097:{
-       34: 1098:    return cJSON_ParseWithOpts(value, 0, 0);
-       34: 1098-block  0
+       68: 1098:    return cJSON_ParseWithOpts(value, 0, 0);
+       68: 1098-block  0
         -: 1099:}
         -: 1100:
         -: 1101:#define cjson_min(a, b) ((a < b) ? a : b)
@@ -3551,12 +3551,12 @@
     %%%%%: 2704-block  0
         -: 2705:    }
         -: 2706:
-       59: 2707:    while (json[0] != '\0')
-       59: 2707-block  0
-       51: 2707-block  1
+       55: 2707:    while (json[0] != '\0')
+       55: 2707-block  0
+       47: 2707-block  1
         -: 2708:    {
-       51: 2709:        switch (json[0])
-       51: 2709-block  0
+       47: 2709:        switch (json[0])
+       47: 2709-block  0
         -: 2710:        {
         3: 2711:            case ' ':
         -: 2712:            case '\t':
@@ -3590,11 +3590,11 @@
         1: 2732-block  0
         1: 2733:                break;
         -: 2734:
-       45: 2735:            default:
-       45: 2736:                into[0] = json[0];
-       45: 2737:                json++;
-       45: 2738:                into++;
-       45: 2738-block  0
+       41: 2735:            default:
+       41: 2736:                into[0] = json[0];
+       41: 2737:                json++;
+       41: 2738:                into++;
+       41: 2738-block  0
         -: 2739:        }
         -: 2740:    }
         -: 2741:
@@ -3603,17 +3603,17 @@
         8: 2743-block  0
         -: 2744:}
         -: 2745:
-        4: 2746:CJSON_PUBLIC(cJSON_bool) cJSON_IsInvalid(const cJSON * const item)
+        6: 2746:CJSON_PUBLIC(cJSON_bool) cJSON_IsInvalid(const cJSON * const item)
         -: 2747:{
-        4: 2748:    if (item == NULL)
-        4: 2748-block  0
+        6: 2748:    if (item == NULL)
+        6: 2748-block  0
         -: 2749:    {
         1: 2750:        return false;
         1: 2750-block  0
         -: 2751:    }
         -: 2752:
-        3: 2753:    return (item->type & 0xFF) == cJSON_Invalid;
-        3: 2753-block  0
+        5: 2753:    return (item->type & 0xFF) == cJSON_Invalid;
+        5: 2753-block  0
         -: 2754:}
         -: 2755:
         3: 2756:CJSON_PUBLIC(cJSON_bool) cJSON_IsFalse(const cJSON * const item)
@@ -3733,19 +3733,19 @@
         2: 2843-block  0
         -: 2844:}
         -: 2845:
-        5: 2846:CJSON_PUBLIC(cJSON_bool) cJSON_Compare(const cJSON * const a, const cJSON * const b, const cJSON_bool case_sensitive)
+       24: 2846:CJSON_PUBLIC(cJSON_bool) cJSON_Compare(const cJSON * const a, const cJSON * const b, const cJSON_bool case_sensitive)
         -: 2847:{
-        5: 2848:    if ((a == NULL) || (b == NULL) || ((a->type & 0xFF) != (b->type & 0xFF)) || cJSON_IsInvalid(a))
-        5: 2848-block  0
-        2: 2848-block  1
-        2: 2848-block  2
-        2: 2848-block  3
-        3: 2848-block  4
+       24: 2848:    if ((a == NULL) || (b == NULL) || ((a->type & 0xFF) != (b->type & 0xFF)) || cJSON_IsInvalid(a))
+       24: 2848-block  0
+        4: 2848-block  1
+        4: 2848-block  2
+        4: 2848-block  3
+       22: 2848-block  4
         2: 2848-block  5
-        5: 2848-block  6
+       24: 2848-block  6
         -: 2849:    {
-        3: 2850:        return false;
-        3: 2850-block  0
+       22: 2850:        return false;
+       22: 2850-block  0
         -: 2851:    }
         -: 2852:
         -: 2853:    /* check if type is valid */

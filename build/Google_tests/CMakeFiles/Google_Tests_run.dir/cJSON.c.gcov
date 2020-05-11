@@ -214,22 +214,22 @@
         -:  209:}
         -:  210:
         -:  211:/* Internal constructor. */
-      154:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
+      218:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
         -:  213:{
-      154:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
-      154:  215:    if (node)
+      218:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
+      218:  215:    if (node)
         -:  216:    {
        28:  217:        memset(node, '\0', sizeof(cJSON));
         -:  218:    }
         -:  219:
-      154:  220:    return node;
+      218:  220:    return node;
         -:  221:}
         -:  222:
         -:  223:/* Delete a cJSON structure. */
-       54:  224:CJSON_PUBLIC(void) cJSON_Delete(cJSON *item)
+      120:  224:CJSON_PUBLIC(void) cJSON_Delete(cJSON *item)
         -:  225:{
-       54:  226:    cJSON *next = NULL;
-      110:  227:    while (item != NULL)
+      120:  226:    cJSON *next = NULL;
+      176:  227:    while (item != NULL)
         -:  228:    {
        28:  229:        next = item->next;
        28:  230:        if (!(item->type & cJSON_IsReference) && (item->child != NULL))
@@ -247,7 +247,7 @@
        28:  242:        global_hooks.deallocate(item);
        28:  243:        item = next;
         -:  244:    }
-       54:  245:}
+      120:  245:}
         -:  246:
         -:  247:/* get the decimal point character of the current locale */
        32:  248:static unsigned char get_decimal_point(void)
@@ -540,15 +540,15 @@
         -:  535:
         -:  536:    /* copy the printed number to the output and replace locale
         -:  537:     * dependent decimal point with '.' */
-       26:  538:    for (i = 0; i < ((size_t)length); i++)
+       25:  538:    for (i = 0; i < ((size_t)length); i++)
         -:  539:    {
-       26:  540:        if (number_buffer[i] == decimal_point)
+       25:  540:        if (number_buffer[i] == decimal_point)
         -:  541:        {
         2:  542:            output_pointer[i] = '.';
         2:  543:            continue;
         -:  544:        }
         -:  545:
-       22:  546:        output_pointer[i] = number_buffer[i];
+       21:  546:        output_pointer[i] = number_buffer[i];
         -:  547:    }
         2:  548:    output_pointer[i] = '\0';
         -:  549:
@@ -1018,29 +1018,29 @@
         -: 1013:}
         -: 1014:
         -: 1015:/* Parse an object - create a new root, and populate. */
-       37: 1016:CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
+      101: 1016:CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
         -: 1017:{
-       37: 1018:    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-       37: 1019:    cJSON *item = NULL;
+      101: 1018:    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+      101: 1019:    cJSON *item = NULL;
         -: 1020:
         -: 1021:    /* reset error position */
-       37: 1022:    global_error.json = NULL;
-       37: 1023:    global_error.position = 0;
+      101: 1022:    global_error.json = NULL;
+      101: 1023:    global_error.position = 0;
         -: 1024:
-       37: 1025:    if (value == NULL)
+      101: 1025:    if (value == NULL)
         -: 1026:    {
         1: 1027:        goto fail;
         -: 1028:    }
         -: 1029:
-       36: 1030:    buffer.content = (const unsigned char*)value;
-       36: 1031:    buffer.length = strlen((const char*)value) + sizeof("");
-       36: 1032:    buffer.offset = 0;
-       36: 1033:    buffer.hooks = global_hooks;
+      100: 1030:    buffer.content = (const unsigned char*)value;
+      100: 1031:    buffer.length = strlen((const char*)value) + sizeof("");
+      100: 1032:    buffer.offset = 0;
+      100: 1033:    buffer.hooks = global_hooks;
         -: 1034:
-       36: 1035:    item = cJSON_New_Item(&global_hooks);
-       36: 1036:    if (item == NULL) /* memory fail */
+      100: 1035:    item = cJSON_New_Item(&global_hooks);
+      100: 1036:    if (item == NULL) /* memory fail */
         -: 1037:    {
-       36: 1038:        goto fail;
+      100: 1038:        goto fail;
         -: 1039:    }
         -: 1040:
     #####: 1041:    if (!parse_value(item, buffer_skip_whitespace(skip_utf8_bom(&buffer))))
@@ -1066,41 +1066,41 @@
     #####: 1061:    return item;
         -: 1062:
     #####: 1063:fail:
-       37: 1064:    if (item != NULL)
+      101: 1064:    if (item != NULL)
         -: 1065:    {
     #####: 1066:        cJSON_Delete(item);
         -: 1067:    }
         -: 1068:
-       37: 1069:    if (value != NULL)
+      101: 1069:    if (value != NULL)
         -: 1070:    {
         -: 1071:        error local_error;
-       36: 1072:        local_error.json = (const unsigned char*)value;
-       36: 1073:        local_error.position = 0;
+      100: 1072:        local_error.json = (const unsigned char*)value;
+      100: 1073:        local_error.position = 0;
         -: 1074:
-       36: 1075:        if (buffer.offset < buffer.length)
+      100: 1075:        if (buffer.offset < buffer.length)
         -: 1076:        {
-       36: 1077:            local_error.position = buffer.offset;
+      100: 1077:            local_error.position = buffer.offset;
         -: 1078:        }
     #####: 1079:        else if (buffer.length > 0)
         -: 1080:        {
     #####: 1081:            local_error.position = buffer.length - 1;
         -: 1082:        }
         -: 1083:
-       36: 1084:        if (return_parse_end != NULL)
+      100: 1084:        if (return_parse_end != NULL)
         -: 1085:        {
     #####: 1086:            *return_parse_end = (const char*)local_error.json + local_error.position;
         -: 1087:        }
         -: 1088:
-       36: 1089:        global_error = local_error;
+      100: 1089:        global_error = local_error;
         -: 1090:    }
         -: 1091:
-       37: 1092:    return NULL;
+      101: 1092:    return NULL;
         -: 1093:}
         -: 1094:
         -: 1095:/* Default options for cJSON_Parse */
-       34: 1096:CJSON_PUBLIC(cJSON *) cJSON_Parse(const char *value)
+       98: 1096:CJSON_PUBLIC(cJSON *) cJSON_Parse(const char *value)
         -: 1097:{
-       34: 1098:    return cJSON_ParseWithOpts(value, 0, 0);
+       98: 1098:    return cJSON_ParseWithOpts(value, 0, 0);
         -: 1099:}
         -: 1100:
         -: 1101:#define cjson_min(a, b) ((a < b) ? a : b)
@@ -2748,14 +2748,14 @@
         8: 2743:    *into = '\0';
         -: 2744:}
         -: 2745:
-        4: 2746:CJSON_PUBLIC(cJSON_bool) cJSON_IsInvalid(const cJSON * const item)
+        6: 2746:CJSON_PUBLIC(cJSON_bool) cJSON_IsInvalid(const cJSON * const item)
         -: 2747:{
-        4: 2748:    if (item == NULL)
+        6: 2748:    if (item == NULL)
         -: 2749:    {
         1: 2750:        return false;
         -: 2751:    }
         -: 2752:
-        3: 2753:    return (item->type & 0xFF) == cJSON_Invalid;
+        5: 2753:    return (item->type & 0xFF) == cJSON_Invalid;
         -: 2754:}
         -: 2755:
         3: 2756:CJSON_PUBLIC(cJSON_bool) cJSON_IsFalse(const cJSON * const item)
@@ -2848,11 +2848,11 @@
         2: 2843:    return (item->type & 0xFF) == cJSON_Raw;
         -: 2844:}
         -: 2845:
-        5: 2846:CJSON_PUBLIC(cJSON_bool) cJSON_Compare(const cJSON * const a, const cJSON * const b, const cJSON_bool case_sensitive)
+       39: 2846:CJSON_PUBLIC(cJSON_bool) cJSON_Compare(const cJSON * const a, const cJSON * const b, const cJSON_bool case_sensitive)
         -: 2847:{
-        5: 2848:    if ((a == NULL) || (b == NULL) || ((a->type & 0xFF) != (b->type & 0xFF)) || cJSON_IsInvalid(a))
+       39: 2848:    if ((a == NULL) || (b == NULL) || ((a->type & 0xFF) != (b->type & 0xFF)) || cJSON_IsInvalid(a))
         -: 2849:    {
-        3: 2850:        return false;
+       37: 2850:        return false;
         -: 2851:    }
         -: 2852:
         -: 2853:    /* check if type is valid */

@@ -8,31 +8,31 @@
         -:    3:#include "../Cjson_lib/cJSON.c"
         -:    4:
         -:    5:static cJSON item[1];
-      117:    6:void reset(cJSON *item) {
-      117:    7:    if ((item != NULL) && (item->child != NULL))
-      117:    7-block  0
-      117:    7-block  1
+      118:    6:void reset(cJSON *item) {
+      118:    7:    if ((item != NULL) && (item->child != NULL))
+      118:    7-block  0
+      118:    7-block  1
         -:    8:    {
        12:    9:        cJSON_Delete(item->child);
        12:    9-block  0
         -:   10:    }
-      117:   11:    if ((item->valuestring != NULL) && !(item->type & cJSON_IsReference))
-      117:   11-block  0
+      118:   11:    if ((item->valuestring != NULL) && !(item->type & cJSON_IsReference))
+      118:   11-block  0
         2:   11-block  1
         -:   12:    {
         2:   13:        global_hooks.deallocate(item->valuestring);
         2:   13-block  0
         -:   14:    }
-     117*:   15:    if ((item->string != NULL) && !(item->type & cJSON_StringIsConst))
-      117:   15-block  0
+     118*:   15:    if ((item->string != NULL) && !(item->type & cJSON_StringIsConst))
+      118:   15-block  0
     %%%%%:   15-block  1
         -:   16:    {
     #####:   17:        global_hooks.deallocate(item->string);
     %%%%%:   17-block  0
         -:   18:    }
         -:   19:
-      117:   20:    memset(item, 0, sizeof(cJSON));
-      117:   21:}
+      118:   20:    memset(item, 0, sizeof(cJSON));
+      118:   21:}
         -:   22:
         -:   23:
         -:   24:class CjsonFixture : public ::testing::Test {
@@ -900,11 +900,11 @@ _ZN37CjsonFixture_assert_cJSON_strdup_TestC1Ev:
         -:  366:
         -:  367:
         -:  368:
-      160:  369:static void * CJSON_CDECL failing_malloc(size_t size)
+      194:  369:static void * CJSON_CDECL failing_malloc(size_t size)
         -:  370:{
         -:  371:    (void)size;
-      160:  372:    return NULL;
-      160:  372-block  0
+      194:  372:    return NULL;
+      194:  372-block  0
         -:  373:}
         -:  374:
         -:  375:/* work around MSVC error C2322: '...' address of dillimport '...' is not static */
@@ -3098,83 +3098,287 @@ _ZN36CjsonFixture_assert_cJSON_IsRaw_TestC1Ev:
         1: 1348-block  0
 ------------------
         -: 1360:
-        2: 1361:TEST_F(CjsonFixture, assert_cJSON_Compare)
+       18: 1361:static cJSON_bool compare_from_string(const char * const a, const char * const b, const cJSON_bool case_sensitive)
         -: 1362:{
-        -: 1363://      TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, true));
-        -: 1364://    TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, false));
-        -: 1365://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
-        -: 1366://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
-        -: 1367:
-        -: 1368:    cJSON invalid[1];
-        1: 1369:    cJSON_Compare(NULL, NULL, true);
-        1: 1370:    cJSON_Compare(NULL, NULL, false);
-        1: 1371:    cJSON_Compare(invalid, invalid, false);
-        1: 1372:    cJSON_Compare(invalid, invalid, true);
+       18: 1363:    cJSON *a_json = NULL;
+       18: 1364:    cJSON *b_json = NULL;
+       18: 1365:    cJSON_bool result = false;
+        -: 1366:
+       18: 1367:    a_json = cJSON_Parse(a);
+       18: 1367-block  0
+        -: 1368://    TEST_ASSERT_NOT_NULL_MESSAGE(a_json, "Failed to parse a.");
+       18: 1369:    b_json = cJSON_Parse(b);
+        -: 1370://    TEST_ASSERT_NOT_NULL_MESSAGE(b_json, "Failed to parse b.");
+        -: 1371:
+       18: 1372:    result = cJSON_Compare(a_json, b_json, case_sensitive);
         -: 1373:
-        -: 1374:    const char *a;
-        -: 1375:    const char *b;
-        1: 1376:    cJSON *a_json = NULL;
-        1: 1377:    cJSON *b_json = NULL;
-        1: 1378:    a_json = cJSON_Parse(a);
-        1: 1379:    b_json = cJSON_Parse(b);
-        -: 1380:    cJSON_bool case_sensitive;
-        1: 1381:    cJSON_Compare(a_json, b_json, case_sensitive);
-        1: 1382:}
+       18: 1374:    cJSON_Delete(a_json);
+       18: 1375:    cJSON_Delete(b_json);
+        -: 1376:
+       18: 1377:    return result;
+        -: 1378:}
+        -: 1379:
+        2: 1380:TEST_F(CjsonFixture, cJSON_Compare)
+        -: 1381:{
+        1: 1382:    cJSON_Compare(NULL, NULL, true);
+        1: 1383:    cJSON_Compare(NULL, NULL, false);
+        -: 1384:    cJSON invalid[1];
+        1: 1385:    memset(invalid, '\0', sizeof(invalid));
+        -: 1386:
+        1: 1387:    cJSON_Compare(invalid, invalid, false);
+        1: 1388:    cJSON_Compare(invalid, invalid, true);
+        -: 1389://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
+        -: 1390://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
+        -: 1391:
+        1: 1392:    compare_from_string("1", "1", true);
+        1: 1393:    compare_from_string("1", "1", false);
+        1: 1394:    compare_from_string("0.0001", "0.0001", true);
+        1: 1395:    compare_from_string("0.0001", "0.0001", false);
+        1: 1396:    compare_from_string("1", "2", true);
+        1: 1397:    compare_from_string("1", "2", false);
+        1: 1398:    compare_from_string("true", "true", true);
+        1: 1399:    compare_from_string("true", "true", false);
+        1: 1400:    compare_from_string("false", "false", true);
+        1: 1401:    compare_from_string("false", "false", false);
+        -: 1402://
+        1: 1403:    compare_from_string("true", "true", true);
+        1: 1404:    compare_from_string("true", "true", false);
+        1: 1405:    compare_from_string("false", "false", true);
+        1: 1406:    compare_from_string("false", "false", false);
+        -: 1407:
+        1: 1408:    compare_from_string("null", "null", true);
+        1: 1409:    compare_from_string("null", "null", false);
+        -: 1410:
+        1: 1411:    compare_from_string("null", "true", true);
+        1: 1412:    compare_from_string("null", "true", false);
+        -: 1413://
+        1: 1414:    reset(invalid);
+        1: 1415:    memset(invalid, '\0', sizeof(invalid));
+        -: 1416:
+        1: 1417:    invalid->type = cJSON_Number | cJSON_String;
+        -: 1418:
+        1: 1419:    cJSON_Compare(invalid, invalid, true);
+        1: 1420:    cJSON_Compare(invalid, invalid, false);
+        -: 1421://
+        -: 1422://    compare_from_string("\"abcdefg\"", "\"abcdefg\"", true);
+        -: 1423://    compare_from_string("\"abcdefg\"", "\"abcdefg\"", false);
+        -: 1424://
+        -: 1425://    compare_from_string("\"ABCDEFG\"", "\"abcdefg\"", true);
+        -: 1426://    compare_from_string("\"ABCDEFG\"", "\"abcdefg\"", false);
+        -: 1427://
+        -: 1428://    cJSON *raw1 = NULL;
+        -: 1429://    cJSON *raw2 = NULL;
+        -: 1430://
+        -: 1431://    raw1 = cJSON_Parse("\"[true, false]\"");
+        -: 1432:////    TEST_ASSERT_NOT_NULL(raw1);
+        -: 1433://    raw2 = cJSON_Parse("\"[true, false]\"");
+        -: 1434:////    TEST_ASSERT_NOT_NULL(raw2);
+        -: 1435://
+        -: 1436://    raw1->type = cJSON_Raw;
+        -: 1437://    raw2->type = cJSON_Raw;
+        -: 1438://
+        -: 1439://    cJSON_Compare(raw1, raw2, true);
+        -: 1440://    cJSON_Compare(raw1, raw2, false);
+        -: 1441://
+        -: 1442://    cJSON_Delete(raw1);
+        -: 1443://    cJSON_Delete(raw2);
+        -: 1444://
+        -: 1445://    compare_from_string("[]", "[]", true);
+        -: 1446://    compare_from_string("[]", "[]", false);
+        -: 1447://    compare_from_string("[false,true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", true);
+        -: 1448://    compare_from_string("[false,true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", false);
+        -: 1449://    compare_from_string("[[[1], 2]]", "[[[1], 2]]", true);
+        -: 1450://    compare_from_string("[[[1], 2]]", "[[[1], 2]]", false);
+        -: 1451:
+        -: 1452://    ASSERT_FALSE(compare_from_string("[true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", true));
+        -: 1453://    ASSERT_FALSE(compare_from_string("[true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", false));
+        -: 1454://
+        -: 1455://    ASSERT_FALSE(compare_from_string("[1,2,3]", "[1,2]", true));
+        -: 1456://    ASSERT_FALSE(compare_from_string("[1,2,3]", "[1,2]", false));
+        -: 1457://
+        -: 1458://    ASSERT_TRUE(compare_from_string("{}", "{}", true));
+        -: 1459://    ASSERT_TRUE(compare_from_string("{}", "{}", false));
+        -: 1460://    ASSERT_TRUE(compare_from_string(
+        -: 1461://            "{\"false\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1462://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1463://            true));
+        -: 1464://    ASSERT_FALSE(compare_from_string(
+        -: 1465://            "{\"False\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1466://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1467://            true));
+        -: 1468://    ASSERT_TRUE(compare_from_string(
+        -: 1469://            "{\"False\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1470://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1471://            false));
+        -: 1472://    ASSERT_FALSE(compare_from_string(
+        -: 1473://            "{\"Flse\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1474://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1475://            false));
+        -: 1476://    ASSERT_FALSE(compare_from_string(
+        -: 1477://            "{\"one\": 1, \"two\": 2}",
+        -: 1478://            "{\"one\": 1, \"two\": 2, \"three\": 3}",
+        -: 1479://            true));
+        -: 1480://    ASSERT_FALSE(compare_from_string(
+        -: 1481://            "{\"one\": 1, \"two\": 2}",
+        -: 1482://            "{\"one\": 1, \"two\": 2, \"three\": 3}",
+        -: 1483://            false));
+        1: 1484:}
 ------------------
-_ZN38CjsonFixture_assert_cJSON_Compare_Test8TestBodyEv:
-        1: 1361:TEST_F(CjsonFixture, assert_cJSON_Compare)
-        -: 1362:{
-        -: 1363://      TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, true));
-        -: 1364://    TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, false));
-        -: 1365://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
-        -: 1366://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
-        -: 1367:
-        -: 1368:    cJSON invalid[1];
-        1: 1369:    cJSON_Compare(NULL, NULL, true);
-        1: 1369-block  0
-        1: 1370:    cJSON_Compare(NULL, NULL, false);
-        1: 1370-block  0
-        1: 1371:    cJSON_Compare(invalid, invalid, false);
-        1: 1371-block  0
-        1: 1372:    cJSON_Compare(invalid, invalid, true);
-        1: 1372-block  0
-        -: 1373:
-        -: 1374:    const char *a;
-        -: 1375:    const char *b;
-        1: 1376:    cJSON *a_json = NULL;
-        1: 1377:    cJSON *b_json = NULL;
-        1: 1378:    a_json = cJSON_Parse(a);
-        1: 1378-block  0
-        1: 1379:    b_json = cJSON_Parse(b);
-        1: 1379-block  0
-        -: 1380:    cJSON_bool case_sensitive;
-        1: 1381:    cJSON_Compare(a_json, b_json, case_sensitive);
-        1: 1381-block  0
-        1: 1382:}
+_ZN31CjsonFixture_cJSON_Compare_Test8TestBodyEv:
+        1: 1380:TEST_F(CjsonFixture, cJSON_Compare)
+        -: 1381:{
+        1: 1382:    cJSON_Compare(NULL, NULL, true);
         1: 1382-block  0
+        1: 1383:    cJSON_Compare(NULL, NULL, false);
+        1: 1383-block  0
+        -: 1384:    cJSON invalid[1];
+        1: 1385:    memset(invalid, '\0', sizeof(invalid));
+        -: 1386:
+        1: 1387:    cJSON_Compare(invalid, invalid, false);
+        1: 1387-block  0
+        1: 1388:    cJSON_Compare(invalid, invalid, true);
+        1: 1388-block  0
+        -: 1389://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
+        -: 1390://    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
+        -: 1391:
+        1: 1392:    compare_from_string("1", "1", true);
+        1: 1392-block  0
+        1: 1393:    compare_from_string("1", "1", false);
+        1: 1393-block  0
+        1: 1394:    compare_from_string("0.0001", "0.0001", true);
+        1: 1394-block  0
+        1: 1395:    compare_from_string("0.0001", "0.0001", false);
+        1: 1395-block  0
+        1: 1396:    compare_from_string("1", "2", true);
+        1: 1396-block  0
+        1: 1397:    compare_from_string("1", "2", false);
+        1: 1397-block  0
+        1: 1398:    compare_from_string("true", "true", true);
+        1: 1398-block  0
+        1: 1399:    compare_from_string("true", "true", false);
+        1: 1399-block  0
+        1: 1400:    compare_from_string("false", "false", true);
+        1: 1400-block  0
+        1: 1401:    compare_from_string("false", "false", false);
+        1: 1401-block  0
+        -: 1402://
+        1: 1403:    compare_from_string("true", "true", true);
+        1: 1403-block  0
+        1: 1404:    compare_from_string("true", "true", false);
+        1: 1404-block  0
+        1: 1405:    compare_from_string("false", "false", true);
+        1: 1405-block  0
+        1: 1406:    compare_from_string("false", "false", false);
+        1: 1406-block  0
+        -: 1407:
+        1: 1408:    compare_from_string("null", "null", true);
+        1: 1408-block  0
+        1: 1409:    compare_from_string("null", "null", false);
+        1: 1409-block  0
+        -: 1410:
+        1: 1411:    compare_from_string("null", "true", true);
+        1: 1411-block  0
+        1: 1412:    compare_from_string("null", "true", false);
+        1: 1412-block  0
+        -: 1413://
+        1: 1414:    reset(invalid);
+        1: 1414-block  0
+        1: 1415:    memset(invalid, '\0', sizeof(invalid));
+        -: 1416:
+        1: 1417:    invalid->type = cJSON_Number | cJSON_String;
+        -: 1418:
+        1: 1419:    cJSON_Compare(invalid, invalid, true);
+        1: 1419-block  0
+        1: 1420:    cJSON_Compare(invalid, invalid, false);
+        1: 1420-block  0
+        -: 1421://
+        -: 1422://    compare_from_string("\"abcdefg\"", "\"abcdefg\"", true);
+        -: 1423://    compare_from_string("\"abcdefg\"", "\"abcdefg\"", false);
+        -: 1424://
+        -: 1425://    compare_from_string("\"ABCDEFG\"", "\"abcdefg\"", true);
+        -: 1426://    compare_from_string("\"ABCDEFG\"", "\"abcdefg\"", false);
+        -: 1427://
+        -: 1428://    cJSON *raw1 = NULL;
+        -: 1429://    cJSON *raw2 = NULL;
+        -: 1430://
+        -: 1431://    raw1 = cJSON_Parse("\"[true, false]\"");
+        -: 1432:////    TEST_ASSERT_NOT_NULL(raw1);
+        -: 1433://    raw2 = cJSON_Parse("\"[true, false]\"");
+        -: 1434:////    TEST_ASSERT_NOT_NULL(raw2);
+        -: 1435://
+        -: 1436://    raw1->type = cJSON_Raw;
+        -: 1437://    raw2->type = cJSON_Raw;
+        -: 1438://
+        -: 1439://    cJSON_Compare(raw1, raw2, true);
+        -: 1440://    cJSON_Compare(raw1, raw2, false);
+        -: 1441://
+        -: 1442://    cJSON_Delete(raw1);
+        -: 1443://    cJSON_Delete(raw2);
+        -: 1444://
+        -: 1445://    compare_from_string("[]", "[]", true);
+        -: 1446://    compare_from_string("[]", "[]", false);
+        -: 1447://    compare_from_string("[false,true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", true);
+        -: 1448://    compare_from_string("[false,true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", false);
+        -: 1449://    compare_from_string("[[[1], 2]]", "[[[1], 2]]", true);
+        -: 1450://    compare_from_string("[[[1], 2]]", "[[[1], 2]]", false);
+        -: 1451:
+        -: 1452://    ASSERT_FALSE(compare_from_string("[true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", true));
+        -: 1453://    ASSERT_FALSE(compare_from_string("[true,null,42,\"string\",[],{}]", "[false, true, null, 42, \"string\", [], {}]", false));
+        -: 1454://
+        -: 1455://    ASSERT_FALSE(compare_from_string("[1,2,3]", "[1,2]", true));
+        -: 1456://    ASSERT_FALSE(compare_from_string("[1,2,3]", "[1,2]", false));
+        -: 1457://
+        -: 1458://    ASSERT_TRUE(compare_from_string("{}", "{}", true));
+        -: 1459://    ASSERT_TRUE(compare_from_string("{}", "{}", false));
+        -: 1460://    ASSERT_TRUE(compare_from_string(
+        -: 1461://            "{\"false\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1462://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1463://            true));
+        -: 1464://    ASSERT_FALSE(compare_from_string(
+        -: 1465://            "{\"False\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1466://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1467://            true));
+        -: 1468://    ASSERT_TRUE(compare_from_string(
+        -: 1469://            "{\"False\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1470://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1471://            false));
+        -: 1472://    ASSERT_FALSE(compare_from_string(
+        -: 1473://            "{\"Flse\": false, \"true\": true, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1474://            "{\"true\": true, \"false\": false, \"null\": null, \"number\": 42, \"string\": \"string\", \"array\": [], \"object\": {}}",
+        -: 1475://            false));
+        -: 1476://    ASSERT_FALSE(compare_from_string(
+        -: 1477://            "{\"one\": 1, \"two\": 2}",
+        -: 1478://            "{\"one\": 1, \"two\": 2, \"three\": 3}",
+        -: 1479://            true));
+        -: 1480://    ASSERT_FALSE(compare_from_string(
+        -: 1481://            "{\"one\": 1, \"two\": 2}",
+        -: 1482://            "{\"one\": 1, \"two\": 2, \"three\": 3}",
+        -: 1483://            false));
+        1: 1484:}
+        1: 1484-block  0
 ------------------
-_ZN38CjsonFixture_assert_cJSON_Compare_TestC1Ev:
-        1: 1361:TEST_F(CjsonFixture, assert_cJSON_Compare)
-        1: 1361-block  0
+_ZN31CjsonFixture_cJSON_Compare_TestC1Ev:
+        1: 1380:TEST_F(CjsonFixture, cJSON_Compare)
+        1: 1380-block  0
 ------------------
-        -: 1383:
-        2: 1384:TEST_F(CjsonFixture, assert_cJSON_free)
-        -: 1385:{
-        1: 1386:    cJSON *array = NULL;
-        1: 1387:    array = cJSON_CreateArray();
-        1: 1388:    cJSON_free(array);
-        1: 1389:}
+        -: 1485:
+        2: 1486:TEST_F(CjsonFixture, assert_cJSON_free)
+        -: 1487:{
+        1: 1488:    cJSON *array = NULL;
+        1: 1489:    array = cJSON_CreateArray();
+        1: 1490:    cJSON_free(array);
+        1: 1491:}
 ------------------
 _ZN35CjsonFixture_assert_cJSON_free_Test8TestBodyEv:
-        1: 1384:TEST_F(CjsonFixture, assert_cJSON_free)
-        -: 1385:{
-        1: 1386:    cJSON *array = NULL;
-        1: 1387:    array = cJSON_CreateArray();
-        1: 1387-block  0
-        1: 1388:    cJSON_free(array);
-        1: 1389:}
+        1: 1486:TEST_F(CjsonFixture, assert_cJSON_free)
+        -: 1487:{
+        1: 1488:    cJSON *array = NULL;
+        1: 1489:    array = cJSON_CreateArray();
+        1: 1489-block  0
+        1: 1490:    cJSON_free(array);
+        1: 1491:}
 ------------------
 _ZN35CjsonFixture_assert_cJSON_free_TestC1Ev:
-        1: 1384:TEST_F(CjsonFixture, assert_cJSON_free)
-        1: 1384-block  0
+        1: 1486:TEST_F(CjsonFixture, assert_cJSON_free)
+        1: 1486-block  0
 ------------------
