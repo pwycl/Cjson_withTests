@@ -288,7 +288,7 @@
         -:  283:  // around may change its bits, although the new value is guaranteed
         -:  284:  // to be also a NAN.  Therefore, don't expect this constructor to
         -:  285:  // preserve the bits in x when x is a NAN.
-       36:  286:  explicit FloatingPoint(const RawType& x) { u_.value_ = x; }
+        -:  286:  explicit FloatingPoint(const RawType& x) { u_.value_ = x; }
         -:  287:
         -:  288:  // Static methods
         -:  289:
@@ -315,19 +315,19 @@
         -:  310:  const Bits &bits() const { return u_.bits_; }
         -:  311:
         -:  312:  // Returns the exponent bits of this number.
-       36:  313:  Bits exponent_bits() const { return kExponentBitMask & u_.bits_; }
+        -:  313:  Bits exponent_bits() const { return kExponentBitMask & u_.bits_; }
         -:  314:
         -:  315:  // Returns the fraction bits of this number.
-    #####:  316:  Bits fraction_bits() const { return kFractionBitMask & u_.bits_; }
+        -:  316:  Bits fraction_bits() const { return kFractionBitMask & u_.bits_; }
         -:  317:
         -:  318:  // Returns the sign bit of this number.
         -:  319:  Bits sign_bit() const { return kSignBitMask & u_.bits_; }
         -:  320:
         -:  321:  // Returns true if this is NAN (not a number).
-       36:  322:  bool is_nan() const {
+        -:  322:  bool is_nan() const {
         -:  323:    // It's a NAN if the exponent bits are all ones and the fraction
         -:  324:    // bits are not entirely zeros.
-       36:  325:    return (exponent_bits() == kExponentBitMask) && (fraction_bits() != 0);
+        -:  325:    return (exponent_bits() == kExponentBitMask) && (fraction_bits() != 0);
         -:  326:  }
         -:  327:
         -:  328:  // Returns true if this number is at most kMaxUlps ULP's away from
@@ -336,13 +336,13 @@
         -:  331:  //   - returns false if either number is (or both are) NAN.
         -:  332:  //   - treats really large numbers as almost equal to infinity.
         -:  333:  //   - thinks +0.0 and -0.0 are 0 DLP's apart.
-       18:  334:  bool AlmostEquals(const FloatingPoint& rhs) const {
+        -:  334:  bool AlmostEquals(const FloatingPoint& rhs) const {
         -:  335:    // The IEEE standard says that any comparison operation involving
         -:  336:    // a NAN must return false.
-       18:  337:    if (is_nan() || rhs.is_nan()) return false;
+        -:  337:    if (is_nan() || rhs.is_nan()) return false;
         -:  338:
-       18:  339:    return DistanceBetweenSignAndMagnitudeNumbers(u_.bits_, rhs.u_.bits_)
-       18:  340:        <= kMaxUlps;
+        -:  339:    return DistanceBetweenSignAndMagnitudeNumbers(u_.bits_, rhs.u_.bits_)
+        -:  340:        <= kMaxUlps;
         -:  341:  }
         -:  342:
         -:  343: private:
@@ -367,23 +367,23 @@
         -:  362:  //
         -:  363:  // Read http://en.wikipedia.org/wiki/Signed_number_representations
         -:  364:  // for more details on signed number representations.
-       36:  365:  static Bits SignAndMagnitudeToBiased(const Bits &sam) {
-       36:  366:    if (kSignBitMask & sam) {
+        -:  365:  static Bits SignAndMagnitudeToBiased(const Bits &sam) {
+        -:  366:    if (kSignBitMask & sam) {
         -:  367:      // sam represents a negative number.
-       20:  368:      return ~sam + 1;
+        -:  368:      return ~sam + 1;
         -:  369:    } else {
         -:  370:      // sam represents a positive number.
-       16:  371:      return kSignBitMask | sam;
+        -:  371:      return kSignBitMask | sam;
         -:  372:    }
         -:  373:  }
         -:  374:
         -:  375:  // Given two numbers in the sign-and-magnitude representation,
         -:  376:  // returns the distance between them as an unsigned number.
-       18:  377:  static Bits DistanceBetweenSignAndMagnitudeNumbers(const Bits &sam1,
+        -:  377:  static Bits DistanceBetweenSignAndMagnitudeNumbers(const Bits &sam1,
         -:  378:                                                     const Bits &sam2) {
-       18:  379:    const Bits biased1 = SignAndMagnitudeToBiased(sam1);
-       18:  380:    const Bits biased2 = SignAndMagnitudeToBiased(sam2);
-       18:  381:    return (biased1 >= biased2) ? (biased1 - biased2) : (biased2 - biased1);
+        -:  379:    const Bits biased1 = SignAndMagnitudeToBiased(sam1);
+        -:  380:    const Bits biased2 = SignAndMagnitudeToBiased(sam2);
+        -:  381:    return (biased1 >= biased2) ? (biased1 - biased2) : (biased2 - biased1);
         -:  382:  }
         -:  383:
         -:  384:  FloatingPointUnion u_;
@@ -425,12 +425,12 @@
         -:  420:// returned for different types.  Calling the function twice with the
         -:  421:// same type argument is guaranteed to return the same ID.
         -:  422:template <typename T>
-       75:  423:TypeId GetTypeId() {
+        -:  423:TypeId GetTypeId() {
         -:  424:  // The compiler is required to allocate a different
         -:  425:  // TypeIdHelper<T>::dummy_ variable for each T used to instantiate
         -:  426:  // the template.  Therefore, the address of dummy_ is guaranteed to
         -:  427:  // be unique.
-       75:  428:  return &(TypeIdHelper<T>::dummy_);
+        -:  428:  return &(TypeIdHelper<T>::dummy_);
         -:  429:}
         -:  430:
         -:  431:// Returns the type ID of ::testing::Test.  Always call this instead
@@ -444,14 +444,14 @@
         -:  439:// of a Test object.
         -:  440:class TestFactoryBase {
         -:  441: public:
-       75:  442:  virtual ~TestFactoryBase() {}
+       48:  442:  virtual ~TestFactoryBase() {}
         -:  443:
         -:  444:  // Creates a test instance to run. The instance is both created and destroyed
         -:  445:  // within TestInfoImpl::Run()
         -:  446:  virtual Test* CreateTest() = 0;
         -:  447:
         -:  448: protected:
-       75:  449:  TestFactoryBase() {}
+       48:  449:  TestFactoryBase() {}
         -:  450:
         -:  451: private:
         -:  452:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -460,9 +460,9 @@
         -:  455:// This class provides implementation of TeastFactoryBase interface.
         -:  456:// It is used in TEST and TEST_F macros.
         -:  457:template <class TestClass>
-      225:  458:class TestFactoryImpl : public TestFactoryBase {
+      144:  458:class TestFactoryImpl : public TestFactoryBase {
         -:  459: public:
-       75:  460:  Test* CreateTest() override { return new TestClass; }
+       48:  460:  Test* CreateTest() override { return new TestClass; }
         -:  461:};
         -:  462:
         -:  463:#if GTEST_OS_WINDOWS
@@ -482,9 +482,9 @@
         -:  477:using SetUpTestSuiteFunc = void (*)();
         -:  478:using TearDownTestSuiteFunc = void (*)();
         -:  479:
-      225:  480:struct CodeLocation {
-       75:  481:  CodeLocation(const std::string& a_file, int a_line)
-       75:  482:      : file(a_file), line(a_line) {}
+      144:  480:struct CodeLocation {
+       48:  481:  CodeLocation(const std::string& a_file, int a_line)
+       48:  482:      : file(a_file), line(a_line) {}
         -:  483:
         -:  484:  std::string file;
         -:  485:  int line;
@@ -496,9 +496,9 @@
         -:  491:// Utility functions to help SuiteApiResolver
         -:  492:using SetUpTearDownSuiteFuncType = void (*)();
         -:  493:
-      300:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
+      192:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
         -:  495:    SetUpTearDownSuiteFuncType a, SetUpTearDownSuiteFuncType def) {
-      300:  496:  return a == def ? nullptr : a;
+      192:  496:  return a == def ? nullptr : a;
         -:  497:}
         -:  498:
         -:  499:template <typename T>
@@ -511,34 +511,34 @@
         -:  506:  using Test =
         -:  507:      typename std::conditional<sizeof(T) != 0, ::testing::Test, void>::type;
         -:  508:
-       75:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
+       48:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
         -:  510:                                                        int line_num) {
-       75:  511:    SetUpTearDownSuiteFuncType test_case_fp =
+       48:  511:    SetUpTearDownSuiteFuncType test_case_fp =
         -:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
-       75:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
+       48:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
         -:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
         -:  515:
-       75:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+       48:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  517:        << "Test can not provide both SetUpTestSuite and SetUpTestCase, please "
         -:  518:           "make sure there is only one present at "
     #####:  519:        << filename << ":" << line_num;
         -:  520:
-       75:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       48:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  522:  }
         -:  523:
-       75:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
+       48:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
         -:  525:                                                           int line_num) {
-       75:  526:    SetUpTearDownSuiteFuncType test_case_fp =
+       48:  526:    SetUpTearDownSuiteFuncType test_case_fp =
         -:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
-       75:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
+       48:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
         -:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
         -:  530:
-       75:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+       48:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  532:        << "Test can not provide both TearDownTestSuite and TearDownTestCase,"
         -:  533:           " please make sure there is only one present at"
     #####:  534:        << filename << ":" << line_num;
         -:  535:
-       75:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       48:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  537:  }
         -:  538:};
         -:  539:
