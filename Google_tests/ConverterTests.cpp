@@ -283,6 +283,45 @@ TEST_F(CjsonFixture, parse_number_should_parse_negative_reals)
     assert_parse_number("-123e-128", 0, -123e-128);
 }
 
+static void assert_parse_value(const char *string, int type)
+{
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.content = (const unsigned char*) string;
+    buffer.length = strlen(string) + sizeof("");
+    buffer.hooks = global_hooks;
+
+    parse_value(item, &buffer);
+//    TEST_ASSERT_TRUE(parse_value(item, &buffer));
+//    assert_is_value(item, type);
+}
+
+TEST_F(CjsonFixture, parse_value)
+{
+    assert_parse_value("null", cJSON_NULL);
+    reset(item);
+
+    assert_parse_value("true", cJSON_True);
+    reset(item);
+
+    assert_parse_value("false", cJSON_False);
+    reset(item);
+
+    assert_parse_value("1.5", cJSON_Number);
+    reset(item);
+
+    assert_parse_value("\"\"", cJSON_String);
+    reset(item);
+    assert_parse_value("\"hello\"", cJSON_String);
+    reset(item);
+
+    assert_parse_value("[]", cJSON_Array);
+    reset(item);
+
+    assert_parse_value("{}", cJSON_Object);
+    reset(item);
+
+
+}
 
 static void assert_case_insensitive_strcmp(const unsigned char *string1, const unsigned char *string2,int integer)
 {
@@ -396,21 +435,21 @@ TEST_F(CjsonFixture, assert_ensure)
 //    ensure(buffer1, 200);
 }
 
-static void assert_update_offset(printbuffer *buffer)
-{
-    update_offset(buffer);
-}
-TEST_F(CjsonFixture, assert_update_offset)
-{
-    printbuffer *buffer;
-    buffer->buffer =NULL;
-    assert_update_offset(NULL);
-    assert_update_offset(buffer);
-//    printbuffer *buffer1 ;
-//    buffer1->length = 10;
-//
-//    assert_update_offset(buffer1);
-}
+//static void assert_update_offset(printbuffer *buffer)
+//{
+//    update_offset(buffer);
+//}
+//TEST_F(CjsonFixture, assert_update_offset)
+//{
+//    printbuffer *buffer;
+//    buffer->buffer =NULL;
+//    assert_update_offset(NULL);
+//    assert_update_offset(buffer);
+////    printbuffer *buffer1 ;
+////    buffer1->length = 10;
+////
+////    assert_update_offset(buffer1);
+//}
 
 
 static void assert_compare_double(double a, double b)
@@ -445,9 +484,8 @@ TEST_F(CjsonFixture, assert_print_number)
 }
 
 
-static void assert_print_string_ptr()
+static void assert_print_string(const char *expected, const char *input)
 {
-    const char *input;
     unsigned char printed[1024];
     printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
     buffer.buffer = printed;
@@ -455,21 +493,17 @@ static void assert_print_string_ptr()
     buffer.offset = 0;
     buffer.noalloc = true;
     buffer.hooks = global_hooks;
-    print_string_ptr((const unsigned char*)input, &buffer), "Failed to print string.";
 
-//    printbuffer buffer1 = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.buffer = printed;
-//    buffer.length = sizeof(printed);
-//    buffer.offset = 0;
-//    buffer.noalloc = true;
-//    buffer.hooks.reallocate = NULL;     修改为NULL，依然无法覆盖另一分支
-//    print_string_ptr((const unsigned char*)input, &buffer), "Failed to print string.";
+    print_string_ptr((const unsigned char*)input, &buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_string_ptr((const unsigned char*)input, &buffer), "Failed to print string.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(expected, printed, "The printed string isn't as expected.");
 }
-TEST_F(CjsonFixture, assert_print_string_ptr)
+TEST_F(CjsonFixture, print_string_should_print_empty_strings)
+//static void print_string_should_print_empty_strings(void)
 {
-    assert_print_string_ptr();
+    assert_print_string("\"\"", "");
+    assert_print_string("\"\"", NULL);
 }
-
 
 static void assert_cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
 {
@@ -568,9 +602,7 @@ TEST_F(CjsonFixture, assert_cJSON_PrintPreallocated)
     cJSON_PrintPreallocated(item, NULL, 1, true);
 }
 
-
-//没有提高覆盖率
-static void assert_print_value()
+static void assert_print_value(const char *input)
 {
     unsigned char printed[1024];
     cJSON item[1];
@@ -581,19 +613,38 @@ static void assert_print_value()
     buffer.offset = 0;
     buffer.noalloc = true;
     buffer.hooks = global_hooks;
+
+    parsebuffer.content = (const unsigned char*)input;
+    parsebuffer.length = strlen(input) + sizeof("");
+    parsebuffer.hooks = global_hooks;
+
+    memset(item, 0, sizeof(item));
+
+    parse_value(item, &parsebuffer);
+//    TEST_ASSERT_TRUE_MESSAGE(parse_value(item, &parsebuffer), "Failed to parse value.");
+
     print_value(item, &buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_value(item, &buffer), "Failed to print value.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, buffer.buffer, "Printed value is not as expected.");
+
+    reset(item);
 }
-TEST_F(CjsonFixture, assert_print_value)
+
+TEST_F(CjsonFixture, print_value)
 {
-    assert_print_value();
+    assert_print_value("null");
+    assert_print_value("true");
+    assert_print_value("false");
+    assert_print_value("1.5");
+    assert_print_value("\"\"");
+    assert_print_value("\"hello\"");
+    assert_print_value("[]");
+    assert_print_value("{}");
+
 }
 
 
-static void assert_print_array(const cJSON * const item, printbuffer * const output_buffer)
-{
-    print_array(item,output_buffer);
-}
-TEST_F(CjsonFixture, assert_print_array)
+static void assert_print_array(const char * const expected, const char * const input)
 {
     unsigned char printed_unformatted[1024];
     unsigned char printed_formatted[1024];
@@ -602,6 +653,11 @@ TEST_F(CjsonFixture, assert_print_array)
 
     printbuffer formatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
     printbuffer unformatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+
+    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    parsebuffer.content = (const unsigned char*)input;
+    parsebuffer.length = strlen(input) + sizeof("");
+    parsebuffer.hooks = global_hooks;
 
     /* buffer for formatted printing */
     formatted_buffer.buffer = printed_formatted;
@@ -616,11 +672,37 @@ TEST_F(CjsonFixture, assert_print_array)
     unformatted_buffer.offset = 0;
     unformatted_buffer.noalloc = true;
     unformatted_buffer.hooks = global_hooks;
-    assert_print_array(item, &unformatted_buffer);
-    assert_print_array(item, &formatted_buffer);
+
+    memset(item, 0, sizeof(item));
+    parse_array(item, &parsebuffer);
+//    TEST_ASSERT_TRUE_MESSAGE(parse_array(item, &parsebuffer), "Failed to parse array.");
+
+    unformatted_buffer.format = false;
+    print_array(item, &unformatted_buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_array(item, &unformatted_buffer), "Failed to print unformatted string.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, printed_unformatted, "Unformatted array is not correct.");
+
+    formatted_buffer.format = true;
+    print_array(item, &formatted_buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_array(item, &formatted_buffer), "Failed to print formatted string.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(expected, printed_formatted, "Formatted array is not correct.");
+
+    reset(item);
 }
 
-TEST_F(CjsonFixture, assert_print_object)
+TEST_F(CjsonFixture, print_array)
+{
+    assert_print_array("[]", "[]");
+    assert_print_array("[1]", "[1]");
+    assert_print_array("[\"hello!\"]", "[\"hello!\"]");
+    assert_print_array("[[]]", "[[]]");
+    assert_print_array("[null]", "[null]");
+    assert_print_array("[1, 2, 3]", "[1,2,3]");
+    assert_print_array("[1, null, true, false, [], \"hello\", {\n\t}]", "[1,null,true,false,[],\"hello\",{}]");
+
+}
+
+static void assert_print_object(const char * const expected, const char * const input)
 {
     unsigned char printed_unformatted[1024];
     unsigned char printed_formatted[1024];
@@ -629,6 +711,12 @@ TEST_F(CjsonFixture, assert_print_object)
 
     printbuffer formatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
     printbuffer unformatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+
+    /* buffer for parsing */
+    parsebuffer.content = (const unsigned char*)input;
+    parsebuffer.length = strlen(input) + sizeof("");
+    parsebuffer.hooks = global_hooks;
 
     /* buffer for formatted printing */
     formatted_buffer.buffer = printed_formatted;
@@ -644,10 +732,36 @@ TEST_F(CjsonFixture, assert_print_object)
     unformatted_buffer.noalloc = true;
     unformatted_buffer.hooks = global_hooks;
 
+    memset(item, 0, sizeof(item));
+    parse_object(item, &parsebuffer);
+//    TEST_ASSERT_TRUE_MESSAGE(parse_object(item, &parsebuffer), "Failed to parse object.");
 
+    unformatted_buffer.format = false;
     print_object(item, &unformatted_buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_object(item, &unformatted_buffer), "Failed to print unformatted string.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, printed_unformatted, "Unformatted object is not correct.");
+
+    formatted_buffer.format = true;
     print_object(item, &formatted_buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_object(item, &formatted_buffer), "Failed to print formatted string.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(expected, printed_formatted, "Formatted ojbect is not correct.");
+
+    reset(item);
 }
+
+TEST_F(CjsonFixture, print_object)
+//static void print_object_should_print_objects_with_multiple_elements(void)
+{
+    assert_print_object("{\n}", "{}");
+    assert_print_object("{\n\t\"one\":\t1\n}", "{\"one\":1}");
+    assert_print_object("{\n\t\"hello\":\t\"world!\"\n}", "{\"hello\":\"world!\"}");
+    assert_print_object("{\n\t\"array\":\t[]\n}", "{\"array\":[]}");
+    assert_print_object("{\n\t\"null\":\tnull\n}", "{\"null\":null}");
+    assert_print_object("{\n\t\"one\":\t1,\n\t\"two\":\t2,\n\t\"three\":\t3\n}", "{\"one\":1,\"two\":2,\"three\":3}");
+    assert_print_object("{\n\t\"one\":\t1,\n\t\"NULL\":\tnull,\n\t\"TRUE\":\ttrue,\n\t\"FALSE\":\tfalse,\n\t\"array\":\t[],\n\t\"world\":\t\"hello\",\n\t\"object\":\t{\n\t}\n}", "{\"one\":1,\"NULL\":null,\"TRUE\":true,\"FALSE\":false,\"array\":[],\"world\":\"hello\",\"object\":{}}");
+
+}
+
 
 TEST_F(CjsonFixture, assert_cJSON_GetArraySize)
 {
@@ -1244,27 +1358,19 @@ TEST_F(CjsonFixture, assert_cJSON_IsRaw)
     cJSON_IsRaw(item);
 }
 
-TEST_F(CjsonFixture, assert_cJSON_Compare)
+TEST_F(CjsonFixture, cJSON_Compare)
 {
-//      TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, true));
-//    TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, false));
+    cJSON_Compare(NULL, NULL, true);
+    cJSON_Compare(NULL, NULL, false);
+    cJSON invalid[1];
+    memset(invalid, '\0', sizeof(invalid));
+
+    cJSON_Compare(invalid, invalid, false);
+    cJSON_Compare(invalid, invalid, true);
 //    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
 //    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
 
-    cJSON invalid[1];
-    cJSON_Compare(NULL, NULL, true);
-    cJSON_Compare(NULL, NULL, false);
-    cJSON_Compare(invalid, invalid, false);
-    cJSON_Compare(invalid, invalid, true);
-
-    const char *a;
-    const char *b;
-    cJSON *a_json = NULL;
-    cJSON *b_json = NULL;
-    a_json = cJSON_Parse(a);
-    b_json = cJSON_Parse(b);
-    cJSON_bool case_sensitive;
-    cJSON_Compare(a_json, b_json, case_sensitive);
+    
 }
 
 TEST_F(CjsonFixture, assert_cJSON_free)

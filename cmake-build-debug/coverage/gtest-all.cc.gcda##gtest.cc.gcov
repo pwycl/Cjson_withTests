@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest.cc
-        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest.cc
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -663,10 +663,10 @@
         -:  487://
         -:  488:// This recursive algorithm isn't very efficient, but is clear and
         -:  489:// works well enough for matching test names, which are short.
-     9706:  490:bool UnitTestOptions::PatternMatchesString(const char *pattern,
+     9664:  490:bool UnitTestOptions::PatternMatchesString(const char *pattern,
         -:  491:                                           const char *str) {
-     9706:  492:  switch (*pattern) {
-     9706:  492-block  0
+     9664:  492:  switch (*pattern) {
+     9664:  492-block  0
       150:  493:    case '\0':
         -:  494:    case ':':  // Either ':' or '\0' marks the end of the pattern.
       150:  495:      return *str == '\0';
@@ -678,23 +678,23 @@
     %%%%%:  497-block  2
     %%%%%:  497-block  3
     %%%%%:  497-block  4
-     5287:  498:    case '*':  // Matches any string (possibly empty) of characters.
-     8506:  499:      return (*str != '\0' && PatternMatchesString(pattern, str + 1)) ||
-     5287:  499-block  0
-     5060:  499-block  1
-     2143:  499-block  2
-     3144:  499-block  3
-     8506:  500:          PatternMatchesString(pattern + 1, str);
-     3219:  500-block  0
-     5287:  500-block  1
-     4269:  501:    default:  // Non-special character.  Matches itself.
-     5244:  502:      return *pattern == *str &&
-     4269:  502-block  0
-      975:  502-block  1
-     3294:  502-block  2
-     5244:  503:          PatternMatchesString(pattern + 1, str + 1);
-      975:  503-block  0
-     4269:  503-block  1
+     6234:  498:    case '*':  // Matches any string (possibly empty) of characters.
+     9439:  499:      return (*str != '\0' && PatternMatchesString(pattern, str + 1)) ||
+     6234:  499-block  0
+     6007:  499-block  1
+     3104:  499-block  2
+     3130:  499-block  3
+     9439:  500:          PatternMatchesString(pattern + 1, str);
+     3205:  500-block  0
+     6234:  500-block  1
+     3280:  501:    default:  // Non-special character.  Matches itself.
+    3280*:  502:      return *pattern == *str &&
+     3280:  502-block  0
+    %%%%%:  502-block  1
+     3280:  502-block  2
+    3280*:  503:          PatternMatchesString(pattern + 1, str + 1);
+    %%%%%:  503-block  0
+     3280:  503-block  1
         -:  504:  }
         -:  505:}
         -:  506:
@@ -3389,17 +3389,17 @@ _ZN7testing12_GLOBAL__N_115IsSubstringImplIPKcEENS_15AssertionResultEbS3_S3_RKT_
         -: 2003:
       123: 2004:  std::string result;
       123: 2005:  result.reserve(static_cast<size_t>(2 * (end - start)));
-     1014: 2006:  for (const char* ch = start; ch != end; ++ch) {
+     1024: 2006:  for (const char* ch = start; ch != end; ++ch) {
       123: 2006-block  0
-     1014: 2006-block  1
-      891: 2006-block  2
-      891: 2007:    if (*ch == '\0') {
-      891: 2007-block  0
+     1024: 2006-block  1
+      901: 2006-block  2
+      901: 2007:    if (*ch == '\0') {
+      901: 2007-block  0
     #####: 2008:      result += "\\0";  // Replaces NUL with "\\0";
     %%%%%: 2008-block  0
         -: 2009:    } else {
-      891: 2010:      result += *ch;
-      891: 2010-block  0
+      901: 2010:      result += *ch;
+      901: 2010-block  0
         -: 2011:    }
         -: 2012:  }
         -: 2013:
@@ -5376,17 +5376,17 @@ _ZN7testing9TestSuiteD2Ev:
         -: 3033:// cannot simply emit special characters and have the terminal change colors.
         -: 3034:// This routine must actually emit the characters rather than return a string
         -: 3035:// that would be colored when printed, as can be done on Linux.
-      158: 3036:void ColoredPrintf(GTestColor color, const char* fmt, ...) {
+      157: 3036:void ColoredPrintf(GTestColor color, const char* fmt, ...) {
         -: 3037:  va_list args;
-      158: 3038:  va_start(args, fmt);
+      157: 3038:  va_start(args, fmt);
         -: 3039:
         -: 3040:#if GTEST_OS_WINDOWS_MOBILE || GTEST_OS_ZOS || GTEST_OS_IOS || \
         -: 3041:    GTEST_OS_WINDOWS_PHONE || GTEST_OS_WINDOWS_RT
         -: 3042:  const bool use_color = AlwaysFalse();
         -: 3043:#else
         -: 3044:  static const bool in_color_mode =
-      158: 3045:      ShouldUseColor(posix::IsATTY(posix::FileNo(stdout)) != 0);
-      158: 3045-block  0
+      157: 3045:      ShouldUseColor(posix::IsATTY(posix::FileNo(stdout)) != 0);
+      157: 3045-block  0
         1: 3045-block  1
         1: 3045-block  2
         1: 3045-block  3
@@ -5395,20 +5395,20 @@ _ZN7testing9TestSuiteD2Ev:
         1: 3045-block  6
     $$$$$: 3045-block  7
     $$$$$: 3045-block  8
-     158*: 3046:  const bool use_color = in_color_mode && (color != COLOR_DEFAULT);
-      158: 3046-block  0
+     157*: 3046:  const bool use_color = in_color_mode && (color != COLOR_DEFAULT);
+      157: 3046-block  0
     %%%%%: 3046-block  1
     %%%%%: 3046-block  2
-      158: 3046-block  3
+      157: 3046-block  3
         -: 3047:#endif  // GTEST_OS_WINDOWS_MOBILE || GTEST_OS_ZOS
         -: 3048:
-      158: 3049:  if (!use_color) {
-      158: 3049-block  0
-      158: 3050:    vprintf(fmt, args);
-      158: 3050-block  0
-      158: 3051:    va_end(args);
-      158: 3052:    return;
-      158: 3052-block  0
+      157: 3049:  if (!use_color) {
+      157: 3049-block  0
+      157: 3050:    vprintf(fmt, args);
+      157: 3050-block  0
+      157: 3051:    va_end(args);
+      157: 3052:    return;
+      157: 3052-block  0
         -: 3053:  }
         -: 3054:
         -: 3055:#if GTEST_OS_WINDOWS && !GTEST_OS_WINDOWS_MOBILE && \
@@ -5529,8 +5529,8 @@ _ZN7testing9TestSuiteD2Ev:
         -: 3154:  // Prints the filter if it's not *.  This reminds the user that some
         -: 3155:  // tests may be skipped.
         1: 3156:  if (!String::CStringEquals(filter, kUniversalFilter)) {
-        1: 3157:    ColoredPrintf(COLOR_YELLOW,
-        1: 3157-block  0
+    #####: 3157:    ColoredPrintf(COLOR_YELLOW,
+    %%%%%: 3157-block  0
         -: 3158:                  "Note: %s filter = %s\n", GTEST_NAME_, filter);
         -: 3159:  }
         -: 3160:

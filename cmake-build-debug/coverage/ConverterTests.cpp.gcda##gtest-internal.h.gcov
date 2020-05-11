@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/include/gtest/internal/gtest-internal.h
-        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
-        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
+        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include/gtest/internal/gtest-internal.h
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -773,13 +773,6 @@ _ZN7testing8internal15TestFactoryImplI39CjsonFixture_assert_compare_double_TestE
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_update_offset_TestE10CreateTestEv:
-        1:  460:  Test* CreateTest() override { return new TestClass; }
-        1:  460-block  0
-        1:  460-block  1
-        1:  460-block  2
-    $$$$$:  460-block  3
-------------------
 _ZN7testing8internal15TestFactoryImplI31CjsonFixture_assert_ensure_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
@@ -822,7 +815,14 @@ _ZN7testing8internal15TestFactoryImplI41CjsonFixture_case_insensitive_strcmp_Tes
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI41CjsonFixture_assert_print_string_ptr_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI29CjsonFixture_parse_value_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI57CjsonFixture_print_string_should_print_empty_strings_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -885,7 +885,7 @@ _ZN7testing8internal15TestFactoryImplI68CjsonFixture_parse_object_should_parse_o
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI37CjsonFixture_assert_print_object_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI30CjsonFixture_print_object_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -955,14 +955,14 @@ _ZN7testing8internal15TestFactoryImplI37CjsonFixture_parse_empty_objects_TestE10
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI36CjsonFixture_assert_print_array_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI29CjsonFixture_print_array_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI36CjsonFixture_assert_print_value_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI29CjsonFixture_print_value_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1

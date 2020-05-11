@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest-filepath.cc
-        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest-filepath.cc
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2008, Google Inc.
@@ -87,14 +87,14 @@
         -:   82:#endif  // GTEST_OS_WINDOWS
         -:   83:
         -:   84:// Returns whether the given character is a valid path separator.
-       63:   85:static bool IsPathSeparator(char c) {
+       71:   85:static bool IsPathSeparator(char c) {
         -:   86:#if GTEST_HAS_ALT_PATH_SEP_
-       63:   87:  return (c == kPathSeparator) || (c == kAlternatePathSeparator);
-       63:   87-block  0
-       55:   87-block  1
+       71:   87:  return (c == kPathSeparator) || (c == kAlternatePathSeparator);
+       71:   87-block  0
+       63:   87-block  1
         8:   87-block  2
-       55:   87-block  3
-       63:   87-block  4
+       63:   87-block  3
+       71:   87-block  4
         -:   88:#else
         -:   89:  return c == kPathSeparator;
         -:   90:#endif
@@ -546,13 +546,13 @@
         1:  355:  char* dest_ptr = dest;
         1:  356:  memset(dest_ptr, 0, pathname_.length() + 1);
         -:  357:
-       56:  358:  while (*src != '\0') {
-       56:  358-block  0
-       55:  359:    *dest_ptr = *src;
-       55:  360:    if (!IsPathSeparator(*src)) {
-       55:  360-block  0
-       51:  361:      src++;
-       51:  361-block  0
+       64:  358:  while (*src != '\0') {
+       64:  358-block  0
+       63:  359:    *dest_ptr = *src;
+       63:  360:    if (!IsPathSeparator(*src)) {
+       63:  360-block  0
+       59:  361:      src++;
+       59:  361-block  0
         -:  362:    } else {
         -:  363:#if GTEST_HAS_ALT_PATH_SEP_
         4:  364:      if (*dest_ptr == kAlternatePathSeparator) {
@@ -566,8 +566,8 @@
         4:  369:        src++;
         4:  369-block  0
         -:  370:    }
-       55:  371:    dest_ptr++;
-       55:  371-block  0
+       63:  371:    dest_ptr++;
+       63:  371-block  0
         -:  372:  }
         1:  373:  *dest_ptr = '\0';
         1:  374:  pathname_ = dest;

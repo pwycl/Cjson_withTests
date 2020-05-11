@@ -9,8 +9,8 @@ set(SOURCE_FILES main.cpp)
 set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
 
 add_executable(Cjson_withTests ${SOURCE_FILES})
-add_compile_options(--coverage)
-add_link_options(--coverage)
+#add_compile_options(--coverage)
+#add_link_options(--coverage)
 include_directories(Cjson_lib)
 add_subdirectory(Cjson_lib)
 

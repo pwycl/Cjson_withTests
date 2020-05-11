@@ -1,7 +1,7 @@
         -:    0:Source:/mnt/d/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest.h
         -:    0:Graph:ConverterTests.cpp.gcno
         -:    0:Data:ConverterTests.cpp.gcda
-        -:    0:Runs:4
+        -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
         -:    2:// All rights reserved.
@@ -277,7 +277,7 @@
         -:  272://   Expected: Foo() is even
         -:  273://     Actual: it's 5
         -:  274://
-      500:  275:class GTEST_API_ AssertionResult {
+      126:  275:class GTEST_API_ AssertionResult {
         -:  276: public:
         -:  277:  // Copy constructor.
         -:  278:  // Used in EXPECT_TRUE/FALSE(assertion_result).
@@ -295,13 +295,13 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-      500:  293:  explicit AssertionResult(
+      126:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-      500:  299:      : success_(success) {}
+      126:  299:      : success_(success) {}
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
         -:  302:  GTEST_DISABLE_MSC_WARNINGS_POP_()
@@ -314,7 +314,7 @@
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-      500:  312:  operator bool() const { return success_; }  // NOLINT
+      126:  312:  operator bool() const { return success_; }  // NOLINT
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;
@@ -1524,12 +1524,12 @@
         -: 1519:
         -: 1520:// The helper function for {ASSERT|EXPECT}_EQ.
         -: 1521:template <typename T1, typename T2>
-       72: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
+       19: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
         -: 1523:                            const char* rhs_expression,
         -: 1524:                            const T1& lhs,
         -: 1525:                            const T2& rhs) {
-       72: 1526:  if (lhs == rhs) {
-       72: 1527:    return AssertionSuccess();
+       19: 1526:  if (lhs == rhs) {
+       19: 1527:    return AssertionSuccess();
         -: 1528:  }
         -: 1529:
     #####: 1530:  return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);
@@ -1552,10 +1552,10 @@
         -: 1547:      // and the other is the null pointer constant.
         -: 1548:      typename std::enable_if<!std::is_integral<T1>::value ||
         -: 1549:                              !std::is_pointer<T2>::value>::type* = nullptr>
-       72: 1550:  static AssertionResult Compare(const char* lhs_expression,
+       19: 1550:  static AssertionResult Compare(const char* lhs_expression,
         -: 1551:                                 const char* rhs_expression, const T1& lhs,
         -: 1552:                                 const T2& rhs) {
-       72: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
+       19: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
         -: 1554:  }
         -: 1555:
         -: 1556:  // With this overloaded version, we allow anonymous enums to be used
@@ -1731,14 +1731,14 @@
         -: 1726://
         -: 1727:// INTERNAL IMPLEMENTATION - DO NOT USE IN A USER PROGRAM.
         -: 1728:template <typename RawType>
-       72: 1729:AssertionResult CmpHelperFloatingPointEQ(const char* lhs_expression,
+       18: 1729:AssertionResult CmpHelperFloatingPointEQ(const char* lhs_expression,
         -: 1730:                                         const char* rhs_expression,
         -: 1731:                                         RawType lhs_value,
         -: 1732:                                         RawType rhs_value) {
-       72: 1733:  const FloatingPoint<RawType> lhs(lhs_value), rhs(rhs_value);
+       18: 1733:  const FloatingPoint<RawType> lhs(lhs_value), rhs(rhs_value);
         -: 1734:
-       72: 1735:  if (lhs.AlmostEquals(rhs)) {
-       72: 1736:    return AssertionSuccess();
+       18: 1735:  if (lhs.AlmostEquals(rhs)) {
+       18: 1736:    return AssertionSuccess();
         -: 1737:  }
         -: 1738:
     #####: 1739:  ::std::stringstream lhs_ss;

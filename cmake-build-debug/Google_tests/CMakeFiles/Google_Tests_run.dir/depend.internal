@@ -23,5 +23,5 @@ Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj
  ../Google_tests/lib/googletest/include/gtest/internal/gtest-port.h
  ../Google_tests/lib/googletest/include/gtest/internal/gtest-string.h
  ../Google_tests/lib/googletest/include/gtest/internal/gtest-type-util.h
- D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.c
- D:/Gtest/Cjson_withTests/Google_tests/ConverterTests.cpp
+ D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.c
+ D:/CLionProjects/Cjson_withTests/Google_tests/ConverterTests.cpp

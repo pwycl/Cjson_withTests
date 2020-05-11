@@ -1,4 +1,4 @@
-ToolSet: w64 6.0 (local)@D:\Program\mingw64
+ToolSet: w64 6.0 (local)@D:\Program Files\JetBrains\CLion 2020.1.1\mingw64
 Options: 
 
 Options:

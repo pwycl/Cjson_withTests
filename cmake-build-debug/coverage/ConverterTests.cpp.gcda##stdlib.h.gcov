@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Program/mingw64/x86_64-w64-mingw32/include/stdlib.h
-        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
-        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
+        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/x86_64-w64-mingw32/include/stdlib.h
+        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
+        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:/**
@@ -452,11 +452,11 @@
         -:  447:
         -:  448:#if defined(__USE_MINGW_STRTOX)
         -:  449:__mingw_ovr
-       28:  450:double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+       30:  450:double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
         -:  451:{
         -:  452:  double __cdecl __mingw_strtod (const char * __restrict__, char ** __restrict__);
-       28:  453:  return __mingw_strtod( _Str, _EndPtr);
-       28:  453-block  0
+       30:  453:  return __mingw_strtod( _Str, _EndPtr);
+       30:  453-block  0
         -:  454:}
         -:  455:
         -:  456:__mingw_ovr

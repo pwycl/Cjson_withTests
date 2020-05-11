@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Gtest\Cjson_withTests
+CMAKE_SOURCE_DIR = D:\CLionProjects\Cjson_withTests
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Gtest\Cjson_withTests\cmake-build-debug
+CMAKE_BINARY_DIR = D:\CLionProjects\Cjson_withTests\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include Google_tests/CMakeFiles/Google_Tests_run.dir/depend.make
@@ -59,16 +59,16 @@ include Google_tests/CMakeFiles/Google_Tests_run.dir/flags.make
 Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj: Google_tests/CMakeFiles/Google_Tests_run.dir/flags.make
 Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj: Google_tests/CMakeFiles/Google_Tests_run.dir/includes_CXX.rsp
 Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj: ../Google_tests/ConverterTests.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj"
-	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests && D:\Program\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.obj -c D:\Gtest\Cjson_withTests\Google_tests\ConverterTests.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj"
+	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\g++.exe"  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.obj -c D:\CLionProjects\Cjson_withTests\Google_tests\ConverterTests.cpp
 
 Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.i"
-	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests && D:\Program\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Gtest\Cjson_withTests\Google_tests\ConverterTests.cpp > CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.i
+	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\CLionProjects\Cjson_withTests\Google_tests\ConverterTests.cpp > CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.i
 
 Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.s"
-	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests && D:\Program\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Gtest\Cjson_withTests\Google_tests\ConverterTests.cpp -o CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.s
+	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\CLionProjects\Cjson_withTests\Google_tests\ConverterTests.cpp -o CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.s
 
 # Object files for target Google_Tests_run
 Google_Tests_run_OBJECTS = \
@@ -86,8 +86,8 @@ Google_tests/Google_Tests_run.exe: lib/libgtestd.a
 Google_tests/Google_Tests_run.exe: Google_tests/CMakeFiles/Google_Tests_run.dir/linklibs.rsp
 Google_tests/Google_Tests_run.exe: Google_tests/CMakeFiles/Google_Tests_run.dir/objects1.rsp
 Google_tests/Google_Tests_run.exe: Google_tests/CMakeFiles/Google_Tests_run.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Google_Tests_run.exe"
-	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Google_Tests_run.dir\link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Google_Tests_run.exe"
+	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Google_Tests_run.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Google_tests/CMakeFiles/Google_Tests_run.dir/build: Google_tests/Google_Tests_run.exe
@@ -95,10 +95,10 @@ Google_tests/CMakeFiles/Google_Tests_run.dir/build: Google_tests/Google_Tests_ru
 .PHONY : Google_tests/CMakeFiles/Google_Tests_run.dir/build
 
 Google_tests/CMakeFiles/Google_Tests_run.dir/clean:
-	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests && $(CMAKE_COMMAND) -P CMakeFiles\Google_Tests_run.dir\cmake_clean.cmake
+	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests && $(CMAKE_COMMAND) -P CMakeFiles\Google_Tests_run.dir\cmake_clean.cmake
 .PHONY : Google_tests/CMakeFiles/Google_Tests_run.dir/clean
 
 Google_tests/CMakeFiles/Google_Tests_run.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\Gtest\Cjson_withTests D:\Gtest\Cjson_withTests\Google_tests D:\Gtest\Cjson_withTests\cmake-build-debug D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\CLionProjects\Cjson_withTests D:\CLionProjects\Cjson_withTests\Google_tests D:\CLionProjects\Cjson_withTests\cmake-build-debug D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : Google_tests/CMakeFiles/Google_Tests_run.dir/depend
 

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/Gtest/Cjson_withTests/Google_tests/lib/googlemock/src/gmock_main.cc" "D:/Gtest/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj"
+  "D:/CLionProjects/Cjson_withTests/Google_tests/lib/googlemock/src/gmock_main.cc" "D:/CLionProjects/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -19,8 +19,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "D:/Gtest/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
-  "D:/Gtest/Cjson_withTests/cmake-build-debug/Google_tests/lib/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "D:/CLionProjects/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
+  "D:/CLionProjects/Cjson_withTests/cmake-build-debug/Google_tests/lib/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
