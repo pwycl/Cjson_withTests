@@ -1,6 +1,6 @@
-        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -760,9 +760,9 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  489:
         -:  490:  // Deletes self.  We deliberately pick an unusual name for this
         -:  491:  // internal method to avoid clashing with names used in user TESTs.
-       10:  492:  void DeleteSelf_() { delete this; }
-       10:  492-block  0
-       10:  492-block  1
+       75:  492:  void DeleteSelf_() { delete this; }
+       75:  492-block  0
+       75:  492-block  1
         -:  493:
         -:  494:  const std::unique_ptr<GTEST_FLAG_SAVER_> gtest_flag_saver_;
         -:  495:
@@ -855,12 +855,12 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  575:  int test_property_count() const;
         -:  576:
         -:  577:  // Returns true if the test passed (i.e. no test part failed).
-      20*:  578:  bool Passed() const { return !Skipped() && !Failed(); }
-       20:  578-block  0
-       20:  578-block  1
-       20:  578-block  2
+     150*:  578:  bool Passed() const { return !Skipped() && !Failed(); }
+      150:  578-block  0
+      150:  578-block  1
+      150:  578-block  2
     %%%%%:  578-block  3
-       20:  578-block  4
+      150:  578-block  4
         -:  579:
         -:  580:  // Returns true if the test was skipped.
         -:  581:  bool Skipped() const;
@@ -875,8 +875,8 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  590:  bool HasNonfatalFailure() const;
         -:  591:
         -:  592:  // Returns the elapsed time, in milliseconds.
-       10:  593:  TimeInMillis elapsed_time() const { return elapsed_time_; }
-       10:  593-block  0
+       75:  593:  TimeInMillis elapsed_time() const { return elapsed_time_; }
+       75:  593-block  0
         -:  594:
         -:  595:  // Gets the time of the test case start, in ms from the start of the
         -:  596:  // UNIX epoch.
@@ -914,10 +914,10 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  627:  }
         -:  628:
         -:  629:  // Sets the start time.
-       10:  630:  void set_start_timestamp(TimeInMillis start) { start_timestamp_ = start; }
+       75:  630:  void set_start_timestamp(TimeInMillis start) { start_timestamp_ = start; }
         -:  631:
         -:  632:  // Sets the elapsed time.
-       10:  633:  void set_elapsed_time(TimeInMillis elapsed) { elapsed_time_ = elapsed; }
+       75:  633:  void set_elapsed_time(TimeInMillis elapsed) { elapsed_time_ = elapsed; }
         -:  634:
         -:  635:  // Adds a test property to the list. The property is validated and may add
         -:  636:  // a non-fatal failure if invalid (e.g., if it conflicts with reserved
@@ -988,8 +988,8 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  699:  ~TestInfo();
         -:  700:
         -:  701:  // Returns the test suite name.
-       30:  702:  const char* test_suite_name() const { return test_suite_name_.c_str(); }
-       30:  702-block  0
+      225:  702:  const char* test_suite_name() const { return test_suite_name_.c_str(); }
+      225:  702-block  0
         -:  703:
         -:  704:// Legacy API is deprecated but still available
         -:  705:#ifndef GTEST_REMOVE_LEGACY_TEST_CASEAPI_
@@ -997,17 +997,17 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  707:#endif  // GTEST_REMOVE_LEGACY_TEST_CASEAPI_
         -:  708:
         -:  709:  // Returns the test name.
-       50:  710:  const char* name() const { return name_.c_str(); }
-       50:  710-block  0
+      375:  710:  const char* name() const { return name_.c_str(); }
+      375:  710-block  0
         -:  711:
         -:  712:  // Returns the name of the parameter type, or NULL if this is not a typed
         -:  713:  // or a type-parameterized test.
-       10:  714:  const char* type_param() const {
-      10*:  715:    if (type_param_.get() != nullptr) return type_param_->c_str();
-       10:  715-block  0
+       75:  714:  const char* type_param() const {
+      75*:  715:    if (type_param_.get() != nullptr) return type_param_->c_str();
+       75:  715-block  0
     %%%%%:  715-block  1
-       10:  716:    return nullptr;
-       10:  716-block  0
+       75:  716:    return nullptr;
+       75:  716-block  0
         -:  717:  }
         -:  718:
         -:  719:  // Returns the text representation of the value parameter, or NULL if this
@@ -1048,24 +1048,24 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  748:  //
         -:  749:  // For example, *A*:Foo.* is a filter that matches any string that
         -:  750:  // contains the character 'A' or starts with "Foo.".
-       90:  751:  bool should_run() const { return should_run_; }
-       90:  751-block  0
+      675:  751:  bool should_run() const { return should_run_; }
+      675:  751-block  0
         -:  752:
         -:  753:  // Returns true if this test will appear in the XML report.
-       10:  754:  bool is_reportable() const {
+       75:  754:  bool is_reportable() const {
         -:  755:    // The XML report includes tests matching the filter, excluding those
         -:  756:    // run in other shards.
-      10*:  757:    return matches_filter_ && !is_in_another_shard_;
-       10:  757-block  0
-       10:  757-block  1
-       10:  757-block  2
+      75*:  757:    return matches_filter_ && !is_in_another_shard_;
+       75:  757-block  0
+       75:  757-block  1
+       75:  757-block  2
     %%%%%:  757-block  3
-       10:  757-block  4
+       75:  757-block  4
         -:  758:  }
         -:  759:
         -:  760:  // Returns the result of the test.
-       80:  761:  const TestResult* result() const { return &result_; }
-       80:  761-block  0
+      600:  761:  const TestResult* result() const { return &result_; }
+      600:  761-block  0
         -:  762:
         -:  763: private:
         -:  764:#if GTEST_HAS_DEATH_TEST
@@ -1102,10 +1102,10 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  794:  // deletes it.
         -:  795:  void Run();
         -:  796:
-       10:  797:  static void ClearTestResult(TestInfo* test_info) {
-       10:  798:    test_info->result_.Clear();
-       10:  798-block  0
-       10:  799:  }
+       75:  797:  static void ClearTestResult(TestInfo* test_info) {
+       75:  798:    test_info->result_.Clear();
+       75:  798-block  0
+       75:  799:  }
         -:  800:
         -:  801:  // These fields are immutable properties of the test.
         -:  802:  const std::string test_suite_name_;    // test suite name
@@ -1158,8 +1158,8 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  849:  virtual ~TestSuite();
         -:  850:
         -:  851:  // Gets the name of the TestSuite.
-       12:  852:  const char* name() const { return name_.c_str(); }
-       12:  852-block  0
+       77:  852:  const char* name() const { return name_.c_str(); }
+       77:  852-block  0
         -:  853:
         -:  854:  // Returns the name of the parameter type, or NULL if this is not a
         -:  855:  // type-parameterized test suite.
@@ -1172,8 +1172,8 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  859:  }
         -:  860:
         -:  861:  // Returns true if any test in this test suite should run.
-       14:  862:  bool should_run() const { return should_run_; }
-       14:  862-block  0
+       79:  862:  bool should_run() const { return should_run_; }
+       79:  862-block  0
         -:  863:
         -:  864:  // Gets the number of successful tests in this test suite.
         -:  865:  int successful_test_count() const;
@@ -1230,13 +1230,13 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  911:  friend class internal::UnitTestImpl;
         -:  912:
         -:  913:  // Gets the (mutable) vector of TestInfos in this TestSuite.
-       21:  914:  std::vector<TestInfo*>& test_info_list() { return test_info_list_; }
-       21:  914-block  0
+      151:  914:  std::vector<TestInfo*>& test_info_list() { return test_info_list_; }
+      151:  914-block  0
         -:  915:
         -:  916:  // Gets the (immutable) vector of TestInfos in this TestSuite.
-       10:  917:  const std::vector<TestInfo*>& test_info_list() const {
-       10:  918:    return test_info_list_;
-       10:  918-block  0
+       75:  917:  const std::vector<TestInfo*>& test_info_list() const {
+       75:  918:    return test_info_list_;
+       75:  918-block  0
         -:  919:  }
         -:  920:
         -:  921:  // Returns the i-th test among all the tests. i can range from 0 to
@@ -1244,7 +1244,7 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  923:  TestInfo* GetMutableTestInfo(int i);
         -:  924:
         -:  925:  // Sets the should_run member.
-       11:  926:  void set_should_run(bool should) { should_run_ = should; }
+       76:  926:  void set_should_run(bool should) { should_run_ = should; }
         -:  927:
         -:  928:  // Adds a TestInfo to this test suite.  Will delete the TestInfo upon
         -:  929:  // destruction of the TestSuite object.
@@ -1283,44 +1283,44 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         1:  957:  }
         -:  958:
         -:  959:  // Returns true if test passed.
-       10:  960:  static bool TestPassed(const TestInfo* test_info) {
-      10*:  961:    return test_info->should_run() && test_info->result()->Passed();
-       10:  961-block  0
-       10:  961-block  1
-       10:  961-block  2
+       75:  960:  static bool TestPassed(const TestInfo* test_info) {
+      75*:  961:    return test_info->should_run() && test_info->result()->Passed();
+       75:  961-block  0
+       75:  961-block  1
+       75:  961-block  2
     %%%%%:  961-block  3
-       10:  961-block  4
+       75:  961-block  4
         -:  962:  }
         -:  963:
         -:  964:  // Returns true if test skipped.
-       10:  965:  static bool TestSkipped(const TestInfo* test_info) {
-      10*:  966:    return test_info->should_run() && test_info->result()->Skipped();
-       10:  966-block  0
-       10:  966-block  1
+       75:  965:  static bool TestSkipped(const TestInfo* test_info) {
+      75*:  966:    return test_info->should_run() && test_info->result()->Skipped();
+       75:  966-block  0
+       75:  966-block  1
     %%%%%:  966-block  2
-       10:  966-block  3
-       10:  966-block  4
+       75:  966-block  3
+       75:  966-block  4
         -:  967:  }
         -:  968:
         -:  969:  // Returns true if test failed.
-       30:  970:  static bool TestFailed(const TestInfo* test_info) {
-      30*:  971:    return test_info->should_run() && test_info->result()->Failed();
-       30:  971-block  0
-       30:  971-block  1
+      225:  970:  static bool TestFailed(const TestInfo* test_info) {
+     225*:  971:    return test_info->should_run() && test_info->result()->Failed();
+      225:  971-block  0
+      225:  971-block  1
     %%%%%:  971-block  2
-       30:  971-block  3
-       30:  971-block  4
+      225:  971-block  3
+      225:  971-block  4
         -:  972:  }
         -:  973:
         -:  974:  // Returns true if the test is disabled and will be reported in the XML
         -:  975:  // report.
-       10:  976:  static bool TestReportableDisabled(const TestInfo* test_info) {
-      10*:  977:    return test_info->is_reportable() && test_info->is_disabled_;
-       10:  977-block  0
-       10:  977-block  1
+       75:  976:  static bool TestReportableDisabled(const TestInfo* test_info) {
+      75*:  977:    return test_info->is_reportable() && test_info->is_disabled_;
+       75:  977-block  0
+       75:  977-block  1
     %%%%%:  977-block  2
-       10:  977-block  3
-       10:  977-block  4
+       75:  977-block  3
+       75:  977-block  4
         -:  978:  }
         -:  979:
         -:  980:  // Returns true if test is disabled.
@@ -1336,9 +1336,9 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -:  988:  }
         -:  989:
         -:  990:  // Returns true if the given test should run.
-       40:  991:  static bool ShouldRunTest(const TestInfo* test_info) {
-       40:  992:    return test_info->should_run();
-       40:  992-block  0
+      300:  991:  static bool ShouldRunTest(const TestInfo* test_info) {
+      300:  992:    return test_info->should_run();
+      300:  992-block  0
         -:  993:  }
         -:  994:
         -:  995:  // Shuffles the tests in this test suite.
@@ -1757,8 +1757,8 @@ _ZN7testing15AssertionResultlsIPKwEERS0_RKT_:
         -: 1408:  TestSuite* GetMutableTestSuite(int i);
         -: 1409:
         -: 1410:  // Accessors for the implementation object.
-      151: 1411:  internal::UnitTestImpl* impl() { return impl_; }
-      151: 1411-block  0
+     1061: 1411:  internal::UnitTestImpl* impl() { return impl_; }
+     1061: 1411-block  0
        10: 1412:  const internal::UnitTestImpl* impl() const { return impl_; }
        10: 1412-block  0
         -: 1413:

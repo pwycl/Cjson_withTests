@@ -1,4 +1,4 @@
-# Install script for directory: D:/CLionProjects/Cjson_withTests/Cjson_lib
+# Install script for directory: D:/Gtest/Cjson_withTests/Cjson_lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

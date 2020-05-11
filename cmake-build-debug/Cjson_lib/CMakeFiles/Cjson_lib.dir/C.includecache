@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.c
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.c
 string.h
 -
 stdio.h
@@ -22,9 +22,9 @@ ctype.h
 locale.h
 -
 cJSON.h
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.h
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.h
 
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.h
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.h
 stddef.h
 -
 

@@ -1,6 +1,6 @@
-        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest-message.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest-message.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -122,7 +122,7 @@
         -:  109:
         -:  110:  // Streams a non-pointer value to this object.
         -:  111:  template <typename T>
-     383*:  112:  inline Message& operator <<(const T& val) {
+     448*:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -138,8 +138,8 @@
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-     383*:  128:    *ss_ << val;
-     383*:  129:    return *this;
+     448*:  128:    *ss_ << val;
+     448*:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA3_cEERS0_RKT_:
@@ -803,7 +803,7 @@ _ZN7testing7MessagelsIjEERS0_RKT_:
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIxEERS0_RKT_:
-       12:  112:  inline Message& operator <<(const T& val) {
+       77:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -819,9 +819,9 @@ _ZN7testing7MessagelsIxEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-       12:  128:    *ss_ << val;
-       12:  128-block  0
-       12:  129:    return *this;
+       77:  128:    *ss_ << val;
+       77:  128-block  0
+       77:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA4096_cEERS0_RKT_:
@@ -1463,8 +1463,8 @@ _ZN7testing7MessagelsIKcEERS0_RKPT_:
         -:  206:// ::std::string, ::wstring, or ::std::wstring object, each NUL
         -:  207:// character in it is replaced with "\\0".
         -:  208:template <typename T>
-      22*:  209:std::string StreamableToString(const T& streamable) {
-      22*:  210:  return (Message() << streamable).GetString();
+      87*:  209:std::string StreamableToString(const T& streamable) {
+      87*:  210:  return (Message() << streamable).GetString();
         -:  211:}
         -:  212:
         -:  213:}  // namespace internal

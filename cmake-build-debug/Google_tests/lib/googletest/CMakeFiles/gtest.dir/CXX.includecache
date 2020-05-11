@@ -620,23 +620,23 @@ absl/debugging/symbolize.h
 absl/strings/str_cat.h
 ../Google_tests/lib/googletest/src/absl/strings/str_cat.h
 
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest-all.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest-all.cc
 gtest/gtest.h
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest/gtest.h
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest/gtest.h
 src/gtest.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest.cc
 src/gtest-death-test.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-death-test.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-death-test.cc
 src/gtest-filepath.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-filepath.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-filepath.cc
 src/gtest-matchers.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-matchers.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-matchers.cc
 src/gtest-port.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-port.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-port.cc
 src/gtest-printers.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-printers.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-printers.cc
 src/gtest-test-part.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-test-part.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-test-part.cc
 src/gtest-typed-test.cc
-D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-typed-test.cc
+D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/src/gtest-typed-test.cc
 

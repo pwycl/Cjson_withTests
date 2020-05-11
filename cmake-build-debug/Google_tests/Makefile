@@ -38,19 +38,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\CLionProjects\Cjson_withTests
+CMAKE_SOURCE_DIR = D:\Gtest\Cjson_withTests
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\CLionProjects\Cjson_withTests\cmake-build-debug
+CMAKE_BINARY_DIR = D:\Gtest\Cjson_withTests\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,31 +68,31 @@ list_install_components/fast: list_install_components
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -103,7 +103,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -114,25 +114,25 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	"D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	"D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\progress.marks
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles 0
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\progress.marks
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/clean
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/clean
 .PHONY : clean
 
 # The main clean target
@@ -142,22 +142,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/preinstall
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/preinstall
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Google_tests/CMakeFiles/Google_Tests_run.dir/rule:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/CMakeFiles/Google_Tests_run.dir/rule
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f CMakeFiles\Makefile2 Google_tests/CMakeFiles/Google_Tests_run.dir/rule
 .PHONY : Google_tests/CMakeFiles/Google_Tests_run.dir/rule
 
 # Convenience name for target.
@@ -167,7 +167,7 @@ Google_Tests_run: Google_tests/CMakeFiles/Google_Tests_run.dir/rule
 
 # fast build rule for target.
 Google_Tests_run/fast:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/build
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/build
 .PHONY : Google_Tests_run/fast
 
 ConverterTests.obj: ConverterTests.cpp.obj
@@ -176,7 +176,7 @@ ConverterTests.obj: ConverterTests.cpp.obj
 
 # target to build an object file
 ConverterTests.cpp.obj:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.obj
 .PHONY : ConverterTests.cpp.obj
 
 ConverterTests.i: ConverterTests.cpp.i
@@ -185,7 +185,7 @@ ConverterTests.i: ConverterTests.cpp.i
 
 # target to preprocess a source file
 ConverterTests.cpp.i:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.i
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.i
 .PHONY : ConverterTests.cpp.i
 
 ConverterTests.s: ConverterTests.cpp.s
@@ -194,7 +194,7 @@ ConverterTests.s: ConverterTests.cpp.s
 
 # target to generate assembly for a file
 ConverterTests.cpp.s:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.s
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(MAKE) -f Google_tests\CMakeFiles\Google_Tests_run.dir\build.make Google_tests/CMakeFiles/Google_Tests_run.dir/ConverterTests.cpp.s
 .PHONY : ConverterTests.cpp.s
 
 # Help Target
@@ -224,6 +224,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

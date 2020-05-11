@@ -1,6 +1,6 @@
-        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest-internal-inl.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest-internal-inl.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -183,62 +183,62 @@
         -:  156:class GTestFlagSaver {
         -:  157: public:
         -:  158:  // The c'tor.
-       10:  159:  GTestFlagSaver() {
-       10:  159-block  0
+       75:  159:  GTestFlagSaver() {
+       75:  159-block  0
     $$$$$:  159-block  1
     $$$$$:  159-block  2
     $$$$$:  159-block  3
     $$$$$:  159-block  4
     $$$$$:  159-block  5
     $$$$$:  159-block  6
-       10:  160:    also_run_disabled_tests_ = GTEST_FLAG(also_run_disabled_tests);
-       10:  161:    break_on_failure_ = GTEST_FLAG(break_on_failure);
-       10:  162:    catch_exceptions_ = GTEST_FLAG(catch_exceptions);
-       10:  163:    color_ = GTEST_FLAG(color);
-       10:  164:    death_test_style_ = GTEST_FLAG(death_test_style);
-       10:  164-block  0
-       10:  165:    death_test_use_fork_ = GTEST_FLAG(death_test_use_fork);
-       10:  166:    filter_ = GTEST_FLAG(filter);
-       10:  166-block  0
-       10:  167:    internal_run_death_test_ = GTEST_FLAG(internal_run_death_test);
-       10:  167-block  0
-       10:  168:    list_tests_ = GTEST_FLAG(list_tests);
-       10:  169:    output_ = GTEST_FLAG(output);
-       10:  169-block  0
-       10:  170:    print_time_ = GTEST_FLAG(print_time);
-       10:  171:    print_utf8_ = GTEST_FLAG(print_utf8);
-       10:  172:    random_seed_ = GTEST_FLAG(random_seed);
-       10:  173:    repeat_ = GTEST_FLAG(repeat);
-       10:  174:    shuffle_ = GTEST_FLAG(shuffle);
-       10:  175:    stack_trace_depth_ = GTEST_FLAG(stack_trace_depth);
-       10:  176:    stream_result_to_ = GTEST_FLAG(stream_result_to);
-       10:  176-block  0
-       10:  177:    throw_on_failure_ = GTEST_FLAG(throw_on_failure);
-       10:  178:  }
-       10:  178-block  0
+       75:  160:    also_run_disabled_tests_ = GTEST_FLAG(also_run_disabled_tests);
+       75:  161:    break_on_failure_ = GTEST_FLAG(break_on_failure);
+       75:  162:    catch_exceptions_ = GTEST_FLAG(catch_exceptions);
+       75:  163:    color_ = GTEST_FLAG(color);
+       75:  164:    death_test_style_ = GTEST_FLAG(death_test_style);
+       75:  164-block  0
+       75:  165:    death_test_use_fork_ = GTEST_FLAG(death_test_use_fork);
+       75:  166:    filter_ = GTEST_FLAG(filter);
+       75:  166-block  0
+       75:  167:    internal_run_death_test_ = GTEST_FLAG(internal_run_death_test);
+       75:  167-block  0
+       75:  168:    list_tests_ = GTEST_FLAG(list_tests);
+       75:  169:    output_ = GTEST_FLAG(output);
+       75:  169-block  0
+       75:  170:    print_time_ = GTEST_FLAG(print_time);
+       75:  171:    print_utf8_ = GTEST_FLAG(print_utf8);
+       75:  172:    random_seed_ = GTEST_FLAG(random_seed);
+       75:  173:    repeat_ = GTEST_FLAG(repeat);
+       75:  174:    shuffle_ = GTEST_FLAG(shuffle);
+       75:  175:    stack_trace_depth_ = GTEST_FLAG(stack_trace_depth);
+       75:  176:    stream_result_to_ = GTEST_FLAG(stream_result_to);
+       75:  176-block  0
+       75:  177:    throw_on_failure_ = GTEST_FLAG(throw_on_failure);
+       75:  178:  }
+       75:  178-block  0
         -:  179:
         -:  180:  // The d'tor is not virtual.  DO NOT INHERIT FROM THIS CLASS.
-       10:  181:  ~GTestFlagSaver() {
-       10:  182:    GTEST_FLAG(also_run_disabled_tests) = also_run_disabled_tests_;
-       10:  183:    GTEST_FLAG(break_on_failure) = break_on_failure_;
-       10:  184:    GTEST_FLAG(catch_exceptions) = catch_exceptions_;
-       10:  185:    GTEST_FLAG(color) = color_;
-       10:  185-block  0
-       10:  186:    GTEST_FLAG(death_test_style) = death_test_style_;
-       10:  187:    GTEST_FLAG(death_test_use_fork) = death_test_use_fork_;
-       10:  188:    GTEST_FLAG(filter) = filter_;
-       10:  189:    GTEST_FLAG(internal_run_death_test) = internal_run_death_test_;
-       10:  190:    GTEST_FLAG(list_tests) = list_tests_;
-       10:  191:    GTEST_FLAG(output) = output_;
-       10:  192:    GTEST_FLAG(print_time) = print_time_;
-       10:  193:    GTEST_FLAG(print_utf8) = print_utf8_;
-       10:  194:    GTEST_FLAG(random_seed) = random_seed_;
-       10:  195:    GTEST_FLAG(repeat) = repeat_;
-       10:  196:    GTEST_FLAG(shuffle) = shuffle_;
-       10:  197:    GTEST_FLAG(stack_trace_depth) = stack_trace_depth_;
-       10:  198:    GTEST_FLAG(stream_result_to) = stream_result_to_;
-       10:  199:    GTEST_FLAG(throw_on_failure) = throw_on_failure_;
-       10:  200:  }
+       75:  181:  ~GTestFlagSaver() {
+       75:  182:    GTEST_FLAG(also_run_disabled_tests) = also_run_disabled_tests_;
+       75:  183:    GTEST_FLAG(break_on_failure) = break_on_failure_;
+       75:  184:    GTEST_FLAG(catch_exceptions) = catch_exceptions_;
+       75:  185:    GTEST_FLAG(color) = color_;
+       75:  185-block  0
+       75:  186:    GTEST_FLAG(death_test_style) = death_test_style_;
+       75:  187:    GTEST_FLAG(death_test_use_fork) = death_test_use_fork_;
+       75:  188:    GTEST_FLAG(filter) = filter_;
+       75:  189:    GTEST_FLAG(internal_run_death_test) = internal_run_death_test_;
+       75:  190:    GTEST_FLAG(list_tests) = list_tests_;
+       75:  191:    GTEST_FLAG(output) = output_;
+       75:  192:    GTEST_FLAG(print_time) = print_time_;
+       75:  193:    GTEST_FLAG(print_utf8) = print_utf8_;
+       75:  194:    GTEST_FLAG(random_seed) = random_seed_;
+       75:  195:    GTEST_FLAG(repeat) = repeat_;
+       75:  196:    GTEST_FLAG(shuffle) = shuffle_;
+       75:  197:    GTEST_FLAG(stack_trace_depth) = stack_trace_depth_;
+       75:  198:    GTEST_FLAG(stream_result_to) = stream_result_to_;
+       75:  199:    GTEST_FLAG(throw_on_failure) = throw_on_failure_;
+       75:  200:  }
         -:  201:
         -:  202: private:
         -:  203:  // Fields for saving the original values of flags.
@@ -318,15 +318,15 @@
         -:  277:// Returns the number of elements in the given container that satisfy
         -:  278:// the given predicate.
         -:  279:template <class Container, typename Predicate>
-       86:  280:inline int CountIf(const Container& c, Predicate predicate) {
+      541:  280:inline int CountIf(const Container& c, Predicate predicate) {
         -:  281:  // Implemented as an explicit loop since std::count_if() in libCstd on
         -:  282:  // Solaris has a non-standard signature.
-       86:  283:  int count = 0;
-     190*:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
-     104*:  285:    if (predicate(*it))
-      52*:  286:      ++count;
+      541:  283:  int count = 0;
+    1295*:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
+     754*:  285:    if (predicate(*it))
+     377*:  286:      ++count;
         -:  287:  }
-       86:  288:  return count;
+      541:  288:  return count;
         -:  289:}
 ------------------
 _ZN7testing8internal7CountIfISt6vectorIPNS_8TestInfoESaIS4_EEPFbPKS3_EEEiRKT_T0_:
@@ -334,15 +334,15 @@ _ZN7testing8internal7CountIfISt6vectorIPNS_8TestInfoESaIS4_EEPFbPKS3_EEEiRKT_T0_
         -:  281:  // Implemented as an explicit loop since std::count_if() in libCstd on
         -:  282:  // Solaris has a non-standard signature.
        10:  283:  int count = 0;
-      110:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
+      760:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
        10:  284-block  0
-      110:  284-block  1
-      100:  284-block  2
-      100:  285:    if (predicate(*it))
-      100:  285-block  0
-      100:  285-block  1
-       50:  286:      ++count;
-       50:  286-block  0
+      760:  284-block  1
+      750:  284-block  2
+      750:  285:    if (predicate(*it))
+      750:  285-block  0
+      750:  285-block  1
+      375:  286:      ++count;
+      375:  286-block  0
         -:  287:  }
        10:  288:  return count;
        10:  288-block  0
@@ -350,13 +350,13 @@ _ZN7testing8internal7CountIfISt6vectorIPNS_8TestInfoESaIS4_EEPFbPKS3_EEEiRKT_T0_
         -:  289:}
 ------------------
 _ZN7testing8internal7CountIfISt6vectorINS_14TestPartResultESaIS3_EEPFbRKS3_EEEiRKT_T0_:
-       72:  280:inline int CountIf(const Container& c, Predicate predicate) {
+      527:  280:inline int CountIf(const Container& c, Predicate predicate) {
         -:  281:  // Implemented as an explicit loop since std::count_if() in libCstd on
         -:  282:  // Solaris has a non-standard signature.
-       72:  283:  int count = 0;
-      72*:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
-       72:  284-block  0
-       72:  284-block  1
+      527:  283:  int count = 0;
+     527*:  284:  for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it) {
+      527:  284-block  0
+      527:  284-block  1
     %%%%%:  284-block  2
     #####:  285:    if (predicate(*it))
     %%%%%:  285-block  0
@@ -364,9 +364,9 @@ _ZN7testing8internal7CountIfISt6vectorINS_14TestPartResultESaIS3_EEPFbRKS3_EEEiR
     #####:  286:      ++count;
     %%%%%:  286-block  0
         -:  287:  }
-       72:  288:  return count;
-       72:  288-block  0
-       72:  288-block  1
+      527:  288:  return count;
+      527:  288-block  0
+      527:  288-block  1
         -:  289:}
 ------------------
 _ZN7testing8internal7CountIfISt6vectorIPNS_9TestSuiteESaIS4_EEPFbPKS3_EEEiRKT_T0_:
@@ -424,14 +424,14 @@ _ZN7testing8internal7ForEachISt6vectorIPNS_9TestSuiteESaIS4_EEPFvS4_EEEvRKT_T0_:
         -:  297:// Returns the i-th element of the vector, or default_value if i is not
         -:  298:// in range [0, v.size()).
         -:  299:template <typename E>
-       11:  300:inline E GetElementOr(const std::vector<E>& v, int i, E default_value) {
-      22*:  301:  return (i < 0 || i >= static_cast<int>(v.size())) ? default_value
-       11:  301-block  0
-       11:  301-block  1
+       76:  300:inline E GetElementOr(const std::vector<E>& v, int i, E default_value) {
+     152*:  301:  return (i < 0 || i >= static_cast<int>(v.size())) ? default_value
+       76:  301-block  0
+       76:  301-block  1
     %%%%%:  301-block  2
-       22:  302:                                                    : v[static_cast<size_t>(i)];
-       11:  302-block  0
-       11:  302-block  1
+      152:  302:                                                    : v[static_cast<size_t>(i)];
+       76:  302-block  0
+       76:  302-block  1
         -:  303:}
         -:  304:
         -:  305:// Performs an in-place shuffle of a range of the vector's elements.
@@ -821,8 +821,8 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  606:  }
         -:  607:
         -:  608:  // Provides access to the event listener list.
-       13:  609:  TestEventListeners* listeners() { return &listeners_; }
-       13:  609-block  0
+       78:  609:  TestEventListeners* listeners() { return &listeners_; }
+       78:  609-block  0
         -:  610:
         -:  611:  // Returns the TestResult for the test that's currently running, or
         -:  612:  // the TestResult for the ad hoc test if no test is running.
@@ -886,7 +886,7 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  669:  //   set_up_tc:    pointer to the function that sets up the test suite
         -:  670:  //   tear_down_tc: pointer to the function that tears down the test suite
         -:  671:  //   test_info:    the TestInfo object
-       10:  672:  void AddTestInfo(internal::SetUpTestSuiteFunc set_up_tc,
+       75:  672:  void AddTestInfo(internal::SetUpTestSuiteFunc set_up_tc,
         -:  673:                   internal::TearDownTestSuiteFunc tear_down_tc,
         -:  674:                   TestInfo* test_info) {
         -:  675:    // In order to support thread-safe death tests, we need to
@@ -896,8 +896,8 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  679:    // RUN_ALL_TESTS().  Therefore we capture the current directory in
         -:  680:    // AddTestInfo(), which is called to register a TEST or TEST_F
         -:  681:    // before main() is reached.
-       10:  682:    if (original_working_dir_.IsEmpty()) {
-       10:  682-block  0
+       75:  682:    if (original_working_dir_.IsEmpty()) {
+       75:  682-block  0
         1:  683:      original_working_dir_.Set(FilePath::GetCurrentDir());
         1:  683-block  0
         1:  683-block  1
@@ -913,9 +913,9 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  687:
         -:  688:    GetTestSuite(test_info->test_suite_name(), test_info->type_param(),
         -:  689:                 set_up_tc, tear_down_tc)
-       10:  690:        ->AddTestInfo(test_info);
-       10:  690-block  0
-       10:  691:  }
+       75:  690:        ->AddTestInfo(test_info);
+       75:  690-block  0
+       75:  691:  }
         -:  692:
         -:  693:  // Returns ParameterizedTestSuiteRegistry object used to keep track of
         -:  694:  // value-parameterized tests and instantiate and register them.
@@ -932,9 +932,9 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  704:  // Sets the TestInfo object for the test that's currently running.  If
         -:  705:  // current_test_info is NULL, the assertion results will be stored in
         -:  706:  // ad_hoc_test_result_.
-       20:  707:  void set_current_test_info(TestInfo* a_current_test_info) {
-       20:  708:    current_test_info_ = a_current_test_info;
-       20:  709:  }
+      150:  707:  void set_current_test_info(TestInfo* a_current_test_info) {
+      150:  708:    current_test_info_ = a_current_test_info;
+      150:  709:  }
         -:  710:
         -:  711:  // Registers all parameterized tests defined using TEST_P and
         -:  712:  // INSTANTIATE_TEST_SUITE_P, creating regular tests for each test/parameter
@@ -983,10 +983,10 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  754:  // Prints the names of the tests matching the user-specified filter flag.
         -:  755:  void ListTestsMatchingFilter();
         -:  756:
-       10:  757:  const TestSuite* current_test_suite() const { return current_test_suite_; }
-       10:  757-block  0
-       10:  758:  TestInfo* current_test_info() { return current_test_info_; }
-       10:  758-block  0
+       75:  757:  const TestSuite* current_test_suite() const { return current_test_suite_; }
+       75:  757-block  0
+       75:  758:  TestInfo* current_test_info() { return current_test_info_; }
+       75:  758-block  0
     #####:  759:  const TestInfo* current_test_info() const { return current_test_info_; }
     %%%%%:  759-block  0
         -:  760:
@@ -1063,8 +1063,8 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  824:
         -:  825:  // Returns the value of GTEST_FLAG(catch_exceptions) at the moment
         -:  826:  // UnitTest::Run() starts.
-       54:  827:  bool catch_exceptions() const { return catch_exceptions_; }
-       54:  827-block  0
+      379:  827:  bool catch_exceptions() const { return catch_exceptions_; }
+      379:  827-block  0
         -:  828:
         -:  829: private:
         -:  830:  friend class ::testing::UnitTest;
@@ -1186,9 +1186,9 @@ _ZN7testing8internalL6DeleteINS_8TestInfoEEEvPT_:
         -:  946:
         -:  947:// Convenience function for accessing the global UnitTest
         -:  948:// implementation object.
-      137:  949:inline UnitTestImpl* GetUnitTestImpl() {
-      137:  950:  return UnitTest::GetInstance()->impl();
-      137:  950-block  0
+      982:  949:inline UnitTestImpl* GetUnitTestImpl() {
+      982:  950:  return UnitTest::GetInstance()->impl();
+      982:  950-block  0
         -:  951:}
         -:  952:
         -:  953:#if GTEST_USES_SIMPLE_RE

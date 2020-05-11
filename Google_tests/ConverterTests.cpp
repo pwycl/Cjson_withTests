@@ -45,7 +45,7 @@ static void assert_not_in_list(cJSON *object_item){
     ASSERT_TRUE(object_item->next==NULL);
     ASSERT_TRUE(object_item->prev==NULL);
 }
-static void assert_has_type(cJSON *object_item, int expect_type){
+static void assert_has_type(cJSON *object_item, int expect_type){    //判断类型
     ASSERT_TRUE((0xff & (object_item->type))==(0xff & expect_type));
 }
 static void assert_has_no_reference(cJSON *object_item){
@@ -284,3 +284,992 @@ TEST_F(CjsonFixture, parse_number_should_parse_negative_reals)
 }
 
 
+static void assert_case_insensitive_strcmp(const unsigned char *string1, const unsigned char *string2,int integer)
+{
+    ASSERT_EQ(integer,case_insensitive_strcmp(string1,string2));
+}
+TEST_F(CjsonFixture, case_insensitive_strcmp)
+{
+    assert_case_insensitive_strcmp(NULL,NULL,1);
+
+}
+
+static void assert_cJSON_GetErrorPtr()
+{
+    cJSON_GetErrorPtr();
+}
+
+TEST_F(CjsonFixture, assert_cJSON_GetErrorPtr)
+{
+    assert_cJSON_GetErrorPtr();
+}
+
+
+
+static void assert_cJSON_Version()
+{
+    cJSON_Version();
+}
+
+TEST_F(CjsonFixture, assert_cJSON_Version)
+{
+    assert_cJSON_Version();
+}
+
+static void assert_cJSON_strdup()
+{
+    cJSON_strdup((const unsigned char*)"number", &global_hooks);
+}
+TEST_F(CjsonFixture, assert_cJSON_strdup)
+{
+    assert_cJSON_strdup();
+}
+
+
+
+static void * CJSON_CDECL failing_malloc(size_t size)
+{
+    (void)size;
+    return NULL;
+}
+
+/* work around MSVC error C2322: '...' address of dillimport '...' is not static */
+static void CJSON_CDECL normal_free(void *pointer)
+{
+    free(pointer);
+}
+static cJSON_Hooks failing_hooks={
+        failing_malloc,
+        normal_free
+};
+
+static void assert_cJSON_InitHooks()
+{
+    cJSON_InitHooks(NULL);
+    cJSON_InitHooks(&failing_hooks);
+}
+TEST_F(CjsonFixture, assert_cJSON_InitHooks)
+{
+    assert_cJSON_InitHooks();
+}
+
+//测试出问题
+//static void assert_cJSON_SetNumberHelper(cJSON *object, double number)
+//{
+//    cJSON_SetNumberHelper(object, number);
+//}
+//TEST_F(CjsonFixture, assert_cJSON_SetNumberHelper)
+//{
+//    assert_cJSON_SetNumberHelper(NULL,0);
+//    assert_cJSON_SetNumberHelper(NULL,INT_MAX);
+//    assert_cJSON_SetNumberHelper(NULL,(double)INT_MIN);
+//}
+
+
+
+
+static void * CJSON_CDECL failing_realloc(void *pointer, size_t size)
+{
+    (void)size;
+    (void)pointer;
+    return NULL;
+}
+static void assert_ensure(printbuffer * const p, size_t needed)
+{
+    ensure(p,needed);
+}
+TEST_F(CjsonFixture, assert_ensure)
+{
+
+
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+    ensure(&buffer, 200);
+    ensure(NULL,2*INT_MAX/3); //这两个无法覆盖  不知为何
+    ensure(NULL,2*INT_MAX);
+//    ensure(output_buffer, (size_t)length + sizeof(""));
+
+//    printbuffer *buffer1;
+//    buffer1->buffer = NULL;
+//    buffer1->length = 10;
+//    buffer1->hooks.reallocate = NULL;
+//    ensure(buffer1, 200);
+}
+
+static void assert_update_offset(printbuffer *buffer)
+{
+    update_offset(buffer);
+}
+TEST_F(CjsonFixture, assert_update_offset)
+{
+    printbuffer *buffer;
+    buffer->buffer =NULL;
+    assert_update_offset(NULL);
+    assert_update_offset(buffer);
+//    printbuffer *buffer1 ;
+//    buffer1->length = 10;
+//
+//    assert_update_offset(buffer1);
+}
+
+
+static void assert_compare_double(double a, double b)
+{
+    compare_double(a,b);
+}
+TEST_F(CjsonFixture, assert_compare_double)
+{
+    assert_compare_double(0.0,2.0);
+}
+
+
+
+static void assert_print_number()
+{
+    unsigned char printed[1024];
+    unsigned char new_buffer[26];
+    unsigned int i = 0;
+    cJSON item[1];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    buffer.offset = 0;
+    buffer.noalloc = true;
+    buffer.hooks = global_hooks;
+    buffer.buffer = new_buffer;
+    print_number(item, &buffer), "Failed to print number.";
+}
+TEST_F(CjsonFixture, assert_print_number)
+{
+    assert_print_number();
+}
+
+
+static void assert_print_string_ptr()
+{
+    const char *input;
+    unsigned char printed[1024];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    buffer.offset = 0;
+    buffer.noalloc = true;
+    buffer.hooks = global_hooks;
+    print_string_ptr((const unsigned char*)input, &buffer), "Failed to print string.";
+
+//    printbuffer buffer1 = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+//    buffer.buffer = printed;
+//    buffer.length = sizeof(printed);
+//    buffer.offset = 0;
+//    buffer.noalloc = true;
+//    buffer.hooks.reallocate = NULL;     修改为NULL，依然无法覆盖另一分支
+//    print_string_ptr((const unsigned char*)input, &buffer), "Failed to print string.";
+}
+TEST_F(CjsonFixture, assert_print_string_ptr)
+{
+    assert_print_string_ptr();
+}
+
+
+static void assert_cJSON_ParseWithOpts(const char *value, const char **return_parse_end, cJSON_bool require_null_terminated)
+{
+    cJSON_ParseWithOpts(value,return_parse_end,require_null_terminated);
+}
+TEST_F(CjsonFixture, assert_cJSON_ParseWithOpts)
+{
+    assert_cJSON_ParseWithOpts(NULL,NULL, true);
+    assert_cJSON_ParseWithOpts("0",NULL, true);
+    assert_cJSON_ParseWithOpts("0",NULL, true);
+}
+
+
+static void assert_cJSON_Parse()
+{
+    cJSON_Parse("a");
+}
+TEST_F(CjsonFixture, assert_cJSON_Parse)
+{
+    assert_cJSON_Parse();
+}
+
+static void assert_cJSON_Print()
+{
+    cJSON *root;
+    cJSON_Print(root);
+}
+TEST_F(CjsonFixture, assert_cJSON_Print)
+{
+    assert_cJSON_Print();
+}
+
+static void assert_cJSON_PrintUnformatted()
+{
+    static const char *merges[15][3] =
+            {
+                    {"{\"a\":\"b\"}", "{\"a\":\"c\"}", "{\"a\":\"c\"}"},
+                    {"{\"a\":\"b\"}", "{\"b\":\"c\"}", "{\"a\":\"b\",\"b\":\"c\"}"},
+                    {"{\"a\":\"b\"}", "{\"a\":null}", "{}"},
+                    {"{\"a\":\"b\",\"b\":\"c\"}", "{\"a\":null}", "{\"b\":\"c\"}"},
+                    {"{\"a\":[\"b\"]}", "{\"a\":\"c\"}", "{\"a\":\"c\"}"},
+                    {"{\"a\":\"c\"}", "{\"a\":[\"b\"]}", "{\"a\":[\"b\"]}"},
+                    {"{\"a\":{\"b\":\"c\"}}", "{\"a\":{\"b\":\"d\",\"c\":null}}", "{\"a\":{\"b\":\"d\"}}"},
+                    {"{\"a\":[{\"b\":\"c\"}]}", "{\"a\":[1]}", "{\"a\":[1]}"},
+                    {"[\"a\",\"b\"]", "[\"c\",\"d\"]", "[\"c\",\"d\"]"},
+                    {"{\"a\":\"b\"}", "[\"c\"]", "[\"c\"]"},
+                    {"{\"a\":\"foo\"}", "null", "null"},
+                    {"{\"a\":\"foo\"}", "\"bar\"", "\"bar\""},
+                    {"{\"e\":null}", "{\"a\":1}", "{\"e\":null,\"a\":1}"},
+                    {"[1,2]", "{\"a\":\"b\",\"c\":null}", "{\"a\":\"b\"}"},
+                    {"{}","{\"a\":{\"bb\":{\"ccc\":null}}}", "{\"a\":{\"bb\":{}}}"}
+            };
+    for (int i = 0; i <15 ; ++i) {
+        cJSON *object_to_be_merged = cJSON_Parse(merges[i][0]);
+        cJSON *patch = cJSON_Parse(merges[i][1]);
+
+
+        cJSON_PrintUnformatted(patch);
+        cJSON_PrintUnformatted(object_to_be_merged);
+    }
+
+}
+TEST_F(CjsonFixture, assert_cJSON_PrintUnformatted)
+{
+    assert_cJSON_PrintUnformatted();
+}
+
+
+static void assert_cJSON_PrintBuffered()
+{
+    cJSON_PrintBuffered(NULL, 10, true);
+}
+TEST_F(CjsonFixture, assert_cJSON_PrintBuffered)
+{
+    assert_cJSON_PrintBuffered();
+}
+
+static void assert_cJSON_PrintPreallocated(cJSON *item, char *buffer, const int length, const cJSON_bool format)
+{
+    cJSON_PrintPreallocated(item,buffer,length,format);
+}
+TEST_F(CjsonFixture, assert_cJSON_PrintPreallocated)
+{
+//    char *out = NULL;
+//    cJSON *root;
+//    char *buf = NULL;
+//    size_t len = 0;
+//    out = cJSON_Print(root);
+//    len = strlen(out) + 5;
+//    buf = (char*)malloc(len);
+//    cJSON_PrintPreallocated(root, buf, (int)len, 1);
+
+    char buffer[10];
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_PrintPreallocated(NULL, buffer, sizeof(buffer), true);
+    cJSON_PrintPreallocated(item, NULL, 1, true);
+}
+
+
+//没有提高覆盖率
+static void assert_print_value()
+{
+    unsigned char printed[1024];
+    cJSON item[1];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    buffer.offset = 0;
+    buffer.noalloc = true;
+    buffer.hooks = global_hooks;
+    print_value(item, &buffer);
+}
+TEST_F(CjsonFixture, assert_print_value)
+{
+    assert_print_value();
+}
+
+
+static void assert_print_array(const cJSON * const item, printbuffer * const output_buffer)
+{
+    print_array(item,output_buffer);
+}
+TEST_F(CjsonFixture, assert_print_array)
+{
+    unsigned char printed_unformatted[1024];
+    unsigned char printed_formatted[1024];
+
+    cJSON item[1];
+
+    printbuffer formatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    printbuffer unformatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+
+    /* buffer for formatted printing */
+    formatted_buffer.buffer = printed_formatted;
+    formatted_buffer.length = sizeof(printed_formatted);
+    formatted_buffer.offset = 0;
+    formatted_buffer.noalloc = true;
+    formatted_buffer.hooks = global_hooks;
+
+    /* buffer for unformatted printing */
+    unformatted_buffer.buffer = printed_unformatted;
+    unformatted_buffer.length = sizeof(printed_unformatted);
+    unformatted_buffer.offset = 0;
+    unformatted_buffer.noalloc = true;
+    unformatted_buffer.hooks = global_hooks;
+    assert_print_array(item, &unformatted_buffer);
+    assert_print_array(item, &formatted_buffer);
+}
+
+TEST_F(CjsonFixture, assert_print_object)
+{
+    unsigned char printed_unformatted[1024];
+    unsigned char printed_formatted[1024];
+
+    cJSON item[1];
+
+    printbuffer formatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    printbuffer unformatted_buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+
+    /* buffer for formatted printing */
+    formatted_buffer.buffer = printed_formatted;
+    formatted_buffer.length = sizeof(printed_formatted);
+    formatted_buffer.offset = 0;
+    formatted_buffer.noalloc = true;
+    formatted_buffer.hooks = global_hooks;
+
+    /* buffer for unformatted printing */
+    unformatted_buffer.buffer = printed_unformatted;
+    unformatted_buffer.length = sizeof(printed_unformatted);
+    unformatted_buffer.offset = 0;
+    unformatted_buffer.noalloc = true;
+    unformatted_buffer.hooks = global_hooks;
+
+
+    print_object(item, &unformatted_buffer);
+    print_object(item, &formatted_buffer);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_GetArraySize)
+{
+    cJSON_GetArraySize(NULL);
+}
+
+
+TEST_F(CjsonFixture, assert_cJSON_GetArrayItem)
+{
+    cJSON_GetArrayItem(NULL, 0);
+}
+
+
+TEST_F(CjsonFixture, assert_cJSON_GetObjectItem)
+{
+    cJSON_GetObjectItem(NULL, "test");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_GetObjectItemCaseSensitive)
+{
+    cJSON_GetObjectItemCaseSensitive(NULL, "test");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_HasObjectItem)
+{
+    cJSON_HasObjectItem(NULL, "test");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddItemToArray)
+{
+    cJSON_AddItemToArray(NULL, NULL);
+
+    cJSON replacements[3];
+    cJSON *beginning = NULL;
+    cJSON *middle = NULL;
+    cJSON *end = NULL;
+    cJSON *array = NULL;
+
+    beginning = cJSON_CreateNull();
+    middle = cJSON_CreateNull();
+    end = cJSON_CreateNull();
+
+    array = cJSON_CreateArray();
+
+    cJSON_AddItemToArray(array, beginning);
+    cJSON_AddItemToArray(array, middle);
+    cJSON_AddItemToArray(array, end);
+}
+
+TEST_F(CjsonFixture, assert_cast_away_const)
+{
+    cast_away_const(NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddItemToObject)
+{
+    cJSON *root = NULL;
+    cJSON *fmt = NULL;
+    cJSON *img = NULL;
+    cJSON *thm = NULL;
+    cJSON *fld = NULL;
+    int i = 0;
+
+    /* Our "days of the week" array: */
+    const char *strings[7] =
+            {
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+            };
+    /* Our matrix: */
+    int numbers[3][3] =
+            {
+                    {0, -1, 0},
+                    {1, 0, 0},
+                    {0 ,0, 1}
+            };
+    /* Our "gallery" item: */
+    int ids[4] = { 116, 943, 234, 38793 };
+    /* Our array of "records": */
+
+    root = cJSON_CreateObject();
+    cJSON_AddItemToObject(root, "name", cJSON_CreateString("Jack (\"Bee\") Nimble"));
+    cJSON_AddItemToObject(root, "format", fmt = cJSON_CreateObject());
+
+    cJSON *monitor = cJSON_CreateObject();
+    cJSON *name = NULL;
+    cJSON *resolutions = NULL;
+    cJSON *resolution = NULL;
+    resolutions = cJSON_CreateArray();
+
+    cJSON_AddItemToObject(monitor, "name", name);
+    cJSON_AddItemToObject(monitor, "name", name);
+    cJSON_AddItemToObject(monitor, "resolutions", resolutions);
+
+    cJSON *width = NULL;
+    cJSON *height = NULL;
+    const unsigned int resolution_numbers[3][2] = {
+            {1280, 720},
+            {1920, 1080},
+            {3840, 2160}
+    };
+    size_t index = 0;
+    width = cJSON_CreateNumber(resolution_numbers[index][0]);
+    cJSON_AddItemToObject(resolution, "width", width);
+
+    height = cJSON_CreateNumber(resolution_numbers[index][1]);
+    cJSON_AddItemToObject(resolution, "height", height);
+
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddItemToObjectCS)
+{
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_AddItemToObjectCS(item, "item", NULL);
+    cJSON_AddItemToObjectCS(item, NULL, item);
+    cJSON_AddItemToObjectCS(NULL, "item", item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddItemReferenceToArray)
+{
+    cJSON *item = cJSON_CreateString("item");
+
+    cJSON_AddItemReferenceToArray(NULL, item);
+    cJSON_AddItemReferenceToArray(item, NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddItemReferenceToObject)
+{
+    cJSON *item = cJSON_CreateString("item");
+
+    cJSON_AddItemReferenceToObject(item, "item", NULL);
+    cJSON_AddItemReferenceToObject(item, NULL, item);
+    cJSON_AddItemReferenceToObject(NULL, "item", item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddNullToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON *null = NULL;
+
+    cJSON_AddNullToObject(root, "null");
+    cJSON_AddNullToObject(NULL, "null");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddTrueToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddTrueToObject(NULL, "true");
+    cJSON_AddTrueToObject(root, NULL);
+    cJSON_AddTrueToObject(root, "true");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddFalseToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddFalseToObject(root, "false");
+    cJSON_AddFalseToObject(NULL, "false");
+    cJSON_AddFalseToObject(root, NULL);
+
+    cJSON *fmt = NULL;
+    cJSON_AddFalseToObject (fmt, "interlace");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddBoolToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddBoolToObject(root, "true", true);
+    cJSON_AddBoolToObject(root, "false", false);
+    cJSON_AddBoolToObject(NULL, "false", false);
+    cJSON_AddBoolToObject(root, NULL, false);
+    cJSON_AddBoolToObject(root, "false", false);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddNumberToObject)
+{
+    cJSON *fmt = NULL;
+    cJSON_AddNumberToObject(fmt, "width", 1920);
+    cJSON_AddNumberToObject(fmt, "height", 1080);
+    cJSON_AddNumberToObject(fmt, "frame rate", 24);
+
+    cJSON *img = NULL;
+    cJSON *thm = NULL;
+    cJSON_AddNumberToObject(img, "Width", 800);
+    cJSON_AddNumberToObject(img, "Height", 600);
+    cJSON_AddNumberToObject(thm, "Height", 125);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddStringToObject)
+{
+    cJSON *fmt = NULL;
+    cJSON *img = NULL;
+    cJSON *thm = NULL;
+
+    cJSON_AddStringToObject(fmt, "type", "rect");
+    cJSON_AddStringToObject(img, "Title", "View from 15th Floor");
+    cJSON_AddStringToObject(thm, "Url", "http:/*www.example.com/image/481989943");
+    cJSON_AddStringToObject(thm, "Width", "100");
+
+}
+
+
+TEST_F(CjsonFixture, assert_cJSON_AddRawToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON *raw = NULL;
+
+    cJSON_AddRawToObject(root, "raw", "{}");
+    cJSON_AddRawToObject(NULL, "raw", "{}");
+    cJSON_AddRawToObject(root, NULL, "{}");
+    cJSON_AddRawToObject(root, "raw", "{}");
+
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddObjectToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+
+    cJSON_AddObjectToObject(root, "object");
+    cJSON_AddObjectToObject(NULL, "object");
+    cJSON_AddObjectToObject(root, NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_AddArrayToObject)
+{
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddArrayToObject(root, "array");
+
+    cJSON_AddArrayToObject(NULL, "array");
+    cJSON_AddArrayToObject(root, NULL);
+    cJSON_AddArrayToObject(root, "array");
+
+    cJSON *root1 = cJSON_Parse("{}");
+    cJSON_AddArrayToObject(root1, "rd");
+
+    cJSON *monitor = cJSON_CreateObject();
+    cJSON_AddArrayToObject(monitor, "resolutions");
+}
+
+TEST_F(CjsonFixture, assert_cJSON_DetachItemViaPointer)
+{
+    cJSON list[4];
+    cJSON parent[1];
+
+    memset(list, '\0', sizeof(list));
+
+    /* link the list */
+    list[0].next = &(list[1]);
+    list[1].next = &(list[2]);
+    list[2].next = &(list[3]);
+
+    list[3].prev = &(list[2]);
+    list[2].prev = &(list[1]);
+    list[1].prev = &(list[0]);
+    list[0].prev = &(list[3]);
+
+    parent->child = &list[0];
+    cJSON_DetachItemViaPointer(parent, &(list[1])) == &(list[1]);
+    cJSON_DetachItemViaPointer(parent, &(list[0])) == &(list[0]);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_DetachItemFromArray)
+{
+    cJSON_DetachItemFromArray(NULL, 0);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_DeleteItemFromArray)
+{
+    cJSON_DeleteItemFromArray(NULL, 0);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_DetachItemFromObject)
+{
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_DetachItemFromObject(NULL, "item");
+    cJSON_DetachItemFromObject(item, NULL);
+    cJSON_DetachItemFromObjectCaseSensitive(NULL, "item");
+    cJSON_DetachItemFromObjectCaseSensitive(item, NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_DeleteItemFromObject)
+{
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_DeleteItemFromObject(NULL, "item");
+    cJSON_DeleteItemFromObject(item, NULL);
+    cJSON_DeleteItemFromObjectCaseSensitive(NULL, "item");
+    cJSON_DeleteItemFromObjectCaseSensitive(item, NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_InsertItemInArray)
+{
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_InsertItemInArray(NULL, 0, item);
+    cJSON_InsertItemInArray(item, 0, NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_ReplaceItemViaPointer)
+{
+    cJSON replacements[3];
+    cJSON *beginning = NULL;
+    cJSON *middle = NULL;
+    cJSON *end = NULL;
+    cJSON *array = NULL;
+
+    cJSON_ReplaceItemViaPointer(array, beginning, &(replacements[0]));
+    cJSON_ReplaceItemViaPointer(array, middle, &(replacements[1]));
+    cJSON_ReplaceItemViaPointer(array, end, &(replacements[2]));
+
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_ReplaceItemViaPointer(NULL, item, item);
+    cJSON_ReplaceItemViaPointer(item, NULL, item);
+    cJSON_ReplaceItemViaPointer(item, item, NULL);
+
+    cJSON_ReplaceItemInArray(NULL, 0, item);
+    cJSON_ReplaceItemInArray(item, 0, NULL);
+    cJSON_ReplaceItemInArray(item, -1, NULL);
+    cJSON *root = NULL;
+    root = cJSON_CreateArray();
+    cJSON_ReplaceItemInArray(root, 1, cJSON_CreateString("Replacement"));
+}
+
+TEST_F(CjsonFixture, assert_cJSON_ReplaceItemInObject)
+{
+
+    cJSON root[1] = {{ NULL, NULL, NULL, 0, NULL, 0, 0, NULL }};
+    cJSON *replacement = NULL;
+    cJSON_ReplaceItemInObject(root, "child", replacement);
+
+    cJSON *item = cJSON_CreateString("item");
+
+
+    cJSON_ReplaceItemInObject(NULL, "item", item) ;
+    cJSON_ReplaceItemInObject(item, NULL, item);
+    cJSON_ReplaceItemInObject(item, "item", NULL);
+
+
+    cJSON_ReplaceItemInObjectCaseSensitive(NULL, "item", item);
+    cJSON_ReplaceItemInObjectCaseSensitive(item, NULL, item);
+    cJSON_ReplaceItemInObjectCaseSensitive(item, "item", NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_CreateStringReference)
+{
+    const char *string = "I am a string!";
+    cJSON_CreateStringReference(string);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_CreateObjectReference)
+{
+    cJSON *number = cJSON_CreateNumber(42);
+    cJSON_CreateObjectReference(number);
+    cJSON_CreateArrayReference(number);
+
+    int numbers[3][3] =
+            {
+                    {0, -1, 0},
+                    {1, 0, 0},
+                    {0 ,0, 1}
+            };
+    for (int i = 0; i < 3; i++){
+        cJSON_CreateIntArray(numbers[i], 3);
+    }
+
+    cJSON_CreateIntArray(numbers[1], -3);
+
+    cJSON_CreateFloatArray(NULL, 10);
+
+    float number1=3;
+    cJSON_CreateFloatArray(&number1, 10);
+//    ASSERT_NULL(cJSON_CreateFloatArray(NULL, 10));    ASSERT如何写
+
+}
+
+TEST_F(CjsonFixture, assert_cJSON_CreateDoubleArray)
+{
+//    ASSERT_NULL(cJSON_CreateDoubleArray(NULL, 10));
+    cJSON_CreateDoubleArray(NULL, 10);
+
+    double number1=3;
+    cJSON_CreateDoubleArray(&number1, 10);
+}
+
+
+TEST_F(CjsonFixture, assert_cJSON_CreateStringArray)
+{
+//    TEST_ASSERT_NULL(cJSON_CreateStringArray(NULL, 10));
+    cJSON_CreateStringArray(NULL, 10);
+
+    const char *strings[7] =
+            {
+                    "Sunday",
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+            };
+    cJSON_CreateStringArray(strings, 7);
+}
+
+
+
+
+TEST_F(CjsonFixture, assert_cJSON_Duplicate)
+{
+//    TEST_ASSERT_NULL(cJSON_Duplicate(NULL, true));
+    cJSON_Duplicate(NULL, true);
+
+    cJSON *doc = NULL;
+    const cJSON *  test;
+    doc = cJSON_GetObjectItemCaseSensitive(test, "doc");
+    cJSON_Duplicate(doc, true);
+
+}
+
+TEST_F(CjsonFixture, assert_cJSON_Minify)
+{
+
+    char unclosed_multiline_comment[] = "/* bla";
+    cJSON_Minify(unclosed_multiline_comment);
+
+    char pending_escape[] = "\"\\";
+    cJSON_Minify(pending_escape);
+
+
+    const char to_minify[] = "{// this is {} \"some kind\" of [] comment /*, don't you see\n}";
+
+    char* minified = (char*) malloc(sizeof(to_minify));
+    cJSON_Minify(minified);
+
+    const char to_minify2[] = "{ \"key\":\ttrue\r\n    }";
+    char* minified2 = (char*) malloc(sizeof(to_minify2));
+    cJSON_Minify(minified2);
+
+    const char to_minify3[] = "{/* this is\n a /* multi\n //line \n {comment \"\\\" */}";
+    char* minified3 = (char*) malloc(sizeof(to_minify3));
+    cJSON_Minify(minified3);
+
+    const char to_minify4[] = "\"this is a string \\\" \\t bla\"";
+    char* minified4 = (char*) malloc(sizeof(to_minify4));
+    cJSON_Minify(minified4);
+
+    char string[] = { '8', ' ', '/', ' ', '5', '\n', '\0' };
+    /* this should not be an infinite loop */
+    cJSON_Minify(string);
+
+    const char to_minify5[] =
+            "{\n"
+            "    \"glossary\": { // comment\n"
+            "        \"title\": \"example glossary\",\n"
+            "  /* multi\n"
+            " line */\n"
+            "		\"GlossDiv\": {\n"
+            "            \"title\": \"S\",\n"
+            "			\"GlossList\": {\n"
+            "                \"GlossEntry\": {\n"
+            "                    \"ID\": \"SGML\",\n"
+            "					\"SortAs\": \"SGML\",\n"
+            "					\"Acronym\": \"SGML\",\n"
+            "					\"Abbrev\": \"ISO 8879:1986\",\n"
+            "					\"GlossDef\": {\n"
+            "						\"GlossSeeAlso\": [\"GML\", \"XML\"]\n"
+            "                    },\n"
+            "					\"GlossSee\": \"markup\"\n"
+            "                }\n"
+            "            }\n"
+            "        }\n"
+            "    }\n"
+            "}";
+
+
+    char *buffer = (char*) malloc(sizeof(to_minify5));
+    cJSON_Minify(buffer);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsInvalid)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsInvalid(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsInvalid(item));
+    cJSON_IsInvalid(NULL);
+    cJSON_IsInvalid(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsFalse)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsFalse(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsFalse(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsFalse(item));
+
+    item->type = cJSON_False;
+    cJSON invalid[1];
+    cJSON_IsFalse(NULL);
+    cJSON_IsFalse(invalid);
+    cJSON_IsFalse(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsTrue)
+{
+//   TEST_ASSERT_FALSE(cJSON_IsTrue(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsTrue(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsTrue(item));
+
+    item->type = cJSON_True;
+    cJSON invalid[1];
+    cJSON_IsTrue(NULL);
+    cJSON_IsTrue(invalid);
+    cJSON_IsTrue(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsBool)
+{
+//   TEST_ASSERT_TRUE(cJSON_IsBool(item));
+
+    cJSON_IsBool(item);
+    cJSON_IsBool(NULL);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsNull)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsNull(NULL));
+//    TEST_ASSERT_TRUE(cJSON_IsNull(item));
+    item->type = cJSON_NULL;
+    cJSON_IsNull(NULL);
+    cJSON_IsNull(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsNumber)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsNumber(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsNumber(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsNumber(item));
+
+    item->type = cJSON_Number;
+    cJSON invalid[1];
+    cJSON_IsNumber(NULL);
+    cJSON_IsNumber(invalid);
+    cJSON_IsNumber(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsString)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsString(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsString(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsString(item));
+
+    item->type = cJSON_String;
+    cJSON invalid[1];
+    cJSON_IsString(NULL);
+    cJSON_IsString(invalid);
+    cJSON_IsString(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsArray)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsArray(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsArray(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsArray(item));
+
+    item->type = cJSON_Array;
+    cJSON invalid[1];
+    cJSON_IsArray(NULL);
+    cJSON_IsArray(invalid);
+    cJSON_IsArray(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsObject)
+{
+//    TEST_ASSERT_FALSE(cJSON_IsObject(NULL));
+//    TEST_ASSERT_FALSE(cJSON_IsObject(invalid));
+//    TEST_ASSERT_TRUE(cJSON_IsObject(item));
+
+    item->type = cJSON_Object;
+    cJSON invalid[1];
+    cJSON_IsObject(NULL);
+    cJSON_IsObject(invalid);
+    cJSON_IsObject(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_IsRaw)
+{
+//    TEST_ASSERT_FALSE(cJSON_cJSON_IsRaw(NULL));
+//    TEST_ASSERT_FALSE(cJSON_cJSON_IsRaw(invalid));
+//    TEST_ASSERT_TRUE(cJSON_cJSON_IsRaw(item));
+
+    item->type = cJSON_Object;
+    cJSON invalid[1];
+    cJSON_IsRaw(NULL);
+    cJSON_IsRaw(invalid);
+    cJSON_IsRaw(item);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_Compare)
+{
+//      TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, true));
+//    TEST_ASSERT_FALSE(cJSON_Compare(NULL, NULL, false));
+//    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, false));
+//    TEST_ASSERT_FALSE(cJSON_Compare(invalid, invalid, true));
+
+    cJSON invalid[1];
+    cJSON_Compare(NULL, NULL, true);
+    cJSON_Compare(NULL, NULL, false);
+    cJSON_Compare(invalid, invalid, false);
+    cJSON_Compare(invalid, invalid, true);
+
+    const char *a;
+    const char *b;
+    cJSON *a_json = NULL;
+    cJSON *b_json = NULL;
+    a_json = cJSON_Parse(a);
+    b_json = cJSON_Parse(b);
+    cJSON_bool case_sensitive;
+    cJSON_Compare(a_json, b_json, case_sensitive);
+}
+
+TEST_F(CjsonFixture, assert_cJSON_free)
+{
+    cJSON *array = NULL;
+    array = cJSON_CreateArray();
+    cJSON_free(array);
+}

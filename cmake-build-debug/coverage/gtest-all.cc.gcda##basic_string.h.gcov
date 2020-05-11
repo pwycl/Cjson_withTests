@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_string.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Program/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/bits/basic_string.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Components for manipulating sequences of characters -*- C++ -*-
@@ -5989,15 +5989,15 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -: 5922:   */
         -: 5923:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5924:    inline basic_string<_CharT, _Traits, _Alloc>
-       10: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+       75: 5925:    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 5926:	      const _CharT* __rhs)
         -: 5927:    {
-       10: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
-       10: 5928-block  0
-       10: 5929:      __str.append(__rhs);
-       10: 5930:      return __str;
-       10: 5930-block  0
-       10: 5930-block  1
+       75: 5928:      basic_string<_CharT, _Traits, _Alloc> __str(__lhs);
+       75: 5928-block  0
+       75: 5929:      __str.append(__rhs);
+       75: 5930:      return __str;
+       75: 5930-block  0
+       75: 5930-block  1
         -: 5931:    }
         -: 5932:
         -: 5933:  /**
@@ -6069,10 +6069,10 @@ _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPKcEEvT_S8_:
         -: 5986:
         -: 5987:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5988:    inline basic_string<_CharT, _Traits, _Alloc>
-       32: 5989:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       97: 5989:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 5990:	      const _CharT* __rhs)
-       32: 5991:    { return std::move(__lhs.append(__rhs)); }
-       32: 5991-block  0
+       97: 5991:    { return std::move(__lhs.append(__rhs)); }
+       97: 5991-block  0
         -: 5992:
         -: 5993:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 5994:    inline basic_string<_CharT, _Traits, _Alloc>

@@ -1,6 +1,6 @@
-        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
+        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/include/gtest/gtest.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
@@ -295,13 +295,13 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-      125:  293:  explicit AssertionResult(
+      126:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-      125:  299:      : success_(success) {}
+      126:  299:      : success_(success) {}
 ------------------
 _ZN7testing15AssertionResultC1IiEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
        34:  293:  explicit AssertionResult(
@@ -314,14 +314,14 @@ _ZN7testing15AssertionResultC1IiEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
        34:  299-block  0
 ------------------
 _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
-       91:  293:  explicit AssertionResult(
+       92:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-       91:  299:      : success_(success) {}
-       91:  299-block  0
+       92:  299:      : success_(success) {}
+       92:  299-block  0
 ------------------
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
@@ -335,8 +335,8 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-      125:  312:  operator bool() const { return success_; }  // NOLINT
-      125:  312-block  0
+      126:  312:  operator bool() const { return success_; }  // NOLINT
+      126:  312-block  0
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;
@@ -1559,14 +1559,14 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -: 1519:
         -: 1520:// The helper function for {ASSERT|EXPECT}_EQ.
         -: 1521:template <typename T1, typename T2>
-       18: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
+       19: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
         -: 1523:                            const char* rhs_expression,
         -: 1524:                            const T1& lhs,
         -: 1525:                            const T2& rhs) {
-       18: 1526:  if (lhs == rhs) {
-       18: 1526-block  0
-       18: 1527:    return AssertionSuccess();
-       18: 1527-block  0
+       19: 1526:  if (lhs == rhs) {
+       19: 1526-block  0
+       19: 1527:    return AssertionSuccess();
+       19: 1527-block  0
         -: 1528:  }
         -: 1529:
     #####: 1530:  return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);
@@ -1590,11 +1590,11 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -: 1547:      // and the other is the null pointer constant.
         -: 1548:      typename std::enable_if<!std::is_integral<T1>::value ||
         -: 1549:                              !std::is_pointer<T2>::value>::type* = nullptr>
-       18: 1550:  static AssertionResult Compare(const char* lhs_expression,
+       19: 1550:  static AssertionResult Compare(const char* lhs_expression,
         -: 1551:                                 const char* rhs_expression, const T1& lhs,
         -: 1552:                                 const T2& rhs) {
-       18: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
-       18: 1553-block  0
+       19: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
+       19: 1553-block  0
         -: 1554:  }
         -: 1555:
         -: 1556:  // With this overloaded version, we allow anonymous enums to be used

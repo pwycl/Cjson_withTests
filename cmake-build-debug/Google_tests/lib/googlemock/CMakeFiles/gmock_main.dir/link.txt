@@ -1,2 +1,2 @@
-"D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\ar.exe" qc ..\..\..\lib\libgmock_maind.a  CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj
-"D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\ranlib.exe" ..\..\..\lib\libgmock_maind.a
+D:\Program\mingw64\bin\ar.exe qc ..\..\..\lib\libgmock_maind.a  CMakeFiles/gmock_main.dir/src/gmock_main.cc.obj
+D:\Program\mingw64\bin\ranlib.exe ..\..\..\lib\libgmock_maind.a

@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iomanip
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
+        -:    0:Source:D:/Program/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/iomanip
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Standard stream manipulators -*- C++ -*-
@@ -197,9 +197,9 @@
         -:  192:   *  that object.
         -:  193:  */
         -:  194:  inline _Setprecision
-       58:  195:  setprecision(int __n)
-       58:  196:  { return { __n }; }
-       58:  196-block  0
+      123:  195:  setprecision(int __n)
+      123:  196:  { return { __n }; }
+      123:  196-block  0
         -:  197:
         -:  198:  template<typename _CharT, typename _Traits>
         -:  199:    inline basic_istream<_CharT, _Traits>&

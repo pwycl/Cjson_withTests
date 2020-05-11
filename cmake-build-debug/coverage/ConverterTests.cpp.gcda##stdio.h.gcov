@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/x86_64-w64-mingw32/include/stdio.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
+        -:    0:Source:D:/Program/mingw64/x86_64-w64-mingw32/include/stdio.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\CMakeFiles\Google_Tests_run.dir\ConverterTests.cpp.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:/**
@@ -269,16 +269,16 @@
         -:  264:
         -:  265:__mingw_ovr
         -:  266:__attribute__((__format__ (gnu_scanf, 2, 3))) __MINGW_ATTRIB_NONNULL(2)
-    #####:  267:int sscanf(const char *__source, const char *__format, ...)
+        1:  267:int sscanf(const char *__source, const char *__format, ...)
         -:  268:{
         -:  269:  int __retval;
-    #####:  270:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-    #####:  271:  __retval = __mingw_vsscanf( __source, __format, __local_argv );
-    %%%%%:  271-block  0
-    #####:  272:  __builtin_va_end( __local_argv );
-    #####:  273:  return __retval;
-    %%%%%:  273-block  0
-    %%%%%:  273-block  1
+        1:  270:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+        1:  271:  __retval = __mingw_vsscanf( __source, __format, __local_argv );
+        1:  271-block  0
+        1:  272:  __builtin_va_end( __local_argv );
+        1:  273:  return __retval;
+        1:  273-block  0
+        1:  273-block  1
         -:  274:}
         -:  275:
         -:  276:__mingw_ovr
@@ -361,14 +361,14 @@
         -:  353:
         -:  354:__mingw_ovr
         -:  355:__attribute__((__format__ (gnu_printf, 2, 3))) __MINGW_ATTRIB_NONNULL(2)
-    #####:  356:int sprintf (char *__stream, const char *__format, ...)
+        4:  356:int sprintf (char *__stream, const char *__format, ...)
         -:  357:{
         -:  358:  int __retval;
-    #####:  359:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-    #####:  360:  __retval = __mingw_vsprintf( __stream, __format, __local_argv );
-    %%%%%:  360-block  0
-    #####:  361:  __builtin_va_end( __local_argv );
-    #####:  362:  return __retval;
+        4:  359:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+        4:  360:  __retval = __mingw_vsprintf( __stream, __format, __local_argv );
+        4:  360-block  0
+        4:  361:  __builtin_va_end( __local_argv );
+        4:  362:  return __retval;
         -:  363:}
         -:  364:
         -:  365:__mingw_ovr

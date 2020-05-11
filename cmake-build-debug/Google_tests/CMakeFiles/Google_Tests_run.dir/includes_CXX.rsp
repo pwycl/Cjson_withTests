@@ -1,1 +1,1 @@
--ID:/CLionProjects/Cjson_withTests/Cjson_lib -isystem D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/include -isystem D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest 
+-ID:/Gtest/Cjson_withTests/Cjson_lib -isystem D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/include -isystem D:/Gtest/Cjson_withTests/Google_tests/lib/googletest 

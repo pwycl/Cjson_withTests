@@ -1,6 +1,6 @@
-        -:    0:Source:D:/CLionProjects/Cjson_withTests/Google_tests/lib/googletest/src/gtest-port.cc
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Gtest/Cjson_withTests/Google_tests/lib/googletest/src/gtest-port.cc
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Copyright 2008, Google Inc.
@@ -380,14 +380,14 @@
     #####:  338:}
     %%%%%:  338-block  0
         -:  339:
-       14:  340:Mutex::Mutex()
+       79:  340:Mutex::Mutex()
         -:  341:    : owner_thread_id_(0),
         -:  342:      type_(kDynamic),
         -:  343:      critical_section_init_phase_(0),
-       14:  344:      critical_section_(new CRITICAL_SECTION) {
-       14:  344-block  0
-       14:  345:  ::InitializeCriticalSection(critical_section_);
-       14:  346:}
+       79:  344:      critical_section_(new CRITICAL_SECTION) {
+       79:  344-block  0
+       79:  345:  ::InitializeCriticalSection(critical_section_);
+       79:  346:}
         -:  347:
     #####:  348:Mutex::~Mutex() {
         -:  349:  // Static mutexes are leaked intentionally. It is not thread-safe to try

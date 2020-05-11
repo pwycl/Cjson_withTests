@@ -33,19 +33,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Program Files\JetBrains\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
+RM = "D:\Program\CLion 2020.1.1\bin\cmake\win\bin\cmake.exe" -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\CLionProjects\Cjson_withTests
+CMAKE_SOURCE_DIR = D:\Gtest\Cjson_withTests
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\CLionProjects\Cjson_withTests\cmake-build-debug
+CMAKE_BINARY_DIR = D:\Gtest\Cjson_withTests\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include Cjson_lib/CMakeFiles/Cjson_lib.dir/depend.make
@@ -59,16 +59,16 @@ include Cjson_lib/CMakeFiles/Cjson_lib.dir/flags.make
 Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj: Cjson_lib/CMakeFiles/Cjson_lib.dir/flags.make
 Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj: Cjson_lib/CMakeFiles/Cjson_lib.dir/includes_C.rsp
 Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj: ../Cjson_lib/cJSON.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj"
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Cjson_lib.dir\cJSON.c.obj   -c D:\CLionProjects\Cjson_withTests\Cjson_lib\cJSON.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj"
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && D:\Program\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Cjson_lib.dir\cJSON.c.obj   -c D:\Gtest\Cjson_withTests\Cjson_lib\cJSON.c
 
 Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Cjson_lib.dir/cJSON.c.i"
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\CLionProjects\Cjson_withTests\Cjson_lib\cJSON.c > CMakeFiles\Cjson_lib.dir\cJSON.c.i
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && D:\Program\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\Gtest\Cjson_withTests\Cjson_lib\cJSON.c > CMakeFiles\Cjson_lib.dir\cJSON.c.i
 
 Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Cjson_lib.dir/cJSON.c.s"
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && "D:\Program Files\JetBrains\CLion 2020.1.1\mingw64\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\CLionProjects\Cjson_withTests\Cjson_lib\cJSON.c -o CMakeFiles\Cjson_lib.dir\cJSON.c.s
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && D:\Program\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\Gtest\Cjson_withTests\Cjson_lib\cJSON.c -o CMakeFiles\Cjson_lib.dir\cJSON.c.s
 
 # Object files for target Cjson_lib
 Cjson_lib_OBJECTS = \
@@ -80,9 +80,9 @@ Cjson_lib_EXTERNAL_OBJECTS =
 Cjson_lib/libCjson_lib.a: Cjson_lib/CMakeFiles/Cjson_lib.dir/cJSON.c.obj
 Cjson_lib/libCjson_lib.a: Cjson_lib/CMakeFiles/Cjson_lib.dir/build.make
 Cjson_lib/libCjson_lib.a: Cjson_lib/CMakeFiles/Cjson_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\CLionProjects\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libCjson_lib.a"
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -P CMakeFiles\Cjson_lib.dir\cmake_clean_target.cmake
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Cjson_lib.dir\link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\Gtest\Cjson_withTests\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libCjson_lib.a"
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -P CMakeFiles\Cjson_lib.dir\cmake_clean_target.cmake
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Cjson_lib.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 Cjson_lib/CMakeFiles/Cjson_lib.dir/build: Cjson_lib/libCjson_lib.a
@@ -90,10 +90,10 @@ Cjson_lib/CMakeFiles/Cjson_lib.dir/build: Cjson_lib/libCjson_lib.a
 .PHONY : Cjson_lib/CMakeFiles/Cjson_lib.dir/build
 
 Cjson_lib/CMakeFiles/Cjson_lib.dir/clean:
-	cd /d D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -P CMakeFiles\Cjson_lib.dir\cmake_clean.cmake
+	cd /d D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib && $(CMAKE_COMMAND) -P CMakeFiles\Cjson_lib.dir\cmake_clean.cmake
 .PHONY : Cjson_lib/CMakeFiles/Cjson_lib.dir/clean
 
 Cjson_lib/CMakeFiles/Cjson_lib.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\CLionProjects\Cjson_withTests D:\CLionProjects\Cjson_withTests\Cjson_lib D:\CLionProjects\Cjson_withTests\cmake-build-debug D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib D:\CLionProjects\Cjson_withTests\cmake-build-debug\Cjson_lib\CMakeFiles\Cjson_lib.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\Gtest\Cjson_withTests D:\Gtest\Cjson_withTests\Cjson_lib D:\Gtest\Cjson_withTests\cmake-build-debug D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib D:\Gtest\Cjson_withTests\cmake-build-debug\Cjson_lib\CMakeFiles\Cjson_lib.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : Cjson_lib/CMakeFiles/Cjson_lib.dir/depend
 

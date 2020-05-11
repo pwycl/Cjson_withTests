@@ -1,6 +1,6 @@
-        -:    0:Source:D:/Program Files/JetBrains/CLion 2020.1.1/mingw64/x86_64-w64-mingw32/include/stdio.h
-        -:    0:Graph:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
-        -:    0:Data:D:\CLionProjects\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
+        -:    0:Source:D:/Program/mingw64/x86_64-w64-mingw32/include/stdio.h
+        -:    0:Graph:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcno
+        -:    0:Data:D:\Gtest\Cjson_withTests\cmake-build-debug\Google_tests\lib\googletest\CMakeFiles\gtest.dir\src\gtest-all.cc.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:/**
@@ -348,16 +348,16 @@
         -:  342:
         -:  343:__mingw_ovr
         -:  344:__attribute__((__format__ (gnu_printf, 1, 2))) __MINGW_ATTRIB_NONNULL(1)
-       50:  345:int printf (const char *__format, ...)
+      310:  345:int printf (const char *__format, ...)
         -:  346:{
         -:  347:  int __retval;
-       50:  348:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-       50:  349:  __retval = __mingw_vfprintf( stdout, __format, __local_argv );
-       50:  349-block  0
-       50:  349-block  1
-       50:  350:  __builtin_va_end( __local_argv );
-       50:  351:  return __retval;
-       50:  351-block  0
+      310:  348:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+      310:  349:  __retval = __mingw_vfprintf( stdout, __format, __local_argv );
+      310:  349-block  0
+      310:  349-block  1
+      310:  350:  __builtin_va_end( __local_argv );
+      310:  351:  return __retval;
+      310:  351-block  0
         -:  352:}
         -:  353:
         -:  354:__mingw_ovr
@@ -380,10 +380,10 @@
         -:  371:
         -:  372:__mingw_ovr
         -:  373:__attribute__((__format__ (gnu_printf, 1, 0))) __MINGW_ATTRIB_NONNULL(1)
-       27:  374:int vprintf (const char *__format, __builtin_va_list __local_argv)
+      158:  374:int vprintf (const char *__format, __builtin_va_list __local_argv)
         -:  375:{
-       27:  376:  return __mingw_vfprintf( stdout, __format, __local_argv );
-       27:  376-block  0
+      158:  376:  return __mingw_vfprintf( stdout, __format, __local_argv );
+      158:  376-block  0
         -:  377:}
         -:  378:
         -:  379:__mingw_ovr

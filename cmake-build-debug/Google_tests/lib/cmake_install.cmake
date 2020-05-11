@@ -1,4 +1,4 @@
-# Install script for directory: D:/CLionProjects/Cjson_withTests/Google_tests/lib
+# Install script for directory: D:/Gtest/Cjson_withTests/Google_tests/lib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/CLionProjects/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/cmake_install.cmake")
+  include("D:/Gtest/Cjson_withTests/cmake-build-debug/Google_tests/lib/googlemock/cmake_install.cmake")
 
 endif()
 

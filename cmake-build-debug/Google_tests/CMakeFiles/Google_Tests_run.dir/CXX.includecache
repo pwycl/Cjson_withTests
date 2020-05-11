@@ -302,7 +302,7 @@ cxxabi.h
 acxx_demangle.h
 -
 
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.c
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.c
 string.h
 -
 stdio.h
@@ -318,13 +318,13 @@ ctype.h
 locale.h
 -
 cJSON.h
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.h
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.h
 
-D:/CLionProjects/Cjson_withTests/Google_tests/ConverterTests.cpp
+D:/Gtest/Cjson_withTests/Google_tests/ConverterTests.cpp
 gtest/gtest.h
-D:/CLionProjects/Cjson_withTests/Google_tests/gtest/gtest.h
+D:/Gtest/Cjson_withTests/Google_tests/gtest/gtest.h
 cJSON.h
-D:/CLionProjects/Cjson_withTests/Google_tests/cJSON.h
+D:/Gtest/Cjson_withTests/Google_tests/cJSON.h
 ../Cjson_lib/cJSON.c
-D:/CLionProjects/Cjson_withTests/Cjson_lib/cJSON.c
+D:/Gtest/Cjson_withTests/Cjson_lib/cJSON.c
 
