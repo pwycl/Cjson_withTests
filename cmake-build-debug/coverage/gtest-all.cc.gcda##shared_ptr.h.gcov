@@ -143,15 +143,15 @@
         -:  136:       */
         -:  137:      template<typename _Yp, typename = _Constructible<_Yp*>>
         -:  138:	explicit
-    #####:  139:	shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
+       2*:  139:	shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
 ------------------
 _ZNSt10shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEEC1ISB_vEEPT_:
     #####:  139:	shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
     %%%%%:  139-block  0
 ------------------
 _ZNSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEEC1IS2_vEEPT_:
-    #####:  139:	shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
-    %%%%%:  139-block  0
+        2:  139:	shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
+        2:  139-block  0
 ------------------
         -:  140:
         -:  141:      /**
@@ -267,13 +267,13 @@ _ZNSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEEC1IS2_vEEPT_:
         -:  251:       *  @param  __r  A %shared_ptr rvalue.
         -:  252:       *  @post   *this contains the old value of @a __r, @a __r is empty.
         -:  253:       */
-    #####:  254:      shared_ptr(shared_ptr&& __r) noexcept
-    #####:  255:      : __shared_ptr<_Tp>(std::move(__r)) { }
+       4*:  254:      shared_ptr(shared_ptr&& __r) noexcept
+       4*:  255:      : __shared_ptr<_Tp>(std::move(__r)) { }
 ------------------
 _ZNSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEEC1EOS3_:
-    #####:  254:      shared_ptr(shared_ptr&& __r) noexcept
-    #####:  255:      : __shared_ptr<_Tp>(std::move(__r)) { }
-    %%%%%:  255-block  0
+        4:  254:      shared_ptr(shared_ptr&& __r) noexcept
+        4:  255:      : __shared_ptr<_Tp>(std::move(__r)) { }
+        4:  255-block  0
 ------------------
 _ZNSt10shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEEC1EOSC_:
     #####:  254:      shared_ptr(shared_ptr&& __r) noexcept

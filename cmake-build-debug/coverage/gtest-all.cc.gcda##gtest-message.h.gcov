@@ -122,7 +122,7 @@
         -:  109:
         -:  110:  // Streams a non-pointer value to this object.
         -:  111:  template <typename T>
-     444*:  112:  inline Message& operator <<(const T& val) {
+     476*:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -138,8 +138,8 @@
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-     444*:  128:    *ss_ << val;
-     444*:  129:    return *this;
+     476*:  128:    *ss_ << val;
+     476*:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA3_cEERS0_RKT_:
@@ -473,7 +473,7 @@ _ZN7testing7MessagelsIA22_cEERS0_RKT_:
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA12_cEERS0_RKT_:
-    #####:  112:  inline Message& operator <<(const T& val) {
+        4:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -489,9 +489,9 @@ _ZN7testing7MessagelsIA12_cEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-    #####:  128:    *ss_ << val;
-    %%%%%:  128-block  0
-    #####:  129:    return *this;
+        4:  128:    *ss_ << val;
+        4:  128-block  0
+        4:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA13_cEERS0_RKT_:
@@ -671,7 +671,7 @@ _ZN7testing7MessagelsIA10_cEERS0_RKT_:
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIiEERS0_RKT_:
-        9:  112:  inline Message& operator <<(const T& val) {
+       12:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -687,13 +687,13 @@ _ZN7testing7MessagelsIiEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-        9:  128:    *ss_ << val;
-        9:  128-block  0
-        9:  129:    return *this;
+       12:  128:    *ss_ << val;
+       12:  128-block  0
+       12:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA2_cEERS0_RKT_:
-    #####:  112:  inline Message& operator <<(const T& val) {
+        2:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -709,13 +709,13 @@ _ZN7testing7MessagelsIA2_cEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-    #####:  128:    *ss_ << val;
-    %%%%%:  128-block  0
-    #####:  129:    return *this;
+        2:  128:    *ss_ << val;
+        2:  128-block  0
+        2:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEERS0_RKT_:
-    #####:  112:  inline Message& operator <<(const T& val) {
+        4:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -731,13 +731,13 @@ _ZN7testing7MessagelsINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEERS0_
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-    #####:  128:    *ss_ << val;
-    %%%%%:  128-block  0
-    #####:  129:    return *this;
+        4:  128:    *ss_ << val;
+        4:  128-block  0
+        4:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA11_cEERS0_RKT_:
-    #####:  112:  inline Message& operator <<(const T& val) {
+        2:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -753,9 +753,9 @@ _ZN7testing7MessagelsIA11_cEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-    #####:  128:    *ss_ << val;
-    %%%%%:  128-block  0
-    #####:  129:    return *this;
+        2:  128:    *ss_ << val;
+        2:  128-block  0
+        2:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA47_cEERS0_RKT_:
@@ -803,7 +803,7 @@ _ZN7testing7MessagelsIjEERS0_RKT_:
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIxEERS0_RKT_:
-       71:  112:  inline Message& operator <<(const T& val) {
+       88:  112:  inline Message& operator <<(const T& val) {
         -:  113:    // Some libraries overload << for STL containers.  These
         -:  114:    // overloads are defined in the global namespace instead of ::std.
         -:  115:    //
@@ -819,9 +819,9 @@ _ZN7testing7MessagelsIxEERS0_RKT_:
         -:  125:    // overloads of << defined in the global namespace and those
         -:  126:    // visible via Koenig lookup are both exposed in this function.
         -:  127:    using ::operator <<;
-       71:  128:    *ss_ << val;
-       71:  128-block  0
-       71:  129:    return *this;
+       88:  128:    *ss_ << val;
+       88:  128-block  0
+       88:  129:    return *this;
         -:  130:  }
 ------------------
 _ZN7testing7MessagelsIA4096_cEERS0_RKT_:
@@ -1367,13 +1367,13 @@ _ZN7testing7MessagelsIA38_cEERS0_RKT_:
         -:  143:  // ensure consistent result across compilers, we always treat NULL
         -:  144:  // as "(null)".
         -:  145:  template <typename T>
-       21:  146:  inline Message& operator <<(T* const& pointer) {  // NOLINT
-       21:  147:    if (pointer == nullptr) {
+       31:  146:  inline Message& operator <<(T* const& pointer) {  // NOLINT
+       31:  147:    if (pointer == nullptr) {
     #####:  148:      *ss_ << "(null)";
         -:  149:    } else {
-       21:  150:      *ss_ << pointer;
+       31:  150:      *ss_ << pointer;
         -:  151:    }
-       21:  152:    return *this;
+       31:  152:    return *this;
         -:  153:  }
 ------------------
 _ZN7testing7MessagelsIcEERS0_RKPT_:
@@ -1391,17 +1391,17 @@ _ZN7testing7MessagelsIcEERS0_RKPT_:
         -:  153:  }
 ------------------
 _ZN7testing7MessagelsIKcEERS0_RKPT_:
-       18:  146:  inline Message& operator <<(T* const& pointer) {  // NOLINT
-       18:  147:    if (pointer == nullptr) {
-       18:  147-block  0
+       28:  146:  inline Message& operator <<(T* const& pointer) {  // NOLINT
+       28:  147:    if (pointer == nullptr) {
+       28:  147-block  0
     #####:  148:      *ss_ << "(null)";
     %%%%%:  148-block  0
         -:  149:    } else {
-       18:  150:      *ss_ << pointer;
-       18:  150-block  0
+       28:  150:      *ss_ << pointer;
+       28:  150-block  0
         -:  151:    }
-       18:  152:    return *this;
-       18:  152-block  0
+       28:  152:    return *this;
+       28:  152-block  0
         -:  153:  }
 ------------------
         -:  154:
@@ -1463,8 +1463,8 @@ _ZN7testing7MessagelsIKcEERS0_RKPT_:
         -:  206:// ::std::string, ::wstring, or ::std::wstring object, each NUL
         -:  207:// character in it is replaced with "\\0".
         -:  208:template <typename T>
-      83*:  209:std::string StreamableToString(const T& streamable) {
-      83*:  210:  return (Message() << streamable).GetString();
+     103*:  209:std::string StreamableToString(const T& streamable) {
+     103*:  210:  return (Message() << streamable).GetString();
         -:  211:}
         -:  212:
         -:  213:}  // namespace internal

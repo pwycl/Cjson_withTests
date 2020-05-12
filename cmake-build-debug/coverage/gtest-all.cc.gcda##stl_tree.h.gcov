@@ -148,25 +148,25 @@
         -:  143:    {
         -:  144:      _Key_compare		_M_key_compare;
         -:  145:
-    #####:  146:      _Rb_tree_key_compare()
+       2*:  146:      _Rb_tree_key_compare()
         -:  147:      _GLIBCXX_NOEXCEPT_IF(
         -:  148:	is_nothrow_default_constructible<_Key_compare>::value)
         -:  149:      : _M_key_compare()
-    #####:  150:      { }
+       2*:  150:      { }
 ------------------
 _ZNSt20_Rb_tree_key_compareISt4lessImEEC2Ev:
-    #####:  146:      _Rb_tree_key_compare()
+        1:  146:      _Rb_tree_key_compare()
         -:  147:      _GLIBCXX_NOEXCEPT_IF(
         -:  148:	is_nothrow_default_constructible<_Key_compare>::value)
         -:  149:      : _M_key_compare()
-    #####:  150:      { }
+        1:  150:      { }
 ------------------
 _ZNSt20_Rb_tree_key_compareISt4lessIPKN7testing8internal15ThreadLocalBaseEEEC2Ev:
-    #####:  146:      _Rb_tree_key_compare()
+        1:  146:      _Rb_tree_key_compare()
         -:  147:      _GLIBCXX_NOEXCEPT_IF(
         -:  148:	is_nothrow_default_constructible<_Key_compare>::value)
         -:  149:      : _M_key_compare()
-    #####:  150:      { }
+        1:  150:      { }
 ------------------
 _ZNSt20_Rb_tree_key_compareISt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEC2Ev:
     #####:  146:      _Rb_tree_key_compare()
@@ -184,10 +184,10 @@ _ZNSt20_Rb_tree_key_compareISt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIc
         -:  157:      // Copy constructor added for consistency with C++98 mode.
         -:  158:      _Rb_tree_key_compare(const _Rb_tree_key_compare&) = default;
         -:  159:
-    #####:  160:      _Rb_tree_key_compare(_Rb_tree_key_compare&& __x)
+        2:  160:      _Rb_tree_key_compare(_Rb_tree_key_compare&& __x)
         -:  161:	noexcept(is_nothrow_copy_constructible<_Key_compare>::value)
         -:  162:      : _M_key_compare(__x._M_key_compare)
-    #####:  163:      { }
+        2:  163:      { }
         -:  164:#endif
         -:  165:    };
         -:  166:
@@ -197,27 +197,27 @@ _ZNSt20_Rb_tree_key_compareISt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIc
         -:  170:    _Rb_tree_node_base	_M_header;
         -:  171:    size_t		_M_node_count; // Keeps track of size of tree.
         -:  172:
-    #####:  173:    _Rb_tree_header() _GLIBCXX_NOEXCEPT
-    #####:  174:    {
-    #####:  175:      _M_header._M_color = _S_red;
-    #####:  176:      _M_reset();
-    %%%%%:  176-block  0
-    #####:  177:    }
+        2:  173:    _Rb_tree_header() _GLIBCXX_NOEXCEPT
+        2:  174:    {
+        2:  175:      _M_header._M_color = _S_red;
+        2:  176:      _M_reset();
+        2:  176-block  0
+        2:  177:    }
         -:  178:
         -:  179:#if __cplusplus >= 201103L
-    #####:  180:    _Rb_tree_header(_Rb_tree_header&& __x) noexcept
-    #####:  181:    {
-    #####:  182:      if (__x._M_header._M_parent != nullptr)
-    %%%%%:  182-block  0
+        2:  180:    _Rb_tree_header(_Rb_tree_header&& __x) noexcept
+        2:  181:    {
+        2:  182:      if (__x._M_header._M_parent != nullptr)
+        2:  182-block  0
     #####:  183:	_M_move_data(__x);
     %%%%%:  183-block  0
         -:  184:      else
         -:  185:	{
-    #####:  186:	  _M_header._M_color = _S_red;
-    #####:  187:	  _M_reset();
-    %%%%%:  187-block  0
+        2:  186:	  _M_header._M_color = _S_red;
+        2:  187:	  _M_reset();
+        2:  187-block  0
         -:  188:	}
-    #####:  189:    }
+        2:  189:    }
         -:  190:#endif
         -:  191:
         -:  192:    void
@@ -235,13 +235,13 @@ _ZNSt20_Rb_tree_key_compareISt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIc
     #####:  203:    }
         -:  204:
         -:  205:    void
-    #####:  206:    _M_reset()
+        4:  206:    _M_reset()
         -:  207:    {
-    #####:  208:      _M_header._M_parent = 0;
-    #####:  209:      _M_header._M_left = &_M_header;
-    #####:  210:      _M_header._M_right = &_M_header;
-    #####:  211:      _M_node_count = 0;
-    #####:  212:    }
+        4:  208:      _M_header._M_parent = 0;
+        4:  209:      _M_header._M_left = &_M_header;
+        4:  210:      _M_header._M_right = &_M_header;
+        4:  211:      _M_node_count = 0;
+        4:  212:    }
         -:  213:  };
         -:  214:
         -:  215:  template<typename _Val>
@@ -263,8 +263,8 @@ _ZNSt20_Rb_tree_key_compareISt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIc
         -:  231:      __gnu_cxx::__aligned_membuf<_Val> _M_storage;
         -:  232:
         -:  233:      _Val*
-    #####:  234:      _M_valptr()
-    #####:  235:      { return _M_storage._M_ptr(); }
+      11*:  234:      _M_valptr()
+      11*:  235:      { return _M_storage._M_ptr(); }
 ------------------
 _ZNSt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE9_M_valptrEv:
     #####:  234:      _M_valptr()
@@ -272,14 +272,14 @@ _ZNSt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE9_M_va
     %%%%%:  235-block  0
 ------------------
 _ZNSt13_Rb_tree_nodeISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEE9_M_valptrEv:
-    #####:  234:      _M_valptr()
-    #####:  235:      { return _M_storage._M_ptr(); }
-    %%%%%:  235-block  0
+        6:  234:      _M_valptr()
+        6:  235:      { return _M_storage._M_ptr(); }
+        6:  235-block  0
 ------------------
 _ZNSt13_Rb_tree_nodeISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEE9_M_valptrEv:
-    #####:  234:      _M_valptr()
-    #####:  235:      { return _M_storage._M_ptr(); }
-    %%%%%:  235-block  0
+        5:  234:      _M_valptr()
+        5:  235:      { return _M_storage._M_ptr(); }
+        5:  235-block  0
 ------------------
 _ZNSt13_Rb_tree_nodeISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEE9_M_valptrEv:
     #####:  234:      _M_valptr()
@@ -288,8 +288,8 @@ _ZNSt13_Rb_tree_nodeISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcE
 ------------------
         -:  236:
         -:  237:      const _Val*
-    #####:  238:      _M_valptr() const
-    #####:  239:      { return _M_storage._M_ptr(); }
+      16*:  238:      _M_valptr() const
+      16*:  239:      { return _M_storage._M_ptr(); }
 ------------------
 _ZNKSt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE9_M_valptrEv:
     #####:  238:      _M_valptr() const
@@ -297,14 +297,14 @@ _ZNKSt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEE9_M_v
     %%%%%:  239-block  0
 ------------------
 _ZNKSt13_Rb_tree_nodeISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEE9_M_valptrEv:
-    #####:  238:      _M_valptr() const
-    #####:  239:      { return _M_storage._M_ptr(); }
-    %%%%%:  239-block  0
+       10:  238:      _M_valptr() const
+       10:  239:      { return _M_storage._M_ptr(); }
+       10:  239-block  0
 ------------------
 _ZNKSt13_Rb_tree_nodeISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEE9_M_valptrEv:
-    #####:  238:      _M_valptr() const
-    #####:  239:      { return _M_storage._M_ptr(); }
-    %%%%%:  239-block  0
+        6:  238:      _M_valptr() const
+        6:  239:      { return _M_storage._M_ptr(); }
+        6:  239-block  0
 ------------------
 _ZNKSt13_Rb_tree_nodeISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEE9_M_valptrEv:
     #####:  238:      _M_valptr() const
@@ -349,20 +349,20 @@ _ZNKSt13_Rb_tree_nodeISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIc
         -:  270:      : _M_node() { }
         -:  271:
         -:  272:      explicit
-    #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  274:      : _M_node(__x) { }
+      36*:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+      36*:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC1EPSt18_Rb_tree_node_base:
     #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
     #####:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEC1EPSt18_Rb_tree_node_base:
-    #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  274:      : _M_node(__x) { }
+       20:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+       20:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEC1EPSt18_Rb_tree_node_base:
-    #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  274:      : _M_node(__x) { }
+       16:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+       16:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEEC1EPSt18_Rb_tree_node_base:
     #####:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -379,18 +379,18 @@ _ZNSt17_Rb_tree_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcES
     %%%%%:  278-block  0
         -:  279:
         -:  280:      pointer
-    #####:  281:      operator->() const _GLIBCXX_NOEXCEPT
-    #####:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
+       8*:  281:      operator->() const _GLIBCXX_NOEXCEPT
+       8*:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
 ------------------
 _ZNKSt17_Rb_tree_iteratorISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEptEv:
-    #####:  281:      operator->() const _GLIBCXX_NOEXCEPT
-    #####:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
-    %%%%%:  282-block  0
+        4:  281:      operator->() const _GLIBCXX_NOEXCEPT
+        4:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
+        4:  282-block  0
 ------------------
 _ZNKSt17_Rb_tree_iteratorISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEptEv:
-    #####:  281:      operator->() const _GLIBCXX_NOEXCEPT
-    #####:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
-    %%%%%:  282-block  0
+        4:  281:      operator->() const _GLIBCXX_NOEXCEPT
+        4:  282:      { return static_cast<_Link_type> (_M_node)->_M_valptr(); }
+        4:  282-block  0
 ------------------
 _ZNKSt17_Rb_tree_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEEptEv:
     #####:  281:      operator->() const _GLIBCXX_NOEXCEPT
@@ -487,8 +487,8 @@ _ZNSt17_Rb_tree_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcES
         -:  312:      }
         -:  313:
         -:  314:      bool
-    #####:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
-    #####:  316:      { return _M_node == __x._M_node; }
+      19*:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+      19*:  316:      { return _M_node == __x._M_node; }
 ------------------
 _ZNKSt17_Rb_tree_iteratorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEeqERKS6_:
     #####:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
@@ -501,14 +501,14 @@ _ZNKSt17_Rb_tree_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcE
     %%%%%:  316-block  0
 ------------------
 _ZNKSt17_Rb_tree_iteratorISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEeqERKSB_:
-    #####:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
-    #####:  316:      { return _M_node == __x._M_node; }
-    %%%%%:  316-block  0
+       10:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+       10:  316:      { return _M_node == __x._M_node; }
+       10:  316-block  0
 ------------------
 _ZNKSt17_Rb_tree_iteratorISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEeqERKSI_:
-    #####:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
-    #####:  316:      { return _M_node == __x._M_node; }
-    %%%%%:  316-block  0
+        9:  315:      operator==(const _Self& __x) const _GLIBCXX_NOEXCEPT
+        9:  316:      { return _M_node == __x._M_node; }
+        9:  316-block  0
 ------------------
         -:  317:
         -:  318:      bool
@@ -792,20 +792,20 @@ _ZNSt23_Rb_tree_const_iteratorISt4pairIKNSt7__cxx1112basic_stringIcSt11char_trai
         -:  554:      // recycle.
         -:  555:      struct _Alloc_node
         -:  556:      {
-    #####:  557:	_Alloc_node(_Rb_tree& __t)
-    #####:  558:	  : _M_t(__t) { }
+       3*:  557:	_Alloc_node(_Rb_tree& __t)
+       3*:  558:	  : _M_t(__t) { }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE11_Alloc_nodeC1ERSB_:
     #####:  557:	_Alloc_node(_Rb_tree& __t)
     #####:  558:	  : _M_t(__t) { }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE11_Alloc_nodeC1ERSG_:
-    #####:  557:	_Alloc_node(_Rb_tree& __t)
-    #####:  558:	  : _M_t(__t) { }
+        2:  557:	_Alloc_node(_Rb_tree& __t)
+        2:  558:	  : _M_t(__t) { }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE11_Alloc_nodeC1ERSM_:
-    #####:  557:	_Alloc_node(_Rb_tree& __t)
-    #####:  558:	  : _M_t(__t) { }
+        1:  557:	_Alloc_node(_Rb_tree& __t)
+        1:  558:	  : _M_t(__t) { }
 ------------------
         -:  559:
         -:  560:	template<typename _Arg>
@@ -813,9 +813,9 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -:  562:#if __cplusplus < 201103L
         -:  563:	  operator()(const _Arg& __arg) const
         -:  564:#else
-    #####:  565:	  operator()(_Arg&& __arg) const
+       3*:  565:	  operator()(_Arg&& __arg) const
         -:  566:#endif
-    #####:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+       3*:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
 ------------------
 _ZNKSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE11_Alloc_nodeclIRKS5_EEPSt13_Rb_tree_nodeIS5_EOT_:
     #####:  565:	  operator()(_Arg&& __arg) const
@@ -824,16 +824,16 @@ _ZNKSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Ident
     %%%%%:  567-block  0
 ------------------
 _ZNKSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE11_Alloc_nodeclIS5_IS4_S9_EEEPSt13_Rb_tree_nodeISA_EOT_:
-    #####:  565:	  operator()(_Arg&& __arg) const
+        2:  565:	  operator()(_Arg&& __arg) const
         -:  566:#endif
-    #####:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
-    %%%%%:  567-block  0
+        2:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+        2:  567-block  0
 ------------------
 _ZNKSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE11_Alloc_nodeclIS0_ImSG_EEEPSt13_Rb_tree_nodeISH_EOT_:
-    #####:  565:	  operator()(_Arg&& __arg) const
+        1:  565:	  operator()(_Arg&& __arg) const
         -:  566:#endif
-    #####:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
-    %%%%%:  567-block  0
+        1:  567:	  { return _M_t._M_create_node(_GLIBCXX_FORWARD(_Arg, __arg)); }
+        1:  567-block  0
 ------------------
         -:  568:
         -:  569:      private:
@@ -852,8 +852,8 @@ _ZNKSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shar
         -:  582:      typedef _Alloc 				allocator_type;
         -:  583:
         -:  584:      _Node_allocator&
-    #####:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
-    #####:  586:      { return this->_M_impl; }
+       6*:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+       6*:  586:      { return this->_M_impl; }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE21_M_get_Node_allocatorEv:
     #####:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
@@ -861,14 +861,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  586-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE21_M_get_Node_allocatorEv:
-    #####:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
-    #####:  586:      { return this->_M_impl; }
-    %%%%%:  586-block  0
+        2:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+        2:  586:      { return this->_M_impl; }
+        2:  586-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE21_M_get_Node_allocatorEv:
-    #####:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
-    #####:  586:      { return this->_M_impl; }
-    %%%%%:  586-block  0
+        4:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
+        4:  586:      { return this->_M_impl; }
+        4:  586-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE21_M_get_Node_allocatorEv:
     #####:  585:      _M_get_Node_allocator() _GLIBCXX_NOEXCEPT
@@ -886,8 +886,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  595:
         -:  596:    protected:
         -:  597:      _Link_type
-    #####:  598:      _M_get_node()
-    #####:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+       3*:  598:      _M_get_node()
+       3*:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE11_M_get_nodeEv:
     #####:  598:      _M_get_node()
@@ -895,14 +895,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  599-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE11_M_get_nodeEv:
-    #####:  598:      _M_get_node()
-    #####:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
-    %%%%%:  599-block  0
+        2:  598:      _M_get_node()
+        2:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+        2:  599-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE11_M_get_nodeEv:
-    #####:  598:      _M_get_node()
-    #####:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
-    %%%%%:  599-block  0
+        1:  598:      _M_get_node()
+        1:  599:      { return _Alloc_traits::allocate(_M_get_Node_allocator(), 1); }
+        1:  599-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE11_M_get_nodeEv:
     #####:  598:      _M_get_node()
@@ -962,12 +962,12 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  629:#else
         -:  630:      template<typename... _Args>
         -:  631:	void
-    #####:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
+       3*:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
         -:  633:	{
         -:  634:	  __try
         -:  635:	    {
-    #####:  636:	      ::new(__node) _Rb_tree_node<_Val>;
-    #####:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
+       3*:  636:	      ::new(__node) _Rb_tree_node<_Val>;
+       3*:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
         -:  638:				       __node->_M_valptr(),
         -:  639:				       std::forward<_Args>(__args)...);
         -:  640:	    }
@@ -977,7 +977,7 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
     =====:  644:	      _M_put_node(__node);
     =====:  645:	      __throw_exception_again;
         -:  646:	    }
-    #####:  647:	}
+       3*:  647:	}
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE17_M_construct_nodeIJRKS5_EEEvPSt13_Rb_tree_nodeIS5_EDpOT_:
     #####:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
@@ -1002,13 +1002,13 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  647-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE17_M_construct_nodeIJS5_IS4_S9_EEEEvPSt13_Rb_tree_nodeISA_EDpOT_:
-    #####:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
+        2:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
         -:  633:	{
         -:  634:	  __try
         -:  635:	    {
-    #####:  636:	      ::new(__node) _Rb_tree_node<_Val>;
-    %%%%%:  636-block  0
-    #####:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
+        2:  636:	      ::new(__node) _Rb_tree_node<_Val>;
+        2:  636-block  0
+        2:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
         -:  638:				       __node->_M_valptr(),
         -:  639:				       std::forward<_Args>(__args)...);
         -:  640:	    }
@@ -1020,17 +1020,17 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
     =====:  644:	      _M_put_node(__node);
     =====:  645:	      __throw_exception_again;
         -:  646:	    }
-    #####:  647:	}
-    %%%%%:  647-block  0
+        2:  647:	}
+        2:  647-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE17_M_construct_nodeIJS0_ImSG_EEEEvPSt13_Rb_tree_nodeISH_EDpOT_:
-    #####:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
+        1:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
         -:  633:	{
         -:  634:	  __try
         -:  635:	    {
-    #####:  636:	      ::new(__node) _Rb_tree_node<_Val>;
-    %%%%%:  636-block  0
-    #####:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
+        1:  636:	      ::new(__node) _Rb_tree_node<_Val>;
+        1:  636-block  0
+        1:  637:	      _Alloc_traits::construct(_M_get_Node_allocator(),
         -:  638:				       __node->_M_valptr(),
         -:  639:				       std::forward<_Args>(__args)...);
         -:  640:	    }
@@ -1042,8 +1042,8 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
     =====:  644:	      _M_put_node(__node);
     =====:  645:	      __throw_exception_again;
         -:  646:	    }
-    #####:  647:	}
-    %%%%%:  647-block  0
+        1:  647:	}
+        1:  647-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE17_M_construct_nodeIJRKSt21piecewise_construct_tSt5tupleIJRS7_EESJ_IJEEEEEvPSt13_Rb_tree_nodeIS8_EDpOT_:
     #####:  632:	_M_construct_node(_Link_type __node, _Args&&... __args)
@@ -1070,11 +1070,11 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  648:
         -:  649:      template<typename... _Args>
         -:  650:	_Link_type
-    #####:  651:	_M_create_node(_Args&&... __args)
+       3*:  651:	_M_create_node(_Args&&... __args)
         -:  652:	{
-    #####:  653:	  _Link_type __tmp = _M_get_node();
-    #####:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
-    #####:  655:	  return __tmp;
+       3*:  653:	  _Link_type __tmp = _M_get_node();
+       3*:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+       3*:  655:	  return __tmp;
         -:  656:	}
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE14_M_create_nodeIJRKS5_EEEPSt13_Rb_tree_nodeIS5_EDpOT_:
@@ -1087,21 +1087,21 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
         -:  656:	}
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE14_M_create_nodeIJS5_IS4_S9_EEEEPSt13_Rb_tree_nodeISA_EDpOT_:
-    #####:  651:	_M_create_node(_Args&&... __args)
+        2:  651:	_M_create_node(_Args&&... __args)
         -:  652:	{
-    #####:  653:	  _Link_type __tmp = _M_get_node();
-    %%%%%:  653-block  0
-    #####:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
-    #####:  655:	  return __tmp;
+        2:  653:	  _Link_type __tmp = _M_get_node();
+        2:  653-block  0
+        2:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+        2:  655:	  return __tmp;
         -:  656:	}
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE14_M_create_nodeIJS0_ImSG_EEEEPSt13_Rb_tree_nodeISH_EDpOT_:
-    #####:  651:	_M_create_node(_Args&&... __args)
+        1:  651:	_M_create_node(_Args&&... __args)
         -:  652:	{
-    #####:  653:	  _Link_type __tmp = _M_get_node();
-    %%%%%:  653-block  0
-    #####:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
-    #####:  655:	  return __tmp;
+        1:  653:	  _Link_type __tmp = _M_get_node();
+        1:  653-block  0
+        1:  654:	  _M_construct_node(__tmp, std::forward<_Args>(__args)...);
+        1:  655:	  return __tmp;
         -:  656:	}
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE14_M_create_nodeIJRKSt21piecewise_construct_tSt5tupleIJRS7_EESJ_IJEEEEEPSt13_Rb_tree_nodeIS8_EDpOT_:
@@ -1221,12 +1221,12 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  696:	{
         -:  697:	  typedef _Rb_tree_key_compare<_Key_compare> _Base_key_compare;
         -:  698:
-    #####:  699:	  _Rb_tree_impl()
+       2*:  699:	  _Rb_tree_impl()
         -:  700:	    _GLIBCXX_NOEXCEPT_IF(
         -:  701:		is_nothrow_default_constructible<_Node_allocator>::value
         -:  702:		&& is_nothrow_default_constructible<_Base_key_compare>::value )
-    #####:  703:	  : _Node_allocator()
-    #####:  704:	  { }
+       2*:  703:	  : _Node_allocator()
+       2*:  704:	  { }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE13_Rb_tree_implIS9_Lb1EEC1Ev:
     #####:  699:	  _Rb_tree_impl()
@@ -1238,22 +1238,22 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     #####:  704:	  { }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE13_Rb_tree_implISK_Lb1EEC1Ev:
-    #####:  699:	  _Rb_tree_impl()
+        1:  699:	  _Rb_tree_impl()
         -:  700:	    _GLIBCXX_NOEXCEPT_IF(
         -:  701:		is_nothrow_default_constructible<_Node_allocator>::value
         -:  702:		&& is_nothrow_default_constructible<_Base_key_compare>::value )
-    #####:  703:	  : _Node_allocator()
-    %%%%%:  703-block  0
-    #####:  704:	  { }
+        1:  703:	  : _Node_allocator()
+        1:  703-block  0
+        1:  704:	  { }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE13_Rb_tree_implISE_Lb1EEC1Ev:
-    #####:  699:	  _Rb_tree_impl()
+        1:  699:	  _Rb_tree_impl()
         -:  700:	    _GLIBCXX_NOEXCEPT_IF(
         -:  701:		is_nothrow_default_constructible<_Node_allocator>::value
         -:  702:		&& is_nothrow_default_constructible<_Base_key_compare>::value )
-    #####:  703:	  : _Node_allocator()
-    %%%%%:  703-block  0
-    #####:  704:	  { }
+        1:  703:	  : _Node_allocator()
+        1:  703-block  0
+        1:  704:	  { }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE13_Rb_tree_implISC_Lb1EEC1Ev:
     #####:  699:	  _Rb_tree_impl()
@@ -1275,8 +1275,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  713:	  : _Node_allocator(__a), _Base_key_compare(__comp)
         -:  714:	  { }
         -:  715:#else
-    #####:  716:	  _Rb_tree_impl(_Rb_tree_impl&&) = default;
-    %%%%%:  716-block  0
+        2:  716:	  _Rb_tree_impl(_Rb_tree_impl&&) = default;
+        2:  716-block  0
         -:  717:
         -:  718:	  _Rb_tree_impl(const _Key_compare& __comp, _Node_allocator&& __a)
         -:  719:	  : _Node_allocator(std::move(__a)), _Base_key_compare(__comp)
@@ -1314,8 +1314,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  749:      { return this->_M_impl._M_header._M_right; }
         -:  750:
         -:  751:      _Link_type
-    #####:  752:      _M_begin() _GLIBCXX_NOEXCEPT
-    #####:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+      13*:  752:      _M_begin() _GLIBCXX_NOEXCEPT
+      13*:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE8_M_beginEv:
     #####:  752:      _M_begin() _GLIBCXX_NOEXCEPT
@@ -1323,14 +1323,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  753-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE8_M_beginEv:
-    #####:  752:      _M_begin() _GLIBCXX_NOEXCEPT
-    #####:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
-    %%%%%:  753-block  0
+        5:  752:      _M_begin() _GLIBCXX_NOEXCEPT
+        5:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+        5:  753-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE8_M_beginEv:
-    #####:  752:      _M_begin() _GLIBCXX_NOEXCEPT
-    #####:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
-    %%%%%:  753-block  0
+        8:  752:      _M_begin() _GLIBCXX_NOEXCEPT
+        8:  753:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+        8:  753-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_M_beginEv:
     #####:  752:      _M_begin() _GLIBCXX_NOEXCEPT
@@ -1347,8 +1347,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  760:      }
         -:  761:
         -:  762:      _Base_ptr
-    #####:  763:      _M_end() _GLIBCXX_NOEXCEPT
-    #####:  764:      { return &this->_M_impl._M_header; }
+      14*:  763:      _M_end() _GLIBCXX_NOEXCEPT
+      14*:  764:      { return &this->_M_impl._M_header; }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE6_M_endEv:
     #####:  763:      _M_end() _GLIBCXX_NOEXCEPT
@@ -1356,14 +1356,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  764-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE6_M_endEv:
-    #####:  763:      _M_end() _GLIBCXX_NOEXCEPT
-    #####:  764:      { return &this->_M_impl._M_header; }
-    %%%%%:  764-block  0
+        8:  763:      _M_end() _GLIBCXX_NOEXCEPT
+        8:  764:      { return &this->_M_impl._M_header; }
+        8:  764-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE6_M_endEv:
-    #####:  763:      _M_end() _GLIBCXX_NOEXCEPT
-    #####:  764:      { return &this->_M_impl._M_header; }
-    %%%%%:  764-block  0
+        6:  763:      _M_end() _GLIBCXX_NOEXCEPT
+        6:  764:      { return &this->_M_impl._M_header; }
+        6:  764-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE6_M_endEv:
     #####:  763:      _M_end() _GLIBCXX_NOEXCEPT
@@ -1377,8 +1377,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
     %%%%%:  768-block  0
         -:  769:
         -:  770:      static const_reference
-    #####:  771:      _S_value(_Const_Link_type __x)
-    #####:  772:      { return *__x->_M_valptr(); }
+       9*:  771:      _S_value(_Const_Link_type __x)
+       9*:  772:      { return *__x->_M_valptr(); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE8_S_valueEPKSt13_Rb_tree_nodeIS5_E:
     #####:  771:      _S_value(_Const_Link_type __x)
@@ -1386,14 +1386,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  772-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE8_S_valueEPKSt13_Rb_tree_nodeISA_E:
-    #####:  771:      _S_value(_Const_Link_type __x)
-    #####:  772:      { return *__x->_M_valptr(); }
-    %%%%%:  772-block  0
+        6:  771:      _S_value(_Const_Link_type __x)
+        6:  772:      { return *__x->_M_valptr(); }
+        6:  772-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE8_S_valueEPKSt13_Rb_tree_nodeISH_E:
-    #####:  771:      _S_value(_Const_Link_type __x)
-    #####:  772:      { return *__x->_M_valptr(); }
-    %%%%%:  772-block  0
+        3:  771:      _S_value(_Const_Link_type __x)
+        3:  772:      { return *__x->_M_valptr(); }
+        3:  772-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_S_valueEPKSt13_Rb_tree_nodeIS8_E:
     #####:  771:      _S_value(_Const_Link_type __x)
@@ -1402,8 +1402,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
 ------------------
         -:  773:
         -:  774:      static const _Key&
-    #####:  775:      _S_key(_Const_Link_type __x)
-    #####:  776:      { return _KeyOfValue()(_S_value(__x)); }
+       9*:  775:      _S_key(_Const_Link_type __x)
+       9*:  776:      { return _KeyOfValue()(_S_value(__x)); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE6_S_keyEPKSt13_Rb_tree_nodeIS5_E:
     #####:  775:      _S_key(_Const_Link_type __x)
@@ -1413,18 +1413,18 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  776-block  2
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE6_S_keyEPKSt13_Rb_tree_nodeISA_E:
-    #####:  775:      _S_key(_Const_Link_type __x)
-    #####:  776:      { return _KeyOfValue()(_S_value(__x)); }
-    %%%%%:  776-block  0
-    %%%%%:  776-block  1
-    %%%%%:  776-block  2
+        6:  775:      _S_key(_Const_Link_type __x)
+        6:  776:      { return _KeyOfValue()(_S_value(__x)); }
+        6:  776-block  0
+        6:  776-block  1
+        6:  776-block  2
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE6_S_keyEPKSt13_Rb_tree_nodeISH_E:
-    #####:  775:      _S_key(_Const_Link_type __x)
-    #####:  776:      { return _KeyOfValue()(_S_value(__x)); }
-    %%%%%:  776-block  0
-    %%%%%:  776-block  1
-    %%%%%:  776-block  2
+        3:  775:      _S_key(_Const_Link_type __x)
+        3:  776:      { return _KeyOfValue()(_S_value(__x)); }
+        3:  776-block  0
+        3:  776-block  1
+        3:  776-block  2
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE6_S_keyEPKSt13_Rb_tree_nodeIS8_E:
     #####:  775:      _S_key(_Const_Link_type __x)
@@ -1435,8 +1435,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
 ------------------
         -:  777:
         -:  778:      static _Link_type
-    #####:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  780:      { return static_cast<_Link_type>(__x->_M_left); }
+       8*:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+       8*:  780:      { return static_cast<_Link_type>(__x->_M_left); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE7_S_leftEPSt18_Rb_tree_node_base:
     #####:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -1444,14 +1444,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  780-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE7_S_leftEPSt18_Rb_tree_node_base:
-    #####:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  780:      { return static_cast<_Link_type>(__x->_M_left); }
-    %%%%%:  780-block  0
+        3:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+        3:  780:      { return static_cast<_Link_type>(__x->_M_left); }
+        3:  780-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE7_S_leftEPSt18_Rb_tree_node_base:
-    #####:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  780:      { return static_cast<_Link_type>(__x->_M_left); }
-    %%%%%:  780-block  0
+        5:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+        5:  780:      { return static_cast<_Link_type>(__x->_M_left); }
+        5:  780-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE7_S_leftEPSt18_Rb_tree_node_base:
     #####:  779:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -1465,8 +1465,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
     %%%%%:  784-block  0
         -:  785:
         -:  786:      static _Link_type
-    #####:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  788:      { return static_cast<_Link_type>(__x->_M_right); }
+       1*:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+       1*:  788:      { return static_cast<_Link_type>(__x->_M_right); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE8_S_rightEPSt18_Rb_tree_node_base:
     #####:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -1479,9 +1479,9 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
     %%%%%:  788-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE8_S_rightEPSt18_Rb_tree_node_base:
-    #####:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-    #####:  788:      { return static_cast<_Link_type>(__x->_M_right); }
-    %%%%%:  788-block  0
+        1:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+        1:  788:      { return static_cast<_Link_type>(__x->_M_right); }
+        1:  788-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_S_rightEPSt18_Rb_tree_node_base:
     #####:  787:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -1495,8 +1495,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
     %%%%%:  792-block  0
         -:  793:
         -:  794:      static const_reference
-    #####:  795:      _S_value(_Const_Base_ptr __x)
-    #####:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
+       7*:  795:      _S_value(_Const_Base_ptr __x)
+       7*:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE8_S_valueEPKSt18_Rb_tree_node_base:
     #####:  795:      _S_value(_Const_Base_ptr __x)
@@ -1504,14 +1504,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  796-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE8_S_valueEPKSt18_Rb_tree_node_base:
-    #####:  795:      _S_value(_Const_Base_ptr __x)
-    #####:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
-    %%%%%:  796-block  0
+        4:  795:      _S_value(_Const_Base_ptr __x)
+        4:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
+        4:  796-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE8_S_valueEPKSt18_Rb_tree_node_base:
-    #####:  795:      _S_value(_Const_Base_ptr __x)
-    #####:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
-    %%%%%:  796-block  0
+        3:  795:      _S_value(_Const_Base_ptr __x)
+        3:  796:      { return *static_cast<_Const_Link_type>(__x)->_M_valptr(); }
+        3:  796-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_S_valueEPKSt18_Rb_tree_node_base:
     #####:  795:      _S_value(_Const_Base_ptr __x)
@@ -1520,8 +1520,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
 ------------------
         -:  797:
         -:  798:      static const _Key&
-    #####:  799:      _S_key(_Const_Base_ptr __x)
-    #####:  800:      { return _KeyOfValue()(_S_value(__x)); }
+       7*:  799:      _S_key(_Const_Base_ptr __x)
+       7*:  800:      { return _KeyOfValue()(_S_value(__x)); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE6_S_keyEPKSt18_Rb_tree_node_base:
     #####:  799:      _S_key(_Const_Base_ptr __x)
@@ -1531,18 +1531,18 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  800-block  2
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE6_S_keyEPKSt18_Rb_tree_node_base:
-    #####:  799:      _S_key(_Const_Base_ptr __x)
-    #####:  800:      { return _KeyOfValue()(_S_value(__x)); }
-    %%%%%:  800-block  0
-    %%%%%:  800-block  1
-    %%%%%:  800-block  2
+        4:  799:      _S_key(_Const_Base_ptr __x)
+        4:  800:      { return _KeyOfValue()(_S_value(__x)); }
+        4:  800-block  0
+        4:  800-block  1
+        4:  800-block  2
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE6_S_keyEPKSt18_Rb_tree_node_base:
-    #####:  799:      _S_key(_Const_Base_ptr __x)
-    #####:  800:      { return _KeyOfValue()(_S_value(__x)); }
-    %%%%%:  800-block  0
-    %%%%%:  800-block  1
-    %%%%%:  800-block  2
+        3:  799:      _S_key(_Const_Base_ptr __x)
+        3:  800:      { return _KeyOfValue()(_S_value(__x)); }
+        3:  800-block  0
+        3:  800-block  1
+        3:  800-block  2
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE6_S_keyEPKSt18_Rb_tree_node_base:
     #####:  799:      _S_key(_Const_Base_ptr __x)
@@ -1679,19 +1679,19 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  926:#if __cplusplus < 201103L
         -:  927:      _Rb_tree() { }
         -:  928:#else
-    #####:  929:      _Rb_tree() = default;
+       2*:  929:      _Rb_tree() = default;
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EEC1Ev:
     #####:  929:      _Rb_tree() = default;
     %%%%%:  929-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EEC1Ev:
-    #####:  929:      _Rb_tree() = default;
-    %%%%%:  929-block  0
+        1:  929:      _Rb_tree() = default;
+        1:  929-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EEC1Ev:
-    #####:  929:      _Rb_tree() = default;
-    %%%%%:  929-block  0
+        1:  929:      _Rb_tree() = default;
+        1:  929-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EEC1Ev:
     #####:  929:      _Rb_tree() = default;
@@ -1722,8 +1722,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  952:	  _M_root() = _M_copy(__x);
         -:  953:      }
         -:  954:
-    #####:  955:      _Rb_tree(_Rb_tree&&) = default;
-    %%%%%:  955-block  0
+        2:  955:      _Rb_tree(_Rb_tree&&) = default;
+        2:  955-block  0
         -:  956:
         -:  957:      _Rb_tree(_Rb_tree&& __x, const allocator_type& __a)
         -:  958:      : _Rb_tree(std::move(__x), _Node_allocator(__a))
@@ -1732,8 +1732,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -:  961:      _Rb_tree(_Rb_tree&& __x, _Node_allocator&& __a);
         -:  962:#endif
         -:  963:
-    #####:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
-    #####:  965:      { _M_erase(_M_begin()); }
+       2*:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
+       2*:  965:      { _M_erase(_M_begin()); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EED1Ev:
     #####:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
@@ -1741,9 +1741,9 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     %%%%%:  965-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EED1Ev:
-    #####:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
-    #####:  965:      { _M_erase(_M_begin()); }
-    %%%%%:  965-block  0
+        2:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
+        2:  965:      { _M_erase(_M_begin()); }
+        2:  965-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EED1Ev:
     #####:  964:      ~_Rb_tree() _GLIBCXX_NOEXCEPT
@@ -1761,8 +1761,8 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
     %%%%%:  973-block  0
         -:  974:
         -:  975:      iterator
-    #####:  976:      begin() _GLIBCXX_NOEXCEPT
-    #####:  977:      { return iterator(this->_M_impl._M_header._M_left); }
+       3*:  976:      begin() _GLIBCXX_NOEXCEPT
+       3*:  977:      { return iterator(this->_M_impl._M_header._M_left); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE5beginEv:
     #####:  976:      begin() _GLIBCXX_NOEXCEPT
@@ -1780,14 +1780,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_N
     %%%%%:  977-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE5beginEv:
-    #####:  976:      begin() _GLIBCXX_NOEXCEPT
-    #####:  977:      { return iterator(this->_M_impl._M_header._M_left); }
-    %%%%%:  977-block  0
+        2:  976:      begin() _GLIBCXX_NOEXCEPT
+        2:  977:      { return iterator(this->_M_impl._M_header._M_left); }
+        2:  977-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE5beginEv:
-    #####:  976:      begin() _GLIBCXX_NOEXCEPT
-    #####:  977:      { return iterator(this->_M_impl._M_header._M_left); }
-    %%%%%:  977-block  0
+        1:  976:      begin() _GLIBCXX_NOEXCEPT
+        1:  977:      { return iterator(this->_M_impl._M_header._M_left); }
+        1:  977-block  0
 ------------------
         -:  978:
         -:  979:      const_iterator
@@ -1795,8 +1795,8 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -:  981:      { return const_iterator(this->_M_impl._M_header._M_left); }
         -:  982:
         -:  983:      iterator
-    #####:  984:      end() _GLIBCXX_NOEXCEPT
-    #####:  985:      { return iterator(&this->_M_impl._M_header); }
+      19*:  984:      end() _GLIBCXX_NOEXCEPT
+      19*:  985:      { return iterator(&this->_M_impl._M_header); }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_N7testing8internal12CodeLocationEESt10_Select1stISB_ESt4lessIS5_ESaISB_EE3endEv:
     #####:  984:      end() _GLIBCXX_NOEXCEPT
@@ -1804,14 +1804,14 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_N
     %%%%%:  985-block  0
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE3endEv:
-    #####:  984:      end() _GLIBCXX_NOEXCEPT
-    #####:  985:      { return iterator(&this->_M_impl._M_header); }
-    %%%%%:  985-block  0
+       10:  984:      end() _GLIBCXX_NOEXCEPT
+       10:  985:      { return iterator(&this->_M_impl._M_header); }
+       10:  985-block  0
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE3endEv:
-    #####:  984:      end() _GLIBCXX_NOEXCEPT
-    #####:  985:      { return iterator(&this->_M_impl._M_header); }
-    %%%%%:  985-block  0
+        9:  984:      end() _GLIBCXX_NOEXCEPT
+        9:  985:      { return iterator(&this->_M_impl._M_header); }
+        9:  985-block  0
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE3endEv:
     #####:  984:      end() _GLIBCXX_NOEXCEPT
@@ -2614,7 +2614,7 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 1753:    template<typename _NodeGen>
         -: 1754:#endif
         -: 1755:      typename _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::iterator
-    #####: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+       3*: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1757:      _M_insert_(_Base_ptr __x, _Base_ptr __p,
         -: 1758:#if __cplusplus >= 201103L
         -: 1759:		 _Arg&& __v,
@@ -2623,16 +2623,16 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 1762:#endif
         -: 1763:		 _NodeGen& __node_gen)
         -: 1764:      {
-    #####: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
-    #####: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
-    #####: 1767:							_S_key(__p)));
+       3*: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
+       6*: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
+        1: 1767:							_S_key(__p)));
         -: 1768:
-    #####: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
+       3*: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
         -: 1770:
-    #####: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
-    #####: 1772:				      this->_M_impl._M_header);
-    #####: 1773:	++_M_impl._M_node_count;
-    #####: 1774:	return iterator(__z);
+       3*: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+       3*: 1772:				      this->_M_impl._M_header);
+       3*: 1773:	++_M_impl._M_node_count;
+       3*: 1774:	return iterator(__z);
         -: 1775:      }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE10_M_insert_IRKS5_NSB_11_Alloc_nodeEEESt17_Rb_tree_iteratorIS5_EPSt18_Rb_tree_node_baseSJ_OT_RT0_:
@@ -2666,7 +2666,7 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
         -: 1775:      }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE10_M_insert_IS5_IS4_S9_ENSG_11_Alloc_nodeEEESt17_Rb_tree_iteratorISA_EPSt18_Rb_tree_node_baseSN_OT_RT0_:
-    #####: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        2: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1757:      _M_insert_(_Base_ptr __x, _Base_ptr __p,
         -: 1758:#if __cplusplus >= 201103L
         -: 1759:		 _Arg&& __v,
@@ -2675,28 +2675,28 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 1762:#endif
         -: 1763:		 _NodeGen& __node_gen)
         -: 1764:      {
-    #####: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
-    %%%%%: 1765-block  0
-    #####: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
-    %%%%%: 1766-block  0
-    %%%%%: 1766-block  1
+        2: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
+        2: 1765-block  0
+       4*: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
+        2: 1766-block  0
+        2: 1766-block  1
     %%%%%: 1766-block  2
-    #####: 1767:							_S_key(__p)));
-    %%%%%: 1767-block  0
-    %%%%%: 1767-block  1
+        1: 1767:							_S_key(__p)));
+        1: 1767-block  0
+        1: 1767-block  1
         -: 1768:
-    #####: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
-    %%%%%: 1769-block  0
+        2: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
+        2: 1769-block  0
         -: 1770:
-    #####: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
-    #####: 1772:				      this->_M_impl._M_header);
-    #####: 1773:	++_M_impl._M_node_count;
-    #####: 1774:	return iterator(__z);
-    %%%%%: 1774-block  0
+        2: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+        2: 1772:				      this->_M_impl._M_header);
+        2: 1773:	++_M_impl._M_node_count;
+        2: 1774:	return iterator(__z);
+        2: 1774-block  0
         -: 1775:      }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE10_M_insert_IS0_ImSG_ENSM_11_Alloc_nodeEEESt17_Rb_tree_iteratorISH_EPSt18_Rb_tree_node_baseST_OT_RT0_:
-    #####: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        1: 1756:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1757:      _M_insert_(_Base_ptr __x, _Base_ptr __p,
         -: 1758:#if __cplusplus >= 201103L
         -: 1759:		 _Arg&& __v,
@@ -2705,24 +2705,24 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -: 1762:#endif
         -: 1763:		 _NodeGen& __node_gen)
         -: 1764:      {
-    #####: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
-    %%%%%: 1765-block  0
-    #####: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
-    %%%%%: 1766-block  0
+        1: 1765:	bool __insert_left = (__x != 0 || __p == _M_end()
+        1: 1765-block  0
+       2*: 1766:			      || _M_impl._M_key_compare(_KeyOfValue()(__v),
+        1: 1766-block  0
     %%%%%: 1766-block  1
     %%%%%: 1766-block  2
-    %%%%%: 1766-block  3
+        1: 1766-block  3
     %%%%%: 1766-block  4
         -: 1767:							_S_key(__p)));
         -: 1768:
-    #####: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
-    %%%%%: 1769-block  0
+        1: 1769:	_Link_type __z = __node_gen(_GLIBCXX_FORWARD(_Arg, __v));
+        1: 1769-block  0
         -: 1770:
-    #####: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
-    #####: 1772:				      this->_M_impl._M_header);
-    #####: 1773:	++_M_impl._M_node_count;
-    #####: 1774:	return iterator(__z);
-    %%%%%: 1774-block  0
+        1: 1771:	_Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+        1: 1772:				      this->_M_impl._M_header);
+        1: 1773:	++_M_impl._M_node_count;
+        1: 1774:	return iterator(__z);
+        1: 1774-block  0
         -: 1775:      }
 ------------------
         -: 1776:
@@ -2815,18 +2815,18 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -: 1863:  template<typename _Key, typename _Val, typename _KeyOfValue,
         -: 1864:	   typename _Compare, typename _Alloc>
         -: 1865:    void
-    #####: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+       2*: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1867:    _M_erase(_Link_type __x)
         -: 1868:    {
         -: 1869:      // Erase without rebalancing.
-    #####: 1870:      while (__x != 0)
+       2*: 1870:      while (__x != 0)
         -: 1871:	{
     #####: 1872:	  _M_erase(_S_right(__x));
     #####: 1873:	  _Link_type __y = _S_left(__x);
     #####: 1874:	  _M_drop_node(__x);
     #####: 1875:	  __x = __y;
         -: 1876:	}
-    #####: 1877:    }
+       2*: 1877:    }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE8_M_eraseEPSt13_Rb_tree_nodeIS5_E:
     #####: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
@@ -2845,12 +2845,12 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
     #####: 1877:    }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE8_M_eraseEPSt13_Rb_tree_nodeISA_E:
-    #####: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        2: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1867:    _M_erase(_Link_type __x)
         -: 1868:    {
         -: 1869:      // Erase without rebalancing.
-    #####: 1870:      while (__x != 0)
-    %%%%%: 1870-block  0
+       2*: 1870:      while (__x != 0)
+        2: 1870-block  0
         -: 1871:	{
     #####: 1872:	  _M_erase(_S_right(__x));
     %%%%%: 1872-block  0
@@ -2858,7 +2858,7 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
     #####: 1874:	  _M_drop_node(__x);
     #####: 1875:	  __x = __y;
         -: 1876:	}
-    #####: 1877:    }
+        2: 1877:    }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE8_M_eraseEPSt13_Rb_tree_nodeIS8_E:
     #####: 1866:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
@@ -2881,54 +2881,54 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -: 1880:	   typename _Compare, typename _Alloc>
         -: 1881:    typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 1882:		      _Compare, _Alloc>::iterator
-    #####: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+      16*: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1884:    _M_lower_bound(_Link_type __x, _Base_ptr __y,
         -: 1885:		   const _Key& __k)
         -: 1886:    {
-    #####: 1887:      while (__x != 0)
-    #####: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
-    #####: 1889:	  __y = __x, __x = _S_left(__x);
+      16*: 1887:      while (__x != 0)
+       8*: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+       7*: 1889:	  __y = __x, __x = _S_left(__x);
         -: 1890:	else
-    #####: 1891:	  __x = _S_right(__x);
-    #####: 1892:      return iterator(__y);
+       1*: 1891:	  __x = _S_right(__x);
+       8*: 1892:      return iterator(__y);
         -: 1893:    }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE14_M_lower_boundEPSt13_Rb_tree_nodeISA_EPSt18_Rb_tree_node_baseRS6_:
-    #####: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        9: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1884:    _M_lower_bound(_Link_type __x, _Base_ptr __y,
         -: 1885:		   const _Key& __k)
         -: 1886:    {
-    #####: 1887:      while (__x != 0)
-    %%%%%: 1887-block  0
-    %%%%%: 1887-block  1
-    #####: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
-    %%%%%: 1888-block  0
-    #####: 1889:	  __y = __x, __x = _S_left(__x);
-    %%%%%: 1889-block  0
+        9: 1887:      while (__x != 0)
+        9: 1887-block  0
+        5: 1887-block  1
+        5: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+        5: 1888-block  0
+        4: 1889:	  __y = __x, __x = _S_left(__x);
+        4: 1889-block  0
         -: 1890:	else
-    #####: 1891:	  __x = _S_right(__x);
-    %%%%%: 1891-block  0
-    #####: 1892:      return iterator(__y);
-    %%%%%: 1892-block  0
+        1: 1891:	  __x = _S_right(__x);
+        1: 1891-block  0
+        4: 1892:      return iterator(__y);
+        4: 1892-block  0
         -: 1893:    }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE14_M_lower_boundEPSt13_Rb_tree_nodeISH_EPSt18_Rb_tree_node_baseRS1_:
-    #####: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        7: 1883:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1884:    _M_lower_bound(_Link_type __x, _Base_ptr __y,
         -: 1885:		   const _Key& __k)
         -: 1886:    {
-    #####: 1887:      while (__x != 0)
-    %%%%%: 1887-block  0
-    %%%%%: 1887-block  1
-    #####: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
-    %%%%%: 1888-block  0
-    #####: 1889:	  __y = __x, __x = _S_left(__x);
-    %%%%%: 1889-block  0
+        7: 1887:      while (__x != 0)
+        7: 1887-block  0
+        3: 1887-block  1
+        3: 1888:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+        3: 1888-block  0
+        3: 1889:	  __y = __x, __x = _S_left(__x);
+        3: 1889-block  0
         -: 1890:	else
     #####: 1891:	  __x = _S_right(__x);
     %%%%%: 1891-block  0
-    #####: 1892:      return iterator(__y);
-    %%%%%: 1892-block  0
+        4: 1892:      return iterator(__y);
+        4: 1892-block  0
         -: 1893:    }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE14_M_lower_boundEPSt13_Rb_tree_nodeIS8_EPSt18_Rb_tree_node_baseRS7_:
@@ -3106,24 +3106,24 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_y
         -: 2041:			   _Compare, _Alloc>::_Base_ptr,
         -: 2042:	 typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 2043:			   _Compare, _Alloc>::_Base_ptr>
-    #####: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+       3*: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2045:    _M_get_insert_unique_pos(const key_type& __k)
         -: 2046:    {
         -: 2047:      typedef pair<_Base_ptr, _Base_ptr> _Res;
-    #####: 2048:      _Link_type __x = _M_begin();
-    #####: 2049:      _Base_ptr __y = _M_end();
-    #####: 2050:      bool __comp = true;
-    #####: 2051:      while (__x != 0)
+       3*: 2048:      _Link_type __x = _M_begin();
+       3*: 2049:      _Base_ptr __y = _M_end();
+       3*: 2050:      bool __comp = true;
+       4*: 2051:      while (__x != 0)
         -: 2052:	{
-    #####: 2053:	  __y = __x;
-    #####: 2054:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
-    #####: 2055:	  __x = __comp ? _S_left(__x) : _S_right(__x);
+       1*: 2053:	  __y = __x;
+       1*: 2054:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
+       1*: 2055:	  __x = __comp ? _S_left(__x) : _S_right(__x);
         -: 2056:	}
-    #####: 2057:      iterator __j = iterator(__y);
-    #####: 2058:      if (__comp)
+       3*: 2057:      iterator __j = iterator(__y);
+       3*: 2058:      if (__comp)
         -: 2059:	{
-    #####: 2060:	  if (__j == begin())
-    #####: 2061:	    return _Res(__x, __y);
+       3*: 2060:	  if (__j == begin())
+       3*: 2061:	    return _Res(__x, __y);
         -: 2062:	  else
     #####: 2063:	    --__j;
         -: 2064:	}
@@ -3217,34 +3217,34 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
         -: 2068:    }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE24_M_get_insert_unique_posERS6_:
-    #####: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        2: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2045:    _M_get_insert_unique_pos(const key_type& __k)
         -: 2046:    {
         -: 2047:      typedef pair<_Base_ptr, _Base_ptr> _Res;
-    #####: 2048:      _Link_type __x = _M_begin();
-    %%%%%: 2048-block  0
-    #####: 2049:      _Base_ptr __y = _M_end();
-    #####: 2050:      bool __comp = true;
-    #####: 2051:      while (__x != 0)
-    %%%%%: 2051-block  0
+        2: 2048:      _Link_type __x = _M_begin();
+        2: 2048-block  0
+        2: 2049:      _Base_ptr __y = _M_end();
+        2: 2050:      bool __comp = true;
+        3: 2051:      while (__x != 0)
+        3: 2051-block  0
         -: 2052:	{
-    #####: 2053:	  __y = __x;
-    #####: 2054:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
-    %%%%%: 2054-block  0
-    %%%%%: 2054-block  1
-    #####: 2055:	  __x = __comp ? _S_left(__x) : _S_right(__x);
-    %%%%%: 2055-block  0
+        1: 2053:	  __y = __x;
+        1: 2054:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
+        1: 2054-block  0
+        1: 2054-block  1
+       1*: 2055:	  __x = __comp ? _S_left(__x) : _S_right(__x);
+        1: 2055-block  0
     %%%%%: 2055-block  1
-    %%%%%: 2055-block  2
+        1: 2055-block  2
         -: 2056:	}
-    #####: 2057:      iterator __j = iterator(__y);
-    %%%%%: 2057-block  0
-    #####: 2058:      if (__comp)
+        2: 2057:      iterator __j = iterator(__y);
+        2: 2057-block  0
+        2: 2058:      if (__comp)
         -: 2059:	{
-    #####: 2060:	  if (__j == begin())
-    %%%%%: 2060-block  0
-    #####: 2061:	    return _Res(__x, __y);
-    %%%%%: 2061-block  0
+        2: 2060:	  if (__j == begin())
+        2: 2060-block  0
+        2: 2061:	    return _Res(__x, __y);
+        2: 2061-block  0
         -: 2062:	  else
     #####: 2063:	    --__j;
     %%%%%: 2063-block  0
@@ -3259,16 +3259,16 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 2068:    }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE24_M_get_insert_unique_posERS1_:
-    #####: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        1: 2044:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2045:    _M_get_insert_unique_pos(const key_type& __k)
         -: 2046:    {
         -: 2047:      typedef pair<_Base_ptr, _Base_ptr> _Res;
-    #####: 2048:      _Link_type __x = _M_begin();
-    %%%%%: 2048-block  0
-    #####: 2049:      _Base_ptr __y = _M_end();
-    #####: 2050:      bool __comp = true;
-    #####: 2051:      while (__x != 0)
-    %%%%%: 2051-block  0
+        1: 2048:      _Link_type __x = _M_begin();
+        1: 2048-block  0
+        1: 2049:      _Base_ptr __y = _M_end();
+        1: 2050:      bool __comp = true;
+       1*: 2051:      while (__x != 0)
+        1: 2051-block  0
         -: 2052:	{
     #####: 2053:	  __y = __x;
     #####: 2054:	  __comp = _M_impl._M_key_compare(__k, _S_key(__x));
@@ -3279,14 +3279,14 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
     %%%%%: 2055-block  1
     %%%%%: 2055-block  2
         -: 2056:	}
-    #####: 2057:      iterator __j = iterator(__y);
-    %%%%%: 2057-block  0
-    #####: 2058:      if (__comp)
+        1: 2057:      iterator __j = iterator(__y);
+        1: 2057-block  0
+        1: 2058:      if (__comp)
         -: 2059:	{
-    #####: 2060:	  if (__j == begin())
-    %%%%%: 2060-block  0
-    #####: 2061:	    return _Res(__x, __y);
-    %%%%%: 2061-block  0
+        1: 2060:	  if (__j == begin())
+        1: 2060-block  0
+        1: 2061:	    return _Res(__x, __y);
+        1: 2061-block  0
         -: 2062:	  else
     #####: 2063:	    --__j;
     %%%%%: 2063-block  0
@@ -3329,7 +3329,7 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -: 2095:#endif
         -: 2096:    pair<typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 2097:			   _Compare, _Alloc>::iterator, bool>
-    #####: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+       3*: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2099:#if __cplusplus >= 201103L
         -: 2100:    _M_insert_unique(_Arg&& __v)
         -: 2101:#else
@@ -3337,15 +3337,15 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -: 2103:#endif
         -: 2104:    {
         -: 2105:      typedef pair<iterator, bool> _Res;
-    #####: 2106:      pair<_Base_ptr, _Base_ptr> __res
-    #####: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
+       3*: 2106:      pair<_Base_ptr, _Base_ptr> __res
+       3*: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
         -: 2108:
-    #####: 2109:      if (__res.second)
+       3*: 2109:      if (__res.second)
         -: 2110:	{
-    #####: 2111:	  _Alloc_node __an(*this);
-    #####: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
+       3*: 2111:	  _Alloc_node __an(*this);
+       3*: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
         -: 2113:				 _GLIBCXX_FORWARD(_Arg, __v), __an),
-    #####: 2114:		      true);
+       6*: 2114:		      true);
         -: 2115:	}
         -: 2116:
     #####: 2117:      return _Res(iterator(__res.first), false);
@@ -3382,7 +3382,7 @@ _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_Identi
         -: 2118:    }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE16_M_insert_uniqueIS5_IS4_S9_EEES5_ISt17_Rb_tree_iteratorISA_EbEOT_:
-    #####: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        2: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2099:#if __cplusplus >= 201103L
         -: 2100:    _M_insert_unique(_Arg&& __v)
         -: 2101:#else
@@ -3390,20 +3390,20 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 2103:#endif
         -: 2104:    {
         -: 2105:      typedef pair<iterator, bool> _Res;
-    #####: 2106:      pair<_Base_ptr, _Base_ptr> __res
-    #####: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
-    %%%%%: 2107-block  0
+        2: 2106:      pair<_Base_ptr, _Base_ptr> __res
+        2: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
+        2: 2107-block  0
     $$$$$: 2107-block  1
         -: 2108:
-    #####: 2109:      if (__res.second)
-    %%%%%: 2109-block  0
+        2: 2109:      if (__res.second)
+        2: 2109-block  0
         -: 2110:	{
-    #####: 2111:	  _Alloc_node __an(*this);
-    %%%%%: 2111-block  0
-    #####: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
+        2: 2111:	  _Alloc_node __an(*this);
+        2: 2111-block  0
+        2: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
         -: 2113:				 _GLIBCXX_FORWARD(_Arg, __v), __an),
-    #####: 2114:		      true);
-    %%%%%: 2114-block  0
+        4: 2114:		      true);
+        2: 2114-block  0
     $$$$$: 2114-block  1
         -: 2115:	}
         -: 2116:
@@ -3412,7 +3412,7 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 2118:    }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE16_M_insert_uniqueIS0_ImSG_EEES0_ISt17_Rb_tree_iteratorISH_EbEOT_:
-    #####: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        1: 2098:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2099:#if __cplusplus >= 201103L
         -: 2100:    _M_insert_unique(_Arg&& __v)
         -: 2101:#else
@@ -3420,20 +3420,20 @@ _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10share
         -: 2103:#endif
         -: 2104:    {
         -: 2105:      typedef pair<iterator, bool> _Res;
-    #####: 2106:      pair<_Base_ptr, _Base_ptr> __res
-    #####: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
-    %%%%%: 2107-block  0
+        1: 2106:      pair<_Base_ptr, _Base_ptr> __res
+        1: 2107:	= _M_get_insert_unique_pos(_KeyOfValue()(__v));
+        1: 2107-block  0
     $$$$$: 2107-block  1
         -: 2108:
-    #####: 2109:      if (__res.second)
-    %%%%%: 2109-block  0
+        1: 2109:      if (__res.second)
+        1: 2109-block  0
         -: 2110:	{
-    #####: 2111:	  _Alloc_node __an(*this);
-    %%%%%: 2111-block  0
-    #####: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
+        1: 2111:	  _Alloc_node __an(*this);
+        1: 2111-block  0
+        1: 2112:	  return _Res(_M_insert_(__res.first, __res.second,
         -: 2113:				 _GLIBCXX_FORWARD(_Arg, __v), __an),
-    #####: 2114:		      true);
-    %%%%%: 2114-block  0
+        2: 2114:		      true);
+        1: 2114-block  0
     $$$$$: 2114-block  1
         -: 2115:	}
         -: 2116:
@@ -3932,53 +3932,53 @@ _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrI
         -: 2533:	   typename _Compare, typename _Alloc>
         -: 2534:    typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 2535:		      _Compare, _Alloc>::iterator
-    #####: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+       8*: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2537:    find(const _Key& __k)
         -: 2538:    {
-    #####: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
-    #####: 2540:      return (__j == end()
-    #####: 2541:	      || _M_impl._M_key_compare(__k,
-    #####: 2542:					_S_key(__j._M_node))) ? end() : __j;
+       8*: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+      16*: 2540:      return (__j == end()
+       6*: 2541:	      || _M_impl._M_key_compare(__k,
+      22*: 2542:					_S_key(__j._M_node))) ? end() : __j;
         -: 2543:    }
 ------------------
 _ZNSt8_Rb_treeIPKN7testing8internal15ThreadLocalBaseESt4pairIKS4_St10shared_ptrINS1_26ThreadLocalValueHolderBaseEEESt10_Select1stISA_ESt4lessIS4_ESaISA_EE4findERS6_:
-    #####: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        4: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2537:    find(const _Key& __k)
         -: 2538:    {
-    #####: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
-    %%%%%: 2539-block  0
-    #####: 2540:      return (__j == end()
-    %%%%%: 2540-block  0
-    %%%%%: 2540-block  1
+        4: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+        4: 2539-block  0
+        8: 2540:      return (__j == end()
+        4: 2540-block  0
+        4: 2540-block  1
     $$$$$: 2540-block  2
-    #####: 2541:	      || _M_impl._M_key_compare(__k,
-    #####: 2542:					_S_key(__j._M_node))) ? end() : __j;
-    %%%%%: 2542-block  0
-    %%%%%: 2542-block  1
-    %%%%%: 2542-block  2
-    %%%%%: 2542-block  3
-    %%%%%: 2542-block  4
-    %%%%%: 2542-block  5
+        3: 2541:	      || _M_impl._M_key_compare(__k,
+       11: 2542:					_S_key(__j._M_node))) ? end() : __j;
+        3: 2542-block  0
+        3: 2542-block  1
+        2: 2542-block  2
+        2: 2542-block  3
+        4: 2542-block  4
+        4: 2542-block  5
         -: 2543:    }
 ------------------
 _ZNSt8_Rb_treeImSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEESt10_Select1stISH_ESB_ImESaISH_EE4findERS1_:
-    #####: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+        4: 2536:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 2537:    find(const _Key& __k)
         -: 2538:    {
-    #####: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
-    %%%%%: 2539-block  0
-    #####: 2540:      return (__j == end()
-    %%%%%: 2540-block  0
-    %%%%%: 2540-block  1
+        4: 2539:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+        4: 2539-block  0
+        8: 2540:      return (__j == end()
+        4: 2540-block  0
+        4: 2540-block  1
     $$$$$: 2540-block  2
-    #####: 2541:	      || _M_impl._M_key_compare(__k,
-    %%%%%: 2541-block  0
-    #####: 2542:					_S_key(__j._M_node))) ? end() : __j;
-    %%%%%: 2542-block  0
-    %%%%%: 2542-block  1
-    %%%%%: 2542-block  2
-    %%%%%: 2542-block  3
-    %%%%%: 2542-block  4
+        3: 2541:	      || _M_impl._M_key_compare(__k,
+        3: 2541-block  0
+       11: 2542:					_S_key(__j._M_node))) ? end() : __j;
+        3: 2542-block  0
+        1: 2542-block  1
+        3: 2542-block  2
+        4: 2542-block  3
+        4: 2542-block  4
         -: 2543:    }
 ------------------
 _ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_yESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE4findERS7_:

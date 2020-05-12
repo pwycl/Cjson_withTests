@@ -334,8 +334,8 @@
         -:  327:			  && _PCCP::template
         -:  328:			   _ImplicitlyMoveConvertiblePair<_U1, _U2>(),
         -:  329:                         bool>::type=true>
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+      10*:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+      10*:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
 ------------------
 _ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC1IRPSt13_Rb_tree_nodeIS_IKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEERS1_Lb1EEEOT_OT0_:
     #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
@@ -353,24 +353,24 @@ _ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC1IRPSt13_Rb_tree_nodeINSt7__cxx1112basic_
     %%%%%:  331-block  0
 ------------------
 _ZNSt4pairISt17_Rb_tree_iteratorIS_IKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEbEC1ISB_bLb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        2:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        2:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        2:  331-block  0
 ------------------
 _ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC1IRPSt13_Rb_tree_nodeIS_IKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS6_26ThreadLocalValueHolderBaseEEEERS1_Lb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        2:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        2:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        2:  331-block  0
 ------------------
 _ZNSt4pairISt17_Rb_tree_iteratorIS_IKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS_IKS7_SA_EEEEEbEC1ISI_bLb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        1:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        1:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        1:  331-block  0
 ------------------
 _ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC1IRPSt13_Rb_tree_nodeIS_IKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS8_26ThreadLocalValueHolderBaseEESt4lessISB_ESaIS_IKSB_SE_EEEEERS1_Lb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        1:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        1:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        1:  331-block  0
 ------------------
 _ZNSt4pairIPSt18_Rb_tree_node_baseS1_EC1IRS1_S4_Lb1EEEOT_OT0_:
     #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
@@ -383,19 +383,19 @@ _ZNSt4pairISt23_Rb_tree_const_iteratorINSt7__cxx1112basic_stringIcSt11char_trait
     %%%%%:  331-block  0
 ------------------
 _ZNSt4pairIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEEEC1IRS4_S7_Lb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        2:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        2:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        2:  331-block  0
 ------------------
 _ZNSt4pairImSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEESt4lessIS5_ESaIS_IKS5_S8_EEEEC1IRmSE_Lb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        1:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        1:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        1:  331-block  0
 ------------------
 _ZNSt4pairImPvEC1IRmRS0_Lb1EEEOT_OT0_:
-    #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
-    #####:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
-    %%%%%:  331-block  0
+        1:  330:	constexpr pair(_U1&& __x, _U2&& __y)
+        1:  331:	: first(std::forward<_U1>(__x)), second(std::forward<_U2>(__y)) { }
+        1:  331-block  0
 ------------------
 _ZNSt4pairIcPKcEC1IcRS1_Lb1EEEOT_OT0_:
     #####:  330:	constexpr pair(_U1&& __x, _U2&& __y)
@@ -419,21 +419,21 @@ _ZNSt4pairIcPKcEC1IcRS1_Lb1EEEOT_OT0_:
         -:  346:			  && _PCCFP<_U1, _U2>::template
         -:  347:			   _ImplicitlyMoveConvertiblePair<_U1, _U2>(),
         -:  348:                         bool>::type=true>
-    #####:  349:	constexpr pair(pair<_U1, _U2>&& __p)
-    #####:  350:	: first(std::forward<_U1>(__p.first)),
-    #####:  351:	  second(std::forward<_U2>(__p.second)) { }
+        3:  349:	constexpr pair(pair<_U1, _U2>&& __p)
+        3:  350:	: first(std::forward<_U1>(__p.first)),
+        3:  351:	  second(std::forward<_U2>(__p.second)) { }
 ------------------
 _ZNSt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEEEC1IS4_S8_Lb1EEEOS_IT_T0_E:
-    #####:  349:	constexpr pair(pair<_U1, _U2>&& __p)
-    #####:  350:	: first(std::forward<_U1>(__p.first)),
-    %%%%%:  350-block  0
-    #####:  351:	  second(std::forward<_U2>(__p.second)) { }
+        2:  349:	constexpr pair(pair<_U1, _U2>&& __p)
+        2:  350:	: first(std::forward<_U1>(__p.first)),
+        2:  350-block  0
+        2:  351:	  second(std::forward<_U2>(__p.second)) { }
 ------------------
 _ZNSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS3_26ThreadLocalValueHolderBaseEESt4lessIS6_ESaIS_IKS6_S9_EEEEC1ImSF_Lb1EEEOS_IT_T0_E:
-    #####:  349:	constexpr pair(pair<_U1, _U2>&& __p)
-    #####:  350:	: first(std::forward<_U1>(__p.first)),
-    %%%%%:  350-block  0
-    #####:  351:	  second(std::forward<_U2>(__p.second)) { }
+        1:  349:	constexpr pair(pair<_U1, _U2>&& __p)
+        1:  350:	: first(std::forward<_U1>(__p.first)),
+        1:  350-block  0
+        1:  351:	  second(std::forward<_U2>(__p.second)) { }
 ------------------
         -:  352:
         -:  353:      template<typename _U1, typename _U2, typename
@@ -602,12 +602,12 @@ _ZNSt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS3_26T
         -:  516:  template<typename _T1, typename _T2>
         -:  517:    constexpr pair<typename __decay_and_strip<_T1>::__type,
         -:  518:                   typename __decay_and_strip<_T2>::__type>
-    #####:  519:    make_pair(_T1&& __x, _T2&& __y)
+       3*:  519:    make_pair(_T1&& __x, _T2&& __y)
         -:  520:    {
         -:  521:      typedef typename __decay_and_strip<_T1>::__type __ds_type1;
         -:  522:      typedef typename __decay_and_strip<_T2>::__type __ds_type2;
         -:  523:      typedef pair<__ds_type1, __ds_type2> 	      __pair_type;
-    #####:  524:      return __pair_type(std::forward<_T1>(__x), std::forward<_T2>(__y));
+       3*:  524:      return __pair_type(std::forward<_T1>(__x), std::forward<_T2>(__y));
         -:  525:    }
         -:  526:#else
         -:  527:  template<typename _T1, typename _T2>

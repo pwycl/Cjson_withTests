@@ -295,33 +295,33 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-   131266:  293:  explicit AssertionResult(
+   131340:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-   131266:  299:      : success_(success) {}
+   131340:  299:      : success_(success) {}
 ------------------
 _ZN7testing15AssertionResultC1IiEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
-       30:  293:  explicit AssertionResult(
+       44:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-       30:  299:      : success_(success) {}
-       30:  299-block  0
+       44:  299:      : success_(success) {}
+       44:  299-block  0
 ------------------
 _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
-   131236:  293:  explicit AssertionResult(
+   131296:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-   131236:  299:      : success_(success) {}
-   131236:  299-block  0
+   131296:  299:      : success_(success) {}
+   131296:  299-block  0
 ------------------
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
@@ -335,8 +335,8 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-   131266:  312:  operator bool() const { return success_; }  // NOLINT
-   131266:  312-block  0
+   131340:  312:  operator bool() const { return success_; }  // NOLINT
+   131340:  312-block  0
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;
@@ -345,12 +345,12 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -:  318:  // use it when they fail (i.e., the predicate's outcome doesn't match the
         -:  319:  // assertion's expectation). When nothing has been streamed into the
         -:  320:  // object, returns an empty string.
-    #####:  321:  const char* message() const {
-    #####:  322:    return message_.get() != nullptr ? message_->c_str() : "";
-    %%%%%:  322-block  0
+        2:  321:  const char* message() const {
+       2*:  322:    return message_.get() != nullptr ? message_->c_str() : "";
+        2:  322-block  0
     %%%%%:  322-block  1
-    %%%%%:  322-block  2
-    %%%%%:  322-block  3
+        2:  322-block  2
+        2:  322-block  3
         -:  323:  }
         -:  324:  // Deprecated; please use message() instead.
     #####:  325:  const char* failure_message() const { return message(); }

@@ -472,7 +472,7 @@
         -:  446:  virtual Test* CreateTest() = 0;
         -:  447:
         -:  448: protected:
-       68:  449:  TestFactoryBase() {}
+       85:  449:  TestFactoryBase() {}
         -:  450:
         -:  451: private:
         -:  452:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -483,9 +483,37 @@
         -:  457:template <class TestClass>
         -:  458:class TestFactoryImpl : public TestFactoryBase {
         -:  459: public:
-       68:  460:  Test* CreateTest() override { return new TestClass; }
+       85:  460:  Test* CreateTest() override { return new TestClass; }
 ------------------
-_ZN7testing8internal15TestFactoryImplI51CjsonFixture_assert_cJSON_DetachItemFromObject_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_InsertItemInArray_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify3_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify2_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI37CjsonFixture_assert_cJSON_Minify_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI40CjsonFixture_assert_cJSON_Duplicate_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -534,7 +562,7 @@ _ZN7testing8internal15TestFactoryImplI52CjsonFixture_assert_cJSON_ReplaceItemVia
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_InsertItemInArray_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify4_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -548,7 +576,7 @@ _ZN7testing8internal15TestFactoryImplI51CjsonFixture_assert_cJSON_DeleteItemFrom
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI40CjsonFixture_assert_cJSON_Duplicate_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI51CjsonFixture_assert_cJSON_DetachItemFromObject_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -604,7 +632,28 @@ _ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_AddStringToObj
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
+_ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_AddNumberToObject_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
 _ZN7testing8internal15TestFactoryImplI39CjsonFixture_assert_cJSON_IsString_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI34CjsonFixture_cJSON_Duplicate2_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI33CjsonFixture_cJSON_Duplicate_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -667,7 +716,7 @@ _ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_IsArray_TestE1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_AddNumberToObject_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI46CjsonFixture_assert_cJSON_AddBoolToObject_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -716,35 +765,28 @@ _ZN7testing8internal15TestFactoryImplI40CjsonFixture_assert_cJSON_IsInvalid_Test
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI37CjsonFixture_assert_cJSON_Minify_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify7_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI46CjsonFixture_assert_cJSON_SetNumberHelper_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify6_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI30CjsonFixture_print_number_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_cJSON_Minify5_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_update_offset_TestE10CreateTestEv:
-        1:  460:  Test* CreateTest() override { return new TestClass; }
-        1:  460-block  0
-        1:  460-block  1
-        1:  460-block  2
-    $$$$$:  460-block  3
-------------------
-_ZN7testing8internal15TestFactoryImplI33CjsonFixture2_assert_ensure6_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI58CjsonFixture_parse_number_should_parse_positive_reals_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -786,7 +828,7 @@ _ZN7testing8internal15TestFactoryImplI31CjsonFixture_assert_ensure_TestE10Create
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI57CjsonFixture_print_string_should_print_empty_strings_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI46CjsonFixture_assert_cJSON_SetNumberHelper_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -807,6 +849,13 @@ _ZN7testing8internal15TestFactoryImplI42CjsonFixture_assert_cJSON_GetErrorPtr_Te
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
+_ZN7testing8internal15TestFactoryImplI29CjsonFixture_parse_value_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
 _ZN7testing8internal15TestFactoryImplI58CjsonFixture_parse_number_should_parse_negative_reals_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
@@ -814,7 +863,7 @@ _ZN7testing8internal15TestFactoryImplI58CjsonFixture_parse_number_should_parse_n
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI58CjsonFixture_parse_number_should_parse_positive_reals_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI33CjsonFixture2_assert_ensure6_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -842,14 +891,49 @@ _ZN7testing8internal15TestFactoryImplI40CjsonFixture_buffer_skip_whitespace_Test
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI30CjsonFixture_print_object_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI33CjsonFixture_parse_not_array_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI46CjsonFixture_assert_cJSON_AddBoolToObject_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI72CjsonFixture_parse_array_should_parse_arrays_with_multiple_elements_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI66CjsonFixture_parse_array_should_parse_arrays_with_one_element_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI55CjsonFixture_parse_array_should_parse_empty_arrays_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI74CjsonFixture_parse_object_should_parse_objects_with_multiple_elements_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI68CjsonFixture_parse_object_should_parse_objects_with_one_element_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI48CjsonFixture_assert_cJSON_PrintPreallocated_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -905,7 +989,7 @@ _ZN7testing8internal15TestFactoryImplI28CjsonFixture_misc_tests_TestE10CreateTes
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
-_ZN7testing8internal15TestFactoryImplI37CjsonFixture_parse_empty_objects_TestE10CreateTestEv:
+_ZN7testing8internal15TestFactoryImplI30CjsonFixture_print_object_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -913,6 +997,20 @@ _ZN7testing8internal15TestFactoryImplI37CjsonFixture_parse_empty_objects_TestE10
     $$$$$:  460-block  3
 ------------------
 _ZN7testing8internal15TestFactoryImplI29CjsonFixture_print_array_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI29CjsonFixture_print_value_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI37CjsonFixture_parse_empty_objects_TestE10CreateTestEv:
         1:  460:  Test* CreateTest() override { return new TestClass; }
         1:  460-block  0
         1:  460-block  1
@@ -961,6 +1059,27 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
         1:  460-block  2
     $$$$$:  460-block  3
 ------------------
+_ZN7testing8internal15TestFactoryImplI57CjsonFixture_print_string_should_print_empty_strings_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI30CjsonFixture_print_number_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
+_ZN7testing8internal15TestFactoryImplI38CjsonFixture_assert_update_offset_TestE10CreateTestEv:
+        1:  460:  Test* CreateTest() override { return new TestClass; }
+        1:  460-block  0
+        1:  460-block  1
+        1:  460-block  2
+    $$$$$:  460-block  3
+------------------
         -:  461:};
         -:  462:
         -:  463:#if GTEST_OS_WINDOWS
@@ -981,9 +1100,9 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
         -:  478:using TearDownTestSuiteFunc = void (*)();
         -:  479:
         -:  480:struct CodeLocation {
-       68:  481:  CodeLocation(const std::string& a_file, int a_line)
-       68:  482:      : file(a_file), line(a_line) {}
-       68:  482-block  0
+       85:  481:  CodeLocation(const std::string& a_file, int a_line)
+       85:  482:      : file(a_file), line(a_line) {}
+       85:  482-block  0
         -:  483:
         -:  484:  std::string file;
         -:  485:  int line;
@@ -995,13 +1114,13 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
         -:  491:// Utility functions to help SuiteApiResolver
         -:  492:using SetUpTearDownSuiteFuncType = void (*)();
         -:  493:
-      272:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
+      340:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
         -:  495:    SetUpTearDownSuiteFuncType a, SetUpTearDownSuiteFuncType def) {
-     272*:  496:  return a == def ? nullptr : a;
-      272:  496-block  0
+     340*:  496:  return a == def ? nullptr : a;
+      340:  496-block  0
     %%%%%:  496-block  1
-      272:  496-block  2
-      272:  496-block  3
+      340:  496-block  2
+      340:  496-block  3
         -:  497:}
         -:  498:
         -:  499:template <typename T>
@@ -1014,19 +1133,19 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
         -:  506:  using Test =
         -:  507:      typename std::conditional<sizeof(T) != 0, ::testing::Test, void>::type;
         -:  508:
-       68:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
+       85:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
         -:  510:                                                        int line_num) {
         -:  511:    SetUpTearDownSuiteFuncType test_case_fp =
-       68:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
-       68:  512-block  0
+       85:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
+       85:  512-block  0
         -:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
-       68:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
+       85:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
         -:  515:
-      68*:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+      85*:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
     %%%%%:  516-block  0
-       68:  516-block  1
+       85:  516-block  1
     %%%%%:  516-block  2
-       68:  516-block  3
+       85:  516-block  3
     %%%%%:  516-block  4
     %%%%%:  516-block  5
     $$$$$:  516-block  6
@@ -1038,27 +1157,27 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
     %%%%%:  519-block  2
     %%%%%:  519-block  3
         -:  520:
-      68*:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
-       68:  521-block  0
+      85*:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       85:  521-block  0
     %%%%%:  521-block  1
-       68:  521-block  2
-       68:  521-block  3
-       68:  521-block  4
+       85:  521-block  2
+       85:  521-block  3
+       85:  521-block  4
         -:  522:  }
         -:  523:
-       68:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
+       85:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
         -:  525:                                                           int line_num) {
         -:  526:    SetUpTearDownSuiteFuncType test_case_fp =
-       68:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
-       68:  527-block  0
+       85:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
+       85:  527-block  0
         -:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
-       68:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
+       85:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
         -:  530:
-      68*:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+      85*:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
     %%%%%:  531-block  0
-       68:  531-block  1
+       85:  531-block  1
     %%%%%:  531-block  2
-       68:  531-block  3
+       85:  531-block  3
     %%%%%:  531-block  4
     %%%%%:  531-block  5
     $$$$$:  531-block  6
@@ -1070,12 +1189,12 @@ _ZN7testing8internal15TestFactoryImplI44CjsonFixture_assert_cJSON_ParseWithOpts_
     %%%%%:  534-block  2
     %%%%%:  534-block  3
         -:  535:
-      68*:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
-       68:  536-block  0
+      85*:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       85:  536-block  0
     %%%%%:  536-block  1
-       68:  536-block  2
-       68:  536-block  3
-       68:  536-block  4
+       85:  536-block  2
+       85:  536-block  3
+       85:  536-block  4
         -:  537:  }
         -:  538:};
         -:  539:

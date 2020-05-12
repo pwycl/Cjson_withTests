@@ -65,20 +65,20 @@
         -:   60:  // C'tor.  TestPartResult does NOT have a default constructor.
         -:   61:  // Always use this constructor (with parameters) to create a
         -:   62:  // TestPartResult object.
-    #####:   63:  TestPartResult(Type a_type, const char* a_file_name, int a_line_number,
+        2:   63:  TestPartResult(Type a_type, const char* a_file_name, int a_line_number,
         -:   64:                 const char* a_message)
-    #####:   65:      : type_(a_type),
+        2:   65:      : type_(a_type),
         -:   66:        file_name_(a_file_name == nullptr ? "" : a_file_name),
         -:   67:        line_number_(a_line_number),
         -:   68:        summary_(ExtractSummary(a_message)),
-    #####:   69:        message_(a_message) {}
-    %%%%%:   69-block  0
-    %%%%%:   69-block  1
+       2*:   69:        message_(a_message) {}
+        2:   69-block  0
+        2:   69-block  1
     %%%%%:   69-block  2
-    %%%%%:   69-block  3
-    %%%%%:   69-block  4
-    %%%%%:   69-block  5
-    %%%%%:   69-block  6
+        2:   69-block  3
+        2:   69-block  4
+        2:   69-block  5
+        2:   69-block  6
     $$$$$:   69-block  7
     $$$$$:   69-block  8
     $$$$$:   69-block  9
@@ -87,31 +87,31 @@
     $$$$$:   69-block 12
         -:   70:
         -:   71:  // Gets the outcome of the test part.
-    #####:   72:  Type type() const { return type_; }
-    %%%%%:   72-block  0
+        4:   72:  Type type() const { return type_; }
+        4:   72-block  0
         -:   73:
         -:   74:  // Gets the name of the source file where the test part took place, or
         -:   75:  // NULL if it's unknown.
-    #####:   76:  const char* file_name() const {
-    #####:   77:    return file_name_.empty() ? nullptr : file_name_.c_str();
-    %%%%%:   77-block  0
+        2:   76:  const char* file_name() const {
+       2*:   77:    return file_name_.empty() ? nullptr : file_name_.c_str();
+        2:   77-block  0
     %%%%%:   77-block  1
-    %%%%%:   77-block  2
-    %%%%%:   77-block  3
+        2:   77-block  2
+        2:   77-block  3
         -:   78:  }
         -:   79:
         -:   80:  // Gets the line in the source file where the test part took place,
         -:   81:  // or -1 if it's unknown.
-    #####:   82:  int line_number() const { return line_number_; }
-    %%%%%:   82-block  0
+        2:   82:  int line_number() const { return line_number_; }
+        2:   82-block  0
         -:   83:
         -:   84:  // Gets the summary of the failure message.
     #####:   85:  const char* summary() const { return summary_.c_str(); }
     %%%%%:   85-block  0
         -:   86:
         -:   87:  // Gets the message associated with the test part.
-    #####:   88:  const char* message() const { return message_.c_str(); }
-    %%%%%:   88-block  0
+        2:   88:  const char* message() const { return message_.c_str(); }
+        2:   88-block  0
         -:   89:
         -:   90:  // Returns true if the test part was skipped.
     #####:   91:  bool skipped() const { return type_ == kSkip; }
@@ -125,16 +125,16 @@
     %%%%%:   97-block  0
         -:   98:
         -:   99:  // Returns true if the test part fatally failed.
-    #####:  100:  bool fatally_failed() const { return type_ == kFatalFailure; }
-    %%%%%:  100-block  0
+       28:  100:  bool fatally_failed() const { return type_ == kFatalFailure; }
+       28:  100-block  0
         -:  101:
         -:  102:  // Returns true if the test part failed.
-    #####:  103:  bool failed() const { return fatally_failed() || nonfatally_failed(); }
-    %%%%%:  103-block  0
+      28*:  103:  bool failed() const { return fatally_failed() || nonfatally_failed(); }
+       28:  103-block  0
     %%%%%:  103-block  1
-    %%%%%:  103-block  2
+       28:  103-block  2
     %%%%%:  103-block  3
-    %%%%%:  103-block  4
+       28:  103-block  4
         -:  104:
         -:  105: private:
         -:  106:  Type type_;

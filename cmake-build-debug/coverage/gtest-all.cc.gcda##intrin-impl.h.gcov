@@ -1334,8 +1334,8 @@
         -: 1329:#if !__has_builtin(_InterlockedCompareExchange)
         -: 1330:__INTRINSICS_USEINLINE 
         -: 1331:__LONG32 _InterlockedCompareExchange(__LONG32 volatile *Destination, __LONG32 ExChange, __LONG32 Comperand) {
-    #####: 1332:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
-    %%%%%: 1332-block  0
+      13*: 1332:    return __sync_val_compare_and_swap(Destination, Comperand, ExChange);
+       12: 1332-block  0
     %%%%%: 1332-block  1
         -: 1333:}
         -: 1334:#endif

@@ -387,13 +387,13 @@
         -:  382:    {
         -:  383:      _GLIBCXX14_CONSTEXPR
         -:  384:      bool
-    #####:  385:      operator()(const _Tp& __x, const _Tp& __y) const
-    #####:  386:      { return __x < __y; }
+       6*:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+       6*:  386:      { return __x < __y; }
 ------------------
 _ZNKSt4lessImEclERKmS2_:
-    #####:  385:      operator()(const _Tp& __x, const _Tp& __y) const
-    #####:  386:      { return __x < __y; }
-    %%%%%:  386-block  0
+        6:  385:      operator()(const _Tp& __x, const _Tp& __y) const
+        6:  386:      { return __x < __y; }
+        6:  386-block  0
 ------------------
 _ZNKSt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEclERKS5_S8_:
     #####:  385:      operator()(const _Tp& __x, const _Tp& __y) const
@@ -440,13 +440,13 @@ _ZNKSt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEclERKS5_S8_:
         -:  424:    struct less<_Tp*> : public binary_function<_Tp*, _Tp*, bool>
         -:  425:    {
         -:  426:      _GLIBCXX14_CONSTEXPR bool
-    #####:  427:      operator()(_Tp* __x, _Tp* __y) const _GLIBCXX_NOTHROW
-    %%%%%:  427-block  0
+       10:  427:      operator()(_Tp* __x, _Tp* __y) const _GLIBCXX_NOTHROW
+       10:  427-block  0
         -:  428:      {
         -:  429:	if (__builtin_constant_p (__x < __y))
         -:  430:	  return __x < __y;
-    #####:  431:	return (__UINTPTR_TYPE__)__x < (__UINTPTR_TYPE__)__y;
-    %%%%%:  431-block  0
+       10:  431:	return (__UINTPTR_TYPE__)__x < (__UINTPTR_TYPE__)__y;
+       10:  431-block  0
         -:  432:      }
         -:  433:    };
         -:  434:
@@ -1147,18 +1147,18 @@ _ZNKSt4lessINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEclERKS5_S8_:
         -: 1128:      { return __x.first; }
         -: 1129:
         -: 1130:      const typename _Pair::first_type&
-    #####: 1131:      operator()(const _Pair& __x) const
-    #####: 1132:      { return __x.first; }
+      16*: 1131:      operator()(const _Pair& __x) const
+      16*: 1132:      { return __x.first; }
 ------------------
 _ZNKSt10_Select1stISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEclERKSA_:
-    #####: 1131:      operator()(const _Pair& __x) const
-    #####: 1132:      { return __x.first; }
-    %%%%%: 1132-block  0
+       10: 1131:      operator()(const _Pair& __x) const
+       10: 1132:      { return __x.first; }
+       10: 1132-block  0
 ------------------
 _ZNKSt10_Select1stISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEclERKSH_:
-    #####: 1131:      operator()(const _Pair& __x) const
-    #####: 1132:      { return __x.first; }
-    %%%%%: 1132-block  0
+        6: 1131:      operator()(const _Pair& __x) const
+        6: 1132:      { return __x.first; }
+        6: 1132-block  0
 ------------------
 _ZNKSt10_Select1stISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEyEEclERKS8_:
     #####: 1131:      operator()(const _Pair& __x) const
@@ -1169,18 +1169,18 @@ _ZNKSt10_Select1stISt4pairIKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
         -: 1134:#if __cplusplus >= 201103L
         -: 1135:      template<typename _Pair2>
         -: 1136:        typename _Pair2::first_type&
-    #####: 1137:        operator()(_Pair2& __x) const
-    #####: 1138:        { return __x.first; }
+        4: 1137:        operator()(_Pair2& __x) const
+        4: 1138:        { return __x.first; }
 ------------------
 _ZNKSt10_Select1stISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEclIS0_IS5_S9_EEERNT_10first_typeERSE_:
-    #####: 1137:        operator()(_Pair2& __x) const
-    #####: 1138:        { return __x.first; }
-    %%%%%: 1138-block  0
+        3: 1137:        operator()(_Pair2& __x) const
+        3: 1138:        { return __x.first; }
+        3: 1138-block  0
 ------------------
 _ZNKSt10_Select1stISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEclIS0_ImSG_EEERNT_10first_typeERSL_:
-    #####: 1137:        operator()(_Pair2& __x) const
-    #####: 1138:        { return __x.first; }
-    %%%%%: 1138-block  0
+        1: 1137:        operator()(_Pair2& __x) const
+        1: 1138:        { return __x.first; }
+        1: 1138-block  0
 ------------------
         -: 1139:
         -: 1140:      template<typename _Pair2>

@@ -133,7 +133,7 @@
         -:  128:      typedef true_type is_always_equal;
         -:  129:#endif
         -:  130:
-     152*:  131:      allocator() throw() { }
+     189*:  131:      allocator() throw() { }
 ------------------
 _ZNSaISt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEC2Ev:
     #####:  131:      allocator() throw() { }
@@ -176,32 +176,32 @@ _ZNSaISt10_List_nodeISt4pairIcPKcEEEC2Ev:
     %%%%%:  131-block  0
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEEC2Ev:
-    #####:  131:      allocator() throw() { }
-    %%%%%:  131-block  0
+        1:  131:      allocator() throw() { }
+        1:  131-block  0
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKmSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS4_26ThreadLocalValueHolderBaseEESt4lessIS7_ESaIS0_IKS7_SA_EEEEEEC2Ev:
-    #####:  131:      allocator() throw() { }
-    %%%%%:  131-block  0
+        1:  131:      allocator() throw() { }
+        1:  131-block  0
 ------------------
 _ZNSaIN7testing8internal9TraceInfoEEC2Ev:
-    #####:  131:      allocator() throw() { }
-    %%%%%:  131-block  0
+        1:  131:      allocator() throw() { }
+        1:  131-block  0
 ------------------
 _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEEC2Ev:
         1:  131:      allocator() throw() { }
         1:  131-block  0
 ------------------
 _ZNSaIN7testing14TestPartResultEEC2Ev:
-       71:  131:      allocator() throw() { }
-       71:  131-block  0
+       88:  131:      allocator() throw() { }
+       88:  131-block  0
 ------------------
 _ZNSaIyEC2Ev:
     #####:  131:      allocator() throw() { }
     %%%%%:  131-block  0
 ------------------
 _ZNSaIN7testing12TestPropertyEEC2Ev:
-       71:  131:      allocator() throw() { }
-       71:  131-block  0
+       88:  131:      allocator() throw() { }
+       88:  131-block  0
 ------------------
 _ZNSaIPN7testing8TestInfoEEC2Ev:
         2:  131:      allocator() throw() { }
@@ -228,8 +228,8 @@ _ZNSaISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEEEC2Ev:
     %%%%%:  131-block  0
 ------------------
         -:  132:
-       4*:  133:      allocator(const allocator& __a) throw()
-       4*:  134:      : __allocator_base<_Tp>(__a) { }
+       6*:  133:      allocator(const allocator& __a) throw()
+       6*:  134:      : __allocator_base<_Tp>(__a) { }
 ------------------
 _ZNSaISt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EEEC2ERKS6_:
     #####:  133:      allocator(const allocator& __a) throw()
@@ -272,15 +272,15 @@ _ZNSaINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2ERKS5_:
         2:  134-block  0
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEEC2ERKSC_:
-    #####:  133:      allocator(const allocator& __a) throw()
-    #####:  134:      : __allocator_base<_Tp>(__a) { }
-    %%%%%:  134-block  0
+        2:  133:      allocator(const allocator& __a) throw()
+        2:  134:      : __allocator_base<_Tp>(__a) { }
+        2:  134-block  0
 ------------------
         -:  135:
         -:  136:      template<typename _Tp1>
         -:  137:	allocator(const allocator<_Tp1>&) throw() { }
         -:  138:
-       4*:  139:      ~allocator() throw() { }
+       6*:  139:      ~allocator() throw() { }
 ------------------
 _ZNSaINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED1Ev:
         2:  139:      ~allocator() throw() { }
@@ -327,8 +327,8 @@ _ZNSaISt10_List_nodeISt4pairIcPKcEEED2Ev:
     %%%%%:  139-block  0
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS2_26ThreadLocalValueHolderBaseEEEEED2Ev:
-    #####:  139:      ~allocator() throw() { }
-    %%%%%:  139-block  0
+        2:  139:      ~allocator() throw() { }
+        2:  139-block  0
 ------------------
 _ZNSaINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEED2Ev:
         2:  139:      ~allocator() throw() { }

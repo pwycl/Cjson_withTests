@@ -444,14 +444,14 @@
         -:  439:// of a Test object.
         -:  440:class TestFactoryBase {
         -:  441: public:
-       68:  442:  virtual ~TestFactoryBase() {}
+       85:  442:  virtual ~TestFactoryBase() {}
         -:  443:
         -:  444:  // Creates a test instance to run. The instance is both created and destroyed
         -:  445:  // within TestInfoImpl::Run()
         -:  446:  virtual Test* CreateTest() = 0;
         -:  447:
         -:  448: protected:
-       68:  449:  TestFactoryBase() {}
+       85:  449:  TestFactoryBase() {}
         -:  450:
         -:  451: private:
         -:  452:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -460,9 +460,9 @@
         -:  455:// This class provides implementation of TeastFactoryBase interface.
         -:  456:// It is used in TEST and TEST_F macros.
         -:  457:template <class TestClass>
-      204:  458:class TestFactoryImpl : public TestFactoryBase {
+      255:  458:class TestFactoryImpl : public TestFactoryBase {
         -:  459: public:
-       68:  460:  Test* CreateTest() override { return new TestClass; }
+       85:  460:  Test* CreateTest() override { return new TestClass; }
         -:  461:};
         -:  462:
         -:  463:#if GTEST_OS_WINDOWS
@@ -482,9 +482,9 @@
         -:  477:using SetUpTestSuiteFunc = void (*)();
         -:  478:using TearDownTestSuiteFunc = void (*)();
         -:  479:
-      204:  480:struct CodeLocation {
-       68:  481:  CodeLocation(const std::string& a_file, int a_line)
-       68:  482:      : file(a_file), line(a_line) {}
+      255:  480:struct CodeLocation {
+       85:  481:  CodeLocation(const std::string& a_file, int a_line)
+       85:  482:      : file(a_file), line(a_line) {}
         -:  483:
         -:  484:  std::string file;
         -:  485:  int line;
@@ -496,9 +496,9 @@
         -:  491:// Utility functions to help SuiteApiResolver
         -:  492:using SetUpTearDownSuiteFuncType = void (*)();
         -:  493:
-      272:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
+      340:  494:inline SetUpTearDownSuiteFuncType GetNotDefaultOrNull(
         -:  495:    SetUpTearDownSuiteFuncType a, SetUpTearDownSuiteFuncType def) {
-      272:  496:  return a == def ? nullptr : a;
+      340:  496:  return a == def ? nullptr : a;
         -:  497:}
         -:  498:
         -:  499:template <typename T>
@@ -511,34 +511,34 @@
         -:  506:  using Test =
         -:  507:      typename std::conditional<sizeof(T) != 0, ::testing::Test, void>::type;
         -:  508:
-       68:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
+       85:  509:  static SetUpTearDownSuiteFuncType GetSetUpCaseOrSuite(const char* filename,
         -:  510:                                                        int line_num) {
-       68:  511:    SetUpTearDownSuiteFuncType test_case_fp =
+       85:  511:    SetUpTearDownSuiteFuncType test_case_fp =
         -:  512:        GetNotDefaultOrNull(&T::SetUpTestCase, &Test::SetUpTestCase);
-       68:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
+       85:  513:    SetUpTearDownSuiteFuncType test_suite_fp =
         -:  514:        GetNotDefaultOrNull(&T::SetUpTestSuite, &Test::SetUpTestSuite);
         -:  515:
-       68:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+       85:  516:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  517:        << "Test can not provide both SetUpTestSuite and SetUpTestCase, please "
         -:  518:           "make sure there is only one present at "
     #####:  519:        << filename << ":" << line_num;
         -:  520:
-       68:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       85:  521:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  522:  }
         -:  523:
-       68:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
+       85:  524:  static SetUpTearDownSuiteFuncType GetTearDownCaseOrSuite(const char* filename,
         -:  525:                                                           int line_num) {
-       68:  526:    SetUpTearDownSuiteFuncType test_case_fp =
+       85:  526:    SetUpTearDownSuiteFuncType test_case_fp =
         -:  527:        GetNotDefaultOrNull(&T::TearDownTestCase, &Test::TearDownTestCase);
-       68:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
+       85:  528:    SetUpTearDownSuiteFuncType test_suite_fp =
         -:  529:        GetNotDefaultOrNull(&T::TearDownTestSuite, &Test::TearDownTestSuite);
         -:  530:
-       68:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
+       85:  531:    GTEST_CHECK_(!test_case_fp || !test_suite_fp)
         -:  532:        << "Test can not provide both TearDownTestSuite and TearDownTestCase,"
         -:  533:           " please make sure there is only one present at"
     #####:  534:        << filename << ":" << line_num;
         -:  535:
-       68:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
+       85:  536:    return test_case_fp != nullptr ? test_case_fp : test_suite_fp;
         -:  537:  }
         -:  538:};
         -:  539:

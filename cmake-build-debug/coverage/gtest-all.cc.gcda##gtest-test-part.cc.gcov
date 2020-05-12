@@ -44,18 +44,18 @@
         -:   39:
         -:   40:// Gets the summary of the failure message by omitting the stack trace
         -:   41:// in it.
-    #####:   42:std::string TestPartResult::ExtractSummary(const char* message) {
-    #####:   43:  const char* const stack_trace = strstr(message, internal::kStackTraceMarker);
-    #####:   44:  return stack_trace == nullptr ? message : std::string(message, stack_trace);
-    %%%%%:   44-block  0
-    %%%%%:   44-block  1
+        2:   42:std::string TestPartResult::ExtractSummary(const char* message) {
+        2:   43:  const char* const stack_trace = strstr(message, internal::kStackTraceMarker);
+       4*:   44:  return stack_trace == nullptr ? message : std::string(message, stack_trace);
+        2:   44-block  0
+        2:   44-block  1
     %%%%%:   44-block  2
-    %%%%%:   44-block  3
+        2:   44-block  3
     %%%%%:   44-block  4
-    %%%%%:   44-block  5
-    %%%%%:   44-block  6
-    %%%%%:   44-block  7
-    %%%%%:   44-block  8
+        2:   44-block  5
+        2:   44-block  6
+        2:   44-block  7
+        2:   44-block  8
     $$$$$:   44-block  9
     $$$$$:   44-block 10
     $$$$$:   44-block 11

@@ -277,7 +277,7 @@
         -:  272://   Expected: Foo() is even
         -:  273://     Actual: it's 5
         -:  274://
-   131266:  275:class GTEST_API_ AssertionResult {
+   131340:  275:class GTEST_API_ AssertionResult {
         -:  276: public:
         -:  277:  // Copy constructor.
         -:  278:  // Used in EXPECT_TRUE/FALSE(assertion_result).
@@ -295,13 +295,13 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-   131266:  293:  explicit AssertionResult(
+   131340:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-   131266:  299:      : success_(success) {}
+   131340:  299:      : success_(success) {}
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
         -:  302:  GTEST_DISABLE_MSC_WARNINGS_POP_()
@@ -314,7 +314,7 @@
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-   131266:  312:  operator bool() const { return success_; }  // NOLINT
+   131340:  312:  operator bool() const { return success_; }  // NOLINT
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;

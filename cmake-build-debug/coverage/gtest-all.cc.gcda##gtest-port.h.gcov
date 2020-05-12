@@ -1448,12 +1448,12 @@
         -: 1440:// "MutexLock l(&mu)".  Hence the typedef trick below.
         -: 1441:class GTestMutexLock {
         -: 1442: public:
-    #####: 1443:  explicit GTestMutexLock(Mutex* mutex)
-    #####: 1444:      : mutex_(mutex) { mutex_->Lock(); }
-    %%%%%: 1444-block  0
+        8: 1443:  explicit GTestMutexLock(Mutex* mutex)
+        8: 1444:      : mutex_(mutex) { mutex_->Lock(); }
+        8: 1444-block  0
         -: 1445:
-    #####: 1446:  ~GTestMutexLock() { mutex_->Unlock(); }
-    %%%%%: 1446-block  0
+        8: 1446:  ~GTestMutexLock() { mutex_->Unlock(); }
+        8: 1446-block  0
         -: 1447:
         -: 1448: private:
         -: 1449:  Mutex* const mutex_;
@@ -1628,20 +1628,20 @@ _ZN7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEED1Ev:
     %%%%%: 1581-block  0
 ------------------
         -: 1582:
-    #####: 1583:  T* pointer() { return GetOrCreateValue(); }
+       2*: 1583:  T* pointer() { return GetOrCreateValue(); }
 ------------------
 _ZN7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE7pointerEv:
     #####: 1583:  T* pointer() { return GetOrCreateValue(); }
     %%%%%: 1583-block  0
 ------------------
 _ZN7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE7pointerEv:
-    #####: 1583:  T* pointer() { return GetOrCreateValue(); }
-    %%%%%: 1583-block  0
+        2: 1583:  T* pointer() { return GetOrCreateValue(); }
+        2: 1583-block  0
 ------------------
-    #####: 1584:  const T* pointer() const { return GetOrCreateValue(); }
-    %%%%%: 1584-block  0
-    #####: 1585:  const T& get() const { return *pointer(); }
-    %%%%%: 1585-block  0
+        2: 1584:  const T* pointer() const { return GetOrCreateValue(); }
+        2: 1584-block  0
+        2: 1585:  const T& get() const { return *pointer(); }
+        2: 1585-block  0
     #####: 1586:  void set(const T& value) { *pointer() = value; }
     %%%%%: 1586-block  0
         -: 1587:
@@ -1650,20 +1650,20 @@ _ZN7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE7pointerEv:
         -: 1590:  // knowing the type of T.
         -: 1591:  class ValueHolder : public ThreadLocalValueHolderBase {
         -: 1592:   public:
-    #####: 1593:    ValueHolder() : value_() {}
-    %%%%%: 1593-block  0
-    #####: 1594:    explicit ValueHolder(const T& value) : value_(value) {}
-    %%%%%: 1594-block  0
+        1: 1593:    ValueHolder() : value_() {}
+        1: 1593-block  0
+        1: 1594:    explicit ValueHolder(const T& value) : value_(value) {}
+        1: 1594-block  0
         -: 1595:
-    #####: 1596:    T* pointer() { return &value_; }
+        4: 1596:    T* pointer() { return &value_; }
 ------------------
 _ZN7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE11ValueHolder7pointerEv:
-    #####: 1596:    T* pointer() { return &value_; }
-    %%%%%: 1596-block  0
+        2: 1596:    T* pointer() { return &value_; }
+        2: 1596-block  0
 ------------------
 _ZN7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE11ValueHolder7pointerEv:
-    #####: 1596:    T* pointer() { return &value_; }
-    %%%%%: 1596-block  0
+        2: 1596:    T* pointer() { return &value_; }
+        2: 1596-block  0
 ------------------
         -: 1597:
         -: 1598:   private:
@@ -1672,40 +1672,40 @@ _ZN7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE11ValueHolde
         -: 1601:  };
         -: 1602:
         -: 1603:
-    #####: 1604:  T* GetOrCreateValue() const {
+        4: 1604:  T* GetOrCreateValue() const {
         -: 1605:    return static_cast<ValueHolder*>(
-    #####: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
+        4: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
         -: 1607:  }
 ------------------
 _ZNK7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE16GetOrCreateValueEv:
-    #####: 1604:  T* GetOrCreateValue() const {
+        2: 1604:  T* GetOrCreateValue() const {
         -: 1605:    return static_cast<ValueHolder*>(
-    #####: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
-    %%%%%: 1606-block  0
+        2: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
+        2: 1606-block  0
         -: 1607:  }
 ------------------
 _ZNK7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE16GetOrCreateValueEv:
-    #####: 1604:  T* GetOrCreateValue() const {
+        2: 1604:  T* GetOrCreateValue() const {
         -: 1605:    return static_cast<ValueHolder*>(
-    #####: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
-    %%%%%: 1606-block  0
+        2: 1606:        ThreadLocalRegistry::GetValueOnCurrentThread(this))->pointer();
+        2: 1606-block  0
         -: 1607:  }
 ------------------
         -: 1608:
-    #####: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
-    #####: 1610:    return default_factory_->MakeNewHolder();
+        2: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
+        2: 1610:    return default_factory_->MakeNewHolder();
         -: 1611:  }
 ------------------
 _ZNK7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE24NewValueForCurrentThreadEv:
-    #####: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
-    #####: 1610:    return default_factory_->MakeNewHolder();
-    %%%%%: 1610-block  0
+        1: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
+        1: 1610:    return default_factory_->MakeNewHolder();
+        1: 1610-block  0
         -: 1611:  }
 ------------------
 _ZNK7testing8internal11ThreadLocalISt6vectorINS0_9TraceInfoESaIS3_EEE24NewValueForCurrentThreadEv:
-    #####: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
-    #####: 1610:    return default_factory_->MakeNewHolder();
-    %%%%%: 1610-block  0
+        1: 1609:  virtual ThreadLocalValueHolderBase* NewValueForCurrentThread() const {
+        1: 1610:    return default_factory_->MakeNewHolder();
+        1: 1610-block  0
         -: 1611:  }
 ------------------
         -: 1612:
@@ -1737,8 +1737,8 @@ _ZN7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE18Value
         -: 1624:   public:
         1: 1625:    DefaultValueHolderFactory() {}
         1: 1625-block  0
-    #####: 1626:    virtual ValueHolder* MakeNewHolder() const { return new ValueHolder(); }
-    %%%%%: 1626-block  0
+        1: 1626:    virtual ValueHolder* MakeNewHolder() const { return new ValueHolder(); }
+        1: 1626-block  0
         -: 1627:
         -: 1628:   private:
         -: 1629:    GTEST_DISALLOW_COPY_AND_ASSIGN_(DefaultValueHolderFactory);
@@ -1748,9 +1748,9 @@ _ZN7testing8internal11ThreadLocalIPNS_31TestPartResultReporterInterfaceEE18Value
         -: 1633:   public:
         1: 1634:    explicit InstanceValueHolderFactory(const T& value) : value_(value) {}
         1: 1634-block  0
-    #####: 1635:    virtual ValueHolder* MakeNewHolder() const {
-    #####: 1636:      return new ValueHolder(value_);
-    %%%%%: 1636-block  0
+        1: 1635:    virtual ValueHolder* MakeNewHolder() const {
+        1: 1636:      return new ValueHolder(value_);
+        1: 1636-block  0
         -: 1637:    }
         -: 1638:
         -: 1639:   private:

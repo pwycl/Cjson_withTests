@@ -185,15 +185,15 @@
         -:  180:#if __cplusplus < 201103L
         -:  181:      map() : _M_t() { }
         -:  182:#else
-    #####:  183:      map() = default;
+       2*:  183:      map() = default;
 ------------------
 _ZNSt3mapImS_IPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEES8_ImESaISA_IKmSE_EEEC1Ev:
-    #####:  183:      map() = default;
-    %%%%%:  183-block  0
+        1:  183:      map() = default;
+        1:  183-block  0
 ------------------
 _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEEC1Ev:
-    #####:  183:      map() = default;
-    %%%%%:  183-block  0
+        1:  183:      map() = default;
+        1:  183-block  0
 ------------------
 _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt4pairIKS5_yEEEC1Ev:
     #####:  183:      map() = default;
@@ -228,8 +228,8 @@ _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt
         -:  210:       *  The newly-created %map contains the exact contents of the moved
         -:  211:       *  instance. The moved instance is a valid, but unspecified, %map.
         -:  212:       */
-    #####:  213:      map(map&&) = default;
-    %%%%%:  213-block  0
+        2:  213:      map(map&&) = default;
+        2:  213-block  0
         -:  214:
         -:  215:      /**
         -:  216:       *  @brief  Builds a %map from an initializer_list.
@@ -316,11 +316,11 @@ _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt
         -:  297:       *  themselves are pointers, the pointed-to memory is not touched in any
         -:  298:       *  way.  Managing the pointer is the user's responsibility.
         -:  299:       */
-    #####:  300:      ~map() = default;
+       2*:  300:      ~map() = default;
 ------------------
 _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEED1Ev:
-    #####:  300:      ~map() = default;
-    %%%%%:  300-block  0
+        2:  300:      ~map() = default;
+        2:  300-block  0
 ------------------
 _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt4pairIKS5_yEEED1Ev:
     #####:  300:      ~map() = default;
@@ -413,8 +413,8 @@ _ZNSt3mapImS_IPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadL
         -:  369:       *  according to the keys.
         -:  370:       */
         -:  371:      iterator
-    #####:  372:      end() _GLIBCXX_NOEXCEPT
-    #####:  373:      { return _M_t.end(); }
+       8*:  372:      end() _GLIBCXX_NOEXCEPT
+       8*:  373:      { return _M_t.end(); }
 ------------------
 _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7testing8internal12CodeLocationESt4lessIS5_ESaISt4pairIKS5_S8_EEE3endEv:
     #####:  372:      end() _GLIBCXX_NOEXCEPT
@@ -422,14 +422,14 @@ _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEN7testing8internal
     %%%%%:  373-block  0
 ------------------
 _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEE3endEv:
-    #####:  372:      end() _GLIBCXX_NOEXCEPT
-    #####:  373:      { return _M_t.end(); }
-    %%%%%:  373-block  0
+        4:  372:      end() _GLIBCXX_NOEXCEPT
+        4:  373:      { return _M_t.end(); }
+        4:  373-block  0
 ------------------
 _ZNSt3mapImS_IPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEES8_ImESaISA_IKmSE_EEE3endEv:
-    #####:  372:      end() _GLIBCXX_NOEXCEPT
-    #####:  373:      { return _M_t.end(); }
-    %%%%%:  373-block  0
+        4:  372:      end() _GLIBCXX_NOEXCEPT
+        4:  373:      { return _M_t.end(); }
+        4:  373-block  0
 ------------------
 _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt4pairIKS5_yEEE3endEv:
     #####:  372:      end() _GLIBCXX_NOEXCEPT
@@ -895,18 +895,18 @@ _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt
         -:  812:	       std::enable_if<std::is_constructible<value_type,
         -:  813:						    _Pair&&>::value>::type>
         -:  814:	std::pair<iterator, bool>
-    #####:  815:	insert(_Pair&& __x)
-    #####:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
+        3:  815:	insert(_Pair&& __x)
+        3:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
 ------------------
 _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEE6insertISA_IS4_S7_EvEESA_ISt17_Rb_tree_iteratorISC_EbEOT_:
-    #####:  815:	insert(_Pair&& __x)
-    #####:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
-    %%%%%:  816-block  0
+        2:  815:	insert(_Pair&& __x)
+        2:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
+        2:  816-block  0
 ------------------
 _ZNSt3mapImS_IPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEES8_ImESaISA_IKmSE_EEE6insertISA_ImSE_EvEESA_ISt17_Rb_tree_iteratorISH_EbEOT_:
-    #####:  815:	insert(_Pair&& __x)
-    #####:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
-    %%%%%:  816-block  0
+        1:  815:	insert(_Pair&& __x)
+        1:  816:	{ return _M_t._M_insert_unique(std::forward<_Pair>(__x)); }
+        1:  816-block  0
 ------------------
         -:  817:#endif
         -:  818:      // @}
@@ -1272,18 +1272,18 @@ _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocal
         -: 1166:       */
         -: 1167:
         -: 1168:      iterator
-    #####: 1169:      find(const key_type& __x)
-    #####: 1170:      { return _M_t.find(__x); }
+       8*: 1169:      find(const key_type& __x)
+       8*: 1170:      { return _M_t.find(__x); }
 ------------------
 _ZNSt3mapIPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEE4findERSB_:
-    #####: 1169:      find(const key_type& __x)
-    #####: 1170:      { return _M_t.find(__x); }
-    %%%%%: 1170-block  0
+        4: 1169:      find(const key_type& __x)
+        4: 1170:      { return _M_t.find(__x); }
+        4: 1170-block  0
 ------------------
 _ZNSt3mapImS_IPKN7testing8internal15ThreadLocalBaseESt10shared_ptrINS1_26ThreadLocalValueHolderBaseEESt4lessIS4_ESaISt4pairIKS4_S7_EEES8_ImESaISA_IKmSE_EEE4findERSG_:
-    #####: 1169:      find(const key_type& __x)
-    #####: 1170:      { return _M_t.find(__x); }
-    %%%%%: 1170-block  0
+        4: 1169:      find(const key_type& __x)
+        4: 1170:      { return _M_t.find(__x); }
+        4: 1170-block  0
 ------------------
 _ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEySt4lessIS5_ESaISt4pairIKS5_yEEE4findERS9_:
     #####: 1169:      find(const key_type& __x)

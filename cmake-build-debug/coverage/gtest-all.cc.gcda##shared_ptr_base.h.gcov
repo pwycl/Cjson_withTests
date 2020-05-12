@@ -125,8 +125,8 @@
         -:  120:    : public _Mutex_base<_Lp>
         -:  121:    {
         -:  122:    public:
-    #####:  123:      _Sp_counted_base() noexcept
-    #####:  124:      : _M_use_count(1), _M_weak_count(1) { }
+        2:  123:      _Sp_counted_base() noexcept
+        2:  124:      : _M_use_count(1), _M_weak_count(1) { }
         -:  125:
         -:  126:      virtual
     #####:  127:      ~_Sp_counted_base() noexcept
@@ -386,8 +386,8 @@
         -:  375:    {
         -:  376:    public:
         -:  377:      explicit
-    #####:  378:      _Sp_counted_ptr(_Ptr __p) noexcept
-    #####:  379:      : _M_ptr(__p) { }
+       2*:  378:      _Sp_counted_ptr(_Ptr __p) noexcept
+       2*:  379:      : _M_ptr(__p) { }
 ------------------
 _ZNSt15_Sp_counted_ptrIPKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EEC1ESC_:
     #####:  378:      _Sp_counted_ptr(_Ptr __p) noexcept
@@ -395,9 +395,9 @@ _ZNSt15_Sp_counted_ptrIPKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_string
     %%%%%:  379-block  0
 ------------------
 _ZNSt15_Sp_counted_ptrIPN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EEC1ES3_:
-    #####:  378:      _Sp_counted_ptr(_Ptr __p) noexcept
-    #####:  379:      : _M_ptr(__p) { }
-    %%%%%:  379-block  0
+        2:  378:      _Sp_counted_ptr(_Ptr __p) noexcept
+        2:  379:      : _M_ptr(__p) { }
+        2:  379-block  0
 ------------------
         -:  380:
         -:  381:      virtual void
@@ -656,23 +656,23 @@ _ZNSt15_Sp_counted_ptrIPKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_string
         -:  597:    class __shared_count
         -:  598:    {
         -:  599:    public:
-    #####:  600:      constexpr __shared_count() noexcept : _M_pi(0)
-    #####:  601:      { }
+        4:  600:      constexpr __shared_count() noexcept : _M_pi(0)
+        4:  601:      { }
         -:  602:
         -:  603:      template<typename _Ptr>
         -:  604:        explicit
-    #####:  605:	__shared_count(_Ptr __p) : _M_pi(0)
+       2*:  605:	__shared_count(_Ptr __p) : _M_pi(0)
         -:  606:	{
         -:  607:	  __try
         -:  608:	    {
-    #####:  609:	      _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
+       2*:  609:	      _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
         -:  610:	    }
     =====:  611:	  __catch(...)
         -:  612:	    {
     =====:  613:	      delete __p;
     =====:  614:	      __throw_exception_again;
         -:  615:	    }
-    #####:  616:	}
+       2*:  616:	}
 ------------------
 _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEEET_:
     #####:  605:	__shared_count(_Ptr __p) : _M_pi(0)
@@ -695,13 +695,13 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPKN7testing16MatcherInter
     #####:  616:	}
 ------------------
 _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26ThreadLocalValueHolderBaseEEET_:
-    #####:  605:	__shared_count(_Ptr __p) : _M_pi(0)
+        2:  605:	__shared_count(_Ptr __p) : _M_pi(0)
         -:  606:	{
         -:  607:	  __try
         -:  608:	    {
-    #####:  609:	      _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
-    %%%%%:  609-block  0
-    %%%%%:  609-block  1
+        2:  609:	      _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
+        2:  609-block  0
+        2:  609-block  1
         -:  610:	    }
     =====:  611:	  __catch(...)
     $$$$$:  611-block  0
@@ -712,13 +712,13 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26Thre
     =====:  614:	      __throw_exception_again;
     $$$$$:  614-block  0
         -:  615:	    }
-    #####:  616:	}
+        2:  616:	}
 ------------------
         -:  617:
         -:  618:      template<typename _Ptr>
-    #####:  619:	__shared_count(_Ptr __p, /* is_array = */ false_type)
-    #####:  620:	: __shared_count(__p)
-    #####:  621:	{ }
+       2*:  619:	__shared_count(_Ptr __p, /* is_array = */ false_type)
+       2*:  620:	: __shared_count(__p)
+       2*:  621:	{ }
 ------------------
 _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEEET_St17integral_constantIbLb0EE:
     #####:  619:	__shared_count(_Ptr __p, /* is_array = */ false_type)
@@ -727,10 +727,10 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPKN7testing16MatcherInter
     #####:  621:	{ }
 ------------------
 _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26ThreadLocalValueHolderBaseEEET_St17integral_constantIbLb0EE:
-    #####:  619:	__shared_count(_Ptr __p, /* is_array = */ false_type)
-    #####:  620:	: __shared_count(__p)
-    %%%%%:  620-block  0
-    #####:  621:	{ }
+        2:  619:	__shared_count(_Ptr __p, /* is_array = */ false_type)
+        2:  620:	: __shared_count(__p)
+        2:  620-block  0
+        2:  621:	{ }
 ------------------
         -:  622:
         -:  623:      template<typename _Ptr>
@@ -819,13 +819,13 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26Thre
         -:  706:      // Does not throw if __r._M_get_use_count() == 0, caller must check.
         -:  707:      explicit __shared_count(const __weak_count<_Lp>& __r, std::nothrow_t);
         -:  708:
-    #####:  709:      ~__shared_count() noexcept
+        4:  709:      ~__shared_count() noexcept
         -:  710:      {
-    #####:  711:	if (_M_pi != nullptr)
-    %%%%%:  711-block  0
+        4:  711:	if (_M_pi != nullptr)
+        4:  711-block  0
     #####:  712:	  _M_pi->_M_release();
     %%%%%:  712-block  0
-    #####:  713:      }
+        4:  713:      }
         -:  714:
     #####:  715:      __shared_count(const __shared_count& __r) noexcept
     #####:  716:      : _M_pi(__r._M_pi)
@@ -852,12 +852,12 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26Thre
         -:  735:      }
         -:  736:
         -:  737:      void
-    #####:  738:      _M_swap(__shared_count& __r) noexcept
+        4:  738:      _M_swap(__shared_count& __r) noexcept
         -:  739:      {
-    #####:  740:	_Sp_counted_base<_Lp>* __tmp = __r._M_pi;
-    #####:  741:	__r._M_pi = _M_pi;
-    #####:  742:	_M_pi = __tmp;
-    #####:  743:      }
+        4:  740:	_Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+        4:  741:	__r._M_pi = _M_pi;
+        4:  742:	_M_pi = __tmp;
+        4:  743:      }
         -:  744:
         -:  745:      long
         -:  746:      _M_get_use_count() const noexcept
@@ -1223,13 +1223,13 @@ _ZNSt14__shared_countILN9__gnu_cxx12_Lock_policyE2EEC1IPN7testing8internal26Thre
         -: 1103:
         -: 1104:      template<typename _Yp, typename = _SafeConv<_Yp>>
         -: 1105:	explicit
-    #####: 1106:	__shared_ptr(_Yp* __p)
-    #####: 1107:	: _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
+       2*: 1106:	__shared_ptr(_Yp* __p)
+       2*: 1107:	: _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
         -: 1108:	{
         -: 1109:	  static_assert( !is_void<_Yp>::value, "incomplete type" );
         -: 1110:	  static_assert( sizeof(_Yp) > 0, "incomplete type" );
-    #####: 1111:	  _M_enable_shared_from_this_with(__p);
-    #####: 1112:	}
+       2*: 1111:	  _M_enable_shared_from_this_with(__p);
+       2*: 1112:	}
 ------------------
 _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EEC2ISB_vEEPT_:
     #####: 1106:	__shared_ptr(_Yp* __p)
@@ -1243,15 +1243,15 @@ _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt
     #####: 1112:	}
 ------------------
 _ZNSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EEC2IS2_vEEPT_:
-    #####: 1106:	__shared_ptr(_Yp* __p)
-    #####: 1107:	: _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
-    %%%%%: 1107-block  0
+        2: 1106:	__shared_ptr(_Yp* __p)
+        2: 1107:	: _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
+        2: 1107-block  0
         -: 1108:	{
         -: 1109:	  static_assert( !is_void<_Yp>::value, "incomplete type" );
         -: 1110:	  static_assert( sizeof(_Yp) > 0, "incomplete type" );
-    #####: 1111:	  _M_enable_shared_from_this_with(__p);
-    %%%%%: 1111-block  0
-    #####: 1112:	}
+        2: 1111:	  _M_enable_shared_from_this_with(__p);
+        2: 1111-block  0
+        2: 1112:	}
 ------------------
         -: 1113:
         -: 1114:      template<typename _Yp, typename _Deleter, typename = _SafeConv<_Yp>>
@@ -1292,11 +1292,11 @@ _ZNSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx1
     #####: 1149:      __shared_ptr(const __shared_ptr&) noexcept = default;
     %%%%%: 1149-block  0
         -: 1150:      __shared_ptr& operator=(const __shared_ptr&) noexcept = default;
-    #####: 1151:      ~__shared_ptr() = default;
+       4*: 1151:      ~__shared_ptr() = default;
 ------------------
 _ZNSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EED2Ev:
-    #####: 1151:      ~__shared_ptr() = default;
-    %%%%%: 1151-block  0
+        4: 1151:      ~__shared_ptr() = default;
+        4: 1151-block  0
 ------------------
 _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EED1Ev:
     #####: 1151:      ~__shared_ptr() = default;
@@ -1312,21 +1312,21 @@ _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt
         -: 1155:	: _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount)
         -: 1156:	{ }
         -: 1157:
-    #####: 1158:      __shared_ptr(__shared_ptr&& __r) noexcept
-    #####: 1159:      : _M_ptr(__r._M_ptr), _M_refcount()
+       4*: 1158:      __shared_ptr(__shared_ptr&& __r) noexcept
+       4*: 1159:      : _M_ptr(__r._M_ptr), _M_refcount()
         -: 1160:      {
-    #####: 1161:	_M_refcount._M_swap(__r._M_refcount);
-    #####: 1162:	__r._M_ptr = 0;
-    #####: 1163:      }
+       4*: 1161:	_M_refcount._M_swap(__r._M_refcount);
+       4*: 1162:	__r._M_ptr = 0;
+       4*: 1163:      }
 ------------------
 _ZNSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EEC2EOS5_:
-    #####: 1158:      __shared_ptr(__shared_ptr&& __r) noexcept
-    #####: 1159:      : _M_ptr(__r._M_ptr), _M_refcount()
-    %%%%%: 1159-block  0
+        4: 1158:      __shared_ptr(__shared_ptr&& __r) noexcept
+        4: 1159:      : _M_ptr(__r._M_ptr), _M_refcount()
+        4: 1159-block  0
         -: 1160:      {
-    #####: 1161:	_M_refcount._M_swap(__r._M_refcount);
-    #####: 1162:	__r._M_ptr = 0;
-    #####: 1163:      }
+        4: 1161:	_M_refcount._M_swap(__r._M_refcount);
+        4: 1162:	__r._M_ptr = 0;
+        4: 1163:      }
 ------------------
 _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EEC1EOSE_:
     #####: 1158:      __shared_ptr(__shared_ptr&& __r) noexcept
@@ -1474,8 +1474,8 @@ _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt
         -: 1288:        { __shared_ptr(__p, std::move(__d), std::move(__a)).swap(*this); }
         -: 1289:
         -: 1290:      element_type*
-    #####: 1291:      get() const noexcept
-    #####: 1292:      { return _M_ptr; }
+       4*: 1291:      get() const noexcept
+       4*: 1292:      { return _M_ptr; }
 ------------------
 _ZNKSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EE3getEv:
     #####: 1291:      get() const noexcept
@@ -1483,9 +1483,9 @@ _ZNKSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcS
     %%%%%: 1292-block  0
 ------------------
 _ZNKSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EE3getEv:
-    #####: 1291:      get() const noexcept
-    #####: 1292:      { return _M_ptr; }
-    %%%%%: 1292-block  0
+        4: 1291:      get() const noexcept
+        4: 1292:      { return _M_ptr; }
+        4: 1292-block  0
 ------------------
         -: 1293:
         -: 1294:      explicit operator bool() const // never throws
@@ -1577,16 +1577,16 @@ _ZNKSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx
         -: 1379:
         -: 1380:      template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
         -: 1381:	typename enable_if<!__has_esft_base<_Yp2>::value>::type
-    #####: 1382:	_M_enable_shared_from_this_with(_Yp*) noexcept
-    #####: 1383:	{ }
+       2*: 1382:	_M_enable_shared_from_this_with(_Yp*) noexcept
+       2*: 1383:	{ }
 ------------------
 _ZNSt12__shared_ptrIKN7testing16MatcherInterfaceIRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEELN9__gnu_cxx12_Lock_policyE2EE31_M_enable_shared_from_this_withISB_SA_EENSt9enable_ifIXntsrNSE_15__has_esft_baseIT0_vEE5valueEvE4typeEPT_:
     #####: 1382:	_M_enable_shared_from_this_with(_Yp*) noexcept
     #####: 1383:	{ }
 ------------------
 _ZNSt12__shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseELN9__gnu_cxx12_Lock_policyE2EE31_M_enable_shared_from_this_withIS2_S2_EENSt9enable_ifIXntsrNS5_15__has_esft_baseIT0_vEE5valueEvE4typeEPT_:
-    #####: 1382:	_M_enable_shared_from_this_with(_Yp*) noexcept
-    #####: 1383:	{ }
+        2: 1382:	_M_enable_shared_from_this_with(_Yp*) noexcept
+        2: 1383:	{ }
 ------------------
         -: 1384:
         -: 1385:      void*

@@ -985,10 +985,6 @@ static unsigned char *print(const cJSON * const item, cJSON_bool format, const i
     else /* otherwise copy the JSON over to a new buffer */
     {
         printed = (unsigned char*) hooks->allocate(buffer->offset + 1);
-        if (printed == NULL)
-        {
-            goto fail;
-        }
         memcpy(printed, buffer->buffer, cjson_min(buffer->length, buffer->offset + 1));
         printed[buffer->offset] = '\0'; /* just to be sure */
 
@@ -999,16 +995,7 @@ static unsigned char *print(const cJSON * const item, cJSON_bool format, const i
     return printed;
 
 fail:
-    if (buffer->buffer != NULL)
-    {
-        hooks->deallocate(buffer->buffer);
-    }
-
-    if (printed != NULL)
-    {
-        hooks->deallocate(printed);
-    }
-
+    hooks->deallocate(buffer->buffer);
     return NULL;
 }
 
@@ -1141,51 +1128,24 @@ static cJSON_bool print_value(const cJSON * const item, printbuffer * const outp
     {
         case cJSON_NULL:
             output = ensure(output_buffer, 5);
-            if (output == NULL)
-            {
-                return false;
-            }
+
             strcpy((char*)output, "null");
             return true;
 
         case cJSON_False:
             output = ensure(output_buffer, 6);
-            if (output == NULL)
-            {
-                return false;
-            }
+
             strcpy((char*)output, "false");
             return true;
 
         case cJSON_True:
             output = ensure(output_buffer, 5);
-            if (output == NULL)
-            {
-                return false;
-            }
+
             strcpy((char*)output, "true");
             return true;
 
         case cJSON_Number:
             return print_number(item, output_buffer);
-
-        case cJSON_Raw:
-        {
-            size_t raw_length = 0;
-            if (item->valuestring == NULL)
-            {
-                return false;
-            }
-
-            raw_length = strlen(item->valuestring) + sizeof("");
-            output = ensure(output_buffer, raw_length);
-            if (output == NULL)
-            {
-                return false;
-            }
-            memcpy(output, item->valuestring, raw_length);
-            return true;
-        }
 
         case cJSON_String:
             return print_string(item, output_buffer);
@@ -1221,10 +1181,14 @@ static cJSON_bool parse_array(cJSON * const item, parse_buffer * const input_buf
 
     input_buffer->offset++;
     buffer_skip_whitespace(input_buffer);
-    if (can_access_at_index(input_buffer, 0) && (buffer_at_offset(input_buffer)[0] == ']'))
+
+    if (can_access_at_index(input_buffer, 0) )
     {
-        /* empty array */
-        goto success;
+        if((buffer_at_offset(input_buffer)[0] == ']')){
+            /* empty array */
+            goto success;
+        }
+
     }
 
     /* check if we skipped to the end of the buffer */
@@ -1241,10 +1205,6 @@ static cJSON_bool parse_array(cJSON * const item, parse_buffer * const input_buf
     {
         /* allocate next item */
         cJSON *new_item = cJSON_New_Item(&(input_buffer->hooks));
-        if (new_item == NULL)
-        {
-            goto fail; /* allocation failure */
-        }
 
         /* attach next item to list */
         if (head == NULL)
@@ -1271,9 +1231,13 @@ static cJSON_bool parse_array(cJSON * const item, parse_buffer * const input_buf
     }
     while (can_access_at_index(input_buffer, 0) && (buffer_at_offset(input_buffer)[0] == ','));
 
-    if (cannot_access_at_index(input_buffer, 0) || buffer_at_offset(input_buffer)[0] != ']')
+    if (cannot_access_at_index(input_buffer, 0) )
     {
         goto fail; /* expected end of array */
+    }
+
+    if( buffer_at_offset(input_buffer)[0] != ']'){
+        goto fail;
     }
 
 success:

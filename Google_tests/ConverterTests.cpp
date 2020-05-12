@@ -83,155 +83,176 @@ TEST(CjsonFixture, parse_empty_objects){
     assert_parse_object("{\n\t}");
 }
 //
-//TEST(CjsonFixture, parse_object_should_parse_objects_with_one_element){
-//    assert_parse_object("{\"one\":1}");
-////    assert_is_child(item->child, "one", cJSON_Number);
-//    reset(item);
+TEST(CjsonFixture, parse_object_should_parse_objects_with_one_element){
+    assert_parse_object("{\"one\":1}");
+//    assert_is_child(item->child, "one", cJSON_Number);
+    reset(item);
+
+    assert_parse_object("{\"hello\":\"world!\"}");
+//    assert_is_child(item->child, "hello", cJSON_String);
+    reset(item);
+
+    assert_parse_object("{\"array\":[]}");
+//    assert_is_child(item->child, "array", cJSON_Array);
+    reset(item);
+
+    assert_parse_object("{\"null\":null}");
+//    assert_is_child(item->child, "null", cJSON_NULL);
+    reset(item);
+}
+TEST(CjsonFixture, parse_object_should_parse_objects_with_multiple_elements)
+{
+    assert_parse_object("{\"one\":1\t,\t\"two\"\n:2, \"three\":3}");
+//    assert_is_child(item->child, "one", cJSON_Number);
+//    assert_is_child(item->child->next, "two", cJSON_Number);
+//    assert_is_child(item->child->next->next, "three", cJSON_Number);
+    reset(item);
+
+    {
+        size_t i = 0;
+        cJSON *node = NULL;
+        int expected_types[7] =
+                {
+                        cJSON_Number,
+                        cJSON_NULL,
+                        cJSON_True,
+                        cJSON_False,
+                        cJSON_Array,
+                        cJSON_String,
+                        cJSON_Object
+                };
+        const char *expected_names[7] =
+                {
+                        "one",
+                        "NULL",
+                        "TRUE",
+                        "FALSE",
+                        "array",
+                        "world",
+                        "object"
+                };
+        assert_parse_object("{\"one\":1, \"NULL\":null, \"TRUE\":true, \"FALSE\":false, \"array\":[], \"world\":\"hello\", \"object\":{}}");
+
+        node = item->child;
+        for (
+                i = 0;
+                (i < (sizeof(expected_types)/sizeof(int)))
+                && (node != NULL);
+                (void)i++, node = node->next)
+        {
+//            assert_is_child(node, expected_names[i], expected_types[i]);
+        }
+//        TEST_ASSERT_EQUAL_INT(i, 7);
+        reset(item);
+    }
+}
 //
-//    assert_parse_object("{\"hello\":\"world!\"}");
-////    assert_is_child(item->child, "hello", cJSON_String);
-//    reset(item);
-//
-//    assert_parse_object("{\"array\":[]}");
-////    assert_is_child(item->child, "array", cJSON_Array);
-//    reset(item);
-//
-//    assert_parse_object("{\"null\":null}");
-////    assert_is_child(item->child, "null", cJSON_NULL);
-//    reset(item);
-//}
-//TEST(CjsonFixture, parse_object_should_parse_objects_with_multiple_elements)
-//{
-//    assert_parse_object("{\"one\":1\t,\t\"two\"\n:2, \"three\":3}");
-////    assert_is_child(item->child, "one", cJSON_Number);
-////    assert_is_child(item->child->next, "two", cJSON_Number);
-////    assert_is_child(item->child->next->next, "three", cJSON_Number);
-//    reset(item);
-//
-//    {
-//        size_t i = 0;
-//        cJSON *node = NULL;
-//        int expected_types[7] =
-//                {
-//                        cJSON_Number,
-//                        cJSON_NULL,
-//                        cJSON_True,
-//                        cJSON_False,
-//                        cJSON_Array,
-//                        cJSON_String,
-//                        cJSON_Object
-//                };
-//        const char *expected_names[7] =
-//                {
-//                        "one",
-//                        "NULL",
-//                        "TRUE",
-//                        "FALSE",
-//                        "array",
-//                        "world",
-//                        "object"
-//                };
-//        assert_parse_object("{\"one\":1, \"NULL\":null, \"TRUE\":true, \"FALSE\":false, \"array\":[], \"world\":\"hello\", \"object\":{}}");
-//
-//        node = item->child;
-//        for (
-//                i = 0;
-//                (i < (sizeof(expected_types)/sizeof(int)))
-//                && (node != NULL);
-//                (void)i++, node = node->next)
-//        {
-////            assert_is_child(node, expected_names[i], expected_types[i]);
-//        }
-////        TEST_ASSERT_EQUAL_INT(i, 7);
-//        reset(item);
-//    }
-//}
-//
-//static void assert_parse_array(const char *json)
-//{
-//    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.content = (const unsigned char*)json;
-//    buffer.length = strlen(json) + sizeof("");
-//    buffer.hooks = global_hooks;
-//
-//    ASSERT_TRUE(parse_array(item, &buffer));
-////    assert_is_array(item);
-//}
-//
-//TEST(CjsonFixture, parse_array_should_parse_empty_arrays)
-////static void parse_array_should_parse_empty_arrays(void)
-//{
-//    assert_parse_array("[]");
-////    assert_has_no_child(item);
-//
-//    assert_parse_array("[\n\t]");
-////    assert_has_no_child(item);
-//}
-//TEST(CjsonFixture, parse_array_should_parse_arrays_with_one_element)
-//{
-//
-//    assert_parse_array("[1]");
-////    assert_has_child(item);
-//    assert_has_type(item->child, cJSON_Number);
-//    reset(item);
-//
-//    assert_parse_array("[\"hello!\"]");
-////    assert_has_child(item);
-//    assert_has_type(item->child, cJSON_String);
-//    ASSERT_STREQ("hello!", item->child->valuestring);
-//    reset(item);
-//
-//    assert_parse_array("[[]]");
-////    assert_has_child(item);
-////    assert_is_array(item->child);
-////    assert_has_no_child(item->child);
-//    reset(item);
-//
-//    assert_parse_array("[null]");
-////    assert_has_child(item);
-//    assert_has_type(item->child, cJSON_NULL);
-//    reset(item);
-//}
-//TEST(CjsonFixture, parse_array_should_parse_arrays_with_multiple_elements)
-//{
-//    assert_parse_array("[1\t,\n2, 3]");
-////    assert_has_child(item);
-////    TEST_ASSERT_NOT_NULL(item->child->next);
-////    TEST_ASSERT_NOT_NULL(item->child->next->next);
-////    TEST_ASSERT_NULL(item->child->next->next->next);
-//    assert_has_type(item->child, cJSON_Number);
-//    assert_has_type(item->child->next, cJSON_Number);
-//    assert_has_type(item->child->next->next, cJSON_Number);
-//    reset(item);
-//
-//    {
-//        size_t i = 0;
-//        cJSON *node = NULL;
-//        int expected_types[7] =
-//                {
-//                        cJSON_Number,
-//                        cJSON_NULL,
-//                        cJSON_True,
-//                        cJSON_False,
-//                        cJSON_Array,
-//                        cJSON_String,
-//                        cJSON_Object
-//                };
-//        assert_parse_array("[1, null, true, false, [], \"hello\", {}]");
-//
-//        node = item->child;
-//        for (
-//                i = 0;
-//                (i < (sizeof(expected_types)/sizeof(int)))
-//                && (node != NULL);
-//                (void)i++, node = node->next)
-//        {
-////            TEST_ASSERT_BITS(0xFF, expected_types[i], node->type);
-//        }
-////        TEST_ASSERT_EQUAL_INT(i, 7);
-//        reset(item);
-//    }
-//}
+static void assert_parse_array(const char *json)
+{
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.content = (const unsigned char*)json;
+    buffer.length = strlen(json) + sizeof("");
+    buffer.hooks = global_hooks;
+
+    ASSERT_TRUE(parse_array(item, &buffer));
+    buffer.depth=CJSON_NESTING_LIMIT;
+    parse_array(item, &buffer);
+//    assert_is_array(item);
+}
+
+TEST(CjsonFixture, parse_array_should_parse_empty_arrays)
+//static void parse_array_should_parse_empty_arrays(void)
+{
+    assert_parse_array("[]");
+//    assert_has_no_child(item);
+
+    assert_parse_array("[\n\t]");
+//    assert_has_no_child(item);
+}
+TEST(CjsonFixture, parse_array_should_parse_arrays_with_one_element)
+{
+
+    assert_parse_array("[1]");
+//    assert_has_child(item);
+    assert_has_type(item->child, cJSON_Number);
+    reset(item);
+
+    assert_parse_array("[\"hello!\"]");
+//    assert_has_child(item);
+    assert_has_type(item->child, cJSON_String);
+    ASSERT_STREQ("hello!", item->child->valuestring);
+    reset(item);
+
+    assert_parse_array("[[]]");
+//    assert_has_child(item);
+//    assert_is_array(item->child);
+//    assert_has_no_child(item->child);
+    reset(item);
+
+    assert_parse_array("[null]");
+//    assert_has_child(item);
+    assert_has_type(item->child, cJSON_NULL);
+    reset(item);
+}
+TEST(CjsonFixture, parse_array_should_parse_arrays_with_multiple_elements)
+{
+    assert_parse_array("[1\t,\n2, 3]");
+//    assert_has_child(item);
+//    TEST_ASSERT_NOT_NULL(item->child->next);
+//    TEST_ASSERT_NOT_NULL(item->child->next->next);
+//    TEST_ASSERT_NULL(item->child->next->next->next);
+    assert_has_type(item->child, cJSON_Number);
+    assert_has_type(item->child->next, cJSON_Number);
+    assert_has_type(item->child->next->next, cJSON_Number);
+    reset(item);
+
+    {
+        size_t i = 0;
+        cJSON *node = NULL;
+        int expected_types[7] =
+                {
+                        cJSON_Number,
+                        cJSON_NULL,
+                        cJSON_True,
+                        cJSON_False,
+                        cJSON_Array,
+                        cJSON_String,
+                        cJSON_Object
+                };
+        assert_parse_array("[1, null, true, false, [], \"hello\", {}]");
+
+        node = item->child;
+        for (
+                i = 0;
+                (i < (sizeof(expected_types)/sizeof(int)))
+                && (node != NULL);
+                (void)i++, node = node->next)
+        {
+//            TEST_ASSERT_BITS(0xFF, expected_types[i], node->type);
+        }
+//        TEST_ASSERT_EQUAL_INT(i, 7);
+        reset(item);
+    }
+}
+
+static void assert_not_array(const char *json)
+{
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.content = (const unsigned char*)json;
+    buffer.length = strlen(json) + sizeof("");
+    buffer.hooks = global_hooks;
+
+    ASSERT_FALSE(parse_array(item, &buffer));
+}
+TEST(CjsonFixture, parse_not_array){
+    assert_not_array("");
+    assert_not_array("[");
+    assert_not_array("]");
+    assert_not_array("{\"hello\":[]}");
+    assert_not_array("42");
+    assert_not_array("3.14");
+    assert_not_array("\"[]hello world!\n\"");
+}
 //
 static void assert_parse_number(const char *string, int integer, double real)
 {
@@ -300,45 +321,47 @@ TEST(CjsonFixture, parse_number_should_parse_negative_reals)
     assert_parse_number("-123e-128", 0, -123e-128);
 }
 //
-//static void assert_parse_value(const char *string, int type)
-//{
-//    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.content = (const unsigned char*) string;
-//    buffer.length = strlen(string) + sizeof("");
-//    buffer.hooks = global_hooks;
-//
-//    parse_value(item, &buffer);
-////    TEST_ASSERT_TRUE(parse_value(item, &buffer));
-////    assert_is_value(item, type);
-//}
-//
-//TEST(CjsonFixture, parse_value)
-//{
-//    assert_parse_value("null", cJSON_NULL);
-//    reset(item);
-//
-//    assert_parse_value("true", cJSON_True);
-//    reset(item);
-//
-//    assert_parse_value("false", cJSON_False);
-//    reset(item);
-//
-//    assert_parse_value("1.5", cJSON_Number);
-//    reset(item);
-//
-//    assert_parse_value("\"\"", cJSON_String);
-//    reset(item);
-//    assert_parse_value("\"hello\"", cJSON_String);
-//    reset(item);
-//
-//    assert_parse_value("[]", cJSON_Array);
-//    reset(item);
-//
-//    assert_parse_value("{}", cJSON_Object);
-//    reset(item);
-//
-//
-//}
+static void assert_parse_value(const char *string, int type)
+{
+    parse_value(item, NULL);
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_value(item, &buffer);
+    buffer.content = (const unsigned char*) string;
+    buffer.length = strlen(string) + sizeof("");
+    buffer.hooks = global_hooks;
+
+    parse_value(item, &buffer);
+//    TEST_ASSERT_TRUE(parse_value(item, &buffer));
+//    assert_is_value(item, type);
+}
+
+TEST(CjsonFixture, parse_value)
+{
+    assert_parse_value("null", cJSON_NULL);
+    reset(item);
+
+    assert_parse_value("true", cJSON_True);
+    reset(item);
+
+    assert_parse_value("false", cJSON_False);
+    reset(item);
+
+    assert_parse_value("1.5", cJSON_Number);
+    reset(item);
+
+    assert_parse_value("\"\"", cJSON_String);
+    reset(item);
+    assert_parse_value("\"hello\"", cJSON_String);
+    reset(item);
+
+    assert_parse_value("[]", cJSON_Array);
+    reset(item);
+
+    assert_parse_value("{}", cJSON_Object);
+    reset(item);
+
+
+}
 //
 //static void assert_case_insensitive_strcmp(const unsigned char *string1, const unsigned char *string2,int integer)
 //{
@@ -641,6 +664,7 @@ TEST(CjsonFixture, assert_cJSON_ParseWithOpts3)
     ASSERT_TRUE(with_bom!=NULL);
 
     ASSERT_TRUE(cJSON_Compare(with_bom, without_bom, true));
+    cJSON_Compare(with_bom, with_bom, true);
 
     cJSON_Delete(with_bom);
     cJSON_Delete(without_bom);
@@ -710,73 +734,79 @@ TEST(CjsonFixture, assert_cJSON_PrintUnformatted)
 static void assert_cJSON_PrintBuffered()
 {
     cJSON_PrintBuffered(NULL, 10, true);
+    cJSON *item=cJSON_CreateString("item");
+    cJSON_PrintBuffered(item, 10, true);
+
 }
 TEST(CjsonFixture, assert_cJSON_PrintBuffered)
 {
     assert_cJSON_PrintBuffered();
 }
 //
-//static void assert_cJSON_PrintPreallocated(cJSON *item, char *buffer, const int length, const cJSON_bool format)
-//{
-//    cJSON_PrintPreallocated(item,buffer,length,format);
-//}
-//TEST(CjsonFixture, assert_cJSON_PrintPreallocated)
-//{
-////    char *out = NULL;
-////    cJSON *root;
-////    char *buf = NULL;
-////    size_t len = 0;
-////    out = cJSON_Print(root);
-////    len = strlen(out) + 5;
-////    buf = (char*)malloc(len);
-////    cJSON_PrintPreallocated(root, buf, (int)len, 1);
+static void assert_cJSON_PrintPreallocated(cJSON *item, char *buffer, const int length, const cJSON_bool format)
+{
+    cJSON_PrintPreallocated(item,buffer,length,format);
+}
+TEST(CjsonFixture, assert_cJSON_PrintPreallocated)
+{
+//    char *out = NULL;
+//    cJSON *root;
+//    char *buf = NULL;
+//    size_t len = 0;
+//    out = cJSON_Print(root);
+//    len = strlen(out) + 5;
+//    buf = (char*)malloc(len);
+//    cJSON_PrintPreallocated(root, buf, (int)len, 1);
+
+    char buffer[10];
+    cJSON *item = cJSON_CreateString("item");
+    cJSON_PrintPreallocated(NULL, buffer, sizeof(buffer), true);
+    cJSON_PrintPreallocated(item, NULL, 1, true);
+}
 //
-//    char buffer[10];
-//    cJSON *item = cJSON_CreateString("item");
-//    cJSON_PrintPreallocated(NULL, buffer, sizeof(buffer), true);
-//    cJSON_PrintPreallocated(item, NULL, 1, true);
-//}
+static void assert_print_value(const char *input)
+{
+    unsigned char printed[1024];
+    cJSON item[1];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    buffer.offset = 0;
+    buffer.noalloc = true;
+    buffer.hooks = global_hooks;
+
+    parsebuffer.content = (const unsigned char*)input;
+    parsebuffer.length = strlen(input) + sizeof("");
+    parsebuffer.hooks = global_hooks;
+
+    memset(item, 0, sizeof(item));
+
+    parse_value(item, &parsebuffer);
+//    TEST_ASSERT_TRUE_MESSAGE(parse_value(item, &parsebuffer), "Failed to parse value.");
+
+    print_value(item, &buffer);
+//    TEST_ASSERT_TRUE_MESSAGE(print_value(item, &buffer), "Failed to print value.");
+//    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, buffer.buffer, "Printed value is not as expected.");
+    item->type=3423;
+    print_value(item, &buffer);
+    print_value(NULL, &buffer);
+    print_value(item, NULL);
+    reset(item);
+}
 //
-//static void assert_print_value(const char *input)
-//{
-//    unsigned char printed[1024];
-//    cJSON item[1];
-//    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
-//    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.buffer = printed;
-//    buffer.length = sizeof(printed);
-//    buffer.offset = 0;
-//    buffer.noalloc = true;
-//    buffer.hooks = global_hooks;
-//
-//    parsebuffer.content = (const unsigned char*)input;
-//    parsebuffer.length = strlen(input) + sizeof("");
-//    parsebuffer.hooks = global_hooks;
-//
-//    memset(item, 0, sizeof(item));
-//
-//    parse_value(item, &parsebuffer);
-////    TEST_ASSERT_TRUE_MESSAGE(parse_value(item, &parsebuffer), "Failed to parse value.");
-//
-//    print_value(item, &buffer);
-////    TEST_ASSERT_TRUE_MESSAGE(print_value(item, &buffer), "Failed to print value.");
-////    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, buffer.buffer, "Printed value is not as expected.");
-//
-//    reset(item);
-//}
-//
-//TEST(CjsonFixture, print_value)
-//{
-//    assert_print_value("null");
-//    assert_print_value("true");
-//    assert_print_value("false");
-//    assert_print_value("1.5");
-//    assert_print_value("\"\"");
-//    assert_print_value("\"hello\"");
-//    assert_print_value("[]");
-//    assert_print_value("{}");
-//
-//}
+TEST(CjsonFixture, print_value)
+{
+    assert_print_value("null");
+    assert_print_value("true");
+    assert_print_value("false");
+    assert_print_value("1.5");
+    assert_print_value("\"\"");
+    assert_print_value("\"hello\"");
+    assert_print_value("[]");
+    assert_print_value("{}");
+
+}
 //
 //
 static void assert_print_array(const char * const expected, const char * const input)
@@ -814,6 +844,7 @@ static void assert_print_array(const char * const expected, const char * const i
 //    TEST_ASSERT_TRUE_MESSAGE(parse_array(item, &parsebuffer), "Failed to parse array.");
 
     unformatted_buffer.format = false;
+    print_array(item, NULL);
     print_array(item, &unformatted_buffer);
 //    TEST_ASSERT_TRUE_MESSAGE(print_array(item, &unformatted_buffer), "Failed to print unformatted string.");
 //    TEST_ASSERT_EQUAL_STRING_MESSAGE(input, printed_unformatted, "Unformatted array is not correct.");
@@ -1229,12 +1260,33 @@ TEST(CjsonFixture, assert_cJSON_DeleteItemFromObject)
 //
 TEST(CjsonFixture, assert_cJSON_InsertItemInArray)
 {
+    cJSON *beginning = NULL;
+    cJSON *middle = NULL;
+    cJSON *end = NULL;
+    cJSON *array = NULL;
+
+    beginning = cJSON_CreateNull();
+    ASSERT_TRUE(beginning!=NULL);
+    middle = cJSON_CreateNull();
+    ASSERT_TRUE(middle!=NULL);
+    end = cJSON_CreateNull();
+    ASSERT_TRUE(end!=NULL);
+
+    array = cJSON_CreateArray();
+    ASSERT_TRUE(array!=NULL);
+
+    cJSON_AddItemToArray(array, beginning);
+    cJSON_AddItemToArray(array, middle);
+    cJSON_AddItemToArray(array, end);
+
     cJSON *item = cJSON_CreateString("item");
     cJSON *newitem = cJSON_CreateString("item");
     cJSON_InsertItemInArray(NULL, 0, item);
     cJSON_InsertItemInArray(item, 0, NULL);
     cJSON_InsertItemInArray(item, -1, NULL);
     cJSON_InsertItemInArray(item, 0, newitem);
+    cJSON_InsertItemInArray(array, 0, newitem);
+    cJSON_InsertItemInArray(array, 0, beginning);
 }
 //
 TEST(CjsonFixture, assert_cJSON_ReplaceItemViaPointer)
@@ -1397,7 +1449,8 @@ TEST(CjsonFixture, assert_cJSON_Minify)
 
     cJSON_Minify(unclosed_multiline_comment);
     cJSON_Minify(pending_escape);
-
+}
+TEST(CjsonFixture, assert_cJSON_Minify2){
     const char to_minify[] = "{// this is {} \"some kind\" of [] comment /*, don't you see\n}";
 
     char* minified = (char*) malloc(sizeof(to_minify));
@@ -1406,63 +1459,101 @@ TEST(CjsonFixture, assert_cJSON_Minify)
 
     cJSON_Minify(minified);
     free(minified);
+}
+TEST(CjsonFixture, assert_cJSON_Minify3){
+    const char to_minify[] = "{ \"key\":\ttrue\r\n    }";
 
+    char* minified = (char*) malloc(sizeof(to_minify));
+    ASSERT_TRUE(minified!=NULL);
+    strcpy(minified, to_minify);
 
-//    char unclosed_multiline_comment[] = "/* bla";
-//    cJSON_Minify(unclosed_multiline_comment);
-//
-//    char pending_escape[] = "\"\\";
-//    cJSON_Minify(pending_escape);
-//
-//
-//    const char to_minify[] = "{// this is {} \"some kind\" of [] comment /*, don't you see\n}";
-//
-//    char* minified = (char*) malloc(sizeof(to_minify));
-//    cJSON_Minify(minified);
-//
-//    const char to_minify2[] = "{ \"key\":\ttrue\r\n    }";
-//    char* minified2 = (char*) malloc(sizeof(to_minify2));
-//    cJSON_Minify(minified2);
-//
-//    const char to_minify3[] = "{/* this is\n a /* multi\n //line \n {comment \"\\\" */}";
-//    char* minified3 = (char*) malloc(sizeof(to_minify3));
-//    cJSON_Minify(minified3);
-//
-//    const char to_minify4[] = "\"this is a string \\\" \\t bla\"";
-//    char* minified4 = (char*) malloc(sizeof(to_minify4));
-//    cJSON_Minify(minified4);
-//
-//    char string[] = { '8', ' ', '/', ' ', '5', '\n', '\0' };
-//    /* this should not be an infinite loop */
-//    cJSON_Minify(string);
-//
-//    const char to_minify5[] =
-//            "{\n"
-//            "    \"glossary\": { // comment\n"
-//            "        \"title\": \"example glossary\",\n"
-//            "  /* multi\n"
-//            " line */\n"
-//            "   \"GlossDiv\": {\n"
-//            "            \"title\": \"S\",\n"
-//            "     \"GlossList\": {\n"
-//            "                \"GlossEntry\": {\n"
-//            "                    \"ID\": \"SGML\",\n"
-//            "         \"SortAs\": \"SGML\",\n"
-//            "         \"Acronym\": \"SGML\",\n"
-//            "         \"Abbrev\": \"ISO 8879:1986\",\n"
-//            "         \"GlossDef\": {\n"
-//            "           \"GlossSeeAlso\": [\"GML\", \"XML\"]\n"
-//            "                    },\n"
-//            "         \"GlossSee\": \"markup\"\n"
-//            "                }\n"
-//            "            }\n"
-//            "        }\n"
-//            "    }\n"
-//            "}";
-//
-//
-//    char *buffer = (char*) malloc(sizeof(to_minify5));
-//    cJSON_Minify(buffer);
+    cJSON_Minify(minified);
+
+    free(minified);
+}
+TEST(CjsonFixture, assert_cJSON_Minify4){
+    const char to_minify[] = "{/* this is\n a /* multi\n //line \n {comment \"\\\" */}";
+
+    char* minified = (char*) malloc(sizeof(to_minify));
+    ASSERT_TRUE(minified!=NULL);
+    strcpy(minified, to_minify);
+
+    cJSON_Minify(minified);
+    free(minified);
+}
+TEST(CjsonFixture, assert_cJSON_Minify5){
+    const char to_minify[] = "\"this is a string \\\" \\t bla\"";
+
+    char* minified = (char*) malloc(sizeof(to_minify));
+    ASSERT_TRUE(minified!=NULL);
+    strcpy(minified, to_minify);
+
+    cJSON_Minify(minified);
+
+    free(minified);
+}
+TEST(CjsonFixture, assert_cJSON_Minify6){
+    const char to_minify[] =
+            "{\n"
+            "    \"glossary\": { // comment\n"
+            "        \"title\": \"example glossary\",\n"
+            "  /* multi\n"
+            " line */\n"
+            "		\"GlossDiv\": {\n"
+            "            \"title\": \"S\",\n"
+            "			\"GlossList\": {\n"
+            "                \"GlossEntry\": {\n"
+            "                    \"ID\": \"SGML\",\n"
+            "					\"SortAs\": \"SGML\",\n"
+            "					\"Acronym\": \"SGML\",\n"
+            "					\"Abbrev\": \"ISO 8879:1986\",\n"
+            "					\"GlossDef\": {\n"
+            "						\"GlossSeeAlso\": [\"GML\", \"XML\"]\n"
+            "                    },\n"
+            "					\"GlossSee\": \"markup\"\n"
+            "                }\n"
+            "            }\n"
+            "        }\n"
+            "    }\n"
+            "}";
+    const char* minified =
+            "{"
+            "\"glossary\":{"
+            "\"title\":\"example glossary\","
+            "\"GlossDiv\":{"
+            "\"title\":\"S\","
+            "\"GlossList\":{"
+            "\"GlossEntry\":{"
+            "\"ID\":\"SGML\","
+            "\"SortAs\":\"SGML\","
+            "\"Acronym\":\"SGML\","
+            "\"Abbrev\":\"ISO 8879:1986\","
+            "\"GlossDef\":{"
+            "\"GlossSeeAlso\":[\"GML\",\"XML\"]"
+            "},"
+            "\"GlossSee\":\"markup\""
+            "}"
+            "}"
+            "}"
+            "}"
+            "}";
+
+    char *buffer = (char*) malloc(sizeof(to_minify));
+    strcpy(buffer, to_minify);
+
+    cJSON_Minify(buffer);
+    cJSON_Minify(NULL);
+    free(buffer);
+}
+TEST(CjsonFixture, assert_cJSON_Minify7){
+    const char to_minify[] = "{/7 this is\n a /* multi\n //line \n {comment \"\\\" */}";
+
+    char* minified = (char*) malloc(sizeof(to_minify));
+    ASSERT_TRUE(minified!=NULL);
+    strcpy(minified, to_minify);
+
+    cJSON_Minify(minified);
+    free(minified);
 }
 //
 TEST(CjsonFixture, assert_cJSON_IsInvalid)
@@ -1658,9 +1749,16 @@ TEST(CjsonFixture, cJSON_Compare)
     raw2 = cJSON_Parse("\"[true, false]\"");
 //    TEST_ASSERT_NOT_NULL(raw2);
 
+    raw1->valuestring = NULL;
+
+    cJSON_Compare(raw1, raw2, true);
+    cJSON_Compare(raw1, raw2, false);
+    raw2->valuestring = NULL;
+    cJSON_Compare(raw1, raw2, true);
+    cJSON_Compare(raw1, raw2, false);
+
     raw1->type = cJSON_Raw;
     raw2->type = cJSON_Raw;
-
     cJSON_Compare(raw1, raw2, true);
     cJSON_Compare(raw1, raw2, false);
 
@@ -1831,4 +1929,181 @@ TEST(CjsonFixture, parse_hex4){
 
     parse_hex4((const unsigned char*)"beef");
     parse_hex4((const unsigned char*)"wbeef");
+    cJSON_malloc(1);
+}
+char* read_file(const char *filename) {
+    FILE *file = NULL;
+    long length = 0;
+    char *content = NULL;
+    size_t read_chars = 0;
+
+    /* open in read binary mode */
+    file = fopen(filename, "rb");
+    if (file == NULL)
+    {
+        goto cleanup;
+    }
+
+    /* get the length */
+    if (fseek(file, 0, SEEK_END) != 0)
+    {
+        goto cleanup;
+    }
+    length = ftell(file);
+    if (length < 0)
+    {
+        goto cleanup;
+    }
+    if (fseek(file, 0, SEEK_SET) != 0)
+    {
+        goto cleanup;
+    }
+
+    /* allocate content buffer */
+    content = (char*)malloc((size_t)length + sizeof(""));
+    if (content == NULL)
+    {
+        goto cleanup;
+    }
+
+    /* read the file into memory */
+    read_chars = fread(content, sizeof(char), (size_t)length, file);
+    if ((long)read_chars != length)
+    {
+        free(content);
+        content = NULL;
+        goto cleanup;
+    }
+    content[read_chars] = '\0';
+
+
+    cleanup:
+    if (file != NULL)
+    {
+        fclose(file);
+    }
+
+    return content;
+}
+
+
+static cJSON *parse_test_file(const char * const filename)
+{
+    char *file = NULL;
+    cJSON *json = NULL;
+
+    file = read_file(filename);
+    json = cJSON_Parse(file);
+
+    free(file);
+
+    return json;
+}
+
+static cJSON_bool test_apply_patch(const cJSON * const test)
+{
+    cJSON *doc = NULL;
+    cJSON *patch = NULL;
+    cJSON *expected = NULL;
+    cJSON *error_element = NULL;
+    cJSON *comment = NULL;
+    cJSON *disabled = NULL;
+
+    cJSON *object = NULL;
+    cJSON_bool successful = false;
+
+    /* extract all the data out of the test */
+    comment = cJSON_GetObjectItemCaseSensitive(test, "comment");
+    if (cJSON_IsString(comment))
+    {
+        printf("Testing \"%s\"\n", comment->valuestring);
+    }
+    else
+    {
+        printf("Testing unkown\n");
+    }
+
+    disabled = cJSON_GetObjectItemCaseSensitive(test, "disabled");
+    if (cJSON_IsTrue(disabled))
+    {
+        printf("SKIPPED\n");
+        return true;
+    }
+
+    doc = cJSON_GetObjectItemCaseSensitive(test, "doc");
+    patch = cJSON_GetObjectItemCaseSensitive(test, "patch");
+    /* Make a working copy of 'doc' */
+    object = cJSON_Duplicate(doc, true);
+
+    expected = cJSON_GetObjectItemCaseSensitive(test, "expected");
+    error_element = cJSON_GetObjectItemCaseSensitive(test, "error");
+    if (error_element != NULL)
+    {
+        /* excepting an error */
+        successful = true;
+    }
+    else
+    {
+        /* apply the patch */
+        successful = true;
+
+        if (expected != NULL)
+        {
+            successful = cJSON_Compare(object, expected, true);
+        }
+    }
+
+    cJSON_Delete(object);
+
+    if (successful)
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("FAILED\n");
+    }
+
+    return successful;
+}
+
+
+TEST(CjsonFixture, cJSON_Duplicate)
+//static void cjson_utils_should_pass_json_patch_test_tests(void)
+{
+    cJSON *tests = parse_test_file("../tests.json");
+    cJSON *test = NULL;
+
+    char *file = NULL;
+    file = read_file("tests.json");
+    ASSERT_TRUE(file!=NULL);
+    free(file);
+
+    cJSON_bool failed = false;
+    cJSON_ArrayForEach(test, tests)
+    {
+        failed |= !test_apply_patch(test);
+    }
+//
+    cJSON_Delete(tests);
+
+}
+TEST(CjsonFixture, cJSON_Duplicate2)
+{
+    cJSON *tests = parse_test_file("../spec_tests.json");
+    cJSON *test = NULL;
+
+    char *file = NULL;
+    file = read_file("spec_tests.json");
+    ASSERT_TRUE(file!=NULL);
+    free(file);
+
+    cJSON_bool failed = false;
+    cJSON_ArrayForEach(test, tests)
+    {
+        failed |= !test_apply_patch(test);
+    }
+
+    cJSON_Delete(tests);
+
 }

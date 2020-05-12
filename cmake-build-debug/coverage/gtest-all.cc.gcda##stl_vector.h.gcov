@@ -97,15 +97,15 @@
         -:   92:	pointer _M_finish;
         -:   93:	pointer _M_end_of_storage;
         -:   94:
-     152*:   95:	_Vector_impl()
-     152*:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
-     152*:   97:	{ }
+     187*:   95:	_Vector_impl()
+     187*:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+     187*:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseIN7testing8internal9TraceInfoESaIS2_EE12_Vector_implC1Ev:
-    #####:   95:	_Vector_impl()
-    #####:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
-    %%%%%:   96-block  0
-    #####:   97:	{ }
+        1:   95:	_Vector_impl()
+        1:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+        1:   96-block  0
+        1:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EE12_Vector_implC1Ev:
     #####:   95:	_Vector_impl()
@@ -144,10 +144,10 @@ _ZNSt12_Vector_baseIPN7testing8TestInfoESaIS2_EE12_Vector_implC1Ev:
         2:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE12_Vector_implC1Ev:
-       71:   95:	_Vector_impl()
-       71:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
-       71:   96-block  0
-       71:   97:	{ }
+       88:   95:	_Vector_impl()
+       88:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+       88:   96-block  0
+       88:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseIySaIyEE12_Vector_implC1Ev:
     #####:   95:	_Vector_impl()
@@ -168,10 +168,10 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
         1:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseIN7testing14TestPartResultESaIS1_EE12_Vector_implC1Ev:
-       71:   95:	_Vector_impl()
-       71:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
-       71:   96-block  0
-       71:   97:	{ }
+       88:   95:	_Vector_impl()
+       88:   96:	: _Tp_alloc_type(), _M_start(), _M_finish(), _M_end_of_storage()
+       88:   96-block  0
+       88:   97:	{ }
 ------------------
 _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE12_Vector_implC1Ev:
         1:   95:	_Vector_impl()
@@ -350,8 +350,8 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
         -:  234:      typedef _Alloc allocator_type;
         -:  235:
         -:  236:      _Tp_alloc_type&
-      91*:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
-      91*:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+     103*:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+     103*:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
 ------------------
 _ZNSt12_Vector_baseIN7testing8internal9TraceInfoESaIS2_EE19_M_get_Tp_allocatorEv:
     #####:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
@@ -379,14 +379,14 @@ _ZNSt12_Vector_baseIPN7testing17TestEventListenerESaIS2_EE19_M_get_Tp_allocatorE
         3:  238-block  0
 ------------------
 _ZNSt12_Vector_baseIiSaIiEE19_M_get_Tp_allocatorEv:
-       39:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
-       39:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
-       39:  238-block  0
+       42:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+       42:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+       42:  238-block  0
 ------------------
 _ZNSt12_Vector_baseIPN7testing8TestInfoESaIS2_EE19_M_get_Tp_allocatorEv:
-       33:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
-       33:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
-       33:  238-block  0
+       36:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+       36:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+       36:  238-block  0
 ------------------
 _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE19_M_get_Tp_allocatorEv:
     #####:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
@@ -424,9 +424,9 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
        10:  238-block  0
 ------------------
 _ZNSt12_Vector_baseIN7testing14TestPartResultESaIS1_EE19_M_get_Tp_allocatorEv:
-    #####:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
-    #####:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
-    %%%%%:  238-block  0
+        6:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
+        6:  238:      { return *static_cast<_Tp_alloc_type*>(&this->_M_impl); }
+        6:  238-block  0
 ------------------
 _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE19_M_get_Tp_allocatorEv:
     #####:  237:      _M_get_Tp_allocator() _GLIBCXX_NOEXCEPT
@@ -435,8 +435,8 @@ _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE
 ------------------
         -:  239:
         -:  240:      const _Tp_alloc_type&
-      60*:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
-      60*:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+      68*:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+      68*:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
 ------------------
 _ZNKSt12_Vector_baseIdSaIdEE19_M_get_Tp_allocatorEv:
     #####:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
@@ -444,9 +444,9 @@ _ZNKSt12_Vector_baseIdSaIdEE19_M_get_Tp_allocatorEv:
     %%%%%:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIiSaIiEE19_M_get_Tp_allocatorEv:
-       26:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
-       26:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
-       26:  242-block  0
+       28:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+       28:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+       28:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIySaIyEE19_M_get_Tp_allocatorEv:
     #####:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
@@ -479,9 +479,9 @@ _ZNKSt12_Vector_baseIPN7testing17TestEventListenerESaIS2_EE19_M_get_Tp_allocator
         2:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIPN7testing8TestInfoESaIS2_EE19_M_get_Tp_allocatorEv:
-       22:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
-       22:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
-       22:  242-block  0
+       24:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+       24:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+       24:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE19_M_get_Tp_allocatorEv:
     #####:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
@@ -489,9 +489,9 @@ _ZNKSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE19_M_get_Tp_allocatorEv:
     %%%%%:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIN7testing14TestPartResultESaIS1_EE19_M_get_Tp_allocatorEv:
-    #####:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
-    #####:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
-    %%%%%:  242-block  0
+        4:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
+        4:  242:      { return *static_cast<const _Tp_alloc_type*>(&this->_M_impl); }
+        4:  242-block  0
 ------------------
 _ZNKSt12_Vector_baseIN7testing8internal13edit_distance8EditTypeESaIS3_EE19_M_get_Tp_allocatorEv:
     #####:  241:      _M_get_Tp_allocator() const _GLIBCXX_NOEXCEPT
@@ -508,13 +508,13 @@ _ZNKSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_E
         -:  245:      get_allocator() const _GLIBCXX_NOEXCEPT
         -:  246:      { return allocator_type(_M_get_Tp_allocator()); }
         -:  247:
-     152*:  248:      _Vector_base()
-     152*:  249:      : _M_impl() { }
+     187*:  248:      _Vector_base()
+     187*:  249:      : _M_impl() { }
 ------------------
 _ZNSt12_Vector_baseIN7testing8internal9TraceInfoESaIS2_EEC2Ev:
-    #####:  248:      _Vector_base()
-    #####:  249:      : _M_impl() { }
-    %%%%%:  249-block  0
+        1:  248:      _Vector_base()
+        1:  249:      : _M_impl() { }
+        1:  249-block  0
 ------------------
 _ZNSt12_Vector_baseISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EEC2Ev:
     #####:  248:      _Vector_base()
@@ -547,9 +547,9 @@ _ZNSt12_Vector_baseIPN7testing8TestInfoESaIS2_EEC2Ev:
         2:  249-block  0
 ------------------
 _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EEC2Ev:
-       71:  248:      _Vector_base()
-       71:  249:      : _M_impl() { }
-       71:  249-block  0
+       88:  248:      _Vector_base()
+       88:  249:      : _M_impl() { }
+       88:  249-block  0
 ------------------
 _ZNSt12_Vector_baseIySaIyEEC2Ev:
     #####:  248:      _Vector_base()
@@ -567,9 +567,9 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
         1:  249-block  0
 ------------------
 _ZNSt12_Vector_baseIN7testing14TestPartResultESaIS1_EEC2Ev:
-       71:  248:      _Vector_base()
-       71:  249:      : _M_impl() { }
-       71:  249-block  0
+       88:  248:      _Vector_base()
+       88:  249:      : _M_impl() { }
+       88:  249-block  0
 ------------------
 _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EEC2Ev:
         1:  248:      _Vector_base()
@@ -790,21 +790,21 @@ _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE
         -:  290:      _Vector_impl _M_impl;
         -:  291:
         -:  292:      pointer
-      31*:  293:      _M_allocate(size_t __n)
+      35*:  293:      _M_allocate(size_t __n)
         -:  294:      {
         -:  295:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-      31*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+      35*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIiSaIiEE11_M_allocateEy:
-       13:  293:      _M_allocate(size_t __n)
+       14:  293:      _M_allocate(size_t __n)
         -:  294:      {
         -:  295:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-      13*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
-       13:  296-block  0
-       13:  296-block  1
+      14*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+       14:  296-block  0
+       14:  296-block  1
     %%%%%:  296-block  2
-       13:  296-block  3
+       14:  296-block  3
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIySaIyEE11_M_allocateEy:
@@ -918,14 +918,14 @@ _ZNSt12_Vector_baseIPN7testing17TestEventListenerESaIS2_EE11_M_allocateEy:
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIPN7testing8TestInfoESaIS2_EE11_M_allocateEy:
-       11:  293:      _M_allocate(size_t __n)
+       12:  293:      _M_allocate(size_t __n)
         -:  294:      {
         -:  295:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-      11*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
-       11:  296-block  0
-       11:  296-block  1
+      12*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+       12:  296-block  0
+       12:  296-block  1
     %%%%%:  296-block  2
-       11:  296-block  3
+       12:  296-block  3
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE11_M_allocateEy:
@@ -940,14 +940,14 @@ _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE11_M_allocateEy:
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIN7testing14TestPartResultESaIS1_EE11_M_allocateEy:
-    #####:  293:      _M_allocate(size_t __n)
+        2:  293:      _M_allocate(size_t __n)
         -:  294:      {
         -:  295:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-    #####:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
-    %%%%%:  296-block  0
-    %%%%%:  296-block  1
+       2*:  296:	return __n != 0 ? _Tr::allocate(_M_impl, __n) : pointer();
+        2:  296-block  0
+        2:  296-block  1
     %%%%%:  296-block  2
-    %%%%%:  296-block  3
+        2:  296-block  3
         -:  297:      }
 ------------------
 _ZNSt12_Vector_baseIN7testing8internal13edit_distance8EditTypeESaIS3_EE11_M_allocateEy:
@@ -963,12 +963,12 @@ _ZNSt12_Vector_baseIN7testing8internal13edit_distance8EditTypeESaIS3_EE11_M_allo
 ------------------
         -:  298:
         -:  299:      void
-      31*:  300:      _M_deallocate(pointer __p, size_t __n)
+      35*:  300:      _M_deallocate(pointer __p, size_t __n)
         -:  301:      {
         -:  302:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-      31*:  303:	if (__p)
-      22*:  304:	  _Tr::deallocate(_M_impl, __p, __n);
-      31*:  305:      }
+      35*:  303:	if (__p)
+      24*:  304:	  _Tr::deallocate(_M_impl, __p, __n);
+      35*:  305:      }
 ------------------
 _ZNSt12_Vector_baseISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EE13_M_deallocateEPS4_y:
     #####:  300:      _M_deallocate(pointer __p, size_t __n)
@@ -1021,24 +1021,24 @@ _ZNSt12_Vector_baseIPN7testing17TestEventListenerESaIS2_EE13_M_deallocateEPS2_y:
         1:  305:      }
 ------------------
 _ZNSt12_Vector_baseIiSaIiEE13_M_deallocateEPiy:
-       13:  300:      _M_deallocate(pointer __p, size_t __n)
+       14:  300:      _M_deallocate(pointer __p, size_t __n)
         -:  301:      {
         -:  302:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-       13:  303:	if (__p)
-       13:  303-block  0
-       10:  304:	  _Tr::deallocate(_M_impl, __p, __n);
-       10:  304-block  0
-       13:  305:      }
+       14:  303:	if (__p)
+       14:  303-block  0
+       11:  304:	  _Tr::deallocate(_M_impl, __p, __n);
+       11:  304-block  0
+       14:  305:      }
 ------------------
 _ZNSt12_Vector_baseIPN7testing8TestInfoESaIS2_EE13_M_deallocateEPS2_y:
-       11:  300:      _M_deallocate(pointer __p, size_t __n)
+       12:  300:      _M_deallocate(pointer __p, size_t __n)
         -:  301:      {
         -:  302:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-       11:  303:	if (__p)
-       11:  303-block  0
-        9:  304:	  _Tr::deallocate(_M_impl, __p, __n);
-        9:  304-block  0
-       11:  305:      }
+       12:  303:	if (__p)
+       12:  303-block  0
+       10:  304:	  _Tr::deallocate(_M_impl, __p, __n);
+       10:  304-block  0
+       12:  305:      }
 ------------------
 _ZNSt12_Vector_baseIN7testing12TestPropertyESaIS1_EE13_M_deallocateEPS1_y:
     #####:  300:      _M_deallocate(pointer __p, size_t __n)
@@ -1111,14 +1111,14 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
         4:  305:      }
 ------------------
 _ZNSt12_Vector_baseIN7testing14TestPartResultESaIS1_EE13_M_deallocateEPS1_y:
-    #####:  300:      _M_deallocate(pointer __p, size_t __n)
+        2:  300:      _M_deallocate(pointer __p, size_t __n)
         -:  301:      {
         -:  302:	typedef __gnu_cxx::__alloc_traits<_Tp_alloc_type> _Tr;
-    #####:  303:	if (__p)
-    %%%%%:  303-block  0
+        2:  303:	if (__p)
+        2:  303-block  0
     #####:  304:	  _Tr::deallocate(_M_impl, __p, __n);
     %%%%%:  304-block  0
-    #####:  305:      }
+        2:  305:      }
 ------------------
 _ZNSt12_Vector_baseIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE13_M_deallocateEPS3_y:
     #####:  300:      _M_deallocate(pointer __p, size_t __n)
@@ -1261,19 +1261,19 @@ _ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE
         -:  388:      /**
         -:  389:       *  @brief  Creates a %vector with no elements.
         -:  390:       */
-     152*:  391:      vector()
+     187*:  391:      vector()
         -:  392:#if __cplusplus >= 201103L
         -:  393:      noexcept(is_nothrow_default_constructible<_Alloc>::value)
         -:  394:#endif
-     152*:  395:      : _Base() { }
+     187*:  395:      : _Base() { }
 ------------------
 _ZNSt6vectorIN7testing8internal9TraceInfoESaIS2_EEC1Ev:
-    #####:  391:      vector()
+        1:  391:      vector()
         -:  392:#if __cplusplus >= 201103L
         -:  393:      noexcept(is_nothrow_default_constructible<_Alloc>::value)
         -:  394:#endif
-    #####:  395:      : _Base() { }
-    %%%%%:  395-block  0
+        1:  395:      : _Base() { }
+        1:  395-block  0
 ------------------
 _ZNSt6vectorISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EEC1Ev:
     #####:  391:      vector()
@@ -1324,12 +1324,12 @@ _ZNSt6vectorIPN7testing8TestInfoESaIS2_EEC1Ev:
         2:  395-block  0
 ------------------
 _ZNSt6vectorIN7testing12TestPropertyESaIS1_EEC1Ev:
-       71:  391:      vector()
+       88:  391:      vector()
         -:  392:#if __cplusplus >= 201103L
         -:  393:      noexcept(is_nothrow_default_constructible<_Alloc>::value)
         -:  394:#endif
-       71:  395:      : _Base() { }
-       71:  395-block  0
+       88:  395:      : _Base() { }
+       88:  395-block  0
 ------------------
 _ZNSt6vectorIySaIyEEC1Ev:
     #####:  391:      vector()
@@ -1356,12 +1356,12 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EEC1Ev:
         1:  395-block  0
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EEC1Ev:
-       71:  391:      vector()
+       88:  391:      vector()
         -:  392:#if __cplusplus >= 201103L
         -:  393:      noexcept(is_nothrow_default_constructible<_Alloc>::value)
         -:  394:#endif
-       71:  395:      : _Base() { }
-       71:  395-block  0
+       88:  395:      : _Base() { }
+       88:  395-block  0
 ------------------
 _ZNSt6vectorIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EEC1Ev:
         1:  391:      vector()
@@ -1927,13 +1927,13 @@ _ZNSt6vectorIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EED1Ev:
         -:  695:       *  element order.
         -:  696:       */
         -:  697:      iterator
-     168*:  698:      begin() _GLIBCXX_NOEXCEPT
-     168*:  699:      { return iterator(this->_M_impl._M_start); }
+     206*:  698:      begin() _GLIBCXX_NOEXCEPT
+     206*:  699:      { return iterator(this->_M_impl._M_start); }
 ------------------
 _ZNSt6vectorIiSaIiEE5beginEv:
-       13:  698:      begin() _GLIBCXX_NOEXCEPT
-       13:  699:      { return iterator(this->_M_impl._M_start); }
-       13:  699-block  0
+       14:  698:      begin() _GLIBCXX_NOEXCEPT
+       14:  699:      { return iterator(this->_M_impl._M_start); }
+       14:  699-block  0
 ------------------
 _ZNSt6vectorIySaIyEE5beginEv:
     #####:  698:      begin() _GLIBCXX_NOEXCEPT
@@ -1951,14 +1951,14 @@ _ZNSt6vectorIN7testing8internal9TraceInfoESaIS2_EE5beginEv:
     %%%%%:  699-block  0
 ------------------
 _ZNSt6vectorIPN7testing8TestInfoESaIS2_EE5beginEv:
-       11:  698:      begin() _GLIBCXX_NOEXCEPT
-       11:  699:      { return iterator(this->_M_impl._M_start); }
-       11:  699-block  0
+       12:  698:      begin() _GLIBCXX_NOEXCEPT
+       12:  699:      { return iterator(this->_M_impl._M_start); }
+       12:  699-block  0
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE5beginEv:
-    #####:  698:      begin() _GLIBCXX_NOEXCEPT
-    #####:  699:      { return iterator(this->_M_impl._M_start); }
-    %%%%%:  699-block  0
+        2:  698:      begin() _GLIBCXX_NOEXCEPT
+        2:  699:      { return iterator(this->_M_impl._M_start); }
+        2:  699-block  0
 ------------------
 _ZNSt6vectorIPN7testing11EnvironmentESaIS2_EE5beginEv:
         1:  698:      begin() _GLIBCXX_NOEXCEPT
@@ -1971,9 +1971,9 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE5beginE
         2:  699-block  0
 ------------------
 _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EE5beginEv:
-      139:  698:      begin() _GLIBCXX_NOEXCEPT
-      139:  699:      { return iterator(this->_M_impl._M_start); }
-      139:  699-block  0
+      173:  698:      begin() _GLIBCXX_NOEXCEPT
+      173:  699:      { return iterator(this->_M_impl._M_start); }
+      173:  699-block  0
 ------------------
 _ZNSt6vectorIPN7testing17TestEventListenerESaIS2_EE5beginEv:
         1:  698:      begin() _GLIBCXX_NOEXCEPT
@@ -2002,8 +2002,8 @@ _ZNSt6vectorIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE5beginE
         -:  704:       *  element order.
         -:  705:       */
         -:  706:      const_iterator
-     508*:  707:      begin() const _GLIBCXX_NOEXCEPT
-     508*:  708:      { return const_iterator(this->_M_impl._M_start); }
+     627*:  707:      begin() const _GLIBCXX_NOEXCEPT
+     627*:  708:      { return const_iterator(this->_M_impl._M_start); }
 ------------------
 _ZNKSt6vectorIdSaIdEE5beginEv:
     #####:  707:      begin() const _GLIBCXX_NOEXCEPT
@@ -2021,14 +2021,14 @@ _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE5beginEv:
     %%%%%:  708-block  0
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EE5beginEv:
-       22:  707:      begin() const _GLIBCXX_NOEXCEPT
-       22:  708:      { return const_iterator(this->_M_impl._M_start); }
-       22:  708-block  0
+       28:  707:      begin() const _GLIBCXX_NOEXCEPT
+       28:  708:      { return const_iterator(this->_M_impl._M_start); }
+       28:  708-block  0
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE5beginEv:
-      478:  707:      begin() const _GLIBCXX_NOEXCEPT
-      478:  708:      { return const_iterator(this->_M_impl._M_start); }
-      478:  708-block  0
+      591:  707:      begin() const _GLIBCXX_NOEXCEPT
+      591:  708:      { return const_iterator(this->_M_impl._M_start); }
+      591:  708-block  0
 ------------------
 _ZNKSt6vectorIPN7testing9TestSuiteESaIS2_EE5beginEv:
         5:  707:      begin() const _GLIBCXX_NOEXCEPT
@@ -2052,13 +2052,13 @@ _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE5beginEv:
         -:  713:       *  element order.
         -:  714:       */
         -:  715:      iterator
-     100*:  716:      end() _GLIBCXX_NOEXCEPT
-     100*:  717:      { return iterator(this->_M_impl._M_finish); }
+     121*:  716:      end() _GLIBCXX_NOEXCEPT
+     121*:  717:      { return iterator(this->_M_impl._M_finish); }
 ------------------
 _ZNSt6vectorIiSaIiEE3endEv:
-       13:  716:      end() _GLIBCXX_NOEXCEPT
-       13:  717:      { return iterator(this->_M_impl._M_finish); }
-       13:  717-block  0
+       14:  716:      end() _GLIBCXX_NOEXCEPT
+       14:  717:      { return iterator(this->_M_impl._M_finish); }
+       14:  717-block  0
 ------------------
 _ZNSt6vectorIySaIyEE3endEv:
     #####:  716:      end() _GLIBCXX_NOEXCEPT
@@ -2086,14 +2086,14 @@ _ZNSt6vectorIPN7testing17TestEventListenerESaIS2_EE3endEv:
         1:  717-block  0
 ------------------
 _ZNSt6vectorIPN7testing8TestInfoESaIS2_EE3endEv:
-       11:  716:      end() _GLIBCXX_NOEXCEPT
-       11:  717:      { return iterator(this->_M_impl._M_finish); }
-       11:  717-block  0
+       12:  716:      end() _GLIBCXX_NOEXCEPT
+       12:  717:      { return iterator(this->_M_impl._M_finish); }
+       12:  717-block  0
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE3endEv:
-    #####:  716:      end() _GLIBCXX_NOEXCEPT
-    #####:  717:      { return iterator(this->_M_impl._M_finish); }
-    %%%%%:  717-block  0
+        2:  716:      end() _GLIBCXX_NOEXCEPT
+        2:  717:      { return iterator(this->_M_impl._M_finish); }
+        2:  717-block  0
 ------------------
 _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE3endEv:
         2:  716:      end() _GLIBCXX_NOEXCEPT
@@ -2101,9 +2101,9 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE3endEv:
         2:  717-block  0
 ------------------
 _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EE3endEv:
-       71:  716:      end() _GLIBCXX_NOEXCEPT
-       71:  717:      { return iterator(this->_M_impl._M_finish); }
-       71:  717-block  0
+       88:  716:      end() _GLIBCXX_NOEXCEPT
+       88:  717:      { return iterator(this->_M_impl._M_finish); }
+       88:  717-block  0
 ------------------
 _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE3endEv:
     #####:  716:      end() _GLIBCXX_NOEXCEPT
@@ -2127,8 +2127,8 @@ _ZNSt6vectorIPN7testing8internal30ParameterizedTestSuiteInfoBaseESaIS3_EE3endEv:
         -:  722:       *  ordinary element order.
         -:  723:       */
         -:  724:      const_iterator
-    1196*:  725:      end() const _GLIBCXX_NOEXCEPT
-    1196*:  726:      { return const_iterator(this->_M_impl._M_finish); }
+    1740*:  725:      end() const _GLIBCXX_NOEXCEPT
+    1740*:  726:      { return const_iterator(this->_M_impl._M_finish); }
 ------------------
 _ZNKSt6vectorIdSaIdEE3endEv:
     #####:  725:      end() const _GLIBCXX_NOEXCEPT
@@ -2146,14 +2146,14 @@ _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE3endEv:
     %%%%%:  726-block  0
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EE3endEv:
-      702:  725:      end() const _GLIBCXX_NOEXCEPT
-      702:  726:      { return const_iterator(this->_M_impl._M_finish); }
-      702:  726-block  0
+     1133:  725:      end() const _GLIBCXX_NOEXCEPT
+     1133:  726:      { return const_iterator(this->_M_impl._M_finish); }
+     1133:  726-block  0
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE3endEv:
-      478:  725:      end() const _GLIBCXX_NOEXCEPT
-      478:  726:      { return const_iterator(this->_M_impl._M_finish); }
-      478:  726-block  0
+      591:  725:      end() const _GLIBCXX_NOEXCEPT
+      591:  726:      { return const_iterator(this->_M_impl._M_finish); }
+      591:  726-block  0
 ------------------
 _ZNKSt6vectorIPN7testing9TestSuiteESaIS2_EE3endEv:
        13:  725:      end() const _GLIBCXX_NOEXCEPT
@@ -2177,8 +2177,8 @@ _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE3endEv:
         -:  731:       *  element order.
         -:  732:       */
         -:  733:      reverse_iterator
-       69:  734:      rbegin() _GLIBCXX_NOEXCEPT
-       69:  735:      { return reverse_iterator(end()); }
+       86:  734:      rbegin() _GLIBCXX_NOEXCEPT
+       86:  735:      { return reverse_iterator(end()); }
 ------------------
 _ZNSt6vectorIPN7testing11EnvironmentESaIS2_EE6rbeginEv:
         1:  734:      rbegin() _GLIBCXX_NOEXCEPT
@@ -2186,9 +2186,9 @@ _ZNSt6vectorIPN7testing11EnvironmentESaIS2_EE6rbeginEv:
         1:  735-block  0
 ------------------
 _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EE6rbeginEv:
-       68:  734:      rbegin() _GLIBCXX_NOEXCEPT
-       68:  735:      { return reverse_iterator(end()); }
-       68:  735-block  0
+       85:  734:      rbegin() _GLIBCXX_NOEXCEPT
+       85:  735:      { return reverse_iterator(end()); }
+       85:  735-block  0
 ------------------
         -:  736:
         -:  737:      /**
@@ -2206,8 +2206,8 @@ _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EE6rbeginEv:
         -:  749:       *  in reverse element order.
         -:  750:       */
         -:  751:      reverse_iterator
-      137:  752:      rend() _GLIBCXX_NOEXCEPT
-      137:  753:      { return reverse_iterator(begin()); }
+      171:  752:      rend() _GLIBCXX_NOEXCEPT
+      171:  753:      { return reverse_iterator(begin()); }
 ------------------
 _ZNSt6vectorIPN7testing11EnvironmentESaIS2_EE4rendEv:
         1:  752:      rend() _GLIBCXX_NOEXCEPT
@@ -2215,9 +2215,9 @@ _ZNSt6vectorIPN7testing11EnvironmentESaIS2_EE4rendEv:
         1:  753-block  0
 ------------------
 _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EE4rendEv:
-      136:  752:      rend() _GLIBCXX_NOEXCEPT
-      136:  753:      { return reverse_iterator(begin()); }
-      136:  753-block  0
+      170:  752:      rend() _GLIBCXX_NOEXCEPT
+      170:  753:      { return reverse_iterator(begin()); }
+      170:  753-block  0
 ------------------
         -:  754:
         -:  755:      /**
@@ -2281,8 +2281,8 @@ _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE6cbeginEv:
         -:  802:      // [23.2.4.2] capacity
         -:  803:      /**  Returns the number of elements in the %vector.  */
         -:  804:      size_type
-    1474*:  805:      size() const _GLIBCXX_NOEXCEPT
-    1474*:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+    2379*:  805:      size() const _GLIBCXX_NOEXCEPT
+    2379*:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
 ------------------
 _ZNKSt6vectorISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EE4sizeEv:
     #####:  805:      size() const _GLIBCXX_NOEXCEPT
@@ -2295,24 +2295,24 @@ _ZNKSt6vectorIPN7testing11EnvironmentESaIS2_EE4sizeEv:
     %%%%%:  806-block  0
 ------------------
 _ZNKSt6vectorIN7testing8internal9TraceInfoESaIS2_EE4sizeEv:
-    #####:  805:      size() const _GLIBCXX_NOEXCEPT
-    #####:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-    %%%%%:  806-block  0
+        2:  805:      size() const _GLIBCXX_NOEXCEPT
+        2:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+        2:  806-block  0
 ------------------
 _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE4sizeEv:
-      233:  805:      size() const _GLIBCXX_NOEXCEPT
-      233:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-      233:  806-block  0
+      288:  805:      size() const _GLIBCXX_NOEXCEPT
+      288:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+      288:  806-block  0
 ------------------
 _ZNKSt6vectorIiSaIiEE4sizeEv:
-      262:  805:      size() const _GLIBCXX_NOEXCEPT
-      262:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-      262:  806-block  0
+      398:  805:      size() const _GLIBCXX_NOEXCEPT
+      398:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+      398:  806-block  0
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EE4sizeEv:
-      184:  805:      size() const _GLIBCXX_NOEXCEPT
-      184:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-      184:  806-block  0
+      302:  805:      size() const _GLIBCXX_NOEXCEPT
+      302:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+      302:  806-block  0
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE4sizeEv:
     #####:  805:      size() const _GLIBCXX_NOEXCEPT
@@ -2320,9 +2320,9 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE4sizeEv:
     %%%%%:  806-block  0
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE4sizeEv:
-      751:  805:      size() const _GLIBCXX_NOEXCEPT
-      751:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-      751:  806-block  0
+     1336:  805:      size() const _GLIBCXX_NOEXCEPT
+     1336:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+     1336:  806-block  0
 ------------------
 _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE4sizeEv:
     #####:  805:      size() const _GLIBCXX_NOEXCEPT
@@ -2345,9 +2345,9 @@ _ZNKSt6vectorIySaIyEE4sizeEv:
     %%%%%:  806-block  0
 ------------------
 _ZNKSt6vectorIPN7testing9TestSuiteESaIS2_EE4sizeEv:
-       32:  805:      size() const _GLIBCXX_NOEXCEPT
-       32:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
-       32:  806-block  0
+       41:  805:      size() const _GLIBCXX_NOEXCEPT
+       41:  806:      { return size_type(this->_M_impl._M_finish - this->_M_impl._M_start); }
+       41:  806-block  0
 ------------------
 _ZNKSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE4sizeEv:
        12:  805:      size() const _GLIBCXX_NOEXCEPT
@@ -2357,13 +2357,13 @@ _ZNKSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE4sizeE
         -:  807:
         -:  808:      /**  Returns the size() of the largest possible %vector.  */
         -:  809:      size_type
-      58*:  810:      max_size() const _GLIBCXX_NOEXCEPT
-      58*:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+      66*:  810:      max_size() const _GLIBCXX_NOEXCEPT
+      66*:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
 ------------------
 _ZNKSt6vectorIiSaIiEE8max_sizeEv:
-       26:  810:      max_size() const _GLIBCXX_NOEXCEPT
-       26:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
-       26:  811-block  0
+       28:  810:      max_size() const _GLIBCXX_NOEXCEPT
+       28:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+       28:  811-block  0
 ------------------
 _ZNKSt6vectorIySaIyEE8max_sizeEv:
     #####:  810:      max_size() const _GLIBCXX_NOEXCEPT
@@ -2401,9 +2401,9 @@ _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE8max_sizeEv:
         2:  811-block  0
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EE8max_sizeEv:
-       22:  810:      max_size() const _GLIBCXX_NOEXCEPT
-       22:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
-       22:  811-block  0
+       24:  810:      max_size() const _GLIBCXX_NOEXCEPT
+       24:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+       24:  811-block  0
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE8max_sizeEv:
     #####:  810:      max_size() const _GLIBCXX_NOEXCEPT
@@ -2411,9 +2411,9 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE8max_sizeEv:
     %%%%%:  811-block  0
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE8max_sizeEv:
-    #####:  810:      max_size() const _GLIBCXX_NOEXCEPT
-    #####:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
-    %%%%%:  811-block  0
+        4:  810:      max_size() const _GLIBCXX_NOEXCEPT
+        4:  811:      { return _Alloc_traits::max_size(_M_get_Tp_allocator()); }
+        4:  811-block  0
 ------------------
 _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE8max_sizeEv:
     #####:  810:      max_size() const _GLIBCXX_NOEXCEPT
@@ -2538,10 +2538,10 @@ _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE8max_sizeEv:
         -:  927:       *  see at().)
         -:  928:       */
         -:  929:      reference
-     362*:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+     449*:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
         -:  931:      {
         -:  932:	__glibcxx_requires_subscript(__n);
-     362*:  933:	return *(this->_M_impl._M_start + __n);
+     449*:  933:	return *(this->_M_impl._M_start + __n);
         -:  934:      }
 ------------------
 _ZNSt6vectorIN7testing8internal9TraceInfoESaIS2_EEixEy:
@@ -2553,27 +2553,27 @@ _ZNSt6vectorIN7testing8internal9TraceInfoESaIS2_EEixEy:
         -:  934:      }
 ------------------
 _ZNSt6vectorIPN7testing17TestEventListenerESaIS2_EEixEy:
-      152:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+      188:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
         -:  931:      {
         -:  932:	__glibcxx_requires_subscript(__n);
-      152:  933:	return *(this->_M_impl._M_start + __n);
-      152:  933-block  0
+      188:  933:	return *(this->_M_impl._M_start + __n);
+      188:  933-block  0
         -:  934:      }
 ------------------
 _ZNSt6vectorIiSaIiEEixEy:
-       70:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+       87:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
         -:  931:      {
         -:  932:	__glibcxx_requires_subscript(__n);
-       70:  933:	return *(this->_M_impl._M_start + __n);
-       70:  933-block  0
+       87:  933:	return *(this->_M_impl._M_start + __n);
+       87:  933-block  0
         -:  934:      }
 ------------------
 _ZNSt6vectorIPN7testing8TestInfoESaIS2_EEixEy:
-      136:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
+      170:  930:      operator[](size_type __n) _GLIBCXX_NOEXCEPT
         -:  931:      {
         -:  932:	__glibcxx_requires_subscript(__n);
-      136:  933:	return *(this->_M_impl._M_start + __n);
-      136:  933-block  0
+      170:  933:	return *(this->_M_impl._M_start + __n);
+      170:  933-block  0
         -:  934:      }
 ------------------
 _ZNSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EEixEy:
@@ -2637,10 +2637,10 @@ _ZNSt6vectorIPN7testing9TestSuiteESaIS2_EEixEy:
         -:  945:       *  see at().)
         -:  946:       */
         -:  947:      const_reference
-     150*:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+     378*:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
         -:  949:      {
         -:  950:	__glibcxx_requires_subscript(__n);
-     150*:  951:	return *(this->_M_impl._M_start + __n);
+     378*:  951:	return *(this->_M_impl._M_start + __n);
         -:  952:      }
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EEixEy:
@@ -2652,27 +2652,27 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EEixEy:
         -:  952:      }
 ------------------
 _ZNKSt6vectorIiSaIiEEixEy:
-       70:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+      168:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
         -:  949:      {
         -:  950:	__glibcxx_requires_subscript(__n);
-       70:  951:	return *(this->_M_impl._M_start + __n);
-       70:  951-block  0
+      168:  951:	return *(this->_M_impl._M_start + __n);
+      168:  951-block  0
         -:  952:      }
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EEixEy:
-    #####:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+       28:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
         -:  949:      {
         -:  950:	__glibcxx_requires_subscript(__n);
-    #####:  951:	return *(this->_M_impl._M_start + __n);
-    %%%%%:  951-block  0
+       28:  951:	return *(this->_M_impl._M_start + __n);
+       28:  951-block  0
         -:  952:      }
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EEixEy:
-       68:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+      164:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
         -:  949:      {
         -:  950:	__glibcxx_requires_subscript(__n);
-       68:  951:	return *(this->_M_impl._M_start + __n);
-       68:  951-block  0
+      164:  951:	return *(this->_M_impl._M_start + __n);
+      164:  951-block  0
         -:  952:      }
 ------------------
 _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EEixEy:
@@ -2700,25 +2700,25 @@ _ZNKSt6vectorIySaIyEEixEy:
         -:  952:      }
 ------------------
 _ZNKSt6vectorIPN7testing9TestSuiteESaIS2_EEixEy:
-       12:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
+       18:  948:      operator[](size_type __n) const _GLIBCXX_NOEXCEPT
         -:  949:      {
         -:  950:	__glibcxx_requires_subscript(__n);
-       12:  951:	return *(this->_M_impl._M_start + __n);
-       12:  951-block  0
+       18:  951:	return *(this->_M_impl._M_start + __n);
+       18:  951-block  0
         -:  952:      }
 ------------------
         -:  953:
         -:  954:    protected:
         -:  955:      /// Safety check used only from at().
         -:  956:      void
-    #####:  957:      _M_range_check(size_type __n) const
+      28*:  957:      _M_range_check(size_type __n) const
         -:  958:      {
-    #####:  959:	if (__n >= this->size())
+      28*:  959:	if (__n >= this->size())
     #####:  960:	  __throw_out_of_range_fmt(__N("vector::_M_range_check: __n "
         -:  961:				       "(which is %zu) >= this->size() "
         -:  962:				       "(which is %zu)"),
         -:  963:				   __n, this->size());
-    #####:  964:      }
+      28*:  964:      }
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE14_M_range_checkEy:
     #####:  957:      _M_range_check(size_type __n) const
@@ -2733,16 +2733,16 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE14_M_range_checkEy:
     #####:  964:      }
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE14_M_range_checkEy:
-    #####:  957:      _M_range_check(size_type __n) const
+       28:  957:      _M_range_check(size_type __n) const
         -:  958:      {
-    #####:  959:	if (__n >= this->size())
-    %%%%%:  959-block  0
+       28:  959:	if (__n >= this->size())
+       28:  959-block  0
     #####:  960:	  __throw_out_of_range_fmt(__N("vector::_M_range_check: __n "
     %%%%%:  960-block  0
         -:  961:				       "(which is %zu) >= this->size() "
         -:  962:				       "(which is %zu)"),
         -:  963:				   __n, this->size());
-    #####:  964:      }
+       28:  964:      }
 ------------------
         -:  965:
         -:  966:    public:
@@ -2776,10 +2776,10 @@ _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE14_M_range_checkEy:
         -:  994:       *  function throws out_of_range if the check fails.
         -:  995:       */
         -:  996:      const_reference
-    #####:  997:      at(size_type __n) const
+      28*:  997:      at(size_type __n) const
         -:  998:      {
-    #####:  999:	_M_range_check(__n);
-    #####: 1000:	return (*this)[__n];
+      28*:  999:	_M_range_check(__n);
+      28*: 1000:	return (*this)[__n];
         -: 1001:      }
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE2atEy:
@@ -2791,11 +2791,11 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE2atEy:
         -: 1001:      }
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE2atEy:
-    #####:  997:      at(size_type __n) const
+       28:  997:      at(size_type __n) const
         -:  998:      {
-    #####:  999:	_M_range_check(__n);
-    %%%%%:  999-block  0
-    #####: 1000:	return (*this)[__n];
+       28:  999:	_M_range_check(__n);
+       28:  999-block  0
+       28: 1000:	return (*this)[__n];
         -: 1001:      }
 ------------------
         -: 1002:
@@ -2870,19 +2870,19 @@ _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE2atEy:
         -: 1071:       *  available.
         -: 1072:       */
         -: 1073:      void
-      71*: 1074:      push_back(const value_type& __x)
+      90*: 1074:      push_back(const value_type& __x)
         -: 1075:      {
-      71*: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+      90*: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
         -: 1077:	  {
         -: 1078:	    _GLIBCXX_ASAN_ANNOTATE_GROW(1);
-      57*: 1079:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
+      73*: 1079:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
         -: 1080:				     __x);
-      57*: 1081:	    ++this->_M_impl._M_finish;
+      73*: 1081:	    ++this->_M_impl._M_finish;
         -: 1082:	    _GLIBCXX_ASAN_ANNOTATE_GREW(1);
         -: 1083:	  }
         -: 1084:	else
-      14*: 1085:	  _M_realloc_insert(end(), __x);
-      71*: 1086:      }
+      17*: 1085:	  _M_realloc_insert(end(), __x);
+      90*: 1086:      }
 ------------------
 _ZNSt6vectorISt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEESaIS4_EE9push_backERKS4_:
     #####: 1074:      push_back(const value_type& __x)
@@ -2975,22 +2975,22 @@ _ZNSt6vectorIPN7testing17TestEventListenerESaIS2_EE9push_backERKS2_:
         1: 1086:      }
 ------------------
 _ZNSt6vectorIPN7testing8TestInfoESaIS2_EE9push_backERKS2_:
-       68: 1074:      push_back(const value_type& __x)
+       85: 1074:      push_back(const value_type& __x)
         -: 1075:      {
-       68: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-       68: 1076-block  0
+       85: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+       85: 1076-block  0
         -: 1077:	  {
         -: 1078:	    _GLIBCXX_ASAN_ANNOTATE_GROW(1);
-       57: 1079:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
-       57: 1079-block  0
+       73: 1079:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
+       73: 1079-block  0
         -: 1080:				     __x);
-       57: 1081:	    ++this->_M_impl._M_finish;
+       73: 1081:	    ++this->_M_impl._M_finish;
         -: 1082:	    _GLIBCXX_ASAN_ANNOTATE_GREW(1);
         -: 1083:	  }
         -: 1084:	else
-       11: 1085:	  _M_realloc_insert(end(), __x);
-       11: 1085-block  0
-       68: 1086:      }
+       12: 1085:	  _M_realloc_insert(end(), __x);
+       12: 1085-block  0
+       85: 1086:      }
 ------------------
 _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE9push_backERKS1_:
     #####: 1074:      push_back(const value_type& __x)
@@ -3011,10 +3011,10 @@ _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE9push_backERKS1_:
     #####: 1086:      }
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE9push_backERKS1_:
-    #####: 1074:      push_back(const value_type& __x)
+        2: 1074:      push_back(const value_type& __x)
         -: 1075:      {
-    #####: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
-    %%%%%: 1076-block  0
+        2: 1076:	if (this->_M_impl._M_finish != this->_M_impl._M_end_of_storage)
+        2: 1076-block  0
         -: 1077:	  {
         -: 1078:	    _GLIBCXX_ASAN_ANNOTATE_GROW(1);
     #####: 1079:	    _Alloc_traits::construct(this->_M_impl, this->_M_impl._M_finish,
@@ -3024,9 +3024,9 @@ _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE9push_backERKS1_:
         -: 1082:	    _GLIBCXX_ASAN_ANNOTATE_GREW(1);
         -: 1083:	  }
         -: 1084:	else
-    #####: 1085:	  _M_realloc_insert(end(), __x);
-    %%%%%: 1085-block  0
-    #####: 1086:      }
+        2: 1085:	  _M_realloc_insert(end(), __x);
+        2: 1085-block  0
+        2: 1086:      }
 ------------------
 _ZNSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE9push_backERKS3_:
     #####: 1074:      push_back(const value_type& __x)
@@ -3049,13 +3049,13 @@ _ZNSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE9push_backERKS3_
         -: 1087:
         -: 1088:#if __cplusplus >= 201103L
         -: 1089:      void
-      72*: 1090:      push_back(value_type&& __x)
-      72*: 1091:      { emplace_back(std::move(__x)); }
+      89*: 1090:      push_back(value_type&& __x)
+      89*: 1091:      { emplace_back(std::move(__x)); }
 ------------------
 _ZNSt6vectorIiSaIiEE9push_backEOi:
-       70: 1090:      push_back(value_type&& __x)
-       70: 1091:      { emplace_back(std::move(__x)); }
-       70: 1091-block  0
+       87: 1090:      push_back(value_type&& __x)
+       87: 1091:      { emplace_back(std::move(__x)); }
+       87: 1091-block  0
 ------------------
 _ZNSt6vectorIySaIyEE9push_backEOy:
     #####: 1090:      push_back(value_type&& __x)
@@ -3367,8 +3367,8 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE9push_b
         -: 1382:       *  the user's responsibility.
         -: 1383:       */
         -: 1384:      void
-      141: 1385:      clear() _GLIBCXX_NOEXCEPT
-      141: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
+      175: 1385:      clear() _GLIBCXX_NOEXCEPT
+      175: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
 ------------------
 _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE5clearEv:
         1: 1385:      clear() _GLIBCXX_NOEXCEPT
@@ -3376,14 +3376,14 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE5clearE
         1: 1386-block  0
 ------------------
 _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE5clearEv:
-       70: 1385:      clear() _GLIBCXX_NOEXCEPT
-       70: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
-       70: 1386-block  0
+       87: 1385:      clear() _GLIBCXX_NOEXCEPT
+       87: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
+       87: 1386-block  0
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE5clearEv:
-       70: 1385:      clear() _GLIBCXX_NOEXCEPT
-       70: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
-       70: 1386-block  0
+       87: 1385:      clear() _GLIBCXX_NOEXCEPT
+       87: 1386:      { _M_erase_at_end(this->_M_impl._M_start); }
+       87: 1386-block  0
 ------------------
         -: 1387:
         -: 1388:    protected:
@@ -3727,30 +3727,30 @@ _ZNSt6vectorIdSaIdEE21_M_default_initializeEy:
         -: 1632:
         -: 1633:      // Called by _M_fill_insert, _M_insert_aux etc.
         -: 1634:      size_type
-      29*: 1635:      _M_check_len(size_type __n, const char* __s) const
+      33*: 1635:      _M_check_len(size_type __n, const char* __s) const
         -: 1636:      {
-      29*: 1637:	if (max_size() - size() < __n)
+      33*: 1637:	if (max_size() - size() < __n)
     #####: 1638:	  __throw_length_error(__N(__s));
         -: 1639:
-      29*: 1640:	const size_type __len = size() + std::max(size(), __n);
-      29*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+      33*: 1640:	const size_type __len = size() + std::max(size(), __n);
+      33*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIiSaIiEE12_M_check_lenEyPKc:
-       13: 1635:      _M_check_len(size_type __n, const char* __s) const
+       14: 1635:      _M_check_len(size_type __n, const char* __s) const
         -: 1636:      {
-       13: 1637:	if (max_size() - size() < __n)
-       13: 1637-block  0
+       14: 1637:	if (max_size() - size() < __n)
+       14: 1637-block  0
     #####: 1638:	  __throw_length_error(__N(__s));
     %%%%%: 1638-block  0
         -: 1639:
-       13: 1640:	const size_type __len = size() + std::max(size(), __n);
-       13: 1640-block  0
-      13*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
-       13: 1641-block  0
+       14: 1640:	const size_type __len = size() + std::max(size(), __n);
+       14: 1640-block  0
+      14*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+       14: 1641-block  0
     %%%%%: 1641-block  1
-       13: 1641-block  2
-       13: 1641-block  3
+       14: 1641-block  2
+       14: 1641-block  3
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIySaIyEE12_M_check_lenEyPKc:
@@ -3873,20 +3873,20 @@ _ZNKSt6vectorIPN7testing17TestEventListenerESaIS2_EE12_M_check_lenEyPKc:
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIPN7testing8TestInfoESaIS2_EE12_M_check_lenEyPKc:
-       11: 1635:      _M_check_len(size_type __n, const char* __s) const
+       12: 1635:      _M_check_len(size_type __n, const char* __s) const
         -: 1636:      {
-       11: 1637:	if (max_size() - size() < __n)
-       11: 1637-block  0
+       12: 1637:	if (max_size() - size() < __n)
+       12: 1637-block  0
     #####: 1638:	  __throw_length_error(__N(__s));
     %%%%%: 1638-block  0
         -: 1639:
-       11: 1640:	const size_type __len = size() + std::max(size(), __n);
-       11: 1640-block  0
-      11*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
-       11: 1641-block  0
+       12: 1640:	const size_type __len = size() + std::max(size(), __n);
+       12: 1640-block  0
+      12*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+       12: 1641-block  0
     %%%%%: 1641-block  1
-       11: 1641-block  2
-       11: 1641-block  3
+       12: 1641-block  2
+       12: 1641-block  3
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE12_M_check_lenEyPKc:
@@ -3907,20 +3907,20 @@ _ZNKSt6vectorIN7testing12TestPropertyESaIS1_EE12_M_check_lenEyPKc:
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIN7testing14TestPartResultESaIS1_EE12_M_check_lenEyPKc:
-    #####: 1635:      _M_check_len(size_type __n, const char* __s) const
+        2: 1635:      _M_check_len(size_type __n, const char* __s) const
         -: 1636:      {
-    #####: 1637:	if (max_size() - size() < __n)
-    %%%%%: 1637-block  0
+        2: 1637:	if (max_size() - size() < __n)
+        2: 1637-block  0
     #####: 1638:	  __throw_length_error(__N(__s));
     %%%%%: 1638-block  0
         -: 1639:
-    #####: 1640:	const size_type __len = size() + std::max(size(), __n);
-    %%%%%: 1640-block  0
-    #####: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
-    %%%%%: 1641-block  0
+        2: 1640:	const size_type __len = size() + std::max(size(), __n);
+        2: 1640-block  0
+       2*: 1641:	return (__len < size() || __len > max_size()) ? max_size() : __len;
+        2: 1641-block  0
     %%%%%: 1641-block  1
-    %%%%%: 1641-block  2
-    %%%%%: 1641-block  3
+        2: 1641-block  2
+        2: 1641-block  3
         -: 1642:      }
 ------------------
 _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE12_M_check_lenEyPKc:
@@ -3946,16 +3946,16 @@ _ZNKSt6vectorIN7testing8internal13edit_distance8EditTypeESaIS3_EE12_M_check_lenE
         -: 1646:      // Called by erase(q1,q2), clear(), resize(), _M_fill_assign,
         -: 1647:      // _M_assign_aux.
         -: 1648:      void
-      141: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+      175: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
         -: 1650:      {
-      141: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
+      175: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
         -: 1652:	  {
     #####: 1653:	    std::_Destroy(__pos, this->_M_impl._M_finish,
     #####: 1654:			  _M_get_Tp_allocator());
     #####: 1655:	    this->_M_impl._M_finish = __pos;
         -: 1656:	    _GLIBCXX_ASAN_ANNOTATE_SHRINK(__n);
         -: 1657:	  }
-      141: 1658:      }
+      175: 1658:      }
 ------------------
 _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE15_M_erase_at_endEPS5_:
         1: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
@@ -3972,10 +3972,10 @@ _ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE15_M_er
         1: 1658:      }
 ------------------
 _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE15_M_erase_at_endEPS1_:
-       70: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+       87: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
         -: 1650:      {
-       70: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
-       70: 1651-block  0
+       87: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
+       87: 1651-block  0
         -: 1652:	  {
     #####: 1653:	    std::_Destroy(__pos, this->_M_impl._M_finish,
     #####: 1654:			  _M_get_Tp_allocator());
@@ -3983,13 +3983,13 @@ _ZNSt6vectorIN7testing12TestPropertyESaIS1_EE15_M_erase_at_endEPS1_:
     #####: 1655:	    this->_M_impl._M_finish = __pos;
         -: 1656:	    _GLIBCXX_ASAN_ANNOTATE_SHRINK(__n);
         -: 1657:	  }
-       70: 1658:      }
+       87: 1658:      }
 ------------------
 _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE15_M_erase_at_endEPS1_:
-       70: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
+       87: 1649:      _M_erase_at_end(pointer __pos) _GLIBCXX_NOEXCEPT
         -: 1650:      {
-       70: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
-       70: 1651-block  0
+       87: 1651:	if (size_type __n = this->_M_impl._M_finish - __pos)
+       87: 1651-block  0
         -: 1652:	  {
     #####: 1653:	    std::_Destroy(__pos, this->_M_impl._M_finish,
     #####: 1654:			  _M_get_Tp_allocator());
@@ -3997,7 +3997,7 @@ _ZNSt6vectorIN7testing14TestPartResultESaIS1_EE15_M_erase_at_endEPS1_:
     #####: 1655:	    this->_M_impl._M_finish = __pos;
         -: 1656:	    _GLIBCXX_ASAN_ANNOTATE_SHRINK(__n);
         -: 1657:	  }
-       70: 1658:      }
+       87: 1658:      }
 ------------------
         -: 1659:
         -: 1660:      iterator
