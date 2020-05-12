@@ -134,21 +134,21 @@
         -:  129:       *  This %iterator will move in the opposite direction that @p x does.
         -:  130:      */
         -:  131:      explicit _GLIBCXX17_CONSTEXPR
-      227:  132:      reverse_iterator(iterator_type __x) : current(__x) { }
+      206:  132:      reverse_iterator(iterator_type __x) : current(__x) { }
 ------------------
 _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEEC1ES9_:
         2:  132:      reverse_iterator(iterator_type __x) : current(__x) { }
 ------------------
 _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEEC1ES9_:
-      225:  132:      reverse_iterator(iterator_type __x) : current(__x) { }
+      204:  132:      reverse_iterator(iterator_type __x) : current(__x) { }
 ------------------
         -:  133:
         -:  134:      /**
         -:  135:       *  The copy constructor is normal.
         -:  136:      */
         -:  137:      _GLIBCXX17_CONSTEXPR
-      449:  138:      reverse_iterator(const reverse_iterator& __x)
-      449:  139:      : current(__x.current) { }
+      459:  138:      reverse_iterator(const reverse_iterator& __x)
+      459:  139:      : current(__x.current) { }
         -:  140:
         -:  141:      /**
         -:  142:       *  A %reverse_iterator across other types can be copied if the
@@ -163,8 +163,8 @@ _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6
         -:  151:       *  @return  @c current, the %iterator used for underlying work.
         -:  152:      */
         -:  153:      _GLIBCXX17_CONSTEXPR iterator_type
-      452:  154:      base() const
-      452:  155:      { return current; }
+      410:  154:      base() const
+      410:  155:      { return current; }
 ------------------
 _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEE4baseEv:
         2:  154:      base() const
@@ -172,9 +172,9 @@ _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11Environment
         2:  155-block  0
 ------------------
 _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEE4baseEv:
-      450:  154:      base() const
-      450:  155:      { return current; }
-      450:  155-block  0
+      408:  154:      base() const
+      408:  155:      { return current; }
+      408:  155-block  0
 ------------------
         -:  156:
         -:  157:      /**
@@ -188,10 +188,10 @@ _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt
         -:  165:       *           destroyed. This is a bug: http://gcc.gnu.org/PR51823
         -:  166:      */
         -:  167:      _GLIBCXX17_CONSTEXPR reference
-     148*:  168:      operator*() const
+     185*:  168:      operator*() const
         -:  169:      {
-     148*:  170:	_Iterator __tmp = current;
-     148*:  171:	return *--__tmp;
+     185*:  170:	_Iterator __tmp = current;
+     185*:  171:	return *--__tmp;
         -:  172:      }
 ------------------
 _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEEdeEv:
@@ -203,11 +203,11 @@ _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11Environment
         -:  172:      }
 ------------------
 _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEEdeEv:
-      148:  168:      operator*() const
+      185:  168:      operator*() const
         -:  169:      {
-      148:  170:	_Iterator __tmp = current;
-      148:  171:	return *--__tmp;
-      148:  171-block  0
+      185:  170:	_Iterator __tmp = current;
+      185:  171:	return *--__tmp;
+      185:  171-block  0
         -:  172:      }
 ------------------
         -:  173:
@@ -226,18 +226,18 @@ _ZNKSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt
         -:  186:       *  Decrements the underlying iterator.
         -:  187:      */
         -:  188:      _GLIBCXX17_CONSTEXPR reverse_iterator&
-    #####:  189:      operator++()
+      53*:  189:      operator++()
         -:  190:      {
-    #####:  191:	--current;
-    #####:  192:	return *this;
+      53*:  191:	--current;
+      53*:  192:	return *this;
         -:  193:      }
 ------------------
 _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEEppEv:
-    #####:  189:      operator++()
+       53:  189:      operator++()
         -:  190:      {
-    #####:  191:	--current;
-    %%%%%:  191-block  0
-    #####:  192:	return *this;
+       53:  191:	--current;
+       53:  191-block  0
+       53:  192:	return *this;
         -:  193:      }
 ------------------
 _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEEppEv:
@@ -353,9 +353,9 @@ _ZNSt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentE
         -:  296:  */
         -:  297:  template<typename _Iterator>
         -:  298:    inline _GLIBCXX17_CONSTEXPR bool
-       76:  299:    operator==(const reverse_iterator<_Iterator>& __x,
+       69:  299:    operator==(const reverse_iterator<_Iterator>& __x,
         -:  300:	       const reverse_iterator<_Iterator>& __y)
-       76:  301:    { return __x.base() == __y.base(); }
+       69:  301:    { return __x.base() == __y.base(); }
 ------------------
 _ZSteqIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEEbRKSt16reverse_iteratorIT_ESE_:
         1:  299:    operator==(const reverse_iterator<_Iterator>& __x,
@@ -364,10 +364,10 @@ _ZSteqIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS
         1:  301-block  0
 ------------------
 _ZSteqIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEEbRKSt16reverse_iteratorIT_ESE_:
-       75:  299:    operator==(const reverse_iterator<_Iterator>& __x,
+       68:  299:    operator==(const reverse_iterator<_Iterator>& __x,
         -:  300:	       const reverse_iterator<_Iterator>& __y)
-       75:  301:    { return __x.base() == __y.base(); }
-       75:  301-block  0
+       68:  301:    { return __x.base() == __y.base(); }
+       68:  301-block  0
 ------------------
         -:  302:
         -:  303:  template<typename _Iterator>
@@ -378,9 +378,9 @@ _ZSteqIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_E
         -:  308:
         -:  309:  template<typename _Iterator>
         -:  310:    inline _GLIBCXX17_CONSTEXPR bool
-       76:  311:    operator!=(const reverse_iterator<_Iterator>& __x,
+       69:  311:    operator!=(const reverse_iterator<_Iterator>& __x,
         -:  312:	       const reverse_iterator<_Iterator>& __y)
-       76:  313:    { return !(__x == __y); }
+       69:  313:    { return !(__x == __y); }
 ------------------
 _ZStneIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS4_EEEEEbRKSt16reverse_iteratorIT_ESE_:
         1:  311:    operator!=(const reverse_iterator<_Iterator>& __x,
@@ -389,10 +389,10 @@ _ZStneIN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS4_SaIS
         1:  313-block  0
 ------------------
 _ZStneIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_EEEEEbRKSt16reverse_iteratorIT_ESE_:
-       75:  311:    operator!=(const reverse_iterator<_Iterator>& __x,
+       68:  311:    operator!=(const reverse_iterator<_Iterator>& __x,
         -:  312:	       const reverse_iterator<_Iterator>& __y)
-       75:  313:    { return !(__x == __y); }
-       75:  313-block  0
+       68:  313:    { return !(__x == __y); }
+       68:  313-block  0
 ------------------
         -:  314:
         -:  315:  template<typename _Iterator>
@@ -469,11 +469,11 @@ _ZStneIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_E
         -:  386:  // DR 685. reverse_iterator/move_iterator difference has invalid signatures
         -:  387:  template<typename _IteratorL, typename _IteratorR>
         -:  388:    inline _GLIBCXX17_CONSTEXPR auto
-      150:  389:    operator-(const reverse_iterator<_IteratorL>& __x,
+      136:  389:    operator-(const reverse_iterator<_IteratorL>& __x,
         -:  390:	      const reverse_iterator<_IteratorR>& __y)
         -:  391:    -> decltype(__y.base() - __x.base())
-      150:  392:    { return __y.base() - __x.base(); }
-      150:  392-block  0
+      136:  392:    { return __y.base() - __x.base(); }
+      136:  392-block  0
         -:  393:#endif
         -:  394:
         -:  395:  template<typename _Iterator>
@@ -861,12 +861,12 @@ _ZStneIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS4_SaIS4_E
         -:  777:      : _M_current(_Iterator()) { }
         -:  778:
         -:  779:      explicit
-    2119*:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-    2119*:  781:      : _M_current(__i) { }
+    1972*:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+    1972*:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKN7testing14TestPartResultESt6vectorIS2_SaIS2_EEEC1ERKS4_:
-     1054:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-     1054:  781:      : _M_current(__i) { }
+      956:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+      956:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing8internal30ParameterizedTestSuiteInfoBaseESt6vectorIS4_SaIS4_EEEC1ERKS5_:
         2:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
@@ -893,12 +893,12 @@ _ZN9__gnu_cxx17__normal_iteratorIPPN7testing17TestEventListenerESt6vectorIS3_SaI
         2:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEC1ERKS5_:
-       14:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-       14:  781:      : _M_current(__i) { }
+       18:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+       18:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEC1ERKS4_:
-      229:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-      229:  781:      : _M_current(__i) { }
+      210:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+      210:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEC1ERKS7_:
         4:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
@@ -913,12 +913,12 @@ _ZN9__gnu_cxx17__normal_iteratorIPKdSt6vectorIdSaIdEEEC1ERKS2_:
     #####:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEC1ERKS5_:
-      772:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-      772:  781:      : _M_current(__i) { }
+      724:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+      724:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEC1ERKS4_:
-       16:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-       16:  781:      : _M_current(__i) { }
+       22:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+       22:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKPN7testing17TestEventListenerESt6vectorIS3_SaIS3_EEEC1ERKS5_:
     #####:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
@@ -945,8 +945,8 @@ _ZN9__gnu_cxx17__normal_iteratorIPySt6vectorIySaIyEEEC1ERKS1_:
     #####:  781:      : _M_current(__i) { }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPiSt6vectorIiSaIiEEEC1ERKS1_:
-       18:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
-       18:  781:      : _M_current(__i) { }
+       26:  780:      __normal_iterator(const _Iterator& __i) _GLIBCXX_NOEXCEPT
+       26:  781:      : _M_current(__i) { }
 ------------------
         -:  782:
         -:  783:      // Allow iterator to const_iterator conversion
@@ -992,8 +992,8 @@ _ZN9__gnu_cxx17__normal_iteratorIPKcNSt7__cxx1112basic_stringIcSt11char_traitsIc
         -:  790:
         -:  791:      // Forward iterator requirements
         -:  792:      reference
-     981*:  793:      operator*() const _GLIBCXX_NOEXCEPT
-     981*:  794:      { return *_M_current; }
+     947*:  793:      operator*() const _GLIBCXX_NOEXCEPT
+     947*:  794:      { return *_M_current; }
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPN7testing12TestPropertyESt6vectorIS2_SaIS2_EEEdeEv:
     #####:  793:      operator*() const _GLIBCXX_NOEXCEPT
@@ -1021,9 +1021,9 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing17TestEventListenerESt6vectorIS3_S
     %%%%%:  794-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEdeEv:
-      825:  793:      operator*() const _GLIBCXX_NOEXCEPT
-      825:  794:      { return *_M_current; }
-      825:  794-block  0
+      748:  793:      operator*() const _GLIBCXX_NOEXCEPT
+      748:  794:      { return *_M_current; }
+      748:  794-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKN7testing14TestPartResultESt6vectorIS2_SaIS2_EEEdeEv:
     #####:  793:      operator*() const _GLIBCXX_NOEXCEPT
@@ -1036,14 +1036,14 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKNSt7__cxx1112basic_stringIcSt11char_traitsIc
         2:  794-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEdeEv:
-      149:  793:      operator*() const _GLIBCXX_NOEXCEPT
-      149:  794:      { return *_M_current; }
-      149:  794-block  0
+      187:  793:      operator*() const _GLIBCXX_NOEXCEPT
+      187:  794:      { return *_M_current; }
+      187:  794-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEdeEv:
-        5:  793:      operator*() const _GLIBCXX_NOEXCEPT
-        5:  794:      { return *_M_current; }
-        5:  794-block  0
+       10:  793:      operator*() const _GLIBCXX_NOEXCEPT
+       10:  794:      { return *_M_current; }
+       10:  794-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEdeEv:
     #####:  793:      operator*() const _GLIBCXX_NOEXCEPT
@@ -1072,10 +1072,10 @@ _ZNK9__gnu_cxx17__normal_iteratorIPcNSt7__cxx1112basic_stringIcSt11char_traitsIc
     %%%%%:  798-block  0
         -:  799:
         -:  800:      __normal_iterator&
-     833*:  801:      operator++() _GLIBCXX_NOEXCEPT
+     762*:  801:      operator++() _GLIBCXX_NOEXCEPT
         -:  802:      {
-     833*:  803:	++_M_current;
-     833*:  804:	return *this;
+     762*:  803:	++_M_current;
+     762*:  804:	return *this;
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPN7testing12TestPropertyESt6vectorIS2_SaIS2_EEEppEv:
@@ -1111,11 +1111,11 @@ _ZN9__gnu_cxx17__normal_iteratorIPN7testing8internal13edit_distance8EditTypeESt6
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEppEv:
-      825:  801:      operator++() _GLIBCXX_NOEXCEPT
+      748:  801:      operator++() _GLIBCXX_NOEXCEPT
         -:  802:      {
-      825:  803:	++_M_current;
-      825:  804:	return *this;
-      825:  804-block  0
+      748:  803:	++_M_current;
+      748:  804:	return *this;
+      748:  804-block  0
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKN7testing14TestPartResultESt6vectorIS2_SaIS2_EEEppEv:
@@ -1135,19 +1135,19 @@ _ZN9__gnu_cxx17__normal_iteratorIPKNSt7__cxx1112basic_stringIcSt11char_traitsIcE
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEppEv:
-        1:  801:      operator++() _GLIBCXX_NOEXCEPT
+        2:  801:      operator++() _GLIBCXX_NOEXCEPT
         -:  802:      {
-        1:  803:	++_M_current;
-        1:  804:	return *this;
-        1:  804-block  0
+        2:  803:	++_M_current;
+        2:  804:	return *this;
+        2:  804-block  0
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEppEv:
-        5:  801:      operator++() _GLIBCXX_NOEXCEPT
+       10:  801:      operator++() _GLIBCXX_NOEXCEPT
         -:  802:      {
-        5:  803:	++_M_current;
-        5:  804:	return *this;
-        5:  804-block  0
+       10:  803:	++_M_current;
+       10:  804:	return *this;
+       10:  804-block  0
         -:  805:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPKcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEppEv:
@@ -1181,10 +1181,10 @@ _ZN9__gnu_cxx17__normal_iteratorIPPN7testing8internal30ParameterizedTestSuiteInf
         -:  810:
         -:  811:      // Bidirectional iterator requirements
         -:  812:      __normal_iterator&
-     148*:  813:      operator--() _GLIBCXX_NOEXCEPT
+     238*:  813:      operator--() _GLIBCXX_NOEXCEPT
         -:  814:      {
-     148*:  815:	--_M_current;
-     148*:  816:	return *this;
+     238*:  815:	--_M_current;
+     238*:  816:	return *this;
         -:  817:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing11EnvironmentESt6vectorIS3_SaIS3_EEEmmEv:
@@ -1204,11 +1204,11 @@ _ZN9__gnu_cxx17__normal_iteratorIPN7testing8internal13edit_distance8EditTypeESt6
         -:  817:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEmmEv:
-      148:  813:      operator--() _GLIBCXX_NOEXCEPT
+      238:  813:      operator--() _GLIBCXX_NOEXCEPT
         -:  814:      {
-      148:  815:	--_M_current;
-      148:  816:	return *this;
-      148:  816-block  0
+      238:  815:	--_M_current;
+      238:  816:	return *this;
+      238:  816-block  0
         -:  817:      }
 ------------------
 _ZN9__gnu_cxx17__normal_iteratorIPcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEmmEv:
@@ -1262,8 +1262,8 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKN7testing8internal13edit_distance8EditTypeES
         -:  842:      { return __normal_iterator(_M_current - __n); }
         -:  843:
         -:  844:      const _Iterator&
-    3298*:  845:      base() const _GLIBCXX_NOEXCEPT
-    3298*:  846:      { return _M_current; }
+    3070*:  845:      base() const _GLIBCXX_NOEXCEPT
+    3070*:  846:      { return _M_current; }
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPN7testing14TestPartResultESt6vectorIS2_SaIS2_EEE4baseEv:
     #####:  845:      base() const _GLIBCXX_NOEXCEPT
@@ -1306,14 +1306,14 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKcNSt7__cxx1112basic_stringIcSt11char_traitsI
     %%%%%:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEE4baseEv:
-       20:  845:      base() const _GLIBCXX_NOEXCEPT
-       20:  846:      { return _M_current; }
-       20:  846-block  0
+       30:  845:      base() const _GLIBCXX_NOEXCEPT
+       30:  846:      { return _M_current; }
+       30:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEE4baseEv:
-      458:  845:      base() const _GLIBCXX_NOEXCEPT
-      458:  846:      { return _M_current; }
-      458:  846-block  0
+      422:  845:      base() const _GLIBCXX_NOEXCEPT
+      422:  846:      { return _M_current; }
+      422:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEE4baseEv:
         8:  845:      base() const _GLIBCXX_NOEXCEPT
@@ -1331,19 +1331,19 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKdSt6vectorIdSaIdEEE4baseEv:
     %%%%%:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKN7testing14TestPartResultESt6vectorIS2_SaIS2_EEE4baseEv:
-     1054:  845:      base() const _GLIBCXX_NOEXCEPT
-     1054:  846:      { return _M_current; }
-     1054:  846-block  0
+      956:  845:      base() const _GLIBCXX_NOEXCEPT
+      956:  846:      { return _M_current; }
+      956:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing8TestInfoESt6vectorIS3_SaIS3_EEE4baseEv:
-     1672:  845:      base() const _GLIBCXX_NOEXCEPT
-     1672:  846:      { return _M_current; }
-     1672:  846-block  0
+     1540:  845:      base() const _GLIBCXX_NOEXCEPT
+     1540:  846:      { return _M_current; }
+     1540:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPPN7testing8TestInfoESt6vectorIS3_SaIS3_EEE4baseEv:
-       32:  845:      base() const _GLIBCXX_NOEXCEPT
-       32:  846:      { return _M_current; }
-       32:  846-block  0
+       44:  845:      base() const _GLIBCXX_NOEXCEPT
+       44:  846:      { return _M_current; }
+       44:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing17TestEventListenerESt6vectorIS3_SaIS3_EEE4baseEv:
     #####:  845:      base() const _GLIBCXX_NOEXCEPT
@@ -1371,9 +1371,9 @@ _ZNK9__gnu_cxx17__normal_iteratorIPySt6vectorIySaIyEEE4baseEv:
     %%%%%:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPiSt6vectorIiSaIiEEE4baseEv:
-       36:  845:      base() const _GLIBCXX_NOEXCEPT
-       36:  846:      { return _M_current; }
-       36:  846-block  0
+       52:  845:      base() const _GLIBCXX_NOEXCEPT
+       52:  846:      { return _M_current; }
+       52:  846-block  0
 ------------------
 _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing11EnvironmentESt6vectorIS3_SaIS3_EEE4baseEv:
         2:  845:      base() const _GLIBCXX_NOEXCEPT
@@ -1401,10 +1401,10 @@ _ZNK9__gnu_cxx17__normal_iteratorIPKPN7testing11EnvironmentESt6vectorIS3_SaIS3_E
         -:  864:
         -:  865:  template<typename _Iterator, typename _Container>
         -:  866:    inline bool
-      76*:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+      69*:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  868:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  869:    _GLIBCXX_NOEXCEPT
-      76*:  870:    { return __lhs.base() == __rhs.base(); }
+      69*:  870:    { return __lhs.base() == __rhs.base(); }
 ------------------
 _ZN9__gnu_cxxeqIPPN7testing11EnvironmentESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESD_:
         1:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1414,11 +1414,11 @@ _ZN9__gnu_cxxeqIPPN7testing11EnvironmentESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal
         1:  870-block  0
 ------------------
 _ZN9__gnu_cxxeqIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESD_:
-       75:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
+       68:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  868:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  869:    _GLIBCXX_NOEXCEPT
-       75:  870:    { return __lhs.base() == __rhs.base(); }
-       75:  870-block  0
+       68:  870:    { return __lhs.base() == __rhs.base(); }
+       68:  870-block  0
 ------------------
 _ZN9__gnu_cxxeqIPN7testing8internal13edit_distance8EditTypeESt6vectorIS4_SaIS4_EEEEbRKNS_17__normal_iteratorIT_T0_EESE_:
     #####:  867:    operator==(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1452,10 +1452,10 @@ _ZN9__gnu_cxxeqIPKN7testing8internal13edit_distance8EditTypeESt6vectorIS4_SaIS4_
         -:  878:
         -:  879:  template<typename _Iterator, typename _Container>
         -:  880:    inline bool
-    1381*:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+    1272*:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  882:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  883:    _GLIBCXX_NOEXCEPT
-    1381*:  884:    { return __lhs.base() != __rhs.base(); }
+    1272*:  884:    { return __lhs.base() != __rhs.base(); }
 ------------------
 _ZN9__gnu_cxxneIPKPN7testing11EnvironmentESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESE_:
         1:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1479,32 +1479,32 @@ _ZN9__gnu_cxxneIPKPN7testing17TestEventListenerESt6vectorIS3_SaIS3_EEEEbRKNS_17_
     %%%%%:  884-block  0
 ------------------
 _ZN9__gnu_cxxneIPKPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESE_:
-      836:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+      770:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  882:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  883:    _GLIBCXX_NOEXCEPT
-      836:  884:    { return __lhs.base() != __rhs.base(); }
-      836:  884-block  0
+      770:  884:    { return __lhs.base() != __rhs.base(); }
+      770:  884-block  0
 ------------------
 _ZN9__gnu_cxxneIPKN7testing14TestPartResultESt6vectorIS2_SaIS2_EEEEbRKNS_17__normal_iteratorIT_T0_EESD_:
-      527:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+      478:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  882:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  883:    _GLIBCXX_NOEXCEPT
-      527:  884:    { return __lhs.base() != __rhs.base(); }
-      527:  884-block  0
+      478:  884:    { return __lhs.base() != __rhs.base(); }
+      478:  884-block  0
 ------------------
 _ZN9__gnu_cxxneIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESD_:
-        2:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+        3:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  882:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  883:    _GLIBCXX_NOEXCEPT
-        2:  884:    { return __lhs.base() != __rhs.base(); }
-        2:  884-block  0
+        3:  884:    { return __lhs.base() != __rhs.base(); }
+        3:  884-block  0
 ------------------
 _ZN9__gnu_cxxneIPKPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEEbRKNS_17__normal_iteratorIT_T0_EESE_:
-       10:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
+       15:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  882:	       const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  883:    _GLIBCXX_NOEXCEPT
-       10:  884:    { return __lhs.base() != __rhs.base(); }
-       10:  884-block  0
+       15:  884:    { return __lhs.base() != __rhs.base(); }
+       15:  884-block  0
 ------------------
 _ZN9__gnu_cxxneIPKcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEbRKNS_17__normal_iteratorIT_T0_EESE_:
     #####:  881:    operator!=(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1621,17 +1621,17 @@ _ZN9__gnu_cxxneIPcNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEbRKNS_17
         -:  960:
         -:  961:  template<typename _Iterator, typename _Container>
         -:  962:    inline typename __normal_iterator<_Iterator, _Container>::difference_type
-     171*:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+     165*:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  964:	      const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  965:    _GLIBCXX_NOEXCEPT
-     171*:  966:    { return __lhs.base() - __rhs.base(); }
+     165*:  966:    { return __lhs.base() - __rhs.base(); }
 ------------------
 _ZN9__gnu_cxxmiIPiSt6vectorIiSaIiEEEENS_17__normal_iteratorIT_T0_E15difference_typeERKS8_SB_:
-        9:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+       13:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  964:	      const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  965:    _GLIBCXX_NOEXCEPT
-        9:  966:    { return __lhs.base() - __rhs.base(); }
-        9:  966-block  0
+       13:  966:    { return __lhs.base() - __rhs.base(); }
+       13:  966-block  0
 ------------------
 _ZN9__gnu_cxxmiIPKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS6_SaIS6_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSF_SI_:
     #####:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1662,11 +1662,11 @@ _ZN9__gnu_cxxmiIPSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEE
     %%%%%:  966-block  0
 ------------------
 _ZN9__gnu_cxxmiIPPN7testing9TestSuiteESt6vectorIS3_SaIS3_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSB_SE_:
-      151:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+      138:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  964:	      const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  965:    _GLIBCXX_NOEXCEPT
-      151:  966:    { return __lhs.base() - __rhs.base(); }
-      151:  966-block  0
+      138:  966:    { return __lhs.base() - __rhs.base(); }
+      138:  966-block  0
 ------------------
 _ZN9__gnu_cxxmiIPN7testing8internal9TraceInfoESt6vectorIS3_SaIS3_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSB_SE_:
     #####:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1690,11 +1690,11 @@ _ZN9__gnu_cxxmiIPPN7testing17TestEventListenerESt6vectorIS3_SaIS3_EEEENS_17__nor
         1:  966-block  0
 ------------------
 _ZN9__gnu_cxxmiIPPN7testing8TestInfoESt6vectorIS3_SaIS3_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSB_SE_:
-        8:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
+       11:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
         -:  964:	      const __normal_iterator<_Iterator, _Container>& __rhs)
         -:  965:    _GLIBCXX_NOEXCEPT
-        8:  966:    { return __lhs.base() - __rhs.base(); }
-        8:  966-block  0
+       11:  966:    { return __lhs.base() - __rhs.base(); }
+       11:  966-block  0
 ------------------
 _ZN9__gnu_cxxmiIPN7testing12TestPropertyESt6vectorIS2_SaIS2_EEEENS_17__normal_iteratorIT_T0_E15difference_typeERKSA_SD_:
     #####:  963:    operator-(const __normal_iterator<_Iterator, _Container>& __lhs,
@@ -1817,12 +1817,12 @@ _ZSt12__niter_baseIPPN7testing17TestEventListenerESt6vectorIS2_SaIS2_EEET_N9__gn
         -: 1027:      : _M_current() { }
         -: 1028:
         -: 1029:      explicit _GLIBCXX17_CONSTEXPR
-      84*: 1030:      move_iterator(iterator_type __i)
-      84*: 1031:      : _M_current(__i) { }
+     116*: 1030:      move_iterator(iterator_type __i)
+     116*: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPiEC1ES0_:
-       36: 1030:      move_iterator(iterator_type __i)
-       36: 1031:      : _M_current(__i) { }
+       52: 1030:      move_iterator(iterator_type __i)
+       52: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPyEC1ES0_:
     #####: 1030:      move_iterator(iterator_type __i)
@@ -1837,8 +1837,8 @@ _ZNSt13move_iteratorIPSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderB
     #####: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPPN7testing9TestSuiteEEC1ES3_:
-        4: 1030:      move_iterator(iterator_type __i)
-        4: 1031:      : _M_current(__i) { }
+        8: 1030:      move_iterator(iterator_type __i)
+        8: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPN7testing8internal9TraceInfoEEC1ES3_:
     #####: 1030:      move_iterator(iterator_type __i)
@@ -1853,8 +1853,8 @@ _ZNSt13move_iteratorIPPN7testing17TestEventListenerEEC1ES3_:
         4: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPPN7testing8TestInfoEEC1ES3_:
-       32: 1030:      move_iterator(iterator_type __i)
-       32: 1031:      : _M_current(__i) { }
+       44: 1030:      move_iterator(iterator_type __i)
+       44: 1031:      : _M_current(__i) { }
 ------------------
 _ZNSt13move_iteratorIPN7testing12TestPropertyEEC1ES2_:
     #####: 1030:      move_iterator(iterator_type __i)
@@ -1875,13 +1875,13 @@ _ZNSt13move_iteratorIPN7testing8internal13edit_distance8EditTypeEEC1ES4_:
         -: 1036:	: _M_current(__i.base()) { }
         -: 1037:
         -: 1038:      _GLIBCXX17_CONSTEXPR iterator_type
-      86*: 1039:      base() const
-      86*: 1040:      { return _M_current; }
+     118*: 1039:      base() const
+     118*: 1040:      { return _M_current; }
 ------------------
 _ZNKSt13move_iteratorIPiE4baseEv:
-       36: 1039:      base() const
-       36: 1040:      { return _M_current; }
-       36: 1040-block  0
+       52: 1039:      base() const
+       52: 1040:      { return _M_current; }
+       52: 1040-block  0
 ------------------
 _ZNKSt13move_iteratorIPyE4baseEv:
     #####: 1039:      base() const
@@ -1899,9 +1899,9 @@ _ZNKSt13move_iteratorIPSt10shared_ptrIN7testing8internal26ThreadLocalValueHolder
     %%%%%: 1040-block  0
 ------------------
 _ZNKSt13move_iteratorIPPN7testing9TestSuiteEE4baseEv:
-        4: 1039:      base() const
-        4: 1040:      { return _M_current; }
-        4: 1040-block  0
+        8: 1039:      base() const
+        8: 1040:      { return _M_current; }
+        8: 1040-block  0
 ------------------
 _ZNKSt13move_iteratorIPN7testing8internal9TraceInfoEE4baseEv:
     #####: 1039:      base() const
@@ -1919,9 +1919,9 @@ _ZNKSt13move_iteratorIPPN7testing17TestEventListenerEE4baseEv:
         4: 1040-block  0
 ------------------
 _ZNKSt13move_iteratorIPPN7testing8TestInfoEE4baseEv:
-       32: 1039:      base() const
-       32: 1040:      { return _M_current; }
-       32: 1040-block  0
+       44: 1039:      base() const
+       44: 1040:      { return _M_current; }
+       44: 1040-block  0
 ------------------
 _ZNKSt13move_iteratorIPN7testing12TestPropertyEE4baseEv:
     #####: 1039:      base() const
@@ -2241,13 +2241,13 @@ _ZStneIPN7testing14TestPartResultEEbRKSt13move_iteratorIT_ES7_:
         -: 1212:    = typename conditional<__move_if_noexcept_cond<_Tp>::value,
         -: 1213:			   const _Tp*, move_iterator<_Tp*>>::type>
         -: 1214:    inline _GLIBCXX17_CONSTEXPR _ReturnType
-      84*: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
-      84*: 1216:    { return _ReturnType(__i); }
+     116*: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
+     116*: 1216:    { return _ReturnType(__i); }
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIiSt13move_iteratorIPiEET0_PT_:
-       36: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
-       36: 1216:    { return _ReturnType(__i); }
-       36: 1216-block  0
+       52: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
+       52: 1216:    { return _ReturnType(__i); }
+       52: 1216-block  0
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIySt13move_iteratorIPyEET0_PT_:
     #####: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
@@ -2265,9 +2265,9 @@ _ZSt32__make_move_if_noexcept_iteratorISt10shared_ptrIN7testing8internal26Thread
     %%%%%: 1216-block  0
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIPN7testing9TestSuiteESt13move_iteratorIPS2_EET0_PT_:
-        4: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
-        4: 1216:    { return _ReturnType(__i); }
-        4: 1216-block  0
+        8: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
+        8: 1216:    { return _ReturnType(__i); }
+        8: 1216-block  0
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIN7testing8internal9TraceInfoESt13move_iteratorIPS2_EET0_PT_:
     #####: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
@@ -2285,9 +2285,9 @@ _ZSt32__make_move_if_noexcept_iteratorIPN7testing17TestEventListenerESt13move_it
         4: 1216-block  0
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIPN7testing8TestInfoESt13move_iteratorIPS2_EET0_PT_:
-       32: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
-       32: 1216:    { return _ReturnType(__i); }
-       32: 1216-block  0
+       44: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
+       44: 1216:    { return _ReturnType(__i); }
+       44: 1216-block  0
 ------------------
 _ZSt32__make_move_if_noexcept_iteratorIN7testing12TestPropertyESt13move_iteratorIPS1_EET0_PT_:
     #####: 1215:    __make_move_if_noexcept_iterator(_Tp* __i)
@@ -2322,15 +2322,15 @@ _ZSt32__make_move_if_noexcept_iteratorIN7testing8internal13edit_distance8EditTyp
         -: 1232:
         -: 1233:  template<typename _Iterator>
         -: 1234:    auto
-      76*: 1235:    __miter_base(move_iterator<_Iterator> __it)
+     108*: 1235:    __miter_base(move_iterator<_Iterator> __it)
         -: 1236:    -> decltype(__miter_base(__it.base()))
-      76*: 1237:    { return __miter_base(__it.base()); }
+     108*: 1237:    { return __miter_base(__it.base()); }
 ------------------
 _ZSt12__miter_baseIPiEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
-       36: 1235:    __miter_base(move_iterator<_Iterator> __it)
+       52: 1235:    __miter_base(move_iterator<_Iterator> __it)
         -: 1236:    -> decltype(__miter_base(__it.base()))
-       36: 1237:    { return __miter_base(__it.base()); }
-       36: 1237-block  0
+       52: 1237:    { return __miter_base(__it.base()); }
+       52: 1237-block  0
 ------------------
 _ZSt12__miter_baseIPyEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
     #####: 1235:    __miter_base(move_iterator<_Iterator> __it)
@@ -2339,10 +2339,10 @@ _ZSt12__miter_baseIPyEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
     %%%%%: 1237-block  0
 ------------------
 _ZSt12__miter_baseIPPN7testing9TestSuiteEEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
-        4: 1235:    __miter_base(move_iterator<_Iterator> __it)
+        8: 1235:    __miter_base(move_iterator<_Iterator> __it)
         -: 1236:    -> decltype(__miter_base(__it.base()))
-        4: 1237:    { return __miter_base(__it.base()); }
-        4: 1237-block  0
+        8: 1237:    { return __miter_base(__it.base()); }
+        8: 1237-block  0
 ------------------
 _ZSt12__miter_baseIPPN7testing11EnvironmentEEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
     #####: 1235:    __miter_base(move_iterator<_Iterator> __it)
@@ -2357,10 +2357,10 @@ _ZSt12__miter_baseIPPN7testing17TestEventListenerEEDTcl12__miter_basecldtfp_4bas
         4: 1237-block  0
 ------------------
 _ZSt12__miter_baseIPPN7testing8TestInfoEEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
-       32: 1235:    __miter_base(move_iterator<_Iterator> __it)
+       44: 1235:    __miter_base(move_iterator<_Iterator> __it)
         -: 1236:    -> decltype(__miter_base(__it.base()))
-       32: 1237:    { return __miter_base(__it.base()); }
-       32: 1237-block  0
+       44: 1237:    { return __miter_base(__it.base()); }
+       44: 1237-block  0
 ------------------
 _ZSt12__miter_baseIPN7testing8internal13edit_distance8EditTypeEEDTcl12__miter_basecldtfp_4baseEEESt13move_iteratorIT_E:
     #####: 1235:    __miter_base(move_iterator<_Iterator> __it)

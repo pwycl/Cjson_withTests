@@ -233,55 +233,72 @@ TEST(CjsonFixture, parse_empty_objects){
 //    }
 //}
 //
-//static void assert_parse_number(const char *string, int integer, double real)
-//{
-//    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.content = (const unsigned char*)string;
-//    buffer.length = strlen(string) + sizeof("");
-//
-//    ASSERT_TRUE(parse_number(item, &buffer));
-////    assert_is_number(item);
-//    ASSERT_EQ(integer, item->valueint);
-//    ASSERT_DOUBLE_EQ(real, item->valuedouble);
-//}
-//TEST(CjsonFixture, parse_number_should_parse_zero)
-//{
-//    assert_parse_number("0", 0, 0);
-//    assert_parse_number("0.0", 0, 0.0);
-//    assert_parse_number("-0", 0, -0.0);
-//}
-//
-//TEST(CjsonFixture, parse_number_should_parse_negative_integers)
-//{
-//    assert_parse_number("-1", -1, -1);
-//    assert_parse_number("-32768", -32768, -32768.0);
-//    assert_parse_number("-2147483648", (int)-2147483648.0, -2147483648.0);
-//}
-//
-//static void parse_number_should_parse_positive_integers(void)
-//{
-//    assert_parse_number("1", 1, 1);
-//    assert_parse_number("32767", 32767, 32767.0);
-//    assert_parse_number("2147483647", (int)2147483647.0, 2147483647.0);
-//}
-//TEST(CjsonFixture, parse_number_should_parse_positive_reals)
-//{
-//    assert_parse_number("0.001", 0, 0.001);
-//    assert_parse_number("10e-10", 0, 10e-10);
-//    assert_parse_number("10E-10", 0, 10e-10);
-//    assert_parse_number("10e10", INT_MAX, 10e10);
-//    assert_parse_number("123e+127", INT_MAX, 123e127);
-//    assert_parse_number("123e-128", 0, 123e-128);
-//}
-//TEST(CjsonFixture, parse_number_should_parse_negative_reals)
-//{
-//    assert_parse_number("-0.001", 0, -0.001);
-//    assert_parse_number("-10e-10", 0, -10e-10);
-//    assert_parse_number("-10E-10", 0, -10e-10);
-//    assert_parse_number("-10e20", INT_MIN, -10e20);
-//    assert_parse_number("-123e+127", INT_MIN, -123e127);
-//    assert_parse_number("-123e-128", 0, -123e-128);
-//}
+static void assert_parse_number(const char *string, int integer, double real)
+{
+    parse_number(item, NULL);
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_number(item, &buffer);
+    buffer.content = (const unsigned char*)string;
+    buffer.length = strlen(string) + sizeof("");
+
+    ASSERT_TRUE(parse_number(item, &buffer));
+//    assert_is_number(item);
+    ASSERT_EQ(integer, item->valueint);
+    ASSERT_DOUBLE_EQ(real, item->valuedouble);
+}
+
+TEST(CjsonFixture, buffer_skip_whitespace){
+    buffer_skip_whitespace(NULL);
+    skip_utf8_bom(NULL);
+    unsigned char printed[1024];
+    cJSON item[1];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    parse_buffer parsebuffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    skip_utf8_bom(&parsebuffer);
+    parsebuffer.offset=1;
+    skip_utf8_bom(&parsebuffer);
+    buffer_skip_whitespace(&parsebuffer);
+}
+TEST(CjsonFixture, parse_number_should_parse_zero)
+{
+    assert_parse_number("0", 0, 0);
+    assert_parse_number("0.0", 0, 0.0);
+    assert_parse_number("-0", 0, -0.0);
+}
+
+TEST(CjsonFixture, parse_number_should_parse_negative_integers)
+{
+    assert_parse_number("-1", -1, -1);
+    assert_parse_number("-32768", -32768, -32768.0);
+    assert_parse_number("-2147483648", (int)-2147483648.0, -2147483648.0);
+}
+
+static void parse_number_should_parse_positive_integers(void)
+{
+    assert_parse_number("1", 1, 1);
+    assert_parse_number("32767", 32767, 32767.0);
+    assert_parse_number("2147483647", (int)2147483647.0, 2147483647.0);
+}
+TEST(CjsonFixture, parse_number_should_parse_positive_reals)
+{
+    assert_parse_number("0.001", 0, 0.001);
+    assert_parse_number("10e-10", 0, 10e-10);
+    assert_parse_number("10E-10", 0, 10e-10);
+    assert_parse_number("10e10", INT_MAX, 10e10);
+    assert_parse_number("123e+127", INT_MAX, 123e127);
+    assert_parse_number("123e-128", 0, 123e-128);
+}
+TEST(CjsonFixture, parse_number_should_parse_negative_reals)
+{
+    assert_parse_number("-0.001", 0, -0.001);
+    assert_parse_number("-10e-10", 0, -10e-10);
+    assert_parse_number("-10E-10", 0, -10e-10);
+    assert_parse_number("-10e20", INT_MIN, -10e20);
+    assert_parse_number("-123e+127", INT_MIN, -123e127);
+    assert_parse_number("-123e-128", 0, -123e-128);
+}
 //
 //static void assert_parse_value(const char *string, int type)
 //{
@@ -345,15 +362,15 @@ TEST(CjsonFixture, assert_cJSON_GetErrorPtr)
 //
 //
 //
-//static void assert_cJSON_Version()
-//{
-//    cJSON_Version();
-//}
-//
-//TEST(CjsonFixture, assert_cJSON_Version)
-//{
-//    assert_cJSON_Version();
-//}
+static void assert_cJSON_Version()
+{
+    cJSON_Version();
+}
+
+TEST(CjsonFixture, assert_cJSON_Version)
+{
+    assert_cJSON_Version();
+}
 //
 //static void assert_cJSON_strdup()
 //{
@@ -369,63 +386,112 @@ TEST(CjsonFixture, assert_cJSON_GetErrorPtr)
 
 //
 ////测试出问题
-////static void assert_cJSON_SetNumberHelper(cJSON *object, double number)
-////{
-////    cJSON_SetNumberHelper(object, number);
-////}
-////TEST(CjsonFixture, assert_cJSON_SetNumberHelper)
-////{
-////    assert_cJSON_SetNumberHelper(NULL,0);
-////    assert_cJSON_SetNumberHelper(NULL,INT_MAX);
-////    assert_cJSON_SetNumberHelper(NULL,(double)INT_MIN);
-////}
+static void assert_cJSON_SetNumberHelper(cJSON *object, double number)
+{
+    cJSON_SetNumberHelper(object, number);
+}
+TEST(CjsonFixture, assert_cJSON_SetNumberHelper)
+{
+    cJSON *object = cJSON_CreateObject();
+    assert_cJSON_SetNumberHelper(object,0);
+    assert_cJSON_SetNumberHelper(object,INT_MAX);
+    assert_cJSON_SetNumberHelper(object,(double)INT_MIN);
+}
 //
 //
 //
 //
-//static void * CJSON_CDECL failing_realloc(void *pointer, size_t size)
-//{
-//    (void)size;
-//    (void)pointer;
-//    return NULL;
-//}
-//static void assert_ensure(printbuffer * const p, size_t needed)
-//{
-//    ensure(p,needed);
-//}
-//TEST(CjsonFixture, assert_ensure)
-//{
-//
-//
-//    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
-//    buffer.buffer = (unsigned char*)malloc(100);
+static void * CJSON_CDECL failing_realloc(void *pointer, size_t size)
+{
+    (void)size;
+    (void)pointer;
+    return NULL;
+}
+static void assert_ensure(printbuffer * const p, size_t needed)
+{
+    ensure(p,needed);
+}
+TEST(CjsonFixture, assert_ensure)
+{
+
+
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    ensure(&buffer, 200);
+    buffer.buffer = (unsigned char*)malloc(100);
 //    ensure(&buffer, 200);
-//    ensure(NULL,2*INT_MAX/3); //这两个无法覆盖  不知为何
-//    ensure(NULL,2*INT_MAX);
-////    ensure(output_buffer, (size_t)length + sizeof(""));
+    long long need= INT_MAX;
+    need=need+1;
+    ASSERT_TRUE(need>INT_MAX);
 //
-////    printbuffer *buffer1;
-////    buffer1->buffer = NULL;
-////    buffer1->length = 10;
-////    buffer1->hooks.reallocate = NULL;
-////    ensure(buffer1, 200);
-//}
+    ASSERT_FALSE(ensure(&buffer,need));
+    ensure(&buffer,INT_MAX/2 +1);
+
+//    ensure(output_buffer, (size_t)length + sizeof(""));
+
+//    printbuffer *buffer1;
+//    buffer1->buffer = NULL;
+//    buffer1->length = 10;
+//    buffer1->hooks.reallocate = NULL;
+//    ensure(buffer1, 200);
+}
+
+TEST(CjsonFixture2, assert_ensure2){
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+
+    buffer.noalloc=1;
+    ensure(&buffer, 200);
+    ensure(NULL,200);
+}
+
+TEST(CjsonFixture2, assert_ensure3){
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+    buffer.length=1;
+    buffer.offset=2;
+    ensure(&buffer, 200);
+}
+TEST(CjsonFixture2, assert_ensure4){
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+
+    ensure(&buffer,INT_MAX/2 -1);
+    ensure(&buffer,INT_MAX);
+}
+
+
+TEST(CjsonFixture2, assert_ensure5){
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+    buffer.length=-1;
+//    buffer.offset=2;
+    ensure(&buffer, 200);
+}
+
+TEST(CjsonFixture2, assert_ensure6){
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    buffer.buffer = (unsigned char*)malloc(100);
+    buffer.hooks.reallocate=NULL;
+    ensure(&buffer, 200);
+}
+
 //
-////static void assert_update_offset(printbuffer *buffer)
-////{
-////    update_offset(buffer);
-////}
-////TEST(CjsonFixture, assert_update_offset)
-////{
-////    printbuffer *buffer;
-////    buffer->buffer =NULL;
-////    assert_update_offset(NULL);
-////    assert_update_offset(buffer);
-//////    printbuffer *buffer1 ;
-//////    buffer1->length = 10;
-//////
-//////    assert_update_offset(buffer1);
-////}
+static void assert_update_offset(printbuffer *buffer)
+{
+    update_offset(buffer);
+}
+TEST(CjsonFixture, assert_update_offset)
+{
+    printbuffer buffer = {NULL, 10, 0, 0, false, false, {&malloc, &free, &failing_realloc}};
+    assert_update_offset(&buffer);
+    buffer.buffer = (unsigned char*)malloc(100);
+    assert_update_offset(NULL);
+    assert_update_offset(&buffer);
+//    printbuffer *buffer1 ;
+//    buffer1->length = 10;
+//
+//    assert_update_offset(buffer1);
+}
 //
 //
 //static void assert_compare_double(double a, double b)
@@ -439,25 +505,47 @@ TEST(CjsonFixture, assert_cJSON_GetErrorPtr)
 //
 //
 //
-//static void assert_print_number()
-//{
-//    unsigned char printed[1024];
-//    unsigned char new_buffer[26];
-//    unsigned int i = 0;
-//    cJSON item[1];
-//    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
-//    buffer.buffer = printed;
-//    buffer.length = sizeof(printed);
-//    buffer.offset = 0;
-//    buffer.noalloc = true;
-//    buffer.hooks = global_hooks;
-//    buffer.buffer = new_buffer;
-//    print_number(item, &buffer), "Failed to print number.";
-//}
-//TEST(CjsonFixture, assert_print_number)
-//{
-//    assert_print_number();
-//}
+static void assert_print_number(const char *expected, double input)
+{
+    unsigned char printed[1024];
+    unsigned char new_buffer[26];
+    unsigned int i = 0;
+    cJSON item[1];
+    printbuffer buffer = { 0, 0, 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.buffer = printed;
+    buffer.length = sizeof(printed);
+    buffer.offset = 0;
+    buffer.noalloc = true;
+    buffer.hooks = global_hooks;
+    buffer.buffer = new_buffer;
+
+    memset(item, 0, sizeof(item));
+    memset(new_buffer, 0, sizeof(new_buffer));
+    cJSON_SetNumberValue(item, input);
+    print_number(item, &buffer);
+    print_number(item, NULL);
+}
+TEST(CjsonFixture, print_number)
+{
+    assert_print_number("0", 0);
+    assert_print_number("-1", -1.0);
+    assert_print_number("-32768", -32768.0);
+    assert_print_number("-2147483648", -2147483648.0);
+    assert_print_number("1", 1.0);
+    assert_print_number("32767", 32767.0);
+    assert_print_number("2147483647", 2147483647.0);
+    assert_print_number("0.123", 0.123);
+    assert_print_number("1e-09", 10e-10);
+    assert_print_number("1000000000000", 10e11);
+    assert_print_number("1.23e+129", 123e+127);
+    assert_print_number("1.23e-126", 123e-128);
+    assert_print_number("3.1415926535897931", 3.1415926535897931);
+    assert_print_number("-0.0123", -0.0123);
+    assert_print_number("-1e-09", -10e-10);
+    assert_print_number("-1e+21", -10e20);
+    assert_print_number("-1.23e+129", -123e+127);
+    assert_print_number("-1.23e-126", -123e-128);
+}
 //
 //
 static void assert_print_string(const char *expected, const char *input)
@@ -503,14 +591,59 @@ static void assert_cJSON_ParseWithOpts(const char *value, const char **return_pa
 }
 TEST(CjsonFixture, assert_cJSON_ParseWithOpts)
 {
-    assert_cJSON_ParseWithOpts(NULL,NULL, true);
-    assert_cJSON_ParseWithOpts("0",NULL, true);
-    assert_cJSON_ParseWithOpts("0",NULL, true);
+    const char *error_pointer = NULL;
+    cJSON *item = NULL;
+    cJSON_ParseWithOpts(NULL, &error_pointer, false);
+    item = cJSON_ParseWithOpts("{}", NULL, false);
+    ASSERT_TRUE(item!=NULL);
+    cJSON_Delete(item);
+    ASSERT_TRUE(cJSON_ParseWithOpts(NULL, NULL, false)==NULL);
+    ASSERT_TRUE(cJSON_ParseWithOpts("{", NULL, false)==NULL);
+
+}
+TEST(CjsonFixture, assert_cJSON_ParseWithOpts2)
+{
+    const char empty_string[] = "";
+    const char *error_pointer = NULL;
+
+    ASSERT_TRUE(cJSON_ParseWithOpts(empty_string, NULL, false)==NULL);
+    ASSERT_TRUE(cJSON_ParseWithOpts(empty_string, &error_pointer, false)==NULL);
 
     const char json[] = "{ \"name\": ";
     const char *parse_end = NULL;
 
     ASSERT_TRUE(cJSON_ParseWithOpts(json, &parse_end, false)==NULL);
+
+    cJSON *item = cJSON_ParseWithOpts("{}", NULL, true);
+    ASSERT_TRUE(item!=NULL);
+    cJSON_Delete(item);
+    item = cJSON_ParseWithOpts("{} \n", NULL, true);
+    ASSERT_TRUE(item!=NULL);
+    cJSON_Delete(item);
+    ASSERT_TRUE(cJSON_ParseWithOpts("{}x", NULL, true)==NULL);
+
+}
+TEST(CjsonFixture, assert_cJSON_ParseWithOpts3)
+{
+    const char json[] = "[] empty array XD";
+    const char *parse_end = NULL;
+
+    cJSON *item = cJSON_ParseWithOpts(json, &parse_end, false);
+    ASSERT_TRUE(item!=NULL);
+    cJSON_Delete(item);
+
+    cJSON *with_bom = NULL;
+    cJSON *without_bom = NULL;
+
+    with_bom = cJSON_ParseWithOpts("\xEF\xBB\xBF{}", NULL, true);
+    ASSERT_TRUE(with_bom!=NULL);
+    without_bom = cJSON_ParseWithOpts("{}", NULL, true);
+    ASSERT_TRUE(with_bom!=NULL);
+
+    ASSERT_TRUE(cJSON_Compare(with_bom, without_bom, true));
+
+    cJSON_Delete(with_bom);
+    cJSON_Delete(without_bom);
 }
 //
 //
@@ -532,6 +665,10 @@ TEST(CjsonFixture, assert_cJSON_Print)
     cJSON_Print(root);
     root=cJSON_Parse("\"[true, false]\"");
     cJSON_Print(root);
+
+    global_hooks.reallocate=NULL;
+    cJSON_Print(root);
+    global_hooks.reallocate=internal_realloc;
 }
 //
 static void assert_cJSON_PrintUnformatted()
@@ -808,6 +945,12 @@ TEST(CjsonFixture, misc_tests)
     cJSON *item = cJSON_CreateString("item");
     ASSERT_FALSE(cJSON_PrintPreallocated(NULL, buffer, sizeof(buffer), true));
     ASSERT_FALSE(cJSON_PrintPreallocated(item, NULL, 1, true));
+
+    case_insensitive_strcmp((const unsigned char *)"a",(const unsigned char *)"a");
+    case_insensitive_strcmp(NULL,(const unsigned char *)"a");
+    case_insensitive_strcmp((const unsigned char *)"a",NULL);
+
+    char *name = (char*)cJSON_strdup(NULL, &global_hooks);
 }
 //
 //
@@ -1609,6 +1752,19 @@ TEST(CjsonFixture, assert_cJSON_InitHooks)
 {
     cJSON_InitHooks(&failing_hooks);
     cJSON_InitHooks(NULL);
+
+    failing_hooks.malloc_fn=NULL;
+    cJSON_InitHooks(&failing_hooks);
+    failing_hooks.free_fn =NULL;
+    global_hooks.deallocate=NULL;
+    cJSON_InitHooks(&failing_hooks);
+    failing_hooks.free_fn =NULL;
+    global_hooks.allocate=NULL;
+    cJSON_InitHooks(&failing_hooks);
+
+    global_hooks.deallocate=free;
+    cJSON_InitHooks(&failing_hooks);
+    global_hooks.allocate=malloc;
 }
 
 static void assert_parse_string(const char *string, const char *expected)
@@ -1623,7 +1779,28 @@ static void assert_parse_string(const char *string, const char *expected)
     item->valuestring = NULL;
 }
 
+static void assert_not_parse_string(const char * const string)
+{
+    parse_buffer buffer = { 0, 0, 0, 0, { 0, 0, 0 } };
+    buffer.content = (const unsigned char*)string;
+    buffer.length = strlen(string) + sizeof("");
+    buffer.hooks = global_hooks;
+
+    parse_string(item, &buffer);
+}
+
 TEST(CjsonFixture, parse_string){
+    assert_not_parse_string("this\" is not a string\"");
+    reset(item);
+    assert_not_parse_string("");
+    reset(item);
+    assert_not_parse_string("Abcdef\\123");
+    reset(item);
+    assert_not_parse_string("Abcdef\\e23");
+    reset(item);
+    assert_not_parse_string("\"000000000000000000\\");
+    reset(item);
+
     assert_parse_string("\"\"", "");
     assert_parse_string(
             "\" !\\\"#$%&'()*+,-./\\/0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\\\]^_'abcdefghijklmnopqrstuvwxyz{|}~\"",
@@ -1637,4 +1814,21 @@ TEST(CjsonFixture, parse_string){
 
     assert_parse_string("\"\\uD83D\\udc31\"", "🐱");
     reset(item);
+}
+TEST(CjsonFixture, parse_hex4){
+    unsigned int number = 0;
+    unsigned char digits_lower[6];
+    unsigned char digits_upper[6];
+    /* test all combinations */
+    for (number = 0; number <= 0xFFFF; number++)
+    {
+        sprintf((char*)digits_lower, "%.4x", number);
+        sprintf((char*)digits_upper, "%.4X", number);
+
+        ASSERT_EQ(parse_hex4(digits_lower),number);
+        ASSERT_EQ(parse_hex4(digits_upper),number);
+    }
+
+    parse_hex4((const unsigned char*)"beef");
+    parse_hex4((const unsigned char*)"wbeef");
 }

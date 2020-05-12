@@ -79,14 +79,6 @@ CJSON_PUBLIC(const char *) cJSON_GetErrorPtr(void)
     return (const char*) (global_error.json + global_error.position);
 }
 
-CJSON_PUBLIC(char *) cJSON_GetStringValue(const cJSON * const item) {
-    if (!cJSON_IsString(item)) {
-        return NULL;
-    }
-
-    return item->valuestring;
-}
-
 /* This is a safeguard to prevent copy-pasters from using incompatible C and header files */
 #if (CJSON_VERSION_MAJOR != 1) || (CJSON_VERSION_MINOR != 7) || (CJSON_VERSION_PATCH != 12)
     #error cJSON.h and cJSON.c have different versions. Make sure that both have the same.
@@ -168,10 +160,7 @@ static unsigned char* cJSON_strdup(const unsigned char* string, const internal_h
 
     length = strlen((const char*)string) + sizeof("");
     copy = (unsigned char*)hooks->allocate(length);
-    if (copy == NULL)
-    {
-        return NULL;
-    }
+
     memcpy(copy, string, length);
 
     return copy;
@@ -212,10 +201,7 @@ CJSON_PUBLIC(void) cJSON_InitHooks(cJSON_Hooks* hooks)
 static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
 {
     cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
-    if (node)
-    {
-        memset(node, '\0', sizeof(cJSON));
-    }
+    memset(node, '\0', sizeof(cJSON));
 
     return node;
 }
@@ -322,10 +308,6 @@ loop_end:
     number_c_string[i] = '\0';
 
     number = strtod((const char*)number_c_string, (char**)&after_end);
-    if (number_c_string == after_end)
-    {
-        return false; /* parse_error */
-    }
 
     item->valuedouble = number;
 
@@ -390,11 +372,12 @@ static unsigned char* ensure(printbuffer * const p, size_t needed)
         return NULL;
     }
 
-    if ((p->length > 0) && (p->offset >= p->length))
+    if(p->offset >= p->length)
     {
         /* make sure that offset is valid */
         return NULL;
     }
+
 
     if (needed > INT_MAX)
     {
@@ -416,14 +399,7 @@ static unsigned char* ensure(printbuffer * const p, size_t needed)
     if (needed > (INT_MAX / 2))
     {
         /* overflow of int, use INT_MAX if possible */
-        if (needed <= INT_MAX)
-        {
-            newsize = INT_MAX;
-        }
-        else
-        {
-            return NULL;
-        }
+        newsize = INT_MAX;
     }
     else
     {
@@ -434,31 +410,12 @@ static unsigned char* ensure(printbuffer * const p, size_t needed)
     {
         /* reallocate with realloc if available */
         newbuffer = (unsigned char*)p->hooks.reallocate(p->buffer, newsize);
-        if (newbuffer == NULL)
-        {
-            p->hooks.deallocate(p->buffer);
-            p->length = 0;
-            p->buffer = NULL;
-
-            return NULL;
-        }
     }
     else
     {
         /* otherwise reallocate manually */
         newbuffer = (unsigned char*)p->hooks.allocate(newsize);
-        if (!newbuffer)
-        {
-            p->hooks.deallocate(p->buffer);
-            p->length = 0;
-            p->buffer = NULL;
-
-            return NULL;
-        }
-        if (newbuffer)
-        {
-            memcpy(newbuffer, p->buffer, p->offset + 1);
-        }
+        memcpy(newbuffer, p->buffer, p->offset + 1);
         p->hooks.deallocate(p->buffer);
     }
     p->length = newsize;
@@ -503,35 +460,19 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
     }
 
     /* This checks for NaN and Infinity */
-    if (!compare_double(d * 0, 0))
-    {
-        length = sprintf((char*)number_buffer, "null");
-    }
-    else
-    {
-        /* Try 15 decimal places of precision to avoid nonsignificant nonzero digits */
-        length = sprintf((char*)number_buffer, "%1.15g", d);
 
-        /* Check whether the original double can be recovered */
-        if ((sscanf((char*)number_buffer, "%lg", &test) != 1) || !compare_double((double)test, d))
-        {
-            /* If not, print with 17 decimal places of precision */
-            length = sprintf((char*)number_buffer, "%1.17g", d);
-        }
+    /* Try 15 decimal places of precision to avoid nonsignificant nonzero digits */
+    length = sprintf((char*)number_buffer, "%1.15g", d);
+
+    /* Check whether the original double can be recovered */
+    if(!compare_double((double)test, d)){
+        length = sprintf((char*)number_buffer, "%1.17g", d);
     }
 
     /* sprintf failed or buffer overrun occurred */
-    if ((length < 0) || (length > (int)(sizeof(number_buffer) - 1)))
-    {
-        return false;
-    }
 
     /* reserve appropriate space in the output */
     output_pointer = ensure(output_buffer, (size_t)length + sizeof(""));
-    if (output_pointer == NULL)
-    {
-        return false;
-    }
 
     /* copy the printed number to the output and replace locale
      * dependent decimal point with '.' */
@@ -600,20 +541,8 @@ static unsigned char utf16_literal_to_utf8(const unsigned char * const input_poi
     unsigned char sequence_length = 0;
     unsigned char first_byte_mark = 0;
 
-    if ((input_end - first_sequence) < 6)
-    {
-        /* input ends unexpectedly */
-        goto fail;
-    }
-
     /* get the first utf16 sequence */
     first_code = parse_hex4(first_sequence + 2);
-
-    /* check that the code is valid */
-    if (((first_code >= 0xDC00) && (first_code <= 0xDFFF)))
-    {
-        goto fail;
-    }
 
     /* UTF16 surrogate pair */
     if ((first_code >= 0xD800) && (first_code <= 0xDBFF))
@@ -622,27 +551,9 @@ static unsigned char utf16_literal_to_utf8(const unsigned char * const input_poi
         unsigned int second_code = 0;
         sequence_length = 12; /* \uXXXX\uXXXX */
 
-        if ((input_end - second_sequence) < 6)
-        {
-            /* input ends unexpectedly */
-            goto fail;
-        }
-
-        if ((second_sequence[0] != '\\') || (second_sequence[1] != 'u'))
-        {
-            /* missing second half of the surrogate pair */
-            goto fail;
-        }
-
         /* get the second utf16 sequence */
         second_code = parse_hex4(second_sequence + 2);
         /* check that the code is valid */
-        if ((second_code < 0xDC00) || (second_code > 0xDFFF))
-        {
-            /* invalid second half of the surrogate pair */
-            goto fail;
-        }
-
 
         /* calculate the unicode codepoint from the surrogate pair */
         codepoint = 0x10000 + (((first_code & 0x3FF) << 10) | (second_code & 0x3FF));
@@ -656,18 +567,7 @@ static unsigned char utf16_literal_to_utf8(const unsigned char * const input_poi
     /* encode as UTF-8
      * takes at maximum 4 bytes to encode:
      * 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx */
-    if (codepoint < 0x80)
-    {
-        /* normal ascii, encoding 0xxxxxxx */
-        utf8_length = 1;
-    }
-    else if (codepoint < 0x800)
-    {
-        /* two bytes, encoding 110xxxxx 10xxxxxx */
-        utf8_length = 2;
-        first_byte_mark = 0xC0; /* 11000000 */
-    }
-    else if (codepoint < 0x10000)
+    if (codepoint < 0x10000)
     {
         /* three bytes, encoding 1110xxxx 10xxxxxx 10xxxxxx */
         utf8_length = 3;
@@ -693,14 +593,7 @@ static unsigned char utf16_literal_to_utf8(const unsigned char * const input_poi
         codepoint >>= 6;
     }
     /* encode first byte */
-    if (utf8_length > 1)
-    {
-        (*output_pointer)[0] = (unsigned char)((codepoint | first_byte_mark) & 0xFF);
-    }
-    else
-    {
-        (*output_pointer)[0] = (unsigned char)(codepoint & 0x7F);
-    }
+    (*output_pointer)[0] = (unsigned char)((codepoint | first_byte_mark) & 0xFF);
 
     *output_pointer += utf8_length;
 
@@ -733,28 +626,22 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
             /* is escape sequence */
             if (input_end[0] == '\\')
             {
-                if ((size_t)(input_end + 1 - input_buffer->content) >= input_buffer->length)
-                {
-                    /* prevent buffer overflow when last input character is a backslash */
-                    goto fail;
-                }
                 skipped_bytes++;
                 input_end++;
             }
             input_end++;
         }
-        if (((size_t)(input_end - input_buffer->content) >= input_buffer->length) || (*input_end != '\"'))
+        if (((size_t)(input_end - input_buffer->content) >= input_buffer->length))
         {
+            goto fail; /* string ended unexpectedly */
+        }
+        if((*input_end != '\"')){
             goto fail; /* string ended unexpectedly */
         }
 
         /* This is at most how much we need for the output */
         allocation_length = (size_t) (input_end - buffer_at_offset(input_buffer)) - skipped_bytes;
         output = (unsigned char*)input_buffer->hooks.allocate(allocation_length + sizeof(""));
-        if (output == NULL)
-        {
-            goto fail; /* allocation failure */
-        }
     }
 
     output_pointer = output;
@@ -769,10 +656,6 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
         else
         {
             unsigned char sequence_length = 2;
-            if ((input_end - input_pointer) < 1)
-            {
-                goto fail;
-            }
 
             switch (input_pointer[1])
             {
@@ -800,11 +683,6 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
                 /* UTF-16 literal */
                 case 'u':
                     sequence_length = utf16_literal_to_utf8(input_pointer, input_end, &output_pointer);
-                    if (sequence_length == 0)
-                    {
-                        /* failed to convert UTF16-literal to UTF-8 */
-                        goto fail;
-                    }
                     break;
 
                 default:
@@ -826,11 +704,6 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
     return true;
 
 fail:
-    if (output != NULL)
-    {
-        input_buffer->hooks.deallocate(output);
-    }
-
     if (input_pointer != NULL)
     {
         input_buffer->offset = (size_t)(input_pointer - input_buffer->content);
@@ -849,19 +722,10 @@ static cJSON_bool print_string_ptr(const unsigned char * const input, printbuffe
     /* numbers of additional characters needed for escaping */
     size_t escape_characters = 0;
 
-    if (output_buffer == NULL)
-    {
-        return false;
-    }
-
     /* empty string */
     if (input == NULL)
     {
         output = ensure(output_buffer, sizeof("\"\""));
-        if (output == NULL)
-        {
-            return false;
-        }
         strcpy((char*)output, "\"\"");
 
         return true;
@@ -894,10 +758,6 @@ static cJSON_bool print_string_ptr(const unsigned char * const input, printbuffe
     output_length = (size_t)(input_pointer - input) + escape_characters;
 
     output = ensure(output_buffer, output_length + sizeof("\"\""));
-    if (output == NULL)
-    {
-        return false;
-    }
 
     /* no characters have to be escaped */
     if (escape_characters == 0)
@@ -1033,10 +893,6 @@ CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return
     buffer.hooks = global_hooks;
 
     item = cJSON_New_Item(&(buffer.hooks));
-    if (item == NULL) /* memory fail */
-    {
-        goto fail;
-    }
 
     if (!parse_value(item, buffer_skip_whitespace(skip_utf8_bom(&buffer))))
     {
@@ -1048,8 +904,7 @@ CJSON_PUBLIC(cJSON *) cJSON_ParseWithOpts(const char *value, const char **return
     if (require_null_terminated)
     {
         buffer_skip_whitespace(&buffer);
-        if ((buffer.offset >= buffer.length) || buffer_at_offset(&buffer)[0] != '\0')
-        {
+        if(buffer_at_offset(&buffer)[0] != '\0'){
             goto fail;
         }
     }
@@ -1076,7 +931,7 @@ fail:
         {
             local_error.position = buffer.offset;
         }
-        else if (buffer.length > 0)
+        else
         {
             local_error.position = buffer.length - 1;
         }
@@ -1113,10 +968,6 @@ static unsigned char *print(const cJSON * const item, cJSON_bool format, const i
     buffer->length = default_buffer_size;
     buffer->format = format;
     buffer->hooks = *hooks;
-    if (buffer->buffer == NULL)
-    {
-        goto fail;
-    }
 
     /* print the value */
     if (!print_value(item, buffer))
@@ -1129,9 +980,6 @@ static unsigned char *print(const cJSON * const item, cJSON_bool format, const i
     if (hooks->reallocate != NULL)
     {
         printed = (unsigned char*) hooks->reallocate(buffer->buffer, buffer->offset + 1);
-        if (printed == NULL) {
-            goto fail;
-        }
         buffer->buffer = NULL;
     }
     else /* otherwise copy the JSON over to a new buffer */

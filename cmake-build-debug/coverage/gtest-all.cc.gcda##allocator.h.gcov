@@ -133,7 +133,7 @@
         -:  128:      typedef true_type is_always_equal;
         -:  129:#endif
         -:  130:
-     162*:  131:      allocator() throw() { }
+     152*:  131:      allocator() throw() { }
 ------------------
 _ZNSaISt13_Rb_tree_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEC2Ev:
     #####:  131:      allocator() throw() { }
@@ -192,24 +192,24 @@ _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEEC2Ev:
         1:  131-block  0
 ------------------
 _ZNSaIN7testing14TestPartResultEEC2Ev:
-       77:  131:      allocator() throw() { }
-       77:  131-block  0
+       71:  131:      allocator() throw() { }
+       71:  131-block  0
 ------------------
 _ZNSaIyEC2Ev:
     #####:  131:      allocator() throw() { }
     %%%%%:  131-block  0
 ------------------
 _ZNSaIN7testing12TestPropertyEEC2Ev:
-       77:  131:      allocator() throw() { }
-       77:  131-block  0
+       71:  131:      allocator() throw() { }
+       71:  131-block  0
 ------------------
 _ZNSaIPN7testing8TestInfoEEC2Ev:
-        1:  131:      allocator() throw() { }
-        1:  131-block  0
-------------------
-_ZNSaIiEC2Ev:
         2:  131:      allocator() throw() { }
         2:  131-block  0
+------------------
+_ZNSaIiEC2Ev:
+        3:  131:      allocator() throw() { }
+        3:  131-block  0
 ------------------
 _ZNSaIPN7testing17TestEventListenerEEC2Ev:
         1:  131:      allocator() throw() { }

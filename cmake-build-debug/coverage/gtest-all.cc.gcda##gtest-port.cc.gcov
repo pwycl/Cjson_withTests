@@ -380,14 +380,14 @@
     #####:  338:}
     %%%%%:  338-block  0
         -:  339:
-       79:  340:Mutex::Mutex()
+       73:  340:Mutex::Mutex()
         -:  341:    : owner_thread_id_(0),
         -:  342:      type_(kDynamic),
         -:  343:      critical_section_init_phase_(0),
-       79:  344:      critical_section_(new CRITICAL_SECTION) {
-       79:  344-block  0
-       79:  345:  ::InitializeCriticalSection(critical_section_);
-       79:  346:}
+       73:  344:      critical_section_(new CRITICAL_SECTION) {
+       73:  344-block  0
+       73:  345:  ::InitializeCriticalSection(critical_section_);
+       73:  346:}
         -:  347:
     #####:  348:Mutex::~Mutex() {
         -:  349:  // Static mutexes are leaked intentionally. It is not thread-safe to try

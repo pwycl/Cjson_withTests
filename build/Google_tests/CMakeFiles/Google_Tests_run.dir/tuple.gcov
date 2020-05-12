@@ -78,8 +78,8 @@
         -:   73:    struct _Head_base<_Idx, _Head, true>
         -:   74:    : public _Head
         -:   75:    {
-      126:   76:      constexpr _Head_base()
-      126:   77:      : _Head() { }
+   131266:   76:      constexpr _Head_base()
+   131266:   77:      : _Head() { }
         -:   78:
         -:   79:      constexpr _Head_base(const _Head& __h)
         -:   80:      : _Head(__h) { }
@@ -115,7 +115,7 @@
         -:  110:	: _Head(std::forward<_UHead>(__uhead), *__a._M_a) { }
         -:  111:
         -:  112:      static constexpr _Head&
-       98:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
+      117:  113:      _M_head(_Head_base& __b) noexcept { return __b; }
         -:  114:
         -:  115:      static constexpr const _Head&
         -:  116:      _M_head(const _Head_base& __b) noexcept { return __b; }
@@ -124,8 +124,8 @@
         -:  119:  template<std::size_t _Idx, typename _Head>
         -:  120:    struct _Head_base<_Idx, _Head, false>
         -:  121:    {
-      126:  122:      constexpr _Head_base()
-      126:  123:      : _M_head_impl() { }
+   131266:  122:      constexpr _Head_base()
+   131266:  123:      : _M_head_impl() { }
         -:  124:
         -:  125:      constexpr _Head_base(const _Head& __h)
         -:  126:      : _M_head_impl(__h) { }
@@ -162,10 +162,10 @@
         -:  157:	: _M_head_impl(std::forward<_UHead>(__uhead), *__a._M_a) { }
         -:  158:
         -:  159:      static constexpr _Head&
-      322:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
+   131500:  160:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
         -:  161:
         -:  162:      static constexpr const _Head&
-        -:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
+    #####:  163:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
         -:  164:
         -:  165:      _Head _M_head_impl;
         -:  166:    };
@@ -197,10 +197,10 @@
         -:  192:      typedef _Head_base<_Idx, _Head> _Base;
         -:  193:
         -:  194:      static constexpr _Head&
-      322:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+   131500:  195:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  196:
         -:  197:      static constexpr const _Head&
-        -:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+    #####:  198:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  199:
         -:  200:      static constexpr _Inherited&
         -:  201:      _M_tail(_Tuple_impl& __t) noexcept { return __t; }
@@ -208,8 +208,8 @@
         -:  203:      static constexpr const _Inherited&
         -:  204:      _M_tail(const _Tuple_impl& __t) noexcept { return __t; }
         -:  205:
-      126:  206:      constexpr _Tuple_impl()
-      126:  207:      : _Inherited(), _Base() { }
+   131266:  206:      constexpr _Tuple_impl()
+   131266:  207:      : _Inherited(), _Base() { }
         -:  208:
         -:  209:      explicit
         -:  210:      constexpr _Tuple_impl(const _Head& __head, const _Tail&... __tail)
@@ -353,13 +353,13 @@
         -:  348:      typedef _Head_base<_Idx, _Head> _Base;
         -:  349:
         -:  350:      static constexpr _Head&
-       98:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
+      117:  351:      _M_head(_Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  352:
         -:  353:      static constexpr const _Head&
         -:  354:      _M_head(const _Tuple_impl& __t) noexcept { return _Base::_M_head(__t); }
         -:  355:
-      126:  356:      constexpr _Tuple_impl()
-      126:  357:      : _Base() { }
+   131266:  356:      constexpr _Tuple_impl()
+   131266:  357:      : _Base() { }
         -:  358:
         -:  359:      explicit
         -:  360:      constexpr _Tuple_impl(const _Head& __head)
@@ -921,8 +921,8 @@
         -:  916:                                     __is_implicitly_default_constructible<_U2>>
         -:  917:                                   ::value, bool>::type = true>
         -:  918:
-      126:  919:      constexpr tuple()
-      126:  920:      : _Inherited() { }
+   131266:  919:      constexpr tuple()
+   131266:  920:      : _Inherited() { }
         -:  921:
         -:  922:      template <typename _U1 = _T1,
         -:  923:                typename _U2 = _T2,
@@ -1305,25 +1305,25 @@
         -: 1300:
         -: 1301:  template<std::size_t __i, typename _Head, typename... _Tail>
         -: 1302:    constexpr _Head&
-      420: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
-      420: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+   131617: 1303:    __get_helper(_Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+   131617: 1304:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
         -: 1305:
         -: 1306:  template<std::size_t __i, typename _Head, typename... _Tail>
         -: 1307:    constexpr const _Head&
-        -: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
-        -: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
+    #####: 1308:    __get_helper(const _Tuple_impl<__i, _Head, _Tail...>& __t) noexcept
+    #####: 1309:    { return _Tuple_impl<__i, _Head, _Tail...>::_M_head(__t); }
         -: 1310:
         -: 1311:  /// Return a reference to the ith element of a tuple.
         -: 1312:  template<std::size_t __i, typename... _Elements>
         -: 1313:    constexpr __tuple_element_t<__i, tuple<_Elements...>>&
-      420: 1314:    get(tuple<_Elements...>& __t) noexcept
-      420: 1315:    { return std::__get_helper<__i>(__t); }
+   131617: 1314:    get(tuple<_Elements...>& __t) noexcept
+   131617: 1315:    { return std::__get_helper<__i>(__t); }
         -: 1316:
         -: 1317:  /// Return a const reference to the ith element of a const tuple.
         -: 1318:  template<std::size_t __i, typename... _Elements>
         -: 1319:    constexpr const __tuple_element_t<__i, tuple<_Elements...>>&
-        -: 1320:    get(const tuple<_Elements...>& __t) noexcept
-        -: 1321:    { return std::__get_helper<__i>(__t); }
+    #####: 1320:    get(const tuple<_Elements...>& __t) noexcept
+    #####: 1321:    { return std::__get_helper<__i>(__t); }
         -: 1322:
         -: 1323:  /// Return an rvalue reference to the ith element of a tuple rvalue.
         -: 1324:  template<std::size_t __i, typename... _Elements>

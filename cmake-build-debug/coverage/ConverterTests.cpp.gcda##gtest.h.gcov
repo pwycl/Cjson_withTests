@@ -295,33 +295,33 @@
         -:  290:  // the argument is implicitly convertible to AssertionResult. In that case
         -:  291:  // we want AssertionResult's copy constructor to be used.
         -:  292:  template <typename T>
-      126:  293:  explicit AssertionResult(
+   131266:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-      126:  299:      : success_(success) {}
+   131266:  299:      : success_(success) {}
 ------------------
 _ZN7testing15AssertionResultC1IiEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
-       34:  293:  explicit AssertionResult(
+       30:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-       34:  299:      : success_(success) {}
-       34:  299-block  0
+       30:  299:      : success_(success) {}
+       30:  299-block  0
 ------------------
 _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convertibleIS2_S0_E5valueEE4typeE:
-       92:  293:  explicit AssertionResult(
+   131236:  293:  explicit AssertionResult(
         -:  294:      const T& success,
         -:  295:      typename internal::EnableIf<
         -:  296:          !std::is_convertible<T, AssertionResult>::value>::type*
         -:  297:      /*enabler*/
         -:  298:      = nullptr)
-       92:  299:      : success_(success) {}
-       92:  299-block  0
+   131236:  299:      : success_(success) {}
+   131236:  299-block  0
 ------------------
         -:  300:
         -:  301:#if defined(_MSC_VER) && _MSC_VER < 1910
@@ -335,8 +335,8 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -:  309:  }
         -:  310:
         -:  311:  // Returns true if the assertion succeeded.
-      126:  312:  operator bool() const { return success_; }  // NOLINT
-      126:  312-block  0
+   131266:  312:  operator bool() const { return success_; }  // NOLINT
+   131266:  312-block  0
         -:  313:
         -:  314:  // Returns the assertion's negation. Used with EXPECT/ASSERT_FALSE.
         -:  315:  AssertionResult operator!() const;
@@ -1541,6 +1541,17 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -: 1508:                   FormatForComparisonFailureMessage(lhs, rhs),
         -: 1509:                   FormatForComparisonFailureMessage(rhs, lhs),
     #####: 1510:                   false);
+        -: 1511:}
+------------------
+_ZN7testing8internal18CmpHelperEQFailureIjjEENS_15AssertionResultEPKcS4_RKT_RKT0_:
+    #####: 1503:AssertionResult CmpHelperEQFailure(const char* lhs_expression,
+        -: 1504:                                   const char* rhs_expression,
+        -: 1505:                                   const T1& lhs, const T2& rhs) {
+        -: 1506:  return EqFailure(lhs_expression,
+        -: 1507:                   rhs_expression,
+        -: 1508:                   FormatForComparisonFailureMessage(lhs, rhs),
+        -: 1509:                   FormatForComparisonFailureMessage(rhs, lhs),
+    #####: 1510:                   false);
     %%%%%: 1510-block  0
     %%%%%: 1510-block  1
     %%%%%: 1510-block  2
@@ -1549,6 +1560,25 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
     $$$$$: 1510-block  5
     $$$$$: 1510-block  6
         -: 1511:}
+------------------
+_ZN7testing8internal18CmpHelperEQFailureIiiEENS_15AssertionResultEPKcS4_RKT_RKT0_:
+    #####: 1503:AssertionResult CmpHelperEQFailure(const char* lhs_expression,
+        -: 1504:                                   const char* rhs_expression,
+        -: 1505:                                   const T1& lhs, const T2& rhs) {
+        -: 1506:  return EqFailure(lhs_expression,
+        -: 1507:                   rhs_expression,
+        -: 1508:                   FormatForComparisonFailureMessage(lhs, rhs),
+        -: 1509:                   FormatForComparisonFailureMessage(rhs, lhs),
+    #####: 1510:                   false);
+    %%%%%: 1510-block  0
+    %%%%%: 1510-block  1
+    %%%%%: 1510-block  2
+    %%%%%: 1510-block  3
+    $$$$$: 1510-block  4
+    $$$$$: 1510-block  5
+    $$$$$: 1510-block  6
+        -: 1511:}
+------------------
         -: 1512:
         -: 1513:// This block of code defines operator==/!=
         -: 1514:// to block lexical scope lookup.
@@ -1559,19 +1589,47 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -: 1519:
         -: 1520:// The helper function for {ASSERT|EXPECT}_EQ.
         -: 1521:template <typename T1, typename T2>
-       19: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
+   131090: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
         -: 1523:                            const char* rhs_expression,
         -: 1524:                            const T1& lhs,
         -: 1525:                            const T2& rhs) {
-       19: 1526:  if (lhs == rhs) {
-       19: 1526-block  0
-       19: 1527:    return AssertionSuccess();
-       19: 1527-block  0
+   131090: 1526:  if (lhs == rhs) {
+   131090: 1527:    return AssertionSuccess();
+        -: 1528:  }
+        -: 1529:
+    #####: 1530:  return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);
+        -: 1531:}
+------------------
+_ZN7testing8internal11CmpHelperEQIjjEENS_15AssertionResultEPKcS4_RKT_RKT0_:
+   131072: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
+        -: 1523:                            const char* rhs_expression,
+        -: 1524:                            const T1& lhs,
+        -: 1525:                            const T2& rhs) {
+   131072: 1526:  if (lhs == rhs) {
+   131072: 1526-block  0
+   131072: 1527:    return AssertionSuccess();
+   131072: 1527-block  0
         -: 1528:  }
         -: 1529:
     #####: 1530:  return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);
     %%%%%: 1530-block  0
         -: 1531:}
+------------------
+_ZN7testing8internal11CmpHelperEQIiiEENS_15AssertionResultEPKcS4_RKT_RKT0_:
+       18: 1522:AssertionResult CmpHelperEQ(const char* lhs_expression,
+        -: 1523:                            const char* rhs_expression,
+        -: 1524:                            const T1& lhs,
+        -: 1525:                            const T2& rhs) {
+       18: 1526:  if (lhs == rhs) {
+       18: 1526-block  0
+       18: 1527:    return AssertionSuccess();
+       18: 1527-block  0
+        -: 1528:  }
+        -: 1529:
+    #####: 1530:  return CmpHelperEQFailure(lhs_expression, rhs_expression, lhs, rhs);
+    %%%%%: 1530-block  0
+        -: 1531:}
+------------------
         -: 1532:
         -: 1533:// With this overloaded version, we allow anonymous enums to be used
         -: 1534:// in {ASSERT|EXPECT}_EQ when compiled with gcc 4, as anonymous enums
@@ -1590,12 +1648,28 @@ _ZN7testing15AssertionResultC1IbEERKT_PNS_8internal8EnableIfIXntsrSt14is_convert
         -: 1547:      // and the other is the null pointer constant.
         -: 1548:      typename std::enable_if<!std::is_integral<T1>::value ||
         -: 1549:                              !std::is_pointer<T2>::value>::type* = nullptr>
-       19: 1550:  static AssertionResult Compare(const char* lhs_expression,
+   131090: 1550:  static AssertionResult Compare(const char* lhs_expression,
         -: 1551:                                 const char* rhs_expression, const T1& lhs,
         -: 1552:                                 const T2& rhs) {
-       19: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
-       19: 1553-block  0
+   131090: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
         -: 1554:  }
+------------------
+_ZN7testing8internal8EqHelper7CompareIjjLPv0EEENS_15AssertionResultEPKcS6_RKT_RKT0_:
+   131072: 1550:  static AssertionResult Compare(const char* lhs_expression,
+        -: 1551:                                 const char* rhs_expression, const T1& lhs,
+        -: 1552:                                 const T2& rhs) {
+   131072: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
+   131072: 1553-block  0
+        -: 1554:  }
+------------------
+_ZN7testing8internal8EqHelper7CompareIiiLPv0EEENS_15AssertionResultEPKcS6_RKT_RKT0_:
+       18: 1550:  static AssertionResult Compare(const char* lhs_expression,
+        -: 1551:                                 const char* rhs_expression, const T1& lhs,
+        -: 1552:                                 const T2& rhs) {
+       18: 1553:    return CmpHelperEQ(lhs_expression, rhs_expression, lhs, rhs);
+       18: 1553-block  0
+        -: 1554:  }
+------------------
         -: 1555:
         -: 1556:  // With this overloaded version, we allow anonymous enums to be used
         -: 1557:  // in {ASSERT|EXPECT}_EQ when compiled with gcc 4, as anonymous

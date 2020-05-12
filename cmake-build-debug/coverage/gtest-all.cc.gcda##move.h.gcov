@@ -122,8 +122,8 @@ _ZSt11__addressofIN7testing14TestPartResultEEPT_RS2_:
         -:   71:   */
         -:   72:  template<typename _Tp>
         -:   73:    constexpr _Tp&&
-     412*:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-     412*:   75:    { return static_cast<_Tp&&>(__t); }
+     390*:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+     390*:   75:    { return static_cast<_Tp&&>(__t); }
 ------------------
 _ZSt7forwardIRKSt21piecewise_construct_tEOT_RNSt16remove_referenceIS3_E4typeE:
     #####:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
@@ -146,14 +146,14 @@ _ZSt7forwardIRKPN7testing17TestEventListenerEEOT_RNSt16remove_referenceIS5_E4typ
         3:   75-block  0
 ------------------
 _ZSt7forwardIiEOT_RNSt16remove_referenceIS0_E4typeE:
-      237:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-      237:   75:    { return static_cast<_Tp&&>(__t); }
-      237:   75-block  0
+      223:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+      223:   75:    { return static_cast<_Tp&&>(__t); }
+      223:   75-block  0
 ------------------
 _ZSt7forwardIRKPN7testing8TestInfoEEOT_RNSt16remove_referenceIS5_E4typeE:
-      158:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-      158:   75:    { return static_cast<_Tp&&>(__t); }
-      158:   75-block  0
+      147:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+      147:   75:    { return static_cast<_Tp&&>(__t); }
+      147:   75-block  0
 ------------------
 _ZSt7forwardIRKN7testing12TestPropertyEEOT_RNSt16remove_referenceIS4_E4typeE:
     #####:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
@@ -186,9 +186,9 @@ _ZSt7forwardISt5tupleIJRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEE
     %%%%%:   75-block  0
 ------------------
 _ZSt7forwardIRKPN7testing9TestSuiteEEOT_RNSt16remove_referenceIS5_E4typeE:
-        3:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
-        3:   75:    { return static_cast<_Tp&&>(__t); }
-        3:   75-block  0
+        6:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
+        6:   75:    { return static_cast<_Tp&&>(__t); }
+        6:   75-block  0
 ------------------
 _ZSt7forwardIRKN7testing8internal13edit_distance8EditTypeEEOT_RNSt16remove_referenceIS6_E4typeE:
     #####:   74:    forward(typename std::remove_reference<_Tp>::type& __t) noexcept
@@ -388,8 +388,8 @@ _ZSt7forwardIRKSt10shared_ptrIN7testing8internal26ThreadLocalValueHolderBaseEEEO
         -:   96:  */
         -:   97:  template<typename _Tp>
         -:   98:    constexpr typename std::remove_reference<_Tp>::type&&
-     328*:   99:    move(_Tp&& __t) noexcept
-     328*:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+     305*:   99:    move(_Tp&& __t) noexcept
+     305*:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
 ------------------
 _ZSt4moveIRPN7testing8internal24InternalRunDeathTestFlagEEONSt16remove_referenceIT_E4typeEOS6_:
         3:   99:    move(_Tp&& __t) noexcept
@@ -412,9 +412,9 @@ _ZSt4moveIRbEONSt16remove_referenceIT_E4typeEOS2_:
     %%%%%:  100-block  0
 ------------------
 _ZSt4moveIRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEONSt16remove_referenceIT_E4typeEOS8_:
-       99:   99:    move(_Tp&& __t) noexcept
-       99:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
-       99:  100-block  0
+       96:   99:    move(_Tp&& __t) noexcept
+       96:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+       96:  100-block  0
 ------------------
 _ZSt4moveIRyEONSt16remove_referenceIT_E4typeEOS2_:
     #####:   99:    move(_Tp&& __t) noexcept
@@ -432,9 +432,9 @@ _ZSt4moveIRNSt7__cxx114listISt4pairIcPKcESaIS5_EEEEONSt16remove_referenceIT_E4ty
     %%%%%:  100-block  0
 ------------------
 _ZSt4moveIRiEONSt16remove_referenceIT_E4typeEOS2_:
-       76:   99:    move(_Tp&& __t) noexcept
-       76:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
-       76:  100-block  0
+       70:   99:    move(_Tp&& __t) noexcept
+       70:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+       70:  100-block  0
 ------------------
 _ZSt4moveIRSaIcEEONSt16remove_referenceIT_E4typeEOS3_:
     #####:   99:    move(_Tp&& __t) noexcept
@@ -457,9 +457,9 @@ _ZSt4moveIRN7testing8internal17TestPropertyKeyIsEEONSt16remove_referenceIT_E4typ
     %%%%%:  100-block  0
 ------------------
 _ZSt4moveIRN7testing8internal15TestSuiteNameIsEEONSt16remove_referenceIT_E4typeEOS5_:
-      150:   99:    move(_Tp&& __t) noexcept
-      150:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
-      150:  100-block  0
+      136:   99:    move(_Tp&& __t) noexcept
+      136:  100:    { return static_cast<typename std::remove_reference<_Tp>::type&&>(__t); }
+      136:  100-block  0
 ------------------
 _ZSt4moveIRPN7testing9TestSuiteEEONSt16remove_referenceIT_E4typeEOS5_:
     #####:   99:    move(_Tp&& __t) noexcept

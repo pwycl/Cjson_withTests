@@ -564,13 +564,13 @@ _ZN7testing8internal13FloatingPointIfE38DistanceBetweenSignAndMagnitudeNumbersER
         -:  420:// returned for different types.  Calling the function twice with the
         -:  421:// same type argument is guaranteed to return the same ID.
         -:  422:template <typename T>
-        1:  423:TypeId GetTypeId() {
+       69:  423:TypeId GetTypeId() {
         -:  424:  // The compiler is required to allocate a different
         -:  425:  // TypeIdHelper<T>::dummy_ variable for each T used to instantiate
         -:  426:  // the template.  Therefore, the address of dummy_ is guaranteed to
         -:  427:  // be unique.
-        1:  428:  return &(TypeIdHelper<T>::dummy_);
-        1:  428-block  0
+       69:  428:  return &(TypeIdHelper<T>::dummy_);
+       69:  428-block  0
         -:  429:}
         -:  430:
         -:  431:// Returns the type ID of ::testing::Test.  Always call this instead

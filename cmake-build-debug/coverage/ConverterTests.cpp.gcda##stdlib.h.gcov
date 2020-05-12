@@ -452,11 +452,11 @@
         -:  447:
         -:  448:#if defined(__USE_MINGW_STRTOX)
         -:  449:__mingw_ovr
-       30:  450:double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+       88:  450:double __cdecl __MINGW_NOTHROW strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
         -:  451:{
         -:  452:  double __cdecl __mingw_strtod (const char * __restrict__, char ** __restrict__);
-       30:  453:  return __mingw_strtod( _Str, _EndPtr);
-       30:  453-block  0
+       88:  453:  return __mingw_strtod( _Str, _EndPtr);
+       88:  453-block  0
         -:  454:}
         -:  455:
         -:  456:__mingw_ovr

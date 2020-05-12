@@ -269,16 +269,13 @@
         -:  264:
         -:  265:__mingw_ovr
         -:  266:__attribute__((__format__ (gnu_scanf, 2, 3))) __MINGW_ATTRIB_NONNULL(2)
-        2:  267:int sscanf(const char *__source, const char *__format, ...)
+        -:  267:int sscanf(const char *__source, const char *__format, ...)
         -:  268:{
         -:  269:  int __retval;
-        2:  270:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-        2:  271:  __retval = __mingw_vsscanf( __source, __format, __local_argv );
-        2:  271-block  0
-        2:  272:  __builtin_va_end( __local_argv );
-        2:  273:  return __retval;
-        2:  273-block  0
-        2:  273-block  1
+        -:  270:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+        -:  271:  __retval = __mingw_vsscanf( __source, __format, __local_argv );
+        -:  272:  __builtin_va_end( __local_argv );
+        -:  273:  return __retval;
         -:  274:}
         -:  275:
         -:  276:__mingw_ovr
@@ -350,25 +347,28 @@
         -:  342:
         -:  343:__mingw_ovr
         -:  344:__attribute__((__format__ (gnu_printf, 1, 2))) __MINGW_ATTRIB_NONNULL(1)
-        -:  345:int printf (const char *__format, ...)
+        1:  345:int printf (const char *__format, ...)
         -:  346:{
         -:  347:  int __retval;
-        -:  348:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-        -:  349:  __retval = __mingw_vfprintf( stdout, __format, __local_argv );
-        -:  350:  __builtin_va_end( __local_argv );
-        -:  351:  return __retval;
+        1:  348:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+        1:  349:  __retval = __mingw_vfprintf( stdout, __format, __local_argv );
+        1:  349-block  0
+        1:  349-block  1
+        1:  350:  __builtin_va_end( __local_argv );
+        1:  351:  return __retval;
+        1:  351-block  0
         -:  352:}
         -:  353:
         -:  354:__mingw_ovr
         -:  355:__attribute__((__format__ (gnu_printf, 2, 3))) __MINGW_ATTRIB_NONNULL(2)
-        3:  356:int sprintf (char *__stream, const char *__format, ...)
+   131180:  356:int sprintf (char *__stream, const char *__format, ...)
         -:  357:{
         -:  358:  int __retval;
-        3:  359:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-        3:  360:  __retval = __mingw_vsprintf( __stream, __format, __local_argv );
-        3:  360-block  0
-        3:  361:  __builtin_va_end( __local_argv );
-        3:  362:  return __retval;
+   131180:  359:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+   131180:  360:  __retval = __mingw_vsprintf( __stream, __format, __local_argv );
+   131180:  360-block  0
+   131180:  361:  __builtin_va_end( __local_argv );
+   131180:  362:  return __retval;
         -:  363:}
         -:  364:
         -:  365:__mingw_ovr

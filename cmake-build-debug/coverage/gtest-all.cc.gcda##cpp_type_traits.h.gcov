@@ -410,8 +410,8 @@
         -:  405:  // remove the move_iterator wrapper.
         -:  406:  template<typename _Iterator>
         -:  407:    inline _Iterator
-      76*:  408:    __miter_base(_Iterator __it)
-      76*:  409:    { return __it; }
+     108*:  408:    __miter_base(_Iterator __it)
+     108*:  409:    { return __it; }
 ------------------
 _ZSt12__miter_baseIN9__gnu_cxx17__normal_iteratorIPKN7testing8internal13edit_distance8EditTypeESt6vectorIS5_SaIS5_EEEEET_SC_:
     #####:  408:    __miter_base(_Iterator __it)
@@ -424,9 +424,9 @@ _ZSt12__miter_baseIN9__gnu_cxx17__normal_iteratorIPKdSt6vectorIdSaIdEEEEET_S8_:
     %%%%%:  409-block  0
 ------------------
 _ZSt12__miter_baseIPiET_S1_:
-       36:  408:    __miter_base(_Iterator __it)
-       36:  409:    { return __it; }
-       36:  409-block  0
+       52:  408:    __miter_base(_Iterator __it)
+       52:  409:    { return __it; }
+       52:  409-block  0
 ------------------
 _ZSt12__miter_baseIPyET_S1_:
     #####:  408:    __miter_base(_Iterator __it)
@@ -444,9 +444,9 @@ _ZSt12__miter_baseIPPN7testing17TestEventListenerEET_S4_:
         4:  409-block  0
 ------------------
 _ZSt12__miter_baseIPPN7testing8TestInfoEET_S4_:
-       32:  408:    __miter_base(_Iterator __it)
-       32:  409:    { return __it; }
-       32:  409-block  0
+       44:  408:    __miter_base(_Iterator __it)
+       44:  409:    { return __it; }
+       44:  409-block  0
 ------------------
 _ZSt12__miter_baseIPN7testing8internal13edit_distance8EditTypeEET_S5_:
     #####:  408:    __miter_base(_Iterator __it)
@@ -454,9 +454,9 @@ _ZSt12__miter_baseIPN7testing8internal13edit_distance8EditTypeEET_S5_:
     %%%%%:  409-block  0
 ------------------
 _ZSt12__miter_baseIPPN7testing9TestSuiteEET_S4_:
-        4:  408:    __miter_base(_Iterator __it)
-        4:  409:    { return __it; }
-        4:  409-block  0
+        8:  408:    __miter_base(_Iterator __it)
+        8:  409:    { return __it; }
+        8:  409-block  0
 ------------------
 _ZSt12__miter_baseIN9__gnu_cxx17__normal_iteratorIPPN7testing17TestEventListenerESt6vectorIS4_SaIS4_EEEEET_SA_:
     #####:  408:    __miter_base(_Iterator __it)
