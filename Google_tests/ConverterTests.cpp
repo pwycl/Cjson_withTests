@@ -333,15 +333,15 @@ TEST(CjsonFixture, parse_empty_objects){
 //
 //}
 //
-//static void assert_cJSON_GetErrorPtr()
-//{
-//    cJSON_GetErrorPtr();
-//}
+static void assert_cJSON_GetErrorPtr()
+{
+    cJSON_GetErrorPtr();
+}
 //
-//TEST(CjsonFixture, assert_cJSON_GetErrorPtr)
-//{
-//    assert_cJSON_GetErrorPtr();
-//}
+TEST(CjsonFixture, assert_cJSON_GetErrorPtr)
+{
+    assert_cJSON_GetErrorPtr();
+}
 //
 //
 //
@@ -1220,18 +1220,31 @@ TEST(CjsonFixture, assert_cJSON_CreateStringArray)
 //
 //
 //
-//TEST(CjsonFixture, assert_cJSON_Duplicate)
-//{
-////    TEST_ASSERT_NULL(cJSON_Duplicate(NULL, true));
-//    cJSON_Duplicate(NULL, true);
-//
-//    cJSON *doc = NULL;
-//    const cJSON *  test;
-//    doc = cJSON_GetObjectItemCaseSensitive(test, "doc");
-//    ASSERT_TRUE(doc!=NULL);
-//    cJSON_Duplicate(doc, true);
-//
-//}
+TEST(CjsonFixture, assert_cJSON_Duplicate)
+{
+//    TEST_ASSERT_NULL(cJSON_Duplicate(NULL, true));
+    cJSON_Duplicate(NULL, true);
+
+    cJSON *doc = NULL;
+    cJSON *patch = NULL;
+    cJSON *expected = NULL;
+    cJSON *error_element = NULL;
+    cJSON *comment = NULL;
+    cJSON *disabled = NULL;
+
+    cJSON *object = NULL;
+    cJSON_bool successful = false;
+
+    cJSON *test=cJSON_CreateString("test");
+
+    object = cJSON_Duplicate(test, true);
+
+    cJSON *array = cJSON_CreateArray();
+    ASSERT_TRUE(array!=NULL);
+
+    cJSON_AddItemToArray(array, test);
+    object = cJSON_Duplicate(array, true);
+}
 //
 TEST(CjsonFixture, assert_cJSON_Minify)
 {

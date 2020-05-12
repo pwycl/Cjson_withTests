@@ -161,25 +161,25 @@
         -:  156:
         -:  157:static internal_hooks global_hooks = { internal_malloc, internal_free, internal_realloc };
         -:  158:
-       44:  159:static unsigned char* cJSON_strdup(const unsigned char* string, const internal_hooks * const hooks)
+       47:  159:static unsigned char* cJSON_strdup(const unsigned char* string, const internal_hooks * const hooks)
         -:  160:{
-       44:  161:    size_t length = 0;
-       44:  162:    unsigned char *copy = NULL;
+       47:  161:    size_t length = 0;
+       47:  162:    unsigned char *copy = NULL;
         -:  163:
-       44:  164:    if (string == NULL)
+       47:  164:    if (string == NULL)
         -:  165:    {
     #####:  166:        return NULL;
         -:  167:    }
         -:  168:
-       44:  169:    length = strlen((const char*)string) + sizeof("");
-       44:  170:    copy = (unsigned char*)hooks->allocate(length);
-       44:  171:    if (copy == NULL)
+       47:  169:    length = strlen((const char*)string) + sizeof("");
+       47:  170:    copy = (unsigned char*)hooks->allocate(length);
+       47:  171:    if (copy == NULL)
         -:  172:    {
     #####:  173:        return NULL;
         -:  174:    }
-       44:  175:    memcpy(copy, string, length);
+       47:  175:    memcpy(copy, string, length);
         -:  176:
-       44:  177:    return copy;
+       47:  177:    return copy;
         -:  178:}
         -:  179:
         2:  180:CJSON_PUBLIC(void) cJSON_InitHooks(cJSON_Hooks* hooks)
@@ -214,15 +214,15 @@
         -:  209:}
         -:  210:
         -:  211:/* Internal constructor. */
-      463:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
+      468:  212:static cJSON *cJSON_New_Item(const internal_hooks * const hooks)
         -:  213:{
-      463:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
-      463:  215:    if (node)
+      468:  214:    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));
+      468:  215:    if (node)
         -:  216:    {
-      463:  217:        memset(node, '\0', sizeof(cJSON));
+      468:  217:        memset(node, '\0', sizeof(cJSON));
         -:  218:    }
         -:  219:
-      463:  220:    return node;
+      468:  220:    return node;
         -:  221:}
         -:  222:
         -:  223:/* Delete a cJSON structure. */
@@ -1866,21 +1866,21 @@
         1: 1861:    return reference;
         -: 1862:}
         -: 1863:
-       26: 1864:static cJSON_bool add_item_to_array(cJSON *array, cJSON *item)
+       27: 1864:static cJSON_bool add_item_to_array(cJSON *array, cJSON *item)
         -: 1865:{
-       26: 1866:    cJSON *child = NULL;
+       27: 1866:    cJSON *child = NULL;
         -: 1867:
-       26: 1868:    if ((item == NULL) || (array == NULL))
+       27: 1868:    if ((item == NULL) || (array == NULL))
         -: 1869:    {
         3: 1870:        return false;
         -: 1871:    }
         -: 1872:
-       23: 1873:    child = array->child;
+       24: 1873:    child = array->child;
         -: 1874:
-       23: 1875:    if (child == NULL)
+       24: 1875:    if (child == NULL)
         -: 1876:    {
         -: 1877:        /* list is empty, start new one */
-       15: 1878:        array->child = item;
+       16: 1878:        array->child = item;
         -: 1879:    }
         -: 1880:    else
         -: 1881:    {
@@ -1892,14 +1892,14 @@
         8: 1887:        suffix_object(child, item);
         -: 1888:    }
         -: 1889:
-       23: 1890:    return true;
+       24: 1890:    return true;
         -: 1891:}
         -: 1892:
         -: 1893:/* Add item to array/object. */
-        6: 1894:CJSON_PUBLIC(void) cJSON_AddItemToArray(cJSON *array, cJSON *item)
+        7: 1894:CJSON_PUBLIC(void) cJSON_AddItemToArray(cJSON *array, cJSON *item)
         -: 1895:{
-        6: 1896:    add_item_to_array(array, item);
-        6: 1897:}
+        7: 1896:    add_item_to_array(array, item);
+        7: 1897:}
         -: 1898:
         -: 1899:#if defined(__clang__) || (defined(__GNUC__)  && ((__GNUC__ > 4) || ((__GNUC__ == 4) && (__GNUC_MINOR__ > 5))))
         -: 1900:    #pragma GCC diagnostic push
@@ -2338,21 +2338,21 @@
        46: 2333:    return item;
         -: 2334:}
         -: 2335:
-       24: 2336:CJSON_PUBLIC(cJSON *) cJSON_CreateString(const char *string)
+       25: 2336:CJSON_PUBLIC(cJSON *) cJSON_CreateString(const char *string)
         -: 2337:{
-       24: 2338:    cJSON *item = cJSON_New_Item(&global_hooks);
-       24: 2339:    if(item)
+       25: 2338:    cJSON *item = cJSON_New_Item(&global_hooks);
+       25: 2339:    if(item)
         -: 2340:    {
-       24: 2341:        item->type = cJSON_String;
-       24: 2342:        item->valuestring = (char*)cJSON_strdup((const unsigned char*)string, &global_hooks);
-       24: 2343:        if(!item->valuestring)
+       25: 2341:        item->type = cJSON_String;
+       25: 2342:        item->valuestring = (char*)cJSON_strdup((const unsigned char*)string, &global_hooks);
+       25: 2343:        if(!item->valuestring)
         -: 2344:        {
     #####: 2345:            cJSON_Delete(item);
     #####: 2346:            return NULL;
         -: 2347:        }
         -: 2348:    }
         -: 2349:
-       24: 2350:    return item;
+       25: 2350:    return item;
         -: 2351:}
         -: 2352:
         1: 2353:CJSON_PUBLIC(cJSON *) cJSON_CreateStringReference(const char *string)
@@ -2405,15 +2405,15 @@
         4: 2400:    return item;
         -: 2401:}
         -: 2402:
-       17: 2403:CJSON_PUBLIC(cJSON *) cJSON_CreateArray(void)
+       18: 2403:CJSON_PUBLIC(cJSON *) cJSON_CreateArray(void)
         -: 2404:{
-       17: 2405:    cJSON *item = cJSON_New_Item(&global_hooks);
-       17: 2406:    if(item)
+       18: 2405:    cJSON *item = cJSON_New_Item(&global_hooks);
+       18: 2406:    if(item)
         -: 2407:    {
-       17: 2408:        item->type=cJSON_Array;
+       18: 2408:        item->type=cJSON_Array;
         -: 2409:    }
         -: 2410:
-       17: 2411:    return item;
+       18: 2411:    return item;
         -: 2412:}
         -: 2413:
        12: 2414:CJSON_PUBLIC(cJSON *) cJSON_CreateObject(void)
@@ -2572,37 +2572,37 @@
         -: 2567:}
         -: 2568:
         -: 2569:/* Duplication */
-    #####: 2570:CJSON_PUBLIC(cJSON *) cJSON_Duplicate(const cJSON *item, cJSON_bool recurse)
+        4: 2570:CJSON_PUBLIC(cJSON *) cJSON_Duplicate(const cJSON *item, cJSON_bool recurse)
         -: 2571:{
-    #####: 2572:    cJSON *newitem = NULL;
-    #####: 2573:    cJSON *child = NULL;
-    #####: 2574:    cJSON *next = NULL;
-    #####: 2575:    cJSON *newchild = NULL;
+        4: 2572:    cJSON *newitem = NULL;
+        4: 2573:    cJSON *child = NULL;
+        4: 2574:    cJSON *next = NULL;
+        4: 2575:    cJSON *newchild = NULL;
         -: 2576:
         -: 2577:    /* Bail on bad ptr */
-    #####: 2578:    if (!item)
+        4: 2578:    if (!item)
         -: 2579:    {
-    #####: 2580:        goto fail;
+        1: 2580:        goto fail;
         -: 2581:    }
         -: 2582:    /* Create new item */
-    #####: 2583:    newitem = cJSON_New_Item(&global_hooks);
-    #####: 2584:    if (!newitem)
+        3: 2583:    newitem = cJSON_New_Item(&global_hooks);
+        3: 2584:    if (!newitem)
         -: 2585:    {
     #####: 2586:        goto fail;
         -: 2587:    }
         -: 2588:    /* Copy over all vars */
-    #####: 2589:    newitem->type = item->type & (~cJSON_IsReference);
-    #####: 2590:    newitem->valueint = item->valueint;
-    #####: 2591:    newitem->valuedouble = item->valuedouble;
-    #####: 2592:    if (item->valuestring)
+        3: 2589:    newitem->type = item->type & (~cJSON_IsReference);
+        3: 2590:    newitem->valueint = item->valueint;
+        3: 2591:    newitem->valuedouble = item->valuedouble;
+        3: 2592:    if (item->valuestring)
         -: 2593:    {
-    #####: 2594:        newitem->valuestring = (char*)cJSON_strdup((unsigned char*)item->valuestring, &global_hooks);
-    #####: 2595:        if (!newitem->valuestring)
+        2: 2594:        newitem->valuestring = (char*)cJSON_strdup((unsigned char*)item->valuestring, &global_hooks);
+        2: 2595:        if (!newitem->valuestring)
         -: 2596:        {
     #####: 2597:            goto fail;
         -: 2598:        }
         -: 2599:    }
-    #####: 2600:    if (item->string)
+        3: 2600:    if (item->string)
         -: 2601:    {
     #####: 2602:        newitem->string = (item->type&cJSON_StringIsConst) ? item->string : (char*)cJSON_strdup((unsigned char*)item->string, &global_hooks);
     #####: 2603:        if (!newitem->string)
@@ -2611,20 +2611,20 @@
         -: 2606:        }
         -: 2607:    }
         -: 2608:    /* If non-recursive, then we're done! */
-    #####: 2609:    if (!recurse)
+        3: 2609:    if (!recurse)
         -: 2610:    {
     #####: 2611:        return newitem;
         -: 2612:    }
         -: 2613:    /* Walk the ->next chain for the child. */
-    #####: 2614:    child = item->child;
-    #####: 2615:    while (child != NULL)
+        3: 2614:    child = item->child;
+        5: 2615:    while (child != NULL)
         -: 2616:    {
-    #####: 2617:        newchild = cJSON_Duplicate(child, true); /* Duplicate (with recurse) each item in the ->next chain */
-    #####: 2618:        if (!newchild)
+        1: 2617:        newchild = cJSON_Duplicate(child, true); /* Duplicate (with recurse) each item in the ->next chain */
+        1: 2618:        if (!newchild)
         -: 2619:        {
     #####: 2620:            goto fail;
         -: 2621:        }
-    #####: 2622:        if (next != NULL)
+        1: 2622:        if (next != NULL)
         -: 2623:        {
         -: 2624:            /* If newitem->child already set, then crosswire ->prev and ->next and move on */
     #####: 2625:            next->next = newchild;
@@ -2634,21 +2634,21 @@
         -: 2629:        else
         -: 2630:        {
         -: 2631:            /* Set newitem->child and move to it */
-    #####: 2632:            newitem->child = newchild;
-    #####: 2633:            next = newchild;
+        1: 2632:            newitem->child = newchild;
+        1: 2633:            next = newchild;
         -: 2634:        }
-    #####: 2635:        child = child->next;
+        1: 2635:        child = child->next;
         -: 2636:    }
         -: 2637:
-    #####: 2638:    return newitem;
+        3: 2638:    return newitem;
         -: 2639:
-    #####: 2640:fail:
-    #####: 2641:    if (newitem != NULL)
+        1: 2640:fail:
+        1: 2641:    if (newitem != NULL)
         -: 2642:    {
     #####: 2643:        cJSON_Delete(newitem);
         -: 2644:    }
         -: 2645:
-    #####: 2646:    return NULL;
+        1: 2646:    return NULL;
         -: 2647:}
         -: 2648:
         1: 2649:static void skip_oneline_comment(char **input)

@@ -269,18 +269,18 @@
             <td class="headerValue">Cjson_lib/cJSON.c</td>
             <td></td>
             <td class="headerName">Lines:</td>
-            <td class="headerTableEntry">1066</td>
+            <td class="headerTableEntry">1095</td>
             <td class="headerTableEntry">1315</td>
-            <td class="headerTableEntry" style="background-color:#FFFF55">81.1 %</td>
+            <td class="headerTableEntry" style="background-color:#FFFF55">83.3 %</td>
           </tr>
           <tr>
             <td class="headerName">Date:</td>
-            <td class="headerValue">2020-05-11 23:53:59</td>
+            <td class="headerValue">2020-05-12 09:34:23</td>
             <td></td>
             <td class="headerName">Branches:</td>
-            <td class="headerTableEntry">584</td>
+            <td class="headerTableEntry">597</td>
             <td class="headerTableEntry">888</td>
-            <td class="headerTableEntry" style="background-color:LightPink">65.8 %</td>
+            <td class="headerTableEntry" style="background-color:LightPink">67.2 %</td>
           </tr>
         </table>
       </td>
@@ -1408,7 +1408,7 @@
     <tr>
     <td align="right" class="lineno"><pre>159</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>static unsigned char* cJSON_strdup(const unsigned char* string, const internal_hooks * const hooks)</pre></td>
     </tr>
 
@@ -1422,14 +1422,14 @@
     <tr>
     <td align="right" class="lineno"><pre>161</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    size_t length = 0;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>162</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    unsigned char *copy = NULL;</pre></td>
     </tr>
 
@@ -1442,8 +1442,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>164</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 44 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 47 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (string == NULL)</pre></td>
     </tr>
 
@@ -1478,21 +1478,21 @@
     <tr>
     <td align="right" class="lineno"><pre>169</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    length = strlen((const char*)string) + sizeof("");</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>170</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    copy = (unsigned char*)hooks->allocate(length);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>171</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 44 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 47 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (copy == NULL)</pre></td>
     </tr>
 
@@ -1520,7 +1520,7 @@
     <tr>
     <td align="right" class="lineno"><pre>175</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    memcpy(copy, string, length);</pre></td>
     </tr>
 
@@ -1534,7 +1534,7 @@
     <tr>
     <td align="right" class="lineno"><pre>177</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>44</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>47</pre></td>
     <td align="left" class="src coveredLine"><pre>    return copy;</pre></td>
     </tr>
 
@@ -1779,7 +1779,7 @@
     <tr>
     <td align="right" class="lineno"><pre>212</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>463</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>468</pre></td>
     <td align="left" class="src coveredLine"><pre>static cJSON *cJSON_New_Item(const internal_hooks * const hooks)</pre></td>
     </tr>
 
@@ -1793,14 +1793,14 @@
     <tr>
     <td align="right" class="lineno"><pre>214</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>463</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>468</pre></td>
     <td align="left" class="src coveredLine"><pre>    cJSON* node = (cJSON*)hooks->allocate(sizeof(cJSON));</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>215</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 463 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>463</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 468 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>468</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (node)</pre></td>
     </tr>
 
@@ -1814,7 +1814,7 @@
     <tr>
     <td align="right" class="lineno"><pre>217</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>463</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>468</pre></td>
     <td align="left" class="src coveredLine"><pre>        memset(node, '\0', sizeof(cJSON));</pre></td>
     </tr>
 
@@ -1835,7 +1835,7 @@
     <tr>
     <td align="right" class="lineno"><pre>220</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>463</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>468</pre></td>
     <td align="left" class="src coveredLine"><pre>    return node;</pre></td>
     </tr>
 
@@ -13343,7 +13343,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1864</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>26</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>27</pre></td>
     <td align="left" class="src coveredLine"><pre>static cJSON_bool add_item_to_array(cJSON *array, cJSON *item)</pre></td>
     </tr>
 
@@ -13357,7 +13357,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1866</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>26</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>27</pre></td>
     <td align="left" class="src coveredLine"><pre>    cJSON *child = NULL;</pre></td>
     </tr>
 
@@ -13370,8 +13370,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>1868</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 24 times">&check;</span><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="takenBranch" title="Branch 3 taken 23 times">&check;</span><br/></td>
-    <td align="right" class="linecount coveredLine"><pre>26</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 25 times">&check;</span><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span><span class="takenBranch" title="Branch 2 taken 1 times">&check;</span><span class="takenBranch" title="Branch 3 taken 24 times">&check;</span><br/></td>
+    <td align="right" class="linecount coveredLine"><pre>27</pre></td>
     <td align="left" class="src coveredLine"><pre>    if ((item == NULL) || (array == NULL))</pre></td>
     </tr>
 
@@ -13406,7 +13406,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1873</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>23</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
     <td align="left" class="src coveredLine"><pre>    child = array->child;</pre></td>
     </tr>
 
@@ -13419,8 +13419,8 @@
 
     <tr>
     <td align="right" class="lineno"><pre>1875</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 15 times">&check;</span><span class="takenBranch" title="Branch 1 taken 8 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>23</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 16 times">&check;</span><span class="takenBranch" title="Branch 1 taken 8 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
     <td align="left" class="src coveredLine"><pre>    if (child == NULL)</pre></td>
     </tr>
 
@@ -13441,7 +13441,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1878</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>15</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>16</pre></td>
     <td align="left" class="src coveredLine"><pre>        array->child = item;</pre></td>
     </tr>
 
@@ -13525,7 +13525,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1890</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>23</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
     <td align="left" class="src coveredLine"><pre>    return true;</pre></td>
     </tr>
 
@@ -13553,7 +13553,7 @@
     <tr>
     <td align="right" class="lineno"><pre>1894</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
     <td align="left" class="src coveredLine"><pre>CJSON_PUBLIC(void) cJSON_AddItemToArray(cJSON *array, cJSON *item)</pre></td>
     </tr>
 
@@ -13567,14 +13567,14 @@
     <tr>
     <td align="right" class="lineno"><pre>1896</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
     <td align="left" class="src coveredLine"><pre>    add_item_to_array(array, item);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>1897</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>6</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>7</pre></td>
     <td align="left" class="src coveredLine"><pre>}</pre></td>
     </tr>
 
@@ -16647,7 +16647,7 @@
     <tr>
     <td align="right" class="lineno"><pre>2336</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>CJSON_PUBLIC(cJSON *) cJSON_CreateString(const char *string)</pre></td>
     </tr>
 
@@ -16661,14 +16661,14 @@
     <tr>
     <td align="right" class="lineno"><pre>2338</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>    cJSON *item = cJSON_New_Item(&amp;global_hooks);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2339</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 24 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 25 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>    if(item)</pre></td>
     </tr>
 
@@ -16682,21 +16682,21 @@
     <tr>
     <td align="right" class="lineno"><pre>2341</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>        item->type = cJSON_String;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2342</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>        item->valuestring = (char*)cJSON_strdup((const unsigned char*)string, &amp;global_hooks);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2343</pre></td>
-    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 24 times">&check;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 25 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>        if(!item->valuestring)</pre></td>
     </tr>
 
@@ -16745,7 +16745,7 @@
     <tr>
     <td align="right" class="lineno"><pre>2350</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>24</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>25</pre></td>
     <td align="left" class="src coveredLine"><pre>    return item;</pre></td>
     </tr>
 
@@ -17116,7 +17116,7 @@
     <tr>
     <td align="right" class="lineno"><pre>2403</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>18</pre></td>
     <td align="left" class="src coveredLine"><pre>CJSON_PUBLIC(cJSON *) cJSON_CreateArray(void)</pre></td>
     </tr>
 
@@ -17130,14 +17130,14 @@
     <tr>
     <td align="right" class="lineno"><pre>2405</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>18</pre></td>
     <td align="left" class="src coveredLine"><pre>    cJSON *item = cJSON_New_Item(&amp;global_hooks);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2406</pre></td>
-    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 17 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
-    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 18 times">&check;</span><span class="notTakenBranch" title="Branch 1 not taken">&cross;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>18</pre></td>
     <td align="left" class="src coveredLine"><pre>    if(item)</pre></td>
     </tr>
 
@@ -17151,7 +17151,7 @@
     <tr>
     <td align="right" class="lineno"><pre>2408</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>18</pre></td>
     <td align="left" class="src coveredLine"><pre>        item->type=cJSON_Array;</pre></td>
     </tr>
 
@@ -17172,7 +17172,7 @@
     <tr>
     <td align="right" class="lineno"><pre>2411</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount coveredLine"><pre>17</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>18</pre></td>
     <td align="left" class="src coveredLine"><pre>    return item;</pre></td>
     </tr>
 
@@ -18285,8 +18285,8 @@
     <tr>
     <td align="right" class="lineno"><pre>2570</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>CJSON_PUBLIC(cJSON *) cJSON_Duplicate(const cJSON *item, cJSON_bool recurse)</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>CJSON_PUBLIC(cJSON *) cJSON_Duplicate(const cJSON *item, cJSON_bool recurse)</pre></td>
     </tr>
 
     <tr>
@@ -18299,29 +18299,29 @@
     <tr>
     <td align="right" class="lineno"><pre>2572</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    cJSON *newitem = NULL;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    cJSON *newitem = NULL;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2573</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    cJSON *child = NULL;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    cJSON *child = NULL;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2574</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    cJSON *next = NULL;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    cJSON *next = NULL;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2575</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    cJSON *newchild = NULL;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    cJSON *newchild = NULL;</pre></td>
     </tr>
 
     <tr>
@@ -18340,9 +18340,9 @@
 
     <tr>
     <td align="right" class="lineno"><pre>2578</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (!item)</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>4</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (!item)</pre></td>
     </tr>
 
     <tr>
@@ -18355,8 +18355,8 @@
     <tr>
     <td align="right" class="lineno"><pre>2580</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        goto fail;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        goto fail;</pre></td>
     </tr>
 
     <tr>
@@ -18376,15 +18376,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2583</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    newitem = cJSON_New_Item(&amp;global_hooks);</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    newitem = cJSON_New_Item(&amp;global_hooks);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2584</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (!newitem)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (!newitem)</pre></td>
     </tr>
 
     <tr>
@@ -18418,29 +18418,29 @@
     <tr>
     <td align="right" class="lineno"><pre>2589</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    newitem->type = item->type &amp; (~cJSON_IsReference);</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    newitem->type = item->type &amp; (~cJSON_IsReference);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2590</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    newitem->valueint = item->valueint;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    newitem->valueint = item->valueint;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2591</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    newitem->valuedouble = item->valuedouble;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    newitem->valuedouble = item->valuedouble;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2592</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (item->valuestring)</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 2 times">&check;</span><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (item->valuestring)</pre></td>
     </tr>
 
     <tr>
@@ -18453,15 +18453,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2594</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        newitem->valuestring = (char*)cJSON_strdup((unsigned char*)item->valuestring, &amp;global_hooks);</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>        newitem->valuestring = (char*)cJSON_strdup((unsigned char*)item->valuestring, &amp;global_hooks);</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2595</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        if (!newitem->valuestring)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 2 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>2</pre></td>
+    <td align="left" class="src coveredLine"><pre>        if (!newitem->valuestring)</pre></td>
     </tr>
 
     <tr>
@@ -18494,9 +18494,9 @@
 
     <tr>
     <td align="right" class="lineno"><pre>2600</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (item->string)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (item->string)</pre></td>
     </tr>
 
     <tr>
@@ -18557,9 +18557,9 @@
 
     <tr>
     <td align="right" class="lineno"><pre>2609</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (!recurse)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (!recurse)</pre></td>
     </tr>
 
     <tr>
@@ -18593,15 +18593,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2614</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    child = item->child;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    child = item->child;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2615</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    while (child != NULL)</pre></td>
+    <td align="right" class="linebranch"><span class="takenBranch" title="Branch 0 taken 1 times">&check;</span><span class="takenBranch" title="Branch 1 taken 3 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>5</pre></td>
+    <td align="left" class="src coveredLine"><pre>    while (child != NULL)</pre></td>
     </tr>
 
     <tr>
@@ -18614,15 +18614,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2617</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        newchild = cJSON_Duplicate(child, true); /* Duplicate (with recurse) each item in the ->next chain */</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        newchild = cJSON_Duplicate(child, true); /* Duplicate (with recurse) each item in the ->next chain */</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2618</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        if (!newchild)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        if (!newchild)</pre></td>
     </tr>
 
     <tr>
@@ -18648,9 +18648,9 @@
 
     <tr>
     <td align="right" class="lineno"><pre>2622</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        if (next != NULL)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        if (next != NULL)</pre></td>
     </tr>
 
     <tr>
@@ -18719,15 +18719,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2632</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>            newitem->child = newchild;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>            newitem->child = newchild;</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2633</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>            next = newchild;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>            next = newchild;</pre></td>
     </tr>
 
     <tr>
@@ -18740,8 +18740,8 @@
     <tr>
     <td align="right" class="lineno"><pre>2635</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>        child = child->next;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>        child = child->next;</pre></td>
     </tr>
 
     <tr>
@@ -18761,8 +18761,8 @@
     <tr>
     <td align="right" class="lineno"><pre>2638</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    return newitem;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>3</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return newitem;</pre></td>
     </tr>
 
     <tr>
@@ -18775,15 +18775,15 @@
     <tr>
     <td align="right" class="lineno"><pre>2640</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>fail:</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>fail:</pre></td>
     </tr>
 
     <tr>
     <td align="right" class="lineno"><pre>2641</pre></td>
-    <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    if (newitem != NULL)</pre></td>
+    <td align="right" class="linebranch"><span class="notTakenBranch" title="Branch 0 not taken">&cross;</span><span class="takenBranch" title="Branch 1 taken 1 times">&check;</span></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>    if (newitem != NULL)</pre></td>
     </tr>
 
     <tr>
@@ -18817,8 +18817,8 @@
     <tr>
     <td align="right" class="lineno"><pre>2646</pre></td>
     <td align="right" class="linebranch"></td>
-    <td align="right" class="linecount uncoveredLine"><pre></pre></td>
-    <td align="left" class="src uncoveredLine"><pre>    return NULL;</pre></td>
+    <td align="right" class="linecount coveredLine"><pre>1</pre></td>
+    <td align="left" class="src coveredLine"><pre>    return NULL;</pre></td>
     </tr>
 
     <tr>
